@@ -1,0 +1,27 @@
+{
+  "name": "pepemon",
+  "version": "0.0.1",
+  "keywords": [
+    "ethereum",
+    "fantom",
+    "wallet"
+  ],
+  "private": true,
+  "scripts": {
+    "react-app:build": "yarn workspace @pepemon/app build",
+    "react-app:eject": "yarn workspace @pepemon/app eject",
+    "react-app:start": "yarn workspace @pepemon/app start",
+    "react-app:test": "yarn workspace @pepemon/app test"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "workspaces": {
+    "packages": [
+      "packages/*"
+    ]
+  },
+  "devDependencies": {
+    "@types/styled-components": "^5.1.7"
+  }
+}
