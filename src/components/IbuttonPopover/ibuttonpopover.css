@@ -1,0 +1,90 @@
+.popover-conatiner {
+  width: 405px;
+  height: 495px;
+  position: relative;
+  padding: 26px 17px 24px 24px;
+  box-shadow: 9px 9px 9px 9px #00000019;
+  background-color: #fff;
+  border-radius: 25px;
+}
+
+.paragraph {
+  width: 266px;
+  height: 112px;
+  margin: 22px 1px 8px 0;
+  font-family: Inter;
+  font-size: 17px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.33;
+  letter-spacing: normal;
+  color: var(--headers);
+  margin-top: 30px;
+}
+th {
+  font-family: Inter;
+  font-size: 11px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 2;
+  letter-spacing: 1px;
+  color: #757575;
+  text-align: start;
+  padding: 5px;
+  padding-left: 36px;
+}
+td {
+  font-family: Inter;
+  font-size: 11px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 2;
+  letter-spacing: 1px;
+  color: #000;
+  padding: 5px;
+  padding-left: 36px;
+}
+.Buy-PPBLZ {
+  width: 156px;
+  height: 24px;
+  margin: 8px 4px 0 0;
+  font-family: Inter;
+  font-size: 18px;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 2;
+  letter-spacing: normal;
+  color: #985dc9;
+  text-decoration: underline;
+}
+.cross {
+  position: absolute;
+  top: 4%;
+  right: 4%;
+  width: 6%;
+}
+.divider {
+  width: 97%;
+  height: 1px;
+  margin: 6px 7px 8px 0;
+  background-color: #deceeb;
+}
+
+.APY {
+  width: 132px;
+  height: 20px;
+  margin-left: 170px;
+  font-family: Inter;
+  font-size: 24px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.25;
+  letter-spacing: normal;
+  text-align: center;
+  color: #713aac;
+}

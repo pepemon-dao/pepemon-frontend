@@ -1,10 +1,10 @@
-import Home from "./Home"
+import Subscription from "./pages/Subscription";
 
 function App() {
   return (
     <div className="main-container">
-      <Home />
-  </div>
+      <Subscription />
+    </div>
   );
 }
 

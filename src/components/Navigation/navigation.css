@@ -1,0 +1,18 @@
+.menu-wrap {
+  width: 6%;
+  overflow-y: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.menu {
+  margin: 90px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.pepemon-icon {
+  width: 80px;
+  height: 80px;
+  margin: 40px 0;
+}
