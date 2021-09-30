@@ -188,17 +188,17 @@ function Home() {
             </div>
           </div>
           <div className="cards-text-container">
-            <span class="Collect-unique-Pepem">
-              Collect unique Pepemon cards created by real artists{" "}
+            <span className="Collect-unique-Pepem">
+              Collect unique Pepemon cards created by real artists
             </span>
-            <span class="Pepemon-NFT">
+            <span className="Pepemon-NFT">
               Pepemon NFT
               <div
                 className="underline-div"
                 style={{ width: "103px", marginLeft: "0" }}
               ></div>
             </span>
-            <span class="Use-your-Pepedex-to">
+            <span className="Use-your-Pepedex-to">
               Use your Pepedex to claim these unique NFTs pepemon cards. All
               cards created by real artist all over the world.
               <br />

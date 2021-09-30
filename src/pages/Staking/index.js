@@ -1,20 +1,14 @@
-import "./Staking.css";
 import React, { useState } from "react";
-
-import cover from "../../assets/staking-bg.png";
-import becomepepbutton from "../../assets/becomepepbutton.png";
-import Navigation from "../../components/Navigation/index";
-import IbuttonPopover from "../../components/IbuttonPopover/index";
-
-import WalletBar from "../../components/WalletBar/index";
-import pokeball from "../../assets/pokeball-temp.png";
-import plus from "../../assets/plus.png";
-import minus from "../../assets/minus.png";
-import stakebutton from "../../assets/stakebutton.png";
-import provideliquiditybutton from "../../assets/provideliquiditybutton.png";
-import ibutton from "../../assets/i.svg";
+import { Popover } from "reactstrap";
 import enable from "../../assets/enable.png";
-import { Button, Popover, PopoverHeader, PopoverBody } from "reactstrap";
+import ibutton from "../../assets/i.svg";
+import pokeball from "../../assets/pokeball-temp.png";
+import provideliquiditybutton from "../../assets/provideliquiditybutton.png";
+import cover from "../../assets/staking-bg.png";
+import IbuttonPopover from "../../components/IbuttonPopover/index";
+import Navigation from "../../components/Navigation/index";
+import WalletBar from "../../components/WalletBar/index";
+import "./Staking.css";
 
 function Staking() {
   const [popoverOpen, setPopoverOpen] = useState(false);
@@ -118,7 +112,7 @@ function Staking() {
                           }}
                         >
                           <div className="max-contianer">
-                            <span class="MAX">MAX</span>
+                            <span className="MAX">MAX</span>
                           </div>
                           <div
                            className="stake-button-conatiner"
@@ -146,9 +140,11 @@ function Staking() {
                       target="Popover2"
                       toggle={toggle2}
                     >
-                      <IbuttonPopover onHide={toggle2} button={"Buy PPBLZ-ETH"} />
+                      <IbuttonPopover
+                        onHide={toggle2}
+                        button={"Buy PPBLZ-ETH"}
+                      />
                     </Popover>
-              
                   </div>
                   <div className="staking-box-small-body">
                     <div className="staking-box-small-body-row">
@@ -169,22 +165,22 @@ function Staking() {
                   </div>
                 </div>
               </div>
-              <div class="staking-big-box">
-                <div class="staking-box-big-header">
+              <div className="staking-big-box">
+                <div className="staking-box-big-header">
                   <img src={pokeball} alt="logo" style={{ width: "5%" }} />
 
-                  <span class="header-text">PPDEX Earned</span>
+                  <span className="header-text">PPDEX Earned</span>
                 </div>
-                <div class="staking-box-big-body">
+                <div className="staking-box-big-body">
                   <div style={{ marginTop: "30px" }}>
-                    <span class="number" style={{ marginLeft: "0" }}>
+                    <span className="number" style={{ marginLeft: "0" }}>
                       0 PPDEX
                     </span>
                   </div>
 
                   <div style={{ display: "flex" }}>
-                    <p class="data-div-bold-text-big">Total value: $0</p>
-                    <p class="Update">Update</p>
+                    <p className="data-div-bold-text-big">Total value: $0</p>
+                    <p className="Update">Update</p>
                   </div>
 
                   <div style={{ marginTop: "6px" }}>
