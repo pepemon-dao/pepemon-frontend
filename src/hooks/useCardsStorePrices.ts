@@ -3,7 +3,7 @@ import {useCallback, useEffect, useState} from 'react'
 // import { useWallet } from 'use-wallet'
 import { provider } from 'web3-core'
 
-import {getBalanceOfBatch, getMaxSupply, getTotalSupply} from '../utils/erc1155';
+import { getBalanceOfBatch, getMaxSupply, getTotalSupply, correctChainIsLoaded} from '../utils';
 import {
     getCardPrice,
     getPepemonFactoryContract,
@@ -13,7 +13,6 @@ import {
 import usePepemon from './usePepemon';
 import BigNumber from 'bignumber.js';
 import {contractAddresses} from '../pepemon/lib/constants';
-import {correctChainIsLoaded} from '../utils/network';
 
 export interface CardPrice {
     tokenId: number,

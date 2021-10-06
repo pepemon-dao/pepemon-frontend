@@ -3,7 +3,7 @@ import BigNumber from 'bignumber.js';
 // import {useWallet} from "use-wallet";
 import usePepemon from './usePepemon';
 import {getPepemonStoreContract, getTotalSpend, getTotalSpendBNB} from '../pepemon/utils';
-import {correctChainIsLoaded} from '../utils/network';
+import {correctChainIsLoaded} from '../utils';
 
 const useTotalSpendInShop = () => {
     const [totalSpend, setTotalSpend] = useState(new BigNumber(0))

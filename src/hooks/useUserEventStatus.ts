@@ -5,7 +5,7 @@ import usePepemon from './usePepemon'
 import {
     getPepemonStakeContract, getUserEventStatus,
 } from '../pepemon/utils'
-import {correctChainIsLoaded} from '../utils/network';
+import {correctChainIsLoaded} from '../utils';
 
 const useUserEventStatus = (eventId: number, transactions: number) => {
     const [userEventStatus, setUserEventStatus] = useState(null)

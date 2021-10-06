@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { correctChainIsLoaded } from "../utils/network";
+import { correctChainIsLoaded } from "../utils";
 import usePepemon from "./usePepemon";
 
 const part1start = "0x0000000000000000000000000000000000000000";

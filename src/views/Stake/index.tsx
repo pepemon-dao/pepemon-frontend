@@ -2,23 +2,18 @@ import React, { useState, useEffect } from "react";
 import { Popover } from "reactstrap";
 import enable from "../../assets/enable.png";
 import ibutton from "../../assets/i.svg";
-
 import pokeball from "../../assets/pokeball-temp.png";
 import minus from "../../assets/minus.png";
 import plus from "../../assets/plus.png";
-
 import provideliquiditybutton from "../../assets/provideliquiditybutton.png";
-import { IbuttonPopover, TopBar } from "../../components";
 import ppdexIcon from "../../assets/ppdex-icon.png";
-import useTokenPrices from "../../hooks/useTokenPrices";
-import { getBalanceNumber } from "../../utils/formatBalance";
+import { IbuttonPopover, TopBar } from "../../components";
+import { useTokenPrices, usePepemon, useWeb3Modal } from "../../hooks";
+import { getBalanceNumber, correctChainIsLoaded } from "../../utils";
 import BigNumber from "bignumber.js";
-import usePepemon from "../../hooks/usePepemon";
 import { sendTransaction } from "../../pepemon/utils";
-import { correctChainIsLoaded } from "../../utils/network";
 import "./Stake.css";
 import Web3 from "web3";
-import useWeb3Modal from "../../hooks/useWeb3Modal";
 
 interface Stake {
   pepemon: any;

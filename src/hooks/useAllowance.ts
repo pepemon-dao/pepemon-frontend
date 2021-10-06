@@ -4,9 +4,8 @@ import BigNumber from 'bignumber.js'
 import usePepemon from './usePepemon'
 import { Contract } from 'web3-eth-contract'
 
-import {getAllowance} from '../utils/erc20'
+import {getAllowance, correctChainIsLoaded} from '../utils'
 import { getPpdexContract } from '../pepemon/utils'
-import {correctChainIsLoaded} from '../utils/network';
 
 const useAllowance = (lpContract: Contract, allowedContract?: Contract) => {
   const [allowance, setAllowance] = useState(new BigNumber(0))

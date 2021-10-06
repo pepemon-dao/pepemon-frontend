@@ -8,7 +8,7 @@ import {
     getPepemonFactoryContract,
     getPepemonStakeAddress,
 } from '../pepemon/utils'
-import {correctChainIsLoaded} from '../utils/network';
+import {correctChainIsLoaded} from '../utils';
 
 const useIsApprovedForAll = () => {
     const [isApprovedForAll, setIsApprovedForAll] = useState(false)

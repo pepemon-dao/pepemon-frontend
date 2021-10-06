@@ -29,10 +29,8 @@ import witchenerycard from "../../assets/witchenerycard.png";
 import pepechurcard from "../../assets/pepechurcard.png";
 import downgreenarrow from "../../assets/downgreenarrow.svg";
 import { Value } from "../../components";
-import useTotalValueStaked from "../../hooks/useTotalValueStaked";
-import { getBalanceNumber } from "../../utils/formatBalance";
-import useTotalSpendInShop from "../../hooks/useTotalSpendInShop";
-import usePepemon from "../../hooks/usePepemon";
+import { getBalanceNumber } from "../../utils";
+import { useTotalValueStaked, useTotalSpendInShop, usePepemon } from "../../hooks";
 
 const Home: React.FC<any> = ({ appChainId: chainId, setChainId }) => {
   const poolStatistics = useTotalValueStaked();

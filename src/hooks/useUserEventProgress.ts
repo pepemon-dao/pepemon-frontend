@@ -4,7 +4,7 @@ import usePepemon from './usePepemon'
 import {
     getPepemonStakeContract, getUserProgress,
 } from '../pepemon/utils'
-import {correctChainIsLoaded} from '../utils/network';
+import {correctChainIsLoaded} from '../utils';
 
 const useUserEventProgress = (eventId: number, transactions: number,) => {
     const [userProgress, setUserProgress] = useState('0')

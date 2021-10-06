@@ -1,9 +1,8 @@
 import { useCallback, useEffect, useState } from 'react'
 
 import BigNumber from 'bignumber.js'
-import {getBalance, getNativeBalance} from '../utils/erc20'
+import { getBalance, getNativeBalance, correctChainIsLoaded} from '../utils'
 import usePepemon from './usePepemon';
-import {correctChainIsLoaded} from '../utils/network';
 
 
 const useTokenBalance = (tokenAddress: string) => {

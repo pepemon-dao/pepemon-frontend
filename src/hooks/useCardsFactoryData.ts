@@ -1,10 +1,9 @@
 import {useCallback, useEffect, useState} from 'react'
 
-import {getBalanceOfBatch, getMaxSupply, getTotalSupply} from '../utils/erc1155';
+import { getBalanceOfBatch, getMaxSupply, getTotalSupply, correctChainIsLoaded } from '../utils';
 import usePepemon from './usePepemon';
 import {getPepemonFactoryContract} from '../pepemon/utils';
 import {contractAddresses} from '../pepemon/lib/constants';
-import {correctChainIsLoaded} from '../utils/network';
 
 export interface CardBalances {
     tokenId: number,
