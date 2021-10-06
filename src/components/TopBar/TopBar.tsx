@@ -1,10 +1,8 @@
 import "./TopBar.css";
 import address from "../../assets/address.png";
 import React, { useCallback } from "react";
-import useWeb3Modal from "../../hooks/useWeb3Modal";
-import usePepemon from "../../hooks/usePepemon";
+import { useWeb3Modal, usePepemon, useTokenBalance } from "../../hooks";
 import { Value } from "../index";
-import useTokenBalance from "../../hooks/useTokenBalance";
 import {
   getPpblzAddress,
   getPpblzContract,
