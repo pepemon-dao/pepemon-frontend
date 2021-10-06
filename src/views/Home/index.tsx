@@ -28,13 +28,11 @@ import stakingbutton from "../../assets/stakingbutton.png";
 import witchenerycard from "../../assets/witchenerycard.png";
 import pepechurcard from "../../assets/pepechurcard.png";
 import downgreenarrow from "../../assets/downgreenarrow.svg";
-import TopBar from "../../components/TopBar/index";
+import { TopBar, Value, Navigation } from "../../components";
 import useTotalValueStaked from "../../hooks/useTotalValueStaked";
-import Value from "../../components/Value";
 import { getBalanceNumber } from "../../utils/formatBalance";
 import useTotalSpendInShop from "../../hooks/useTotalSpendInShop";
 import usePepemon from "../../hooks/usePepemon";
-import Navigation from "../../components/Navigation/index";
 
 const Home: React.FC<any> = ({ appChainId: chainId, setChainId }) => {
   const poolStatistics = useTotalValueStaked();

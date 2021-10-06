@@ -1,1 +1,1 @@
-export { default } from "./ModalImage";
+export { default as ModalImage } from "./ModalImage";

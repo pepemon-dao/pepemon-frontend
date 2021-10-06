@@ -1,1 +1,1 @@
-export { default } from "./ModalTitle";
+export { default as ModalTitle } from "./ModalTitle";

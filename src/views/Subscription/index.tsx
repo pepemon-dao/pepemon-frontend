@@ -1,8 +1,6 @@
 import React from "react";
 import { darktealTiles } from "../../assets";
-import DropDown from "../../components/DropDown/index";
-import Navigation from "../../components/Navigation/index";
-import TopBar from "../../components/TopBar/index";
+import { DropDown, Navigation, TopBar } from "../../components";
 import "./subscription.css";
 const Subscription: React.FC<any> = ({ appChainId: chainId, setChainId }) => {
   return (

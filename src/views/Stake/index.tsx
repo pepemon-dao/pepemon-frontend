@@ -9,9 +9,7 @@ import plus from "../../assets/plus.png";
 
 import provideliquiditybutton from "../../assets/provideliquiditybutton.png";
 import { darktealTiles } from "../../assets";
-import IbuttonPopover from "../../components/IbuttonPopover/index";
-import Navigation from "../../components/Navigation/index";
-import TopBar from "../../components/TopBar/index";
+import { IbuttonPopover, Navigation, TopBar } from "../../components";
 import ppdexIcon from "../../assets/ppdex-icon.png";
 import useTokenPrices from "../../hooks/useTokenPrices";
 import { getBalanceNumber } from "../../utils/formatBalance";

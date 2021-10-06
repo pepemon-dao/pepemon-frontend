@@ -8,7 +8,7 @@ import Subscription from "./views/Subscription";
 import Store from "./views/Store";
 import PepemonProvider from "./contexts/PepemonProvider";
 import ModalsProvider from "./contexts/Modals";
-import TopBar from "./components/TopBar/index";
+import { TopBar } from "./components";
 
 const App: React.FC = () => {
   const [mobileMenu, setMobileMenu] = useState(false);

@@ -11,7 +11,7 @@ import buyyourbutton from "../../assets/buyyourbutton.png";
 import stakingbutton from "../../assets/stakingbutton.png";
 import { useHistory } from "react-router-dom"; // version 5.2.0
 
-function Navigation() {
+const Navigation = () => {
   let history = useHistory();
 
   return (

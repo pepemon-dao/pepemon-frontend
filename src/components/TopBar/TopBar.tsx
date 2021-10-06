@@ -3,7 +3,7 @@ import address from "../../assets/address.png";
 import React, { useCallback } from "react";
 import useWeb3Modal from "../../hooks/useWeb3Modal";
 import usePepemon from "../../hooks/usePepemon";
-import Value from "../Value";
+import { Value } from "../index";
 import useTokenBalance from "../../hooks/useTokenBalance";
 import {
   getPpblzAddress,

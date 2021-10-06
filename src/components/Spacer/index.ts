@@ -1,1 +1,1 @@
-export { default, StyledSpacer } from "./Spacer";
+export { default as Spacer, StyledSpacer } from "./Spacer";
