@@ -4,6 +4,9 @@ import enable from "../../assets/enable.png";
 import ibutton from "../../assets/i.svg";
 
 import pokeball from "../../assets/pokeball-temp.png";
+import uniswap from "../../assets/uniswap.png";
+import ppdex from "../../assets/ppdex.png";
+
 import minus from "../../assets/minus.png";
 import plus from "../../assets/plus.png";
 

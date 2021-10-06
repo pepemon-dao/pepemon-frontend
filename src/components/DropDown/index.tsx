@@ -38,11 +38,11 @@ const DropDown: React.FC<props> = ({ heading }) => {
             style={{ width: "50px", height: "50px" }}
           />
 
-          <span className="header-text">{heading}</span>
+          <span className="top-header-text">{heading}</span>
         </div>
         {dorpdown ? (
           <div className="header-sub-div">
-            <span className="Show-more">Show less</span>
+            <span className="show-more">Show less</span>
             <img
               src={uparrow}
               alt="logo"
@@ -55,7 +55,7 @@ const DropDown: React.FC<props> = ({ heading }) => {
           </div>
         ) : (
           <div className="header-sub-div">
-            <span className="Show-more">Show more</span>
+            <span className="show-more">Show more</span>
             <img
               src={dropdownarrow}
               alt="logo"
@@ -71,14 +71,14 @@ const DropDown: React.FC<props> = ({ heading }) => {
       {dorpdown && (
         <div className="subscription-box-big-body">
           <div className="leftside-body">
-            <span className="data-div-bold-text" style={{ fontSize: "17px" }}>
+            <span className="data-div-bold-text-subs" style={{ fontSize: "17px" }}>
               Get Exclusive NFTs! Provide 100 PPDEX (+ETH) on Uniswap LP, stake
               these LP tokens and recieve a unique NFT every month. Your LP
               tokens will be locked for a minimum 32 days.
             </span>
             <br />
             <br />
-            <span className="data-div-bold-text">PPBLZ-ETH LP balance</span>
+            <span className="data-div-bold-text-subs">PPBLZ-ETH LP balance</span>
             <span className="Buy-PPBLZ">Buy PPBLZ-ETH LP</span>
 
             <br />
@@ -86,14 +86,14 @@ const DropDown: React.FC<props> = ({ heading }) => {
             <span className="number">4.00</span>
             <br />
             <br />
-            <span className="data-div-bold-text">PPBLZ-ETH LP staked</span>
+            <span className="data-div-bold-text-subs">PPBLZ-ETH LP staked</span>
             <br />
             <br />
             <span className="number">0.00</span>
             <br />
             <br />
 
-            <span className="data-div-bold-text" style={{ fontSize: "16px" }}>
+            <span className="data-div-bold-text-subs" style={{ fontSize: "16px" }}>
               3.828 PPBLZ-ETH LP needed to subscribe
             </span>
 
@@ -125,7 +125,7 @@ const DropDown: React.FC<props> = ({ heading }) => {
               <br />
               <span className="Yugipepe">Yugipepe</span> <br />
               <span
-                className="data-div-bold-text"
+                className="data-div-bold-text-subs"
                 style={{ fontSize: "16px", marginLeft: "0px" }}
               >
                 Super cool discription about this card. Iuis aute irure dolor in
@@ -159,7 +159,7 @@ const DropDown: React.FC<props> = ({ heading }) => {
       </div>
 
       <div style={{ display: "flex" }}>
-        <p className="data-div-bold-text-big">Total value: $0</p>
+        <p className="data-div-bold-text-subs-big">Total value: $0</p>
         <p className="Update">Update</p>
       </div>
 
