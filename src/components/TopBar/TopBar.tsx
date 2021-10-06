@@ -9,7 +9,7 @@ import {
   getPpdexAddress,
   getPpdexContract,
 } from "../../pepemon/utils";
-import { getBalanceNumber } from "../../utils/formatBalance";
+import { getBalanceNumber, formatAddress } from "../../utils";
 
 type props = {
   staking: boolean;
@@ -64,7 +64,7 @@ const TopBar: React.FC<props> = ({ ethChainId, setEthChainId, staking }) => {
             <div className="menu-text">3 unique cards</div>
             <div className="green-text-addr">
               <p className="green-buttontext">
-                {account.substr(0, 4)}.....{account.slice(-4)}
+                {formatAddress(account)}
               </p>
             </div>
           </div>
