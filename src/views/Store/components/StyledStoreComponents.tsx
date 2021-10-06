@@ -14,7 +14,7 @@ export const StyledStoreWrapper = styled.div<{width?: string}>`
 `
 
 export const StyledStoreHeader = styled.div`
-    background-color: ${(props) => props.theme.color.purple[900]};
+    background-color: ${(props) => props.theme.color.purple[800]};
     color:  ${(props) => props.theme.color.white};
     display: flex;
     align-items: center;

@@ -28,7 +28,7 @@ import stakingbutton from "../../assets/stakingbutton.png";
 import witchenerycard from "../../assets/witchenerycard.png";
 import pepechurcard from "../../assets/pepechurcard.png";
 import downgreenarrow from "../../assets/downgreenarrow.svg";
-import { TopBar, Value, Navigation } from "../../components";
+import { Value } from "../../components";
 import useTotalValueStaked from "../../hooks/useTotalValueStaked";
 import { getBalanceNumber } from "../../utils/formatBalance";
 import useTotalSpendInShop from "../../hooks/useTotalSpendInShop";
@@ -41,7 +41,6 @@ const Home: React.FC<any> = ({ appChainId: chainId, setChainId }) => {
 
   return (
     <div className="main-container">
-      <Navigation />
 
       <div className="container-wrap">
         <div

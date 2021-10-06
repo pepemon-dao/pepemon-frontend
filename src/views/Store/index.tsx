@@ -2,7 +2,6 @@ import React, { useState, Suspense, lazy } from 'react';
 import { Link, useParams, Redirect } from "react-router-dom";
 import { StoreCardsBody, StoreBoosterpacksBody, StyledStoreWrapper, StyledStoreHeader } from './components';
 import { Page, StyledTitle, Spacer, Loading } from '../../components';
-import { Navigation } from "../../components";
 import { theme } from '../../theme';
 import { pokeCards, pokePacks } from '../../constants';
 const StoreCardsAside = lazy(() => import('./components').then((module) => ({
@@ -57,7 +56,6 @@ const Store: React.FC<any> = () => {
 			<Redirect to={`/store/cards`}/> // default route
 			:
 			<div style={{display: 'flex'}}>
-				<Navigation />
 				<Page repeat='no-repeat' size='cover'>
 					{account ? (
 						<>

@@ -21,7 +21,7 @@ const StoreCardsAside: React.FC<any> = ({setSelectedCard, selectedCard}) => {
 			<StyledStoreBody>
 				<StyledTitle as="h2" font={theme.font.neometric} size="1.3rem">{selectedCard.name}</StyledTitle>
 				<Spacer size="sm"/>
-				<StyledText as="p" font={theme.font.inter} size=".875rem" color={theme.color.gray[500]}>Super cool discription about this card. Iuis aute irure dolor in reprehenderit in voluptate velit esse cillum.</StyledText>
+				<StyledText as="p" font={theme.font.inter} size=".875rem" color={theme.color.gray[600]}>Super cool discription about this card. Iuis aute irure dolor in reprehenderit in voluptate velit esse cillum.</StyledText>
 				<Spacer size="sm"/>
 				<StyledPepemonCardImage src={selectedCard.url}/>
 				<Spacer size='md'/>

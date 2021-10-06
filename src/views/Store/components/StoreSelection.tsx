@@ -12,7 +12,7 @@ const StoreSelectionWrapper: React.FC<any> = ({children}) => {
 
 const StyledStoreSelectionWrapper = styled.div`
 	display: flex;
-	color: ${props => props.theme.color.purple[400]};
+	color: ${props => props.theme.color.purple[600]};
 	position: absolute;
 	font-family: ${props => props.theme.font.inter};
 	top: 1.1em;

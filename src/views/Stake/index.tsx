@@ -8,8 +8,7 @@ import minus from "../../assets/minus.png";
 import plus from "../../assets/plus.png";
 
 import provideliquiditybutton from "../../assets/provideliquiditybutton.png";
-import { darktealTiles } from "../../assets";
-import { IbuttonPopover, Navigation, TopBar } from "../../components";
+import { IbuttonPopover, TopBar } from "../../components";
 import ppdexIcon from "../../assets/ppdex-icon.png";
 import useTokenPrices from "../../hooks/useTokenPrices";
 import { getBalanceNumber } from "../../utils/formatBalance";
@@ -567,21 +566,12 @@ const Stake: React.FC<any> = ({ appChainId: chainId, setChainId }) => {
 
   return (
     <div className="main-container">
-      <Navigation />
+
       <div className="container-wrap">
-        <TopBar
-          staking={true}
-          ethChainId={chainId}
-          setEthChainId={setChainId}
-        />
         <div
           style={{
-            backgroundPosition: "center",
-            backgroundImage: `url(${darktealTiles})`,
             height: "100%",
             width: "100%",
-            backgroundSize: "cover",
-            backgroundRepeat: "no-repeat",
           }}
         >
           <div className="main-container">

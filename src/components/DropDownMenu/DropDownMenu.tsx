@@ -78,7 +78,7 @@ const StyledMenuContainer = styled.div`
 const StyledMenuTrigger = styled.button<StyledProps>`
     background: ${(props) => props.bgColor ? props.bgColor : props.theme.color.white};
     border-radius: 1em;
-    color: ${props => props.theme.color.purple[400]};
+    color: ${props => props.theme.color.purple[600]};
     cursor: pointer;
     display: flex;
     font-family: ${props => props.theme.font.spaceMace};
@@ -89,7 +89,7 @@ const StyledMenuTrigger = styled.button<StyledProps>`
     text-align: center;
     text-transform: uppercase;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.0);
-    border: 2px solid ${props => props.theme.color.purple[400]};
+    border: 2px solid ${props => props.theme.color.purple[600]};
     vertical-align: middle;
     transition: box-shadow 0.4s ease;
 
@@ -117,7 +117,7 @@ const StyledMenu = styled.div<StyledMenuProps>`
   font-size: 1rem;
   border-radius: 1em;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.12);
-  border: solid 1px ${props => props.theme.color.purple[400]};
+  border: solid 1px ${props => props.theme.color.purple[600]};
   width: 18.75em;
 
   &:before {
@@ -129,7 +129,7 @@ const StyledMenu = styled.div<StyledMenuProps>`
       transform: rotate(45deg) translateY(-50%);
       position: absolute;
       right: 2.5em;
-      border-color: ${props => props.theme.color.purple[400]};
+      border-color: ${props => props.theme.color.purple[600]};
       transform-origin: top;
       border-left-style: solid;
       border-top-style: solid;
@@ -149,13 +149,13 @@ const StyledListItem = styled.li``
 const StyledListItemLink = styled.a`
   text-decoration: none;
   cursor: pointer;
-  color: ${props => props.theme.color.gray[400]};
+  color: ${props => props.theme.color.gray[500]};
   padding: .5em 0;
   display: flex;
   align-items: center;
 
   &:hover {
-      color: ${props => props.theme.color.purple[400]};
+      color: ${props => props.theme.color.purple[600]};
   }
 
   svg {
@@ -166,7 +166,7 @@ const StyledListItemLink = styled.a`
   }
 
   &.active {
-      color: ${props => props.theme.color.purple[400]};
+      color: ${props => props.theme.color.purple[600]};
       font-weight: bold;
   }
 `

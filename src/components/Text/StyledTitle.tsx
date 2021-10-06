@@ -10,7 +10,7 @@ interface StyledTitleProps {
 const StyledTitle = styled.div<StyledTitleProps>`
 	&{
 		color: ${props => props.color ? props.color : props.theme.color.black};
-		font-family: ${props => props.font && props.font};
+		font-family: ${props => props.font ? props.font : props.theme.font.spaceMace};
 		font-size: ${props => props.size && props.size};
 		font-weight: 500;
 		position: relative;
@@ -44,6 +44,11 @@ const StyledTitle = styled.div<StyledTitleProps>`
 		left: 0;
       }
     `}
+`
+
+export const StyledPageTitle = styled(StyledTitle)`
+	font-size: 2.5rem;
+	margin-bottom: .5em;
 `
 
 export default StyledTitle;

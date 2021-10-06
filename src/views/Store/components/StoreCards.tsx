@@ -157,7 +157,7 @@ export const StyledPepemonCardMeta = styled.dl`
 	}
 
 	& dd {
-		color: ${props => props.theme.color.gray[500]};
+		color: ${props => props.theme.color.gray[600]};
 		font-weight: bold
 	}
 `

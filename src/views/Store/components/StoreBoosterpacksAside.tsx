@@ -22,7 +22,7 @@ const StoreBoosterpacksAside: React.FC<any> = ({setSelectedPack, selectedPack}) 
 			<StyledStoreBody>
 				<StyledTitle as="h2" font={theme.font.neometric} size="1.3rem">{selectedPack.name}</StyledTitle>
 				<Spacer size="sm"/>
-				<StyledText as="p" font={theme.font.inter} size=".875rem" color={theme.color.gray[500]}>When claiming this boorsterpack you will recieve 3 random cards. Possible cards are:</StyledText>
+				<StyledText as="p" font={theme.font.inter} size=".875rem" color={theme.color.gray[600]}>When claiming this boorsterpack you will recieve 3 random cards. Possible cards are:</StyledText>
 				<Spacer size="sm"/>
 				<StyledPepemonCardImage src={selectedPack.url}/>
 				<Spacer size='md'/>

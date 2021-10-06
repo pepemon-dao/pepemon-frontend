@@ -1,7 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
 // import Footer from '../Footer'
-import { darktealTiles } from '../../assets';
 
 interface PageProps {
     image?: any,
@@ -35,7 +34,6 @@ const StyledMain = styled.div<StyledMainProps>`
     display: flex;
     flex-direction: column;
     min-height: calc(100vh - ${(props) => props.theme.topBarSize * 2}px);
-    background: ${(props) => `url(${props.image ? props.image : darktealTiles}) ${props.repeat ? props.repeat : 'repeat'} center 0px, ${props.color ? props.color : props.theme.color.white}`};
     background-size: auto ${props => props.size ? props.size : '100vh'};
     background-attachment: ${props => props.scroll ? 'scroll': 'fixed'};
 `

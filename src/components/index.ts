@@ -1,7 +1,7 @@
+export { Accordion, AccordionGroup } from './Accordion';
 export { Body } from './Body';
 export { Button } from './Button';
 export { Card } from './Card';
-export { DropDown } from './DropDown';
 export { DropDownMenu } from './DropDownMenu';
 export { Header } from './Header';
 export { IbuttonPopover } from './IbuttonPopover';
@@ -16,6 +16,6 @@ export { ModalTitle } from './ModalTitle';
 export { Navigation } from './Navigation';
 export { Page } from './Page';
 export { Spacer, StyledSpacer } from './Spacer';
-export { StyledTitle, StyledText } from './Text';
+export { StyledTitle, StyledPageTitle, StyledText } from './Text';
 export { TopBar } from './TopBar';
 export { Value } from './Value';
