@@ -8,11 +8,11 @@ import minus from "../../assets/minus.png";
 import plus from "../../assets/plus.png";
 
 import provideliquiditybutton from "../../assets/provideliquiditybutton.png";
-import cover from "../../assets/staking-bg.png";
+import { darktealTiles } from "../../assets";
 import IbuttonPopover from "../../components/IbuttonPopover/index";
 import Navigation from "../../components/Navigation/index";
 import TopBar from "../../components/TopBar/index";
-import ppdexIcon from "../../../assets/img/ppdex-icon.png";
+import ppdexIcon from "../../assets/ppdex-icon.png";
 import useTokenPrices from "../../hooks/useTokenPrices";
 import { getBalanceNumber } from "../../utils/formatBalance";
 import BigNumber from "bignumber.js";
@@ -579,7 +579,7 @@ const Stake: React.FC<any> = ({ appChainId: chainId, setChainId }) => {
         <div
           style={{
             backgroundPosition: "center",
-            backgroundImage: `url(${cover})`,
+            backgroundImage: `url(${darktealTiles})`,
             height: "100%",
             width: "100%",
             backgroundSize: "cover",

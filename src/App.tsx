@@ -1,5 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { ThemeProvider } from "styled-components";
+import { theme } from "./theme";
 import Home from "./views/Home";
 import Stake from "./views/Stake";
 import Subscription from "./views/Subscription";
@@ -67,7 +69,7 @@ const App: React.FC = () => {
               setChainId={setEthChainId}
             />
           </Route>
-          <Route path="/store" exact>
+          <Route path="/store/:storeState?">
             <Store
               providerChainId={providerChainId}
               appChainId={ethChainId}
@@ -99,9 +101,11 @@ const Providers: React.FC<any> = ({ ethChainId, children }) => {
 
   return (
     <div>
-      <PepemonProvider>
-        <ModalsProvider>{children}</ModalsProvider>
-      </PepemonProvider>
+        <ThemeProvider theme={theme}>
+          <PepemonProvider>
+            <ModalsProvider>{children}</ModalsProvider>
+          </PepemonProvider>
+        </ThemeProvider>
       {/*</UseWalletProvider>*/}
     </div>
   );

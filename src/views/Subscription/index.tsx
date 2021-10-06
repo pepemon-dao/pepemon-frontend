@@ -1,5 +1,5 @@
 import React from "react";
-import cover from "../../assets/staking-bg.png";
+import { darktealTiles } from "../../assets";
 import DropDown from "../../components/DropDown/index";
 import Navigation from "../../components/Navigation/index";
 import TopBar from "../../components/TopBar/index";
@@ -12,7 +12,7 @@ const Subscription: React.FC<any> = ({ appChainId: chainId, setChainId }) => {
         <div
           style={{
             backgroundPosition: "center",
-            backgroundImage: `url(${cover})`,
+            backgroundImage: `url(${darktealTiles})`,
             height: "100%",
             width: "100%",
             backgroundSize: "cover",

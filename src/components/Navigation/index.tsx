@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import "./navigation.css";
 import group from "../../assets/group3x.png";
 import cover from "../../assets/cover.png";
@@ -15,24 +16,22 @@ function Navigation() {
 
   return (
     <div className="menu-wrap">
-      <img
-        src={pepemon}
-        onClick={() => {
-          history.push("./");
-        }}
-        className="pepemon-icon"
-        alt="logo"
-      />
+        <Link to="/">
+          <img
+            src={pepemon}
+            className="pepemon-icon"
+            alt="logo"
+          />
+        </Link>
 
       <div className="menu">
-        <img
-          src={homefade}
-          onClick={() => {
-            history.push("./staking");
-          }}
-          className="menu-icon"
-          alt="logo"
-        />
+        <Link to="/staking">
+            <img
+              src={homefade}
+              className="menu-icon"
+              alt="logo"
+            />
+        </Link>
         <img
           src={homefade}
           onClick={() => {
@@ -41,30 +40,27 @@ function Navigation() {
           className="menu-icon"
           alt="logo"
         />
-        <img
-          src={homeactive}
-          onClick={() => {
-            history.push("./");
-          }}
-          className="menu-icon"
-          alt="logo"
-        />
-        <img
-          src={homefade}
-          onClick={() => {
-            history.push("./");
-          }}
-          className="menu-icon"
-          alt="logo"
-        />
-        <img
-          src={homefade}
-          onClick={() => {
-            history.push("./");
-          }}
-          className="menu-icon"
-          alt="logo"
-        />
+            <Link to="/store">
+            <img
+              src={homeactive}
+              className="menu-icon"
+              alt="logo"
+            />
+        </Link>
+            <Link to="/">
+            <img
+              src={homefade}
+              className="menu-icon"
+              alt="logo"
+            />
+        </Link>
+            <Link to="/">
+            <img
+              src={homefade}
+              className="menu-icon"
+              alt="logo"
+            />
+        </Link>
       </div>
     </div>
   );
