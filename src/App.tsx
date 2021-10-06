@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Home from "./views/Home";
 import Stake from "./views/Stake";
 import Subscription from "./views/Subscription";
+import Store from "./views/Store";
 import PepemonProvider from "./contexts/PepemonProvider";
 import ModalsProvider from "./contexts/Modals";
 import TopBar from "./components/TopBar/index";
@@ -61,6 +62,13 @@ const App: React.FC = () => {
           </Route>
           <Route path="/subscription" exact>
             <Subscription
+              providerChainId={providerChainId}
+              appChainId={ethChainId}
+              setChainId={setEthChainId}
+            />
+          </Route>
+          <Route path="/store" exact>
+            <Store
               providerChainId={providerChainId}
               appChainId={ethChainId}
               setChainId={setEthChainId}
