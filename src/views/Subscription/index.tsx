@@ -1,6 +1,6 @@
 import React from "react";
 import { StyledPageTitle, AccordionGroup, Accordion, TopBar } from "../../components";
-import "./subscription.css";
+
 const Subscription: React.FC<any> = ({ appChainId: chainId, setChainId }) => {
 	return (
 		<>
