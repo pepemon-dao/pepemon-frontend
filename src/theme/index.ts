@@ -73,9 +73,7 @@ export const theme = {
 	sideBar: {
 		width: 96
 	},
-	pages: {
-		store: {
-			maxWidth: 940
-		}
+	page: {
+		maxWidth: 1120
 	}
 };

@@ -1,7 +1,7 @@
 import React, { useState, Suspense, lazy } from 'react';
 import { Link, useParams, Redirect } from "react-router-dom";
 import { StoreCardsBody, StoreBoosterpacksBody, StyledStoreWrapper, StyledStoreHeader } from './components';
-import { StyledPageWrapperMain, StyledPageWrapperMainInner, Page, StyledTitle, StyledPageTitle, Spacer, Loading } from '../../components';
+import { StyledPageWrapperMain, StyledPageWrapperMainInner, StyledTitle, StyledPageTitle, Loading } from '../../components';
 import { theme } from '../../theme';
 import { pokeCards, pokePacks } from '../../constants';
 const StoreCardsAside = lazy(() => import('./components').then((module) => ({

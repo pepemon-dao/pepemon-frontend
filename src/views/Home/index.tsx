@@ -1,33 +1,10 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import { Button, ContentBox, ContentBoxNumber, ContentBoxGrid, ContentCentered, ContentColumn, ContentColumns, Footer,
+import { ContentBox, ContentBoxNumber, ContentBoxGrid, ContentCentered, ContentColumn, ContentColumns, Footer,
 	Spacer, StyledTitle, StyledText, StyledButton, SocialBoxes, Newsletter } from "../../components";
 import { theme } from "../../theme";
 import "./Home.css";
-import dummyGraph from "../../assets/dummy_graph.png";
-import group from "../../assets/group3x.png";
-import walkr from "../../assets/walkr.png";
-import walkh from "../../assets/walkh.png";
-import walkw from "../../assets/walkw.png";
-import cover from "../../assets/cover.png";
-import coverblack from "../../assets/coverblack.png";
-import pepemon from "../../assets/pepemon.png";
-import homeactive from "../../assets/homeactive.png";
-import homefade from "../../assets/homefade.png";
-import fudizard from "../../assets/fudizard.png";
-import pepemander from "../../assets/pepemander.gif";
-import logoexpand from "../../assets/logoexpand.png";
-import becomepepbutton from "../../assets/becomepepbutton.png";
-import address from "../../assets/address.png";
-import bluecard from "../../assets/bluecard.png";
-import buynowbutton from "../../assets/buynowbutton.png";
-import buyyourbutton from "../../assets/buyyourbutton.png";
-import claimyourcardbutton from "../../assets/claimyourcardbutton.png";
-import pepechucard from "../../assets/pepechucard.png";
-import stakingbutton from "../../assets/stakingbutton.png";
-import witchenerycard from "../../assets/witchenerycard.png";
-import pepechurcard from "../../assets/pepechurcard.png";
-import downgreenarrow from "../../assets/downgreenarrow.svg";
+import { dummyGraph, group, walkr, walkh, walkw, cover, coverblack, fudizardPng, pepemander, logoexpand, bluecard, pepechucard, witchenerycard, pepechurcard, downgreenarrow } from "../../assets";
 import { Value } from "../../components";
 import { getBalanceNumber } from "../../utils";
 import { useTotalValueStaked, useTotalSpendInShop, usePepemon } from "../../hooks";
@@ -193,7 +170,7 @@ const Home: React.FC<any> = ({ appChainId: chainId, setChainId }) => {
 					<ContentColumn width="60%">
 						<div style={{ position: "relative", height: "100%", width: "100%" }}>
 							<ContentCentered>
-								<img src={fudizard} alt="fudizard"/>
+								<img src={fudizardPng} alt="fudizard"/>
 							</ContentCentered>
 						</div>
 					</ContentColumn>

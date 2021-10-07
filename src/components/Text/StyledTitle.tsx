@@ -33,7 +33,7 @@ const StyledTitle = styled.div<StyledTitleProps>`
 
 	${({ inactive }) => !inactive && `
 	  &{
-		font-weight: 900;
+		// font-weight: 900;
 	  }
 
       a:before {

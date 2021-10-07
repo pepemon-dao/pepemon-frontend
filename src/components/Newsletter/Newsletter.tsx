@@ -1,6 +1,4 @@
-import styled from "styled-components";
 import { theme } from "../../theme";
-import signupbutton from "../../assets/signupbutton.png";
 import { ContentCentered, StyledTitle, StyledText, Spacer, StyledButton } from "../../components";
 
 const Newsletter = () => {

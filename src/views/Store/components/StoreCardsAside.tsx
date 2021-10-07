@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyledStoreWrapper, StyledStoreHeader, StyledStoreBody, StyledPepemonCardImage, StyledPepemonCardMeta, StyledPepemonCardPrice } from './index';
+import { StyledStoreWrapper, StyledStoreHeader, StyledStoreBody, StyledPepemonCardMeta, StyledPepemonCardPrice } from './index';
 import { Button, StyledTitle, StyledText, Spacer, StyledSpacer } from '../../../components';
 import { StoreClaimModal } from './index';
 import { ActionClose, coin } from '../../../assets';

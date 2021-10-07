@@ -1,11 +1,6 @@
 // @ts-ignore
 import React, { useState, useEffect } from "react";
-import dropdownarrow from "../../assets/dropdownarrow.png";
-import pepemandercard from "../../assets/pepemandercard.png";
-import pokeball from "../../assets/pokeball-temp.png";
-import subscribetoclaim from "../../assets/subscribetoclaim.png";
-import unsubscribe from "../../assets/unsubscribe.png";
-import uparrow from "../../assets/uparrow.png";
+import { dropdownarrow, pepemandercard, pokeball, subscribetoclaim, unsubscribe, uparrow } from "../../assets";
 import "./dropdown.css";
 
 type props = {

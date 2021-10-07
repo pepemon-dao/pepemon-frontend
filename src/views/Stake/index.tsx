@@ -1,29 +1,14 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { Popover } from "reactstrap";
-import { StyledPageWrapperMain, StyledPageWrapperMainInner, Button, StyledText, StyledTitle, StyledPageTitle, IbuttonPopover, TopBar, Spacer } from "../../components";
-import { useTokenPrices, usePepemon, useWeb3Modal } from "../../hooks";
-import { getBalanceNumber, correctChainIsLoaded } from "../../utils";
+import { StyledPageWrapperMain, StyledPageWrapperMainInner, Button, StyledText, StyledTitle, StyledPageTitle, IbuttonPopover, Spacer } from "../../components";
+import { usePepemon, useWeb3Modal } from "../../hooks";
+import { correctChainIsLoaded } from "../../utils";
 import { theme } from "../../theme";
-import BigNumber from "bignumber.js";
 import { sendTransaction } from "../../pepemon/utils";
 import Web3 from "web3";
 import "./Stake.css";
-import enable from "../../assets/enable.png";
-import ibutton from "../../assets/i.svg";
-import pokeball from "../../assets/pokeball-temp.png";
-import uniswap from "../../assets/uniswap.png";
-import ppdex from "../../assets/ppdex.png";
-
-import minus from "../../assets/minus.png";
-import plus from "../../assets/plus.png";
-import provideliquiditybutton from "../../assets/provideliquiditybutton.png";
-import ppdexIcon from "../../assets/ppdex-icon.png";
-
-interface Stake {
-	pepemon: any;
-	web3: any;
-}
+import { ibutton, pokeball } from "../../assets";
 
 const Stake: React.FC<any> = ({ appChainId: chainId, setChainId }) => {
 	const [popoverOpen, setPopoverOpen] = useState(false);
@@ -31,15 +16,10 @@ const Stake: React.FC<any> = ({ appChainId: chainId, setChainId }) => {
 	const toggle = () => setPopoverOpen(!popoverOpen);
 	const toggle2 = () => setPopoverOpen2(!popoverOpen2);
 	const pepemon = usePepemon();
-	const [provider, onPresentWalletProviderModal, logoutOfWeb3Modal] =
-	useWeb3Modal();
-	const [providerChainId, setProviderChainId] = useState(
-	(window.ethereum && parseInt(window.ethereum.chainId)) || 1
-	);
+	const [provider] = useWeb3Modal();
 
 	const web3: any = new Web3(provider);
 	//TODO: implement proper state / context management
-	const [loaded, setLoaded] = useState(false);
 	const [ppblzStakeAdd, setPpblzStakeAdd] = useState(false);
 	const [ppblzStakeSub, setPpblzStakeSub] = useState(false);
 
@@ -54,13 +34,11 @@ const Stake: React.FC<any> = ({ appChainId: chainId, setChainId }) => {
 	const [isStakingPpblz, setIsStakingPpblz] = useState(false);
 	const [isWithdrawingPpblz, setIsWithdrawingPpblz] = useState(false);
 	const [isStakingUniV2Ppblz, setIsStakingUniV2Ppblz] = useState(false);
-	const [isWithdrawingUniV2Ppblz, setIsWithdrawingUniV2Ppblz] = useState(false);
 	const [isClaiming, setIsClaiming] = useState(false);
 	const [isUpdatingRewards, setIsUpdatingRewards] = useState(false);
 	const [ppdexRewards, setPpdexRewards] = useState(0);
 	const [totalPpblzSupply, setTotalPpblzSupply] = useState(0);
 	const [totalUniV2PpblzSupply, setTotalUniV2PpblzSupply] = useState(0);
-	const [ppblzAllowance, setPpblzAllowance] = useState();
 	const [uniV2PpblAllowance, setUniV2PpblzAllowance] = useState(0);
 	const [ppblzBalance, setPpblzBalance] = useState(0);
 	const [uniV2PpblzBalance, setUniV2PpblzBalance] = useState(0);
@@ -70,12 +48,6 @@ const Stake: React.FC<any> = ({ appChainId: chainId, setChainId }) => {
 	const { account } = usePepemon();
 	const getAccount = () => {
 	return account;
-	};
-
-	const { ppblzPrice, ppdexPrice } = useTokenPrices();
-	const calculateApy = () => {
-	const rewardedPerYear = ppdexPrice * 20;
-	return (rewardedPerYear * 100) / ppblzPrice;
 	};
 
 	let timer: any = null;
@@ -90,7 +62,6 @@ const Stake: React.FC<any> = ({ appChainId: chainId, setChainId }) => {
 	setIsWithdrawingPpblz(false);
 	setIsStakingUniV2Ppblz(false);
 	setIsApprovingUniV2Ppblz(false);
-	setIsWithdrawingUniV2Ppblz(false);
 	setIsClaiming(false);
 	};
 
@@ -102,7 +73,6 @@ const Stake: React.FC<any> = ({ appChainId: chainId, setChainId }) => {
 		getAccount(),
 		pepemon.contracts.ppdex.address
 	);
-	setPpblzAllowance(web3.utils.fromWei(_ppblzAllowance.toString()));
 	if (_ppblzAllowance > 0) {
 		setIsApprovedPpblz(true);
 	}
@@ -307,39 +277,6 @@ const Stake: React.FC<any> = ({ appChainId: chainId, setChainId }) => {
 	}
 	};
 
-	const withdrawUniV2Ppblz = async () => {
-	if (isWithdrawingUniV2Ppblz || uniV2PpblzStakeAmount === 0) {
-		return;
-	}
-	setIsWithdrawingUniV2Ppblz(true);
-	try {
-		let unstakeRes = await sendTransaction(
-		provider,
-		async () =>
-			await pepemon.contracts.ppdex.withdrawUniV2(
-			web3.utils.toWei(uniV2PpblzStakeAmount.toString()),
-			{ gasLimit: 200000 }
-			)
-		);
-
-		if (unstakeRes) {
-		setIsWithdrawingUniV2Ppblz(false);
-		setUniV2PpblzStakeAmount(null);
-		await getMyUniV2PpblzStakeAmount();
-		await getUniV2PpblzBalance();
-		await getUniV2PpblzAllowance();
-		await getPpdexRewards();
-		} else {
-		setIsWithdrawingUniV2Ppblz(false);
-		}
-
-		return setTransactionFinished(transactionFinished + 1);
-	} catch (error) {
-		console.log(error);
-		await resetToInitialStateOnReject();
-	}
-	};
-
 	const approvePpblz = async () => {
 	if (isApprovingPpblz) {
 		return;
@@ -509,24 +446,6 @@ const Stake: React.FC<any> = ({ appChainId: chainId, setChainId }) => {
 	setIsClaiming(false);
 	};
 
-	const shouldClaimFirst = (asset: string) => {
-	if (asset === "UNIV2") {
-		return (
-		parseFloat(uniV2PpblzStakedAmount.toString()) === 0 &&
-		parseFloat(ppblzStakedAmount.toString()) > 0 &&
-		parseFloat(ppdexRewards.toString()) > 0.1
-		);
-	}
-	if (asset === "PPBLZ") {
-		return (
-		parseFloat(ppblzStakedAmount.toString()) === 0 &&
-		parseFloat(uniV2PpblzBalance.toString()) > 0 &&
-		parseFloat(ppdexRewards.toString()) > 0.1
-		);
-	}
-	return false;
-	};
-
 	useEffect(() => {
 	if (!pepemon || !pepemon.contracts) {
 		return;
@@ -549,8 +468,6 @@ const Stake: React.FC<any> = ({ appChainId: chainId, setChainId }) => {
 			getPpdexRewards();
 			getUniV2PpblzBalance();
 			getUniV2PpblzSupply();
-
-			setLoaded(true);
 			setIsApprovedPpblz(false);
 			setIsApprovedUniV2Ppblz(false);
 		} catch (error) {

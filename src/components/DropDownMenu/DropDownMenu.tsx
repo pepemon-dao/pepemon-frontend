@@ -2,7 +2,6 @@ import React, { useRef, useState } from 'react';
 import { useOutsideClick } from '../../hooks';
 import styled from 'styled-components'
 import { Check, ChevronDown } from '../../assets';
-import { theme } from '../../theme';
 
 interface DropDownMenuProps {
     title: any;

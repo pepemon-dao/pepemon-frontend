@@ -1,4 +1,4 @@
-import {useCallback, useContext, useEffect, useState} from 'react';
+import {useCallback, useContext, useState} from 'react';
 import { Web3Provider } from "@ethersproject/providers";
 import Web3Modal from "web3modal";
 import WalletConnectProvider from "@walletconnect/web3-provider";
@@ -13,9 +13,8 @@ const NETWORK_NAME = "mainnet";
 
 function useWeb3Modal(config = {}) {
     const [provider, setProvider] = useState<any>(null);
-    const [autoLoaded, setAutoLoaded] = useState(false);
     const [, dispatch] = useContext(Context);
-    const { autoLoad = true, infuraId = INFURA_ID, NETWORK = NETWORK_NAME }: any = config;
+    const { infuraId = INFURA_ID, NETWORK = NETWORK_NAME }: any = config;
 
     // Web3Modal also supports many other wallets.
     // You can see other options at https://github.com/Web3Modal/web3modal
@@ -98,14 +97,6 @@ function useWeb3Modal(config = {}) {
             setPepemon(web3Provider).then(() => console.log('Contracts LOADED'));
         });
     };
-
-    // If autoLoad is enabled and the the wallet had been loaded before, load it automatically now.
-    // useEffect(() => {
-    //     if (autoLoad && !autoLoaded && web3Modal.cachedProvider) {
-    //         loadWeb3Modal();
-    //         setAutoLoaded(true);
-    //     }
-    // }, [autoLoad, autoLoaded, loadWeb3Modal, setAutoLoaded, web3Modal.cachedProvider]);
 
     return [provider, loadWeb3Modal, logoutOfWeb3Modal];
 }

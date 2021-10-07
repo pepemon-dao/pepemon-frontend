@@ -1,14 +1,9 @@
 // @ts-ignore
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { Button, Spacer, StyledTitle, StyledText } from "../../components";
 import { theme } from "../../theme";
-import dropdownarrow from "../../assets/dropdownarrow.png";
-import pepemandercard from "../../assets/pepemandercard.png";
-import pokeball from "../../assets/pokeball-temp.png";
-import subscribetoclaim from "../../assets/subscribetoclaim.png";
-import unsubscribe from "../../assets/unsubscribe.png";
-import uparrow from "../../assets/uparrow.png";
+import { dropdownarrow, pepemandercard, pokeball, uparrow } from "../../assets";
 import "./dropdown.css";
 
 type AccordionProps = {
@@ -146,13 +141,6 @@ const AccordionBodyContent = styled.div<{side: "left" | "right"}>`
 	border-left: ${props => props.side === "right" && `2px solid ${props.theme.color.colorsLayoutBorders}`};
 	padding-left: ${props => props.side === "right" && "5.5em"};
 	padding-right: ${props => props.side === "left" && "5.5em"};
-`
-
-const Rectangle = styled.div`
-	border: 2px solid #f0f0f0;
-	height: 495px;
-	margin: 24px 82px 0 69px;
-	width: 2px;
 `
 
 export default Accordion;

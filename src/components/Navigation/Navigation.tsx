@@ -1,14 +1,6 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import group from "../../assets/group3x.png";
-import cover from "../../assets/cover.png";
-import pepemon from "../../assets/pepemon.png";
-import homeactive from "../../assets/homeactive.png";
-import homefade from "../../assets/homefade.png";
-import becomepepbutton from "../../assets/becomepepbutton.png";
-import address from "../../assets/address.png";
-import buyyourbutton from "../../assets/buyyourbutton.png";
-import stakingbutton from "../../assets/stakingbutton.png";
+import { pepemon, homeactive } from "../../assets";
 import { useLocation } from "react-router-dom"; // version 5.2.0
 
 const Navigation = () => {

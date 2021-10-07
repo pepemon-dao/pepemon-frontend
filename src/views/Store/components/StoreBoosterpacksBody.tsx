@@ -10,17 +10,17 @@ const StoreBoosterpacksBody: React.FC<any> = ({pokePacksArr, pokePacks, activeSe
 			</StoreSelection>
 			{ pokePacksArr.map((series: string, key: number) => {
 				const active = activeSeriesPack.includes(pokePacks[series as keyof typeof pokePacks].title);
-				if (active || activeSeriesPack.length === 0) {
-					return <StoreCards
-								key={key}
-								title={ pokePacks[series as keyof typeof pokePacks]?.title }
-								pokeCards={ pokePacks[series as keyof typeof pokePacks]?.cards }
-								gridCols={ Object.keys(selectedPack).length !== 0 ? 3 : 5 }
-								selectedCard={selectedPack}
-								selectCard={setSelectedPack}
-							/>
-				}
-				return;
+				return (
+					<>{(active || activeSeriesPack.length === 0) &&
+						<StoreCards
+							key={key}
+							title={ pokePacks[series as keyof typeof pokePacks]?.title }
+							pokeCards={ pokePacks[series as keyof typeof pokePacks]?.cards }
+							gridCols={ Object.keys(selectedPack).length !== 0 ? 3 : 5 }
+							selectedCard={selectedPack}
+							selectCard={setSelectedPack}
+						/>
+				}</>)
 			})}
 		</StyledStoreBody>
 	)

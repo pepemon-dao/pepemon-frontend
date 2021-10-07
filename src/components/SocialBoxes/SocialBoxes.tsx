@@ -1,10 +1,7 @@
 import styled from "styled-components";
 import { theme } from "../../theme";
 import { ContentBox, ContentBoxGrid, ContentCentered, StyledTitle, StyledText, Spacer } from "../../components";
-import discord from "../../assets/discord.svg";
-import twitter from "../../assets/twitter.svg";
-import medium from "../../assets/medium.svg";
-import telegram from "../../assets/telegram.svg";
+import { discord, telegram, twitter, medium } from "../../assets";
 
 const SocialBoxes = () => {
 	return (

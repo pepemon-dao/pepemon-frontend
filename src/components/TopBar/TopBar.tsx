@@ -1,12 +1,8 @@
 import "./TopBar.css";
-import address from "../../assets/address.png";
 import React, { useCallback } from "react";
 import { useWeb3Modal, usePepemon, useTokenBalance } from "../../hooks";
-import { Value } from "../index";
 import {
-  getPpblzAddress,
   getPpblzContract,
-  getPpdexAddress,
   getPpdexContract,
 } from "../../pepemon/utils";
 import { getBalanceNumber, formatAddress } from "../../utils";
@@ -17,10 +13,9 @@ type props = {
   setEthChainId: any;
 };
 const TopBar: React.FC<props> = ({ ethChainId, setEthChainId, staking }) => {
-  const [provider, loadWeb3Modal, logoutOfWeb3Modal] = useWeb3Modal();
+  const [, loadWeb3Modal] = useWeb3Modal();
   const { account } = usePepemon();
   const pepemon = usePepemon();
-  const { chainId } = usePepemon();
   const ppblzBalance = useTokenBalance(
     getPpblzContract(pepemon) ? getPpblzContract(pepemon).address : null
   );

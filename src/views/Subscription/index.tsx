@@ -1,5 +1,5 @@
 import React from "react";
-import { StyledPageWrapperMain, StyledPageWrapperMainInner, StyledPageTitle, AccordionGroup, Accordion, TopBar } from "../../components";
+import { StyledPageWrapperMain, StyledPageWrapperMainInner, StyledPageTitle, AccordionGroup, Accordion } from "../../components";
 
 const Subscription: React.FC<any> = ({ appChainId: chainId, setChainId }) => {
 	return (
@@ -13,7 +13,7 @@ const Subscription: React.FC<any> = ({ appChainId: chainId, setChainId }) => {
 					<Accordion heading="Pepemon Four Subscription" />
 				</AccordionGroup>
 			</StyledPageWrapperMainInner>
-		</StyledPageWrapperMain>	
+		</StyledPageWrapperMain>
 	);
 };
 

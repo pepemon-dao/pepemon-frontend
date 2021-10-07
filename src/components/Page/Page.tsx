@@ -4,10 +4,6 @@ import { Navigation } from "../../components";
 import { darktealTiles } from "../../assets";
 // import Footer from '../Footer'
 
-interface PageProps {
-    custom?: boolean
-}
-
 // const Page: React.FC<PageProps> = (props) => {
 // 	const { children } = props;
 // 	return <>
