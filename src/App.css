@@ -1,0 +1,889 @@
+.App {
+  text-align: center;
+}
+.main-container {
+  width: auto;
+  display: flex;
+  flex-direction: row;
+}
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+.main-landing-button {
+  width: 102%;
+  object-fit: cover;
+  margin: 0 auto;
+  margin-top: 40px;
+}
+.actiondiv {
+  display: flex;
+  flex-direction: row;
+  z-index: 99;
+  margin-top: 50px;
+  width: 1582px;
+}
+.footer {
+  display: flex;
+  flex-direction: row;
+}
+.Ut-enim-ad-minim-ven-Copy {
+  width: 422px;
+  height: 120px;
+  margin: 16px 0 0;
+  font-family: Inter;
+  font-size: 19px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  text-align: center;
+  color: var(--buttonPrimaryActive);
+}
+.-APY-Copy {
+  width: 268px;
+  height: 24px;
+  margin: 0 77px 16px;
+  font-family: Neometric;
+  font-size: 32px;
+  font-weight: 900;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 0.75;
+  letter-spacing: normal;
+  text-align: center;
+  color: var(--buttonPrimaryActive);
+}
+.fudizard {
+  width: 80%;
+  height: 100%;
+  /* padding: 100px; */
+  /* margin: 120px 0 0 46px; */
+  object-fit: cover;
+}
+.fudizard-container {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+.Golden-Fudizard {
+  width: 211px;
+  height: 20px;
+  margin: 24px 6px 2px;
+  font-family: SpaceMace;
+  font-size: 16px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.25;
+  letter-spacing: normal;
+}
+.stake-evolve {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+}
+.img-evolve {
+  width: 82%;
+  display: flex;
+  flex-direction: row;
+}
+.text-evolve {
+  width: 50%;
+  height: 200px;
+  position: absolute;
+  left: 50%;
+  top: 120px;
+  display: flex;
+  flex-direction: column;
+}
+.Collect-unique-Pepem {
+  width: 460px;
+  margin: 0 0 24px 1px;
+  font-family: Neometric-Alt;
+  font-size: 48px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.17;
+  letter-spacing: normal;
+  color: var(--headers);
+}
+.Pepemon-NFT {
+  width: 118px;
+  height: 20px;
+  font-family: SpaceMace;
+  font-size: 16px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.25;
+  letter-spacing: normal;
+  color: var(--headers);
+}
+
+.Use-your-Pepedex-to {
+  width: 460px;
+  height: 192px;
+  margin: 24px 0 24px 1px;
+  font-family: Inter;
+  font-size: 16px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  color: var(--headers);
+}
+.cards-text-container {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  padding: 221px;
+  padding-top: 300px;
+}
+.Stake-to-evolve {
+  width: 538px;
+  height: 56px;
+  margin: 0 0 24px 1px;
+  font-family: Neometric-Alt;
+  font-size: 48px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.17;
+  letter-spacing: normal;
+  color: var(--buttonPrimaryActive);
+}
+.Staking-events {
+  width: 159px;
+  height: 20px;
+  margin: 24px 379px 2px 1px;
+  font-family: SpaceMace;
+  font-size: 16px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.25;
+  letter-spacing: normal;
+}
+.The-Pepemon-Game {
+  width: 538px;
+  height: 56px;
+  margin: 0 0 24px 1px;
+  font-family: Neometric-Alt;
+  font-size: 58px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.17;
+  letter-spacing: normal;
+  color: var(--buttonPrimaryActive);
+}
+.Twitter-Telegram-Dis {
+  width: 240px;
+  height: 132px;
+  margin: 12px 0 0;
+  font-family: Inter;
+  font-size: 14px;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.57;
+  letter-spacing: normal;
+  color: #fafaf7;
+}
+.PPBLZ-Contract-PPDEX {
+  width: 240px;
+  height: 88px;
+  margin: 12px 0 0;
+  font-family: Inter;
+  font-size: 14px;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.57;
+  letter-spacing: normal;
+  color: #fafaf7;
+}
+.pepemander-display {
+  width: 391px;
+  height: 547px;
+  object-fit: cover;
+  margin-left: 283px;
+  margin-top: 120px;
+}
+.dotted-div {
+  width: 391px;
+  margin-left: 70px;
+  height: 547px;
+  margin: 72px 20px 277px 22px;
+  border-radius: 8px;
+  border: 1px dashed #9d9d9d;
+  position: relative;
+}
+.downgreenarrow {
+  position: absolute;
+  top: -35px;
+  left: 20px;
+}
+.middle-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.menu-list {
+  width: 240px;
+  height: 66px;
+  margin: 12px 0 0;
+  font-family: Inter;
+  font-size: 17px;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.57;
+  letter-spacing: normal;
+  color: #fafaf7;
+}
+
+.Stake-your-awesome-P {
+  width: 478px;
+  height: 96px;
+  margin: 24px 60px 0 1px;
+  -webkit-text-stroke: 1px #979797;
+  font-family: Inter;
+  font-size: 16px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  color: var(--buttonPrimaryActive);
+}
+.api-div-second {
+  width: 500px;
+  height: 208px;
+  margin: 24px 24px 120px 12px;
+  padding: 24px 18px;
+  border-radius: 8px;
+  box-shadow: 0 18.7px 14.2px 0 #00000019;
+  background-color: #eaecf8;
+  text-align: center;
+}
+
+.apidiv {
+  display: flex;
+  flex-direction: row;
+  z-index: 99;
+  margin: 0 auto;
+}
+.Lorem-ipsum-dolor-si {
+  width: 940px;
+
+  margin: 0 auto;
+  font-family: Neometric-Alt;
+  font-size: 48px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.04;
+  letter-spacing: normal;
+  text-align: center;
+  color: #fff;
+}
+.Rectangle {
+  width: 409px;
+  height: 170px;
+  margin: 28px 143px 189px 1px;
+  padding: 55px 16px 24px;
+  border-radius: 8px;
+  box-shadow: 0 4.5px 1px 0 #0000000f, 0 10.3px 6.9px 0 rgb(0 0 0 / 8%),
+    0 18.7px 14.2px 0 #00000019, 0 33.2px 29.2px 0 #00000021,
+    0 71px 80px 0 #00000030;
+  background-color: #fff;
+  position: relative;
+}
+.-APY {
+  width: 268px;
+  height: 24px;
+  margin: 4px 0 24px;
+  font-family: Neometric;
+  font-size: 36px;
+  font-weight: 900;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 0.75;
+  letter-spacing: normal;
+  text-align: center;
+  color: var(--buttonPrimaryActive);
+}
+.Become-a-true-Pepetr {
+  width: 268px;
+  height: 48px;
+  margin: 0 0 24px;
+  font-family: Inter;
+  font-size: 19px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  text-align: center;
+  color: var(--buttonPrimaryActive);
+}
+.logoexpand {
+  width: 414px;
+  height: 232.7px;
+}
+
+.Pepemon-is-a-digital {
+  width: 461px;
+  height: 120px;
+  margin: 27px 20px 24px 0;
+  font-family: Inter;
+  font-size: 25px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.36;
+  letter-spacing: normal;
+  color: var(--buttonPrimaryActive);
+}
+.number {
+  font-family: SpaceMace;
+  font-size: 22px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: center;
+  color: #fff;
+}
+.Rectanglebl {
+  width: 58px;
+  height: 58px;
+  margin: 0 auto;
+  border-radius: 8px;
+  background-color: #000;
+  text-align: center;
+  top: -25px;
+  left: 162px;
+  justify-content: center;
+  position: absolute;
+  align-items: center;
+  display: flex;
+}
+.graph-detail {
+  display: flex;
+  flex-direction: column;
+}
+.graph-detail-head {
+  width: 72px;
+  height: 24px;
+  margin: 0 0 8px;
+  font-family: Inter;
+  font-size: 16px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  text-align: center;
+}
+.graph-detail-number {
+  width: 48px;
+  height: 24px;
+  margin: 8px 12px 0;
+  font-family: Neometric;
+  font-size: 32px;
+  font-weight: 900;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 0.75;
+  letter-spacing: normal;
+  text-align: center;
+}
+.graph-detail-container {
+  flex-direction: row;
+  display: flex;
+  width: 50%;
+  justify-content: space-between;
+}
+.rectangle-text {
+  padding-left: 40px;
+  padding-right: 40px;
+  text-align: center;
+  margin-top: 20px;
+}
+.line {
+  width: 1005px;
+  height: 1px;
+  margin: 32px 0 24px;
+  background-color: #ffffff1e;
+}
+.h-bar {
+  position: absolute;
+  top: 20px;
+  right: 50px;
+
+  display: flex;
+  text-align: center;
+  right: 50px;
+}
+.container-wrap {
+  width: 94%;
+  overflow-y: hidden;
+  overflow-x: hidden;
+}
+.text-container {
+  width: 19%;
+  z-index: 99;
+  padding: 100px 300px;
+}
+.img-container {
+  width: 75%;
+  z-index: 1;
+}
+.menu-wrap {
+  width: 6%;
+  overflow-y: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.poketeam {
+  /* width: 100%; */
+  height: 703px;
+  z-index: -1;
+  /* margin: 131px 100px; */
+  /* padding: 29px 45.6px; */
+  object-fit: contain;
+  margin-top: 150px;
+  /* padding-right: 534px; */
+  object-fit: contain;
+  position: absolute;
+  left: 45%;
+}
+
+.email {
+  height: 466px;
+  margin: 100px 0 0;
+  padding: 120px 250px 80px;
+  background-color: #eaecf8;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.Stay-up-to-date-and {
+  width: 1240px;
+  height: 50px;
+  margin: 0 0 24px;
+  font-family: Neometric;
+  font-size: 61px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.04;
+  letter-spacing: normal;
+  text-align: center;
+  color: var(--buttonPrimaryActive);
+}
+.underlined-text {
+  width: 118px;
+  height: 20px;
+  margin: 0 0 2px;
+  font-family: SpaceMace;
+  font-size: 16px;
+
+  text-align: center;
+}
+
+.Duel-other-trainers {
+  width: 478px;
+  height: 96px;
+  margin: 24px 60px 0 1px;
+  font-family: Inter;
+  font-size: 19px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+}
+.Be-the-first-to-coll {
+  width: 800px;
+  height: 24px;
+  margin: 24px 160px;
+  font-family: Inter;
+  font-size: 18px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  text-align: center;
+  color: var(--buttonPrimaryActive);
+}
+
+.text-logo-contain {
+  display: flex;
+  flex-direction: row;
+  align-self: flex-end;
+}
+.text-logo-contain-text {
+  width: 50%;
+  height: 464px;
+  margin: 1021px 0 0;
+  padding: 120px 250px 120px 251px;
+}
+.input-email {
+  width: 638px;
+  height: 40px;
+  margin-top: 10px;
+  /* padding: 0 0 0 460px; */
+  display: flex;
+  flex-direction: row;
+  border-radius: 8px;
+  border: solid 1px #713aac;
+  background-color: #fafbff;
+}
+.input-email-input {
+  width: 84%;
+}
+.input-box {
+  width: 100%;
+  height: 100%;
+  outline: none;
+}
+.input-box:focus {
+  outline: none;
+}
+.menu-text {
+  width: 124px;
+  height: 24px;
+  margin: 8px 24px;
+  font-family: SpaceMace;
+  font-size: 18px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  text-align: right;
+  color: #030303;
+}
+.-Ether-scroll {
+  font-family: SpaceMace;
+  font-size: 16px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  text-align: right;
+  color: #030303;
+}
+.pepemon-icon {
+  width: 80px;
+  height: 80px;
+  margin: 40px 0;
+}
+.menu-icon {
+  width: 16px;
+  height: 16px;
+  margin: 26px 0;
+  object-fit: contain;
+}
+.menu {
+  margin: 90px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.SymbolsIconsSocial {
+  width: 70px;
+  height: 55px;
+  margin: 0 64.5px 16px;
+  object-fit: contain;
+}
+.social-box {
+  display: flex;
+}
+.social-box-cont {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 895px;
+  background-color: #fafbff;
+}
+
+.social-head {
+  margin: 0 auto;
+  font-family: Neometric;
+  font-size: 33px;
+  font-weight: 900;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 0.75;
+  letter-spacing: normal;
+  text-align: center;
+  color: var(--buttonPrimaryActive);
+}
+.Say-hi-and-meet-all {
+  margin: 0 auto;
+  font-family: Neometric;
+  font-size: 55px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.04;
+  letter-spacing: normal;
+  text-align: center;
+  color: var(--buttonPrimaryActive);
+}
+.Our-socials {
+  width: 118px;
+  height: 20px;
+  margin: 0 0 2px;
+  font-family: SpaceMace;
+  font-size: 17px;
+
+  letter-spacing: normal;
+  text-align: center;
+}
+img.Group-4 {
+  width: 475px;
+  height: 661px;
+  margin: 120px 0 0 46px;
+  object-fit: contain;
+}
+.underline-div {
+  width: 92px;
+  height: 2px;
+  margin: 2px 14px 0 12px;
+  background-color: #713aac;
+}
+
+.social-desc-conatiner {
+  margin-top: 30px;
+  text-align: center;
+}
+.social-desc {
+  margin-top: 10px;
+  width: 189px;
+  height: 94px;
+  margin: 16px 0 0;
+  font-family: Inter;
+  text-align: center;
+  font-size: 18px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  text-align: center;
+  color: var(--buttonPrimaryActive);
+}
+
+.To-the-moon {
+  width: 118px;
+  height: 20px;
+  margin: 0 auto;
+  font-family: SpaceMace;
+  font-size: 16px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.25;
+  letter-spacing: normal;
+  text-align: center;
+  color: #fff;
+
+  font-family: SpaceMace;
+  font-size: 16px;
+
+  text-align: center;
+}
+
+.Get-yours-before-it {
+  width: 460px;
+  height: 100px;
+  margin: 0 24px 21px 5px;
+  font-family: Neometric-Alt;
+  font-size: 74px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.04;
+  letter-spacing: normal;
+  color: var(--buttonPrimaryActive);
+}
+.api-card {
+  width: 320px;
+  height: 92px;
+  text-align: center;
+  margin: 40px 20px 24px 12px;
+  padding: 24px 16px 32px 15px;
+  border-radius: 8px;
+  box-shadow: 0 18.7px 14.2px 0 #00000019;
+  background-color: #eaecf8;
+  display: flex;
+  flex-direction: column;
+}
+.boldtext {
+  width: 268px;
+  height: 24px;
+  margin: 0 auto;
+  font-family: Neometric;
+  font-size: 34px;
+  font-weight: 900;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 0.75;
+  letter-spacing: normal;
+  text-align: center;
+  margin-top: 20px;
+}
+.Total-PPBLZ-value-lo {
+  width: 268px;
+  height: 24px;
+  font-family: Inter;
+  font-size: 18px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  margin: 0 auto;
+
+  letter-spacing: normal;
+  text-align: center;
+  color: var(--buttonPrimaryActive);
+}
+
+.Ut-enim-ad-minim-ven {
+  width: 690px;
+  height: 48px;
+  margin: 0 auto;
+  font-family: Inter;
+  font-size: 21px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  text-align: center;
+  color: #fff;
+}
+
+.social-container {
+  width: 221px;
+  height: 247px;
+  margin: 50px 25px 0 0px;
+  padding: 24px 16px;
+  border-radius: 8px;
+  box-shadow: 0 18.7px 14.2px 0 #00000019;
+  background-color: #eaecf8;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.Gotta-claim-em-all {
+  width: 460px;
+  height: 160px;
+  margin: 114px 11px 7px 0;
+  -webkit-text-stroke: 2px #0d0d0d;
+  background-color: var(--iconBlack);
+  font-family: SpaceMace;
+  font-size: 82px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.11;
+  letter-spacing: normal;
+  color: var(--iconBlack);
+}
+
+.Group {
+  width: 750px;
+  height: 573px;
+  margin: 57px 0 2px 100px;
+  padding: 432px 336px 29px 45.6px;
+  object-fit: contain;
+}
+
+.top-menu-bar {
+  height: 48px;
+  margin: 0 0 0 24px;
+  padding: 4px 4px 4px 16px;
+  border-radius: 8px;
+  border: solid 1px #6d7278;
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+.BrandLogoIconDefault {
+  width: 200px;
+  height: 105px;
+  margin: 0 80px 103px 0;
+  object-fit: contain;
+  align-self: center;
+}
+.bottomline {
+  width: 100%;
+  height: 10px;
+  margin: 32px 0 24px;
+  background-color: #ffffff1e;
+  margin-bottom: 70px;
+}
+.menu-top {
+  width: 56px;
+  height: 12px;
+  margin: 0 184px 12px 0;
+  font-family: SpaceMace;
+  font-size: 12px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.2;
+  letter-spacing: 1px;
+  color: #fafaf7;
+}
+.footer-wrap {
+  width: 68%;
+  margin: 0 auto;
+}
+.menu-align {
+  padding-left: 89px;
+  padding-right: 112px;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
