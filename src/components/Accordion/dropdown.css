@@ -58,7 +58,7 @@
   justify-content: space-between;
   align-items: center;
 }
-.data-div-bold-text {
+.data-div-bold-text-subs {
   height: 24px;
   font-family: Inter;
   font-size: 19px;
@@ -140,12 +140,13 @@
   margin-top: 15px;
 }
 
-.header-text {
+.top-header-text {
   align-self: center;
   height: 24px;
   font-family: Neometric;
   font-size: 22px;
   margin-left: 10px;
+  width: 400px;
   font-weight: 900;
   font-stretch: normal;
   font-style: normal;
@@ -195,7 +196,7 @@
   margin-left: 20px;
   text-decoration: underline;
 }
-.data-div-bold-text-big {
+.data-div-bold-text-subs-big {
   font-family: Inter;
   font-size: 19px;
   font-weight: normal;
