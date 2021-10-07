@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { Popover } from "reactstrap";
-import { Button, StyledText, StyledTitle, StyledPageTitle, IbuttonPopover, TopBar, Spacer } from "../../components";
+import { StyledPageWrapperMain, StyledPageWrapperMainInner, Button, StyledText, StyledTitle, StyledPageTitle, IbuttonPopover, TopBar, Spacer } from "../../components";
 import { useTokenPrices, usePepemon, useWeb3Modal } from "../../hooks";
 import { getBalanceNumber, correctChainIsLoaded } from "../../utils";
 import { theme } from "../../theme";
@@ -565,388 +565,390 @@ const Stake: React.FC<any> = ({ appChainId: chainId, setChainId }) => {
 	}, [account, pepemon, provider, transactionFinished]);
 
 	return (
-		<>
-			<StyledPageTitle as="h1">Staking</StyledPageTitle>
+		<StyledPageWrapperMain>
+			<StyledPageWrapperMainInner>
+				<StyledPageTitle as="h1">Staking</StyledPageTitle>
 
-			<StakeGrid>
-				<StakeGridArea area="ppblz">
-					<StakeGridAreaHeader>
-						<StakeGridAreaHeaderTitle>
-							<img src={pokeball} alt="Pokeball"/>
-							<Spacer size="sm"/>
-							<StyledTitle as="h2" size="1.125rem" color={theme.color.white} font={theme.font.neometric}>Stake PPBLZ</StyledTitle>
-						</StakeGridAreaHeaderTitle>
-						<StakeGridAreaHeaderMeta>
-							<span>{parseFloat(ppdexBalance.toString()).toFixed(2)}% APY</span>
-							<img id="Popover1" src={ibutton} alt="logo"/>
-							<Popover placement="bottom" isOpen={popoverOpen} target="Popover1" toggle={toggle}>
-								<IbuttonPopover onHide={toggle} button={"Buy PPBLZ"} />
-							</Popover>
-						</StakeGridAreaHeaderMeta>
-					</StakeGridAreaHeader>
-					<StakeGridAreaBody>
-						<DataColumns>
-							<DataColumn>
-								<StyledText as="p" font={theme.font.inter}>PPBLZ balance</StyledText>
+				<StakeGrid>
+					<StakeGridArea area="ppblz">
+						<StakeGridAreaHeader>
+							<StakeGridAreaHeaderTitle>
+								<img src={pokeball} alt="Pokeball"/>
 								<Spacer size="sm"/>
-								<StyledText as="p" font={theme.font.neometric} weight={900} size="2rem">{parseFloat(ppblzBalance.toString()).toFixed(2)}</StyledText>
-							</DataColumn>
-							<DataColumn>
-								<StyledText as="p" font={theme.font.inter}>PPBLZ staked</StyledText>
-								<Spacer size="sm"/>
-								<StyledText as="p" font={theme.font.neometric} weight={900} size="2rem">{parseFloat(ppblzStakedAmount.toString()).toFixed(2)}</StyledText>
-							</DataColumn>
-						</DataColumns>
-						<div style={{ marginTop: "auto" }}>
-							{!isApprovedPpblz && (
-							<div onClick={approvePpblz}>
-								{!isApprovingPpblz ? (
-								<div>
-									<div
-									onClick={approvePpblz}
-									>
-									<StyledButton borderless width="100%">ENABLE</StyledButton>
-									</div>
-								</div>
-								) : null}
-							</div>
-							)}
-
-							{isApprovedPpblz && !ppblzStakeAdd && !ppblzStakeSub ? (
-							<div
-								className="enable"
-								style={{
-								display: "flex",
-								flexDirection: "row",
-								justifyContent: "center",
-								}}
-							>
-								<div>
-								{ppblzStakedAmount != 0 ? (
-									<div
-									onClick={() => {
-										setPpblzStakeSub(true);
-										setPpblzStakeAdd(false);
-									}}
-									className="minus-act"
-									>
-									<p className="minus-act-text">-</p>
-									</div>
-								) : (
-									<div className="minus-passive">
-									<p className="disable-blue-btn-txt">-</p>
-									</div>
-								)}
-								</div>
-								<div>
-								{ppblzBalance != 0 ? (
-									<div
-									onClick={() => {
-										setPpblzStakeSub(false);
-										setPpblzStakeAdd(true);
-									}}
-									className="plus-act"
-									>
-									<p className="minus-act-text">+</p>
-									</div>
-								) : (
-									<div className="plus-passive">
-									<p className="disable-blue-btn-txt">+</p>
-									</div>
-								)}
-								</div>
-							</div>
-							) : null}
-							{isApprovingPpblz && !ppblzStakeAdd && !ppblzStakeSub ? (
-							<div
-								className="blue-button-enable"
-								onClick={approvePpblz}
-							>
-								<p className="bluebutton-text">ENABLING...</p>
-							</div>
-							) : null}
-
-							{isApprovedPpblz &&
-							ppblzStakeAdd &&
-							!ppblzStakeSub &&
-							!isWithdrawingPpblz &&
-							!isStakingPpblz ? (
-							<div>
-								<div
-								className="enable"
-								style={{
-									display: "flex",
-									flexDirection: "row",
-									justifyContent: "space-between",
-									width: "590px",
-									height: "60px",
-									borderRadius: "10px",
-									border: "solid 1px #220245",
-								}}
-								>
-								<div className="max-contianer">
-									<input
-									className="input-amount"
-									placeholder="0.00"
-									value={setPpblzInputField() || ""}
-									onChange={(event) =>
-										updatePpblzStakingInput(event)
-									}
-									min="0.00"
-									step="1"
-									autoFocus={true}
-									/>
-								</div>
-								<div
-									style={{
-									display: "flex",
-									flexDirection: "row",
-									}}
-								>
-									<div className="max-contianer">
-									<span className="MAX" onClick={setMaxPpblz}>
-										MAX
-									</span>
-									</div>
-									<div className="stake-button-conatiner">
-									<div
-										onClick={stakePpblz}
-										className="blue-button"
-									>
-										<p className="bluebutton-text">Stake</p>
-									</div>
-									</div>
-								</div>
-								</div>
-							</div>
-							) : null}
-							{isApprovedPpblz &&
-							ppblzStakeSub &&
-							!ppblzStakeAdd &&
-							!isWithdrawingPpblz &&
-							!isStakingPpblz ? (
-							<div>
-								<div
-								className="enable"
-								style={{
-									display: "flex",
-									flexDirection: "row",
-									justifyContent: "space-between",
-									width: "590px",
-									height: "60px",
-									borderRadius: "10px",
-									border: "solid 1px #220245",
-								}}
-								>
-								<div className="max-contianer">
-									<input
-									className="input-amount"
-									placeholder="0.00"
-									value={setPpblzInputField() || ""}
-									onChange={(event) =>
-										updatePpblzStakingInput(event)
-									}
-									min="0.00"
-									step="1"
-									autoFocus={true}
-									/>
-								</div>
-								<div
-									style={{
-									display: "flex",
-									flexDirection: "row",
-									}}
-								>
-									<div className="max-contianer">
-									<span className="MAX" onClick={setMaxPpblz}>
-										MAX
-									</span>
-									</div>
-									<div className="stake-button-conatiner">
-									<div
-										onClick={withdrawPpblz}
-										className="blue-button"
-									>
-										<p className="bluebutton-text">Withdraw</p>
-									</div>
-									</div>
-								</div>
-								</div>
-							</div>
-							) : null}
-							{isStakingPpblz ? (
-							<div
-								className="blue-button-enable"
-								onClick={approvePpblz}
-							>
-								<p className="bluebutton-text">STAKING...</p>
-							</div>
-							) : null}
-
-							{isWithdrawingPpblz && (
-							<div
-								className="blue-button-enable"
-								onClick={approvePpblz}
-							>
-								<p className="bluebutton-text">WITHDRAWING...</p>
-							</div>
-							)}
-						</div>
-					</StakeGridAreaBody>
-				</StakeGridArea>
-				<StakeGridArea area="pplbzEthLp">
-					<StakeGridAreaHeader>
-						<StakeGridAreaHeaderTitle>
-							<img src={pokeball} alt="Pokeball"/>
-							<Spacer size="sm"/>
-							<StyledTitle as="h2" size="1.125rem" color={theme.color.white} font={theme.font.neometric}>Stake PPBLZ-ETH LP</StyledTitle>
-						</StakeGridAreaHeaderTitle>
-						<StakeGridAreaHeaderMeta>
-							<span className="StakeGridAreaHeader-number">87% APY</span>
-							<img id="Popover2" src={ibutton} alt="logo"
-							/>
-							<Popover placement="bottom" isOpen={popoverOpen2} target="Popover2" toggle={toggle2}>
-								<IbuttonPopover onHide={toggle2} button={"Buy PPBLZ-ETH"}/>
-							</Popover>
-						</StakeGridAreaHeaderMeta>
-					</StakeGridAreaHeader>
-					<StakeGridAreaBody>
-						<DataColumns>
-							<DataColumn>
-								<StyledText as="p" font={theme.font.inter}>PPBLZ-ETH balance</StyledText>
-								<Spacer size="sm"/>
-								<StyledText as="p" font={theme.font.neometric} weight={900} size="2rem">{parseFloat(uniV2PpblzBalance.toString()).toFixed(2)}</StyledText>
-							</DataColumn>
-							<DataColumn>
-								<StyledText as="p" font={theme.font.inter}>PPBLZ-ETH staked</StyledText>
-								<Spacer size="sm"/>
-								<StyledText as="p" font={theme.font.neometric} weight={900} size="2rem">{parseFloat(uniV2PpblzStakedAmount.toString()).toFixed(2)}</StyledText>
-							</DataColumn>
-						</DataColumns>
-						<div style={{ marginTop: "auto" }}>
-							{!isApprovedUniV2Ppblz ||
-							uniV2PpblAllowance < parseFloat(uniV2PpblzStakeAmount) ? (
-							<div
-								onClick={approveUniV2Ppblz}
-							>
-								{!isApprovingUniV2Ppblz ? (
-								<StyledButton borderless width="100%">ENABLE</StyledButton>
-								) : null}
-
-								{isApprovingUniV2Ppblz ? (
-								<p className="bluebutton-text">ENABLING...</p>
-								) : null}
-							</div>
-							) : null}
-							{isApprovedUniV2Ppblz ? (
-							<div>
-								<div
-								className="enable"
-								style={{
-									display: "flex",
-									flexDirection: "row",
-									justifyContent: "space-between",
-									width: "590px",
-									height: "60px",
-									borderRadius: "10px",
-									border: "solid 1px #220245",
-								}}
-								>
-								<div className="max-contianer">
-									<input
-									className="input-amount"
-									placeholder="0.00"
-									value={setUniV2PpblzInputField() || ""}
-									onChange={(event) =>
-										updateUniV2PpblzStakingInput(event)
-									}
-									min="0.00"
-									autoFocus={true}
-									/>
-								</div>
-								<div
-									style={{
-									display: "flex",
-									flexDirection: "row",
-									}}
-								>
-									<div className="max-contianer">
-									<span
-										className="MAX"
-										onClick={setMaxUniV2Ppblz}
-									>
-										MAX
-									</span>
-									</div>
-									<div className="stake-button-conatiner">
-									<div
-										onClick={stakeUniV2Ppblz}
-										className="blue-button"
-									>
-										<p className="bluebutton-text">Stake</p>
-									</div>
-									</div>
-								</div>
-								</div>
-							</div>
-							) : null}
-						</div>
-					</StakeGridAreaBody>
-				</StakeGridArea>
-				<StakeGridArea area="ppdexEarned">
-					<StakeGridAreaHeader>
-						<StakeGridAreaHeaderTitle>
-							<img src={pokeball} alt="Pokeball"/>
-							<Spacer size="sm"/>
-							<StyledTitle as="h2" size="1.125rem" color={theme.color.white} font={theme.font.neometric}>PPDEX Earned</StyledTitle>
-						</StakeGridAreaHeaderTitle>
-					</StakeGridAreaHeader>
-					<StakeGridAreaBody>
-						<div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-							<StyledText as="p" font={theme.font.neometric} weight={900} size="2rem">
-								{parseFloat(ppdexBalance.toString()).toFixed(2)} PPDEX
-							</StyledText>
-
-							<div style={{ display: "flex" }}>
-								<StyledText as="p" font={theme.font.inter}>
-									Total value: $
-									{parseFloat((ppdexRewards * 0.9).toString()).toFixed(4)}
-								</StyledText>
-								<Spacer size="md"/>
-								<StyledText as="p" font={theme.font.inter} color={theme.color.purple[600]} txtDecoration="underline">
-									{isUpdatingRewards ? "UPDATING..." : "UPDATE"}
-								</StyledText>
-							</div>
-
-							<Spacer size="md"/>
-
-							<>
-								{ppblzStakedAmount > 0 ? (
+								<StyledTitle as="h2" size="1.125rem" color={theme.color.white} font={theme.font.neometric}>Stake PPBLZ</StyledTitle>
+							</StakeGridAreaHeaderTitle>
+							<StakeGridAreaHeaderMeta>
+								<span>{parseFloat(ppdexBalance.toString()).toFixed(2)}% APY</span>
+								<img id="Popover1" src={ibutton} alt="logo"/>
+								<Popover placement="bottom" isOpen={popoverOpen} target="Popover1" toggle={toggle}>
+									<IbuttonPopover onHide={toggle} button={"Buy PPBLZ"} />
+								</Popover>
+							</StakeGridAreaHeaderMeta>
+						</StakeGridAreaHeader>
+						<StakeGridAreaBody>
+							<DataColumns>
+								<DataColumn>
+									<StyledText as="p" font={theme.font.inter}>PPBLZ balance</StyledText>
+									<Spacer size="sm"/>
+									<StyledText as="p" font={theme.font.neometric} weight={900} size="2rem">{parseFloat(ppblzBalance.toString()).toFixed(2)}</StyledText>
+								</DataColumn>
+								<DataColumn>
+									<StyledText as="p" font={theme.font.inter}>PPBLZ staked</StyledText>
+									<Spacer size="sm"/>
+									<StyledText as="p" font={theme.font.neometric} weight={900} size="2rem">{parseFloat(ppblzStakedAmount.toString()).toFixed(2)}</StyledText>
+								</DataColumn>
+							</DataColumns>
+							<div style={{ marginTop: "auto" }}>
+								{!isApprovedPpblz && (
+								<div onClick={approvePpblz}>
+									{!isApprovingPpblz ? (
 									<div>
-									{ppdexRewards > 0.001 ? (
 										<div
-										className="enable-blue-btn"
-										onClick={claimRewards}
+										onClick={approvePpblz}
 										>
-										<p className="bluebutton-text">
-											{isClaiming ? "CLAIMING..." : "CLAIM"}
-										</p>
+										<StyledButton borderless width="100%">ENABLE</StyledButton>
+										</div>
+									</div>
+									) : null}
+								</div>
+								)}
+
+								{isApprovedPpblz && !ppblzStakeAdd && !ppblzStakeSub ? (
+								<div
+									className="enable"
+									style={{
+									display: "flex",
+									flexDirection: "row",
+									justifyContent: "center",
+									}}
+								>
+									<div>
+									{ppblzStakedAmount != 0 ? (
+										<div
+										onClick={() => {
+											setPpblzStakeSub(true);
+											setPpblzStakeAdd(false);
+										}}
+										className="minus-act"
+										>
+										<p className="minus-act-text">-</p>
 										</div>
 									) : (
-										<div className="disable-blue-btn">
-										<p className="disable-blue-btn-txt">CLAIM</p>
+										<div className="minus-passive">
+										<p className="disable-blue-btn-txt">-</p>
 										</div>
 									)}
 									</div>
-								) : (
-									<Button disabled bg={theme.color.purple[400]} color={theme.color.purple[500]} width="100%" borderless>STAKE FIRST</Button>
+									<div>
+									{ppblzBalance != 0 ? (
+										<div
+										onClick={() => {
+											setPpblzStakeSub(false);
+											setPpblzStakeAdd(true);
+										}}
+										className="plus-act"
+										>
+										<p className="minus-act-text">+</p>
+										</div>
+									) : (
+										<div className="plus-passive">
+										<p className="disable-blue-btn-txt">+</p>
+										</div>
+									)}
+									</div>
+								</div>
+								) : null}
+								{isApprovingPpblz && !ppblzStakeAdd && !ppblzStakeSub ? (
+								<div
+									className="blue-button-enable"
+									onClick={approvePpblz}
+								>
+									<p className="bluebutton-text">ENABLING...</p>
+								</div>
+								) : null}
+
+								{isApprovedPpblz &&
+								ppblzStakeAdd &&
+								!ppblzStakeSub &&
+								!isWithdrawingPpblz &&
+								!isStakingPpblz ? (
+								<div>
+									<div
+									className="enable"
+									style={{
+										display: "flex",
+										flexDirection: "row",
+										justifyContent: "space-between",
+										width: "590px",
+										height: "60px",
+										borderRadius: "10px",
+										border: "solid 1px #220245",
+									}}
+									>
+									<div className="max-contianer">
+										<input
+										className="input-amount"
+										placeholder="0.00"
+										value={setPpblzInputField() || ""}
+										onChange={(event) =>
+											updatePpblzStakingInput(event)
+										}
+										min="0.00"
+										step="1"
+										autoFocus={true}
+										/>
+									</div>
+									<div
+										style={{
+										display: "flex",
+										flexDirection: "row",
+										}}
+									>
+										<div className="max-contianer">
+										<span className="MAX" onClick={setMaxPpblz}>
+											MAX
+										</span>
+										</div>
+										<div className="stake-button-conatiner">
+										<div
+											onClick={stakePpblz}
+											className="blue-button"
+										>
+											<p className="bluebutton-text">Stake</p>
+										</div>
+										</div>
+									</div>
+									</div>
+								</div>
+								) : null}
+								{isApprovedPpblz &&
+								ppblzStakeSub &&
+								!ppblzStakeAdd &&
+								!isWithdrawingPpblz &&
+								!isStakingPpblz ? (
+								<div>
+									<div
+									className="enable"
+									style={{
+										display: "flex",
+										flexDirection: "row",
+										justifyContent: "space-between",
+										width: "590px",
+										height: "60px",
+										borderRadius: "10px",
+										border: "solid 1px #220245",
+									}}
+									>
+									<div className="max-contianer">
+										<input
+										className="input-amount"
+										placeholder="0.00"
+										value={setPpblzInputField() || ""}
+										onChange={(event) =>
+											updatePpblzStakingInput(event)
+										}
+										min="0.00"
+										step="1"
+										autoFocus={true}
+										/>
+									</div>
+									<div
+										style={{
+										display: "flex",
+										flexDirection: "row",
+										}}
+									>
+										<div className="max-contianer">
+										<span className="MAX" onClick={setMaxPpblz}>
+											MAX
+										</span>
+										</div>
+										<div className="stake-button-conatiner">
+										<div
+											onClick={withdrawPpblz}
+											className="blue-button"
+										>
+											<p className="bluebutton-text">Withdraw</p>
+										</div>
+										</div>
+									</div>
+									</div>
+								</div>
+								) : null}
+								{isStakingPpblz ? (
+								<div
+									className="blue-button-enable"
+									onClick={approvePpblz}
+								>
+									<p className="bluebutton-text">STAKING...</p>
+								</div>
+								) : null}
+
+								{isWithdrawingPpblz && (
+								<div
+									className="blue-button-enable"
+									onClick={approvePpblz}
+								>
+									<p className="bluebutton-text">WITHDRAWING...</p>
+								</div>
 								)}
-							</>
-						</div>
-					</StakeGridAreaBody>
-				</StakeGridArea>
-			</StakeGrid>
-		</>
+							</div>
+						</StakeGridAreaBody>
+					</StakeGridArea>
+					<StakeGridArea area="pplbzEthLp">
+						<StakeGridAreaHeader>
+							<StakeGridAreaHeaderTitle>
+								<img src={pokeball} alt="Pokeball"/>
+								<Spacer size="sm"/>
+								<StyledTitle as="h2" size="1.125rem" color={theme.color.white} font={theme.font.neometric}>Stake PPBLZ-ETH LP</StyledTitle>
+							</StakeGridAreaHeaderTitle>
+							<StakeGridAreaHeaderMeta>
+								<span className="StakeGridAreaHeader-number">87% APY</span>
+								<img id="Popover2" src={ibutton} alt="logo"
+								/>
+								<Popover placement="bottom" isOpen={popoverOpen2} target="Popover2" toggle={toggle2}>
+									<IbuttonPopover onHide={toggle2} button={"Buy PPBLZ-ETH"}/>
+								</Popover>
+							</StakeGridAreaHeaderMeta>
+						</StakeGridAreaHeader>
+						<StakeGridAreaBody>
+							<DataColumns>
+								<DataColumn>
+									<StyledText as="p" font={theme.font.inter}>PPBLZ-ETH balance</StyledText>
+									<Spacer size="sm"/>
+									<StyledText as="p" font={theme.font.neometric} weight={900} size="2rem">{parseFloat(uniV2PpblzBalance.toString()).toFixed(2)}</StyledText>
+								</DataColumn>
+								<DataColumn>
+									<StyledText as="p" font={theme.font.inter}>PPBLZ-ETH staked</StyledText>
+									<Spacer size="sm"/>
+									<StyledText as="p" font={theme.font.neometric} weight={900} size="2rem">{parseFloat(uniV2PpblzStakedAmount.toString()).toFixed(2)}</StyledText>
+								</DataColumn>
+							</DataColumns>
+							<div style={{ marginTop: "auto" }}>
+								{!isApprovedUniV2Ppblz ||
+								uniV2PpblAllowance < parseFloat(uniV2PpblzStakeAmount) ? (
+								<div
+									onClick={approveUniV2Ppblz}
+								>
+									{!isApprovingUniV2Ppblz ? (
+									<StyledButton borderless width="100%">ENABLE</StyledButton>
+									) : null}
+
+									{isApprovingUniV2Ppblz ? (
+									<p className="bluebutton-text">ENABLING...</p>
+									) : null}
+								</div>
+								) : null}
+								{isApprovedUniV2Ppblz ? (
+								<div>
+									<div
+									className="enable"
+									style={{
+										display: "flex",
+										flexDirection: "row",
+										justifyContent: "space-between",
+										width: "590px",
+										height: "60px",
+										borderRadius: "10px",
+										border: "solid 1px #220245",
+									}}
+									>
+									<div className="max-contianer">
+										<input
+										className="input-amount"
+										placeholder="0.00"
+										value={setUniV2PpblzInputField() || ""}
+										onChange={(event) =>
+											updateUniV2PpblzStakingInput(event)
+										}
+										min="0.00"
+										autoFocus={true}
+										/>
+									</div>
+									<div
+										style={{
+										display: "flex",
+										flexDirection: "row",
+										}}
+									>
+										<div className="max-contianer">
+										<span
+											className="MAX"
+											onClick={setMaxUniV2Ppblz}
+										>
+											MAX
+										</span>
+										</div>
+										<div className="stake-button-conatiner">
+										<div
+											onClick={stakeUniV2Ppblz}
+											className="blue-button"
+										>
+											<p className="bluebutton-text">Stake</p>
+										</div>
+										</div>
+									</div>
+									</div>
+								</div>
+								) : null}
+							</div>
+						</StakeGridAreaBody>
+					</StakeGridArea>
+					<StakeGridArea area="ppdexEarned">
+						<StakeGridAreaHeader>
+							<StakeGridAreaHeaderTitle>
+								<img src={pokeball} alt="Pokeball"/>
+								<Spacer size="sm"/>
+								<StyledTitle as="h2" size="1.125rem" color={theme.color.white} font={theme.font.neometric}>PPDEX Earned</StyledTitle>
+							</StakeGridAreaHeaderTitle>
+						</StakeGridAreaHeader>
+						<StakeGridAreaBody>
+							<div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+								<StyledText as="p" font={theme.font.neometric} weight={900} size="2rem">
+									{parseFloat(ppdexBalance.toString()).toFixed(2)} PPDEX
+								</StyledText>
+
+								<div style={{ display: "flex" }}>
+									<StyledText as="p" font={theme.font.inter}>
+										Total value: $
+										{parseFloat((ppdexRewards * 0.9).toString()).toFixed(4)}
+									</StyledText>
+									<Spacer size="md"/>
+									<StyledText as="p" font={theme.font.inter} color={theme.color.purple[600]} txtDecoration="underline">
+										{isUpdatingRewards ? "UPDATING..." : "UPDATE"}
+									</StyledText>
+								</div>
+
+								<Spacer size="md"/>
+
+								<>
+									{ppblzStakedAmount > 0 ? (
+										<div>
+										{ppdexRewards > 0.001 ? (
+											<div
+											className="enable-blue-btn"
+											onClick={claimRewards}
+											>
+											<p className="bluebutton-text">
+												{isClaiming ? "CLAIMING..." : "CLAIM"}
+											</p>
+											</div>
+										) : (
+											<div className="disable-blue-btn">
+											<p className="disable-blue-btn-txt">CLAIM</p>
+											</div>
+										)}
+										</div>
+									) : (
+										<Button disabled bg={theme.color.purple[400]} color={theme.color.purple[500]} width="100%" borderless>STAKE FIRST</Button>
+									)}
+								</>
+							</div>
+						</StakeGridAreaBody>
+					</StakeGridArea>
+				</StakeGrid>
+			</StyledPageWrapperMainInner>
+		</StyledPageWrapperMain>
 	);
 };
 

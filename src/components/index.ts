@@ -14,7 +14,7 @@ export { ModalContent } from './ModalContent';
 export { ModalImage } from './ModalImage';
 export { ModalTitle } from './ModalTitle';
 export { Navigation } from './Navigation';
-export { Page } from './Page';
+export { Page, StyledPageWrapper, StyledPageWrapperMain, StyledPageWrapperMainInner } from './Page';
 export { Spacer, StyledSpacer } from './Spacer';
 export { StyledTitle, StyledPageTitle, StyledText } from './Text';
 export { TopBar } from './TopBar';

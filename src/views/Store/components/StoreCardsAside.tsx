@@ -9,7 +9,7 @@ const StoreCardsAside: React.FC<any> = ({setSelectedCard, selectedCard}) => {
 	const [activeClaimModal, setActiveClaimModal] = useState(false);
 
 	return (
-		<StyledStoreWrapper width="35%">
+		<StyledStoreWrapper>
 			<StyledStoreHeader>
 				<div style={{display: 'flex', justifyContent: 'space-between', width: '100%'}}>
 					<StyledTitle as="h2" color={theme.color.white} font={theme.font.neometric} size="1.2rem">
@@ -23,7 +23,7 @@ const StoreCardsAside: React.FC<any> = ({setSelectedCard, selectedCard}) => {
 				<Spacer size="sm"/>
 				<StyledText as="p" font={theme.font.inter} size=".875rem" color={theme.color.gray[600]}>Super cool discription about this card. Iuis aute irure dolor in reprehenderit in voluptate velit esse cillum.</StyledText>
 				<Spacer size="sm"/>
-				<StyledPepemonCardImage src={selectedCard.url}/>
+				<img src={selectedCard.url} alt={selectedCard.name} style={{width: "100%"}}/>
 				<Spacer size='md'/>
 				<StyledPepemonCardMeta>
 					<dt>Rarity:</dt>

@@ -120,10 +120,11 @@ export const StyledPepemonCardPrice = styled.span<{styling?: string}>`
 `
 
 export const StyledPepemonCardImage = styled.img<{active?: boolean}>`
-	width: 100%;
-	height: auto;
 	filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.12));
+	height: auto;
+	max-width: 25em;
 	position: relative;
+	width: 100%;
 	z-index: 0;
 
 	&:hover {

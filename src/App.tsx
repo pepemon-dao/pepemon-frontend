@@ -9,7 +9,7 @@ import Subscription from "./views/Subscription";
 import Store from "./views/Store";
 import PepemonProvider from "./contexts/PepemonProvider";
 import ModalsProvider from "./contexts/Modals";
-import { TopBar, Navigation } from "./components";
+import { Page, TopBar } from "./components";
 import { darktealTiles } from "./assets";
 
 const App: React.FC = () => {
@@ -41,49 +41,44 @@ const App: React.FC = () => {
 				ethChainId={ethChainId}
 				setEthChainId={setEthChainId}
 			/>
-			<StyledPageWrapper>
-				<Router>
-					<Navigation />
-					<StyledPageWrapperMain>
-						<StyledPageWrapperMainInner>
-							<Switch>
-								<Route
-									path="/"
-									component={() => (
-										<Home
-										providerChainId={providerChainId}
-										appChainId={ethChainId}
-										setChainId={setEthChainId}
-										/>
-									)}
-									exact
+			<Router>
+				<Page>
+					<Switch>
+						<Route
+							path="/"
+							component={() => (
+								<Home
+								providerChainId={providerChainId}
+								appChainId={ethChainId}
+								setChainId={setEthChainId}
 								/>
-								<Route path="/staking" exact>
-									<Stake
-										providerChainId={providerChainId}
-										appChainId={ethChainId}
-										setChainId={setEthChainId}
-									/>
-								</Route>
-								<Route path="/subscription" exact>
-									<Subscription
-										providerChainId={providerChainId}
-										appChainId={ethChainId}
-										setChainId={setEthChainId}
-									/>
-								</Route>
-								<Route path="/store/:storeState?">
-									<Store
-										providerChainId={providerChainId}
-										appChainId={ethChainId}
-										setChainId={setEthChainId}
-									/>
-								</Route>
-							</Switch>
-						</StyledPageWrapperMainInner>
-					</StyledPageWrapperMain>
-				</Router>
-			</StyledPageWrapper>
+							)}
+							exact
+						/>
+						<Route path="/staking" exact>
+							<Stake
+								providerChainId={providerChainId}
+								appChainId={ethChainId}
+								setChainId={setEthChainId}
+							/>
+						</Route>
+						<Route path="/subscription" exact>
+							<Subscription
+								providerChainId={providerChainId}
+								appChainId={ethChainId}
+								setChainId={setEthChainId}
+							/>
+						</Route>
+						<Route path="/store/:storeState?">
+							<Store
+								providerChainId={providerChainId}
+								appChainId={ethChainId}
+								setChainId={setEthChainId}
+							/>
+						</Route>
+					</Switch>
+				</Page>
+			</Router>
 		</Providers>
 	);
 };
@@ -114,27 +109,3 @@ const Providers: React.FC<any> = ({ ethChainId, children }) => {
 		</ThemeProvider>
 	);
 };
-
-const StyledPageWrapper = styled.div`
-	display: flex;
-`
-
-const StyledPageWrapperMain = styled.main`
-	background-attachment: fixed;
-	background-image: url(${darktealTiles});
-	background-repeat: no-repeat;
-	background-size: cover;
-	box-shadow: inset 0 0 0 2000px ${props => props.theme.color.buttonSecondaryDisabled};
-	margin-left: ${120}px;
-	padding-left: 2em;
-	padding-right: 2em;
-	min-height: 100vh;
-	width: calc(100vw - ${120}px);
-`
-
-const StyledPageWrapperMainInner = styled.div`
-	max-width: 940px;
-	margin-left: auto;
-	margin-right: auto;
-	padding-top: 10em;
-`
