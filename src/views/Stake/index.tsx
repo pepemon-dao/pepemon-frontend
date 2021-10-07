@@ -952,6 +952,7 @@ const StakeGrid = styled.section`
 	grid-column-gap: 1.25em;
 	grid-row-gap: 1em;
 	grid-template-areas: "ppblz pplbzEthLp" "ppdexEarned ppdexEarned";
+	grid-auto-columns: 1fr;
 `
 
 const StakeGridArea = styled.div<{area: string}>`
