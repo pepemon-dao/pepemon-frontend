@@ -44,3 +44,7 @@ code {
 	url("./fonts/Neometric/Neometric-Alt-Black.otf") format("truetype");
 	font-weight: 900;
 }
+
+img {
+	max-width: 100%;
+}

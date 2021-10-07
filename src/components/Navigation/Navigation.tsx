@@ -67,11 +67,16 @@ const Navigation = () => {
 
 const StyledMenuOuterWrapper = styled.div`
 	&{
+		max-width: ${props => props.theme.sideBar.width}px;
 		background-color: ${props => props.theme.color.typographyAllTextOnDark};
 		height: 100vh;
 		position: fixed;
 		left: 0;
 		top: 0;
+	}
+
+	&:hover {
+		max-width: unset;
 	}
 
 	&:hover span {

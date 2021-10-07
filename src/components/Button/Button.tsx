@@ -25,7 +25,7 @@ const Button = styled.button<ButtonProps>`
 		text-align: center;
 		text-decoration: none;
 		text-transform: uppercase;
-		padding: 12px 24px;
+		padding: .75em 1.5em;
 		width: ${props => props.width && props.width};
 		transition: all .2s;
 	}
@@ -42,5 +42,29 @@ const Button = styled.button<ButtonProps>`
 		outline: none;
 	}
 `;
+
+export const StyledButton = styled.button<{light?: boolean, width?: string}>`
+	background-color: ${props => props.light && props.theme.color.white};
+	background-image: ${props => !props.light && `linear-gradient(to bottom, #aa6cd6 -100%, ${props.theme.color.purple[600]})`};
+	border-radius: 8px;
+	border: ${props => `1px solid ${props.light ? props.theme.color.purple[600] : "transparent"}`};
+	box-shadow: ${props => !props.light && "0 4px 10px 0 rgba(121, 121, 121, 0.5)"};
+	color: ${props => props.light ? props.theme.color.purple[600] : props.theme.color.white};
+	font-family: ${props => props.theme.font.spaceMace};
+	padding: 12px 24px;
+	text-align: center;
+	text-decoration: none;
+	text-transform: uppercase;
+	transition: .2s all ease-in;
+	width: ${props => props.width && props.width};
+
+	&:hover {
+		background-image: ${props => props.light ? `linear-gradient(to bottom, #aa6cd6 -100%, ${props.theme.color.purple[600]})` : "unset"};
+		background-color: ${props => !props.light && props.theme.color.white};
+		border: ${props => !props.light && `1px solid ${props.theme.color.purple[600]}`};
+		color: ${props => props.light ? props.theme.color.white : props.theme.color.purple[600]};
+		box-shadow: 0 4px 10px 0 rgba(121, 121, 121, 0.5);
+	}
+`
 
 export default Button;
