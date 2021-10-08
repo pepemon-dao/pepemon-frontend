@@ -1,7 +1,7 @@
 import React, { useCallback } from "react";
 import styled from "styled-components";
 import { useWeb3Modal, usePepemon, useTokenBalance } from "../../hooks";
-import { up_down_arrows_light, up_down_arrows_dark } from "../../assets";
+import { up_down_arrows_dark } from "../../assets";
 import { getPpblzContract, getPpdexContract } from "../../pepemon/utils";
 import { getBalanceNumber, formatAddress } from "../../utils";
 import { Button, StyledText } from "../../components";
