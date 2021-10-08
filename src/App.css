@@ -455,7 +455,7 @@
 }
 .poketeam {
   /* width: 100%; */
-  height: 873px;
+  height: 703px;
   z-index: -1;
   /* margin: 131px 100px; */
   /* padding: 29px 45.6px; */
@@ -585,12 +585,12 @@
   text-align: right;
   color: #030303;
 }
-._Pepemon_Icon_color {
+.pepemon-icon {
   width: 80px;
   height: 80px;
   margin: 40px 0;
 }
-.HomeDefault {
+.menu-icon {
   width: 16px;
   height: 16px;
   margin: 26px 0;

@@ -1,0 +1,139 @@
+.h-bar {
+  position: absolute;
+  top: 50px;
+  width: 800px;
+  right: 70px;
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  text-align: center;
+  right: 70px;
+}
+.connect {
+  position: absolute;
+  top: 50px;
+
+  right: 70px;
+  background-color: #fff;
+  z-index: 109;
+  width: 150px;
+  height: 50px;
+}
+.green-button {
+  position: absolute;
+  top: 50px;
+
+  right: 70px;
+  width: 214px;
+  height: 50px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px 0 #79797980;
+  background-image: linear-gradient(to bottom, #9feea3, #66d86a);
+  display: flex;
+  align-items: center;
+  z-index: 111;
+}
+.green-text-addr {
+  width: 154px;
+  height: 50px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px 0 #79797980;
+  background-image: linear-gradient(to bottom, #9feea3, #66d86a);
+  display: flex;
+  align-items: center;
+  z-index: 111;
+  display: flex;
+  align-items: center;
+}
+.green-buttontext {
+  font-family: SpaceMace;
+  font-size: 18px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+
+  text-align: center;
+  color: #1a1a1a;
+  width: 150px;
+  height: 24px;
+  -webkit-text-stroke: 0.5px #1a1a1a;
+  font-family: SpaceMace;
+  font-size: 14px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.71;
+  letter-spacing: 0.88px;
+  text-align: center;
+  color: #1a1a1a;
+  margin: 0 auto;
+}
+.h-bar-alt {
+  position: absolute;
+  top: 50px;
+  flex-direction: row;
+  width: 800px;
+
+  right: 70px;
+  background-color: #fff;
+  margin: 0 0 38px 9px;
+  padding: 4px 4px 4px 17px;
+  border-radius: 10px;
+  border: solid 1px #220245;
+  background-color: #fff9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  right: 70px;
+}
+.connect-btn {
+  position: absolute;
+  top: 20px;
+  right: 0px;
+  z-index: 99;
+}
+.top-menu-bar-alt {
+  height: 48px;
+  margin: 0 0 0 24px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.top-menu-bar {
+  height: 48px;
+  display: flex;
+  flex-direction: row;
+  margin: 0 0 0 24px;
+  padding: 4px 4px 4px 16px;
+  border-radius: 8px;
+  border: solid 1px #6d7278;
+  align-items: center;
+  justify-content: center;
+}
+.menu-text {
+  /* width: 124px; */
+  /* height: 24px; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: SpaceMace;
+  font-size: 18px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  white-space: nowrap;
+  line-height: 1.5;
+  letter-spacing: normal;
+  text-align: right;
+  color: #030303;
+}
+.menu-icon {
+  margin: 26px 0;
+  object-fit: contain;
+  width: 24px;
+  height: 19px;
+}
