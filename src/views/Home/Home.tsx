@@ -4,7 +4,7 @@ import { ContentBox, ContentBoxNumber, ContentBoxGrid, ContentCentered, ContentC
 	Spacer, StyledTitle, StyledText, StyledButton, SocialBoxes, Newsletter, Value } from "../../components";
 import { theme } from "../../theme";
 import "./Home.css";
-import { dummyGraph, group, walkr, walkh, walkw, cover, coverblack, fudizardPng, pepemander, logoexpand, bluecard, pepechucard, witchenerycard, pepechurcard, downgreenarrow } from "../../assets";
+import { dummyGraph, group, cover, coverblack, fudizardPng, pepemander, logoexpand, bluecard, pepechucard, witchenerycard, pepechurcard, downgreenarrow } from "../../assets";
 import { getBalanceNumber } from "../../utils";
 import { useTotalValueStaked, useTotalSpendInShop, usePepemon } from "../../hooks";
 
@@ -179,9 +179,9 @@ const Home: React.FC<any> = ({ appChainId: chainId, setChainId }) => {
 		<div className="middle-container">
 		  <div className="stake-evolve">
 			<div className="img-evolve">
-			  <img loading="lazy" className="pepemander-display" src={pepemander} />
+			  <img loading="lazy" className="pepemander-display" src={pepemander} alt="pepemander" />
 			  <div className="dotted-div" style={{ marginTop: "470px" }}>
-				<img loading="lazy" src={downgreenarrow} className="downgreenarrow" />
+				<img loading="lazy" src={downgreenarrow} alt="downgreenarrow" className="downgreenarrow" />
 			  </div>
 			  <div className="dotted-div" style={{ marginTop: "870px" }}></div>
 			</div>

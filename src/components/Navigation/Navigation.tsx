@@ -17,37 +17,37 @@ const Navigation = () => {
 				<StyledMenuList>
 					<StyledMenuListItem>
 						<StyledLink active={ pathname === "/" ? true : false } to="/">
-							<StyledLinkIcon src={ homeactive } alt="logo" />
+							<StyledLinkIcon loading="lazy" src={ homeactive } alt="logo" />
 							<span>Home</span>
 						</StyledLink>
 					</StyledMenuListItem>
 					<StyledMenuListItem>
 						<StyledLink active={ pathname.startsWith("/staking") ? true : false } to="/staking">
-							<StyledLinkIcon src={ homeactive } alt="logo" />
+							<StyledLinkIcon loading="lazy" src={ homeactive } alt="logo" />
 							<span>Staking</span>
 						</StyledLink>
 					</StyledMenuListItem>
 					<StyledMenuListItem>
 						<StyledLink active={ pathname.startsWith("/subscription") ? true : false } to="/subscription">
-							<StyledLinkIcon src={ homeactive } alt="logo" />
+							<StyledLinkIcon loading="lazy" src={ homeactive } alt="logo" />
 							<span>Subscription</span>
 						</StyledLink>
 					</StyledMenuListItem>
 					<StyledMenuListItem>
 						<StyledLink active={ pathname.startsWith("/store") ? true : false } to="/store">
-							<StyledLinkIcon src={ homeactive } alt="logo" />
+							<StyledLinkIcon loading="lazy" src={ homeactive } alt="logo" />
 							<span>Store</span>
 						</StyledLink>
 					</StyledMenuListItem>
 					<StyledMenuListItem>
 						<StyledLink active={ pathname === "/" ? true : false } to="/">
-							<StyledLinkIcon src={ homeactive } alt="logo" />
+							<StyledLinkIcon loading="lazy" src={ homeactive } alt="logo" />
 							<span>My Collection</span>
 						</StyledLink>
 					</StyledMenuListItem>
 					<StyledMenuListItem>
 						<StyledLink active={ pathname === "/" ? true : false } to="/">
-							<StyledLinkIcon src={ homeactive } alt="logo" />
+							<StyledLinkIcon loading="lazy" src={ homeactive } alt="logo" />
 							<span>Events</span>
 						</StyledLink>
 					</StyledMenuListItem>

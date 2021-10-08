@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import styled from "styled-components";
 import { Popover } from "reactstrap";
 import { ContentCentered, StyledPageWrapperMain, StyledPageWrapperMainInner, Button, LinkButton, StyledText, StyledTitle, StyledPageTitle, IbuttonPopover, Spacer } from "../../components";
@@ -44,14 +44,14 @@ const Stake: React.FC<any> = ({ appChainId: chainId, setChainId }) => {
 	const [transactionFinished, setTransactionFinished] = useState(0);
 
 	const { account } = usePepemon();
-	const getAccount = () => {
-	return account;
-	};
+	const getAccount = useCallback(() => {
+		return account;
+	}, [account]);
 
-	let timer: any = null;
 
 	useEffect(() => {
-	return () => timer && clearTimeout(timer);
+		const timer: any = null;
+		return () => timer && clearTimeout(timer);
 	}, []);
 
 	const resetToInitialStateOnReject = async () => {
@@ -65,114 +65,108 @@ const Stake: React.FC<any> = ({ appChainId: chainId, setChainId }) => {
 
 	//TODO: move to generic contract service
 	/** getters */
-	const getPpblzAllowance = async () => {
-	// @ts-ignore
-	let _ppblzAllowance = await pepemon.contracts.ppblz.allowance(
-		getAccount(),
-		pepemon.contracts.ppdex.address
-	);
-	if (_ppblzAllowance > 0) {
-		setIsApprovedPpblz(true);
-	}
-	};
-
-	const getUniV2PpblzAllowance = async () => {
-	// @ts-ignore
-	let _uniV2PpblzAllowance = await pepemon.contracts.uniV2_ppblz.allowance(
-		getAccount(),
-		pepemon.contracts.ppdex.address
-	);
-	setUniV2PpblzAllowance(web3.utils.fromWei(_uniV2PpblzAllowance.toString()));
-	if (_uniV2PpblzAllowance > 0) {
-		setIsApprovedUniV2Ppblz(true);
-	}
-	};
-
-	const getPpblzBalance = async () => {
-	let _ppblzBalance = await pepemon.contracts.ppblz.balanceOf(getAccount());
-	setPpblzBalance(web3.utils.fromWei(_ppblzBalance.toString()));
-	};
-
-	const getUniV2PpblzBalance = async () => {
-	let _uniV2PpblzBalance = await pepemon.contracts.uniV2_ppblz.balanceOf(
-		getAccount()
-	);
-	setUniV2PpblzBalance(web3.utils.fromWei(_uniV2PpblzBalance.toString()));
-	};
-
-	const getPpdexBalance = async () => {
-	let _ppdexBalance = await pepemon.contracts.ppdex.balanceOf(getAccount());
-	setPpdexBalance(web3.utils.fromWei(_ppdexBalance.toString()));
-	};
-
-	const getPpblzSupply = async () => {
-	let _ppblzSupply = await pepemon.contracts.ppblz.totalSupply();
-	setTotalPpblzSupply(web3.utils.fromWei(_ppblzSupply.toString()));
-	};
-
-	const getUniV2PpblzSupply = async () => {
-	let _ppblzSupply = await pepemon.contracts.uniV2_ppblz.totalSupply();
-	setTotalUniV2PpblzSupply(web3.utils.fromWei(_ppblzSupply.toString()));
-	};
-
-	const getMyPpblzStakeAmount = async () => {
-	let stakeA = await pepemon.contracts.ppdex.getAddressPpblzStakeAmount(
-		getAccount()
-	);
-	setPpblzStakedAmount(web3.utils.fromWei(stakeA.toString()));
-	};
-
-	const getMyUniV2PpblzStakeAmount = async () => {
-	let stakeA = await pepemon.contracts.ppdex.getAddressUniV2StakeAmount(
-		getAccount()
-	);
-	setUniV2PpblzStakedAmount(web3.utils.fromWei(stakeA.toString()));
-	};
-
-	const getPpdexRewards = async () => {
-	setIsUpdatingRewards(true);
-	let cRewards = (
-		await pepemon.contracts.ppdex.myRewardsBalance(getAccount())
-	).toString();
-	const ppblzStaked = (
-		await pepemon.contracts.ppdex.getAddressPpblzStakeAmount(getAccount())
-	).toString();
-	const uniV2Staked = (
-		await pepemon.contracts.ppdex.getAddressUniV2StakeAmount(getAccount())
-	).toString();
-
-	// Faulty myRewardsBalance edge case.. dont use view but recalculate!
-	if (ppblzStaked > 0 && uniV2Staked > 0) {
-		const lastRewardBlock =
-		await pepemon.contracts.ppdex.getLastBlockCheckedNum(getAccount());
-		const currentBlock = await pepemon.contracts.ppdex.getBlockNum();
-		const liquidityMultiplier =
-		await pepemon.contracts.ppdex.getLiquidityMultiplier();
-		const rewardsVar = 100000;
-
-		const ppblzRewardBalance =
-		(ppblzStaked * (currentBlock - lastRewardBlock)) / rewardsVar;
-		const uniV2RewardsBalance =
-		(uniV2Staked *
-			((currentBlock - lastRewardBlock) * liquidityMultiplier)) /
-		rewardsVar;
-		const originalReward =
-		cRewards - (ppblzRewardBalance + uniV2RewardsBalance);
-
-		if (originalReward > 10000) {
-		const realReward =
-			(cRewards - (ppblzRewardBalance + uniV2RewardsBalance)) / 2 +
-			(ppblzRewardBalance + uniV2RewardsBalance);
-		cRewards = realReward.toString();
+	const getPpblzAllowance = useCallback(async () => {
+		// @ts-ignore
+		let _ppblzAllowance = await pepemon.contracts.ppblz.allowance(
+			getAccount(),
+			pepemon.contracts.ppdex.address
+		);
+		if (_ppblzAllowance > 0) {
+			setIsApprovedPpblz(true);
 		}
-	}
-	setPpdexRewards(web3.utils.fromWei(cRewards));
+	},[pepemon, getAccount, setIsApprovedPpblz]);
 
-	timer = setTimeout(() => {
-		setIsUpdatingRewards(false);
-		clearTimeout(timer);
-	}, 2000);
-	};
+	const getUniV2PpblzAllowance = useCallback(async () => {
+		// @ts-ignore
+		let _uniV2PpblzAllowance = await pepemon.contracts.uniV2_ppblz.allowance(
+			getAccount(),
+			pepemon.contracts.ppdex.address
+		);
+		setUniV2PpblzAllowance(web3.utils.fromWei(_uniV2PpblzAllowance.toString()));
+		if (_uniV2PpblzAllowance > 0) {
+			setIsApprovedUniV2Ppblz(true);
+		}
+	},[pepemon, getAccount, setIsApprovedUniV2Ppblz, web3.utils]);
+
+	const getPpblzBalance = useCallback(async () => {
+		let _ppblzBalance = await pepemon.contracts.ppblz.balanceOf(getAccount());
+		setPpblzBalance(web3.utils.fromWei(_ppblzBalance.toString()));
+	},[pepemon, web3.utils, getAccount]);
+
+	const getUniV2PpblzBalance = useCallback(async () => {
+		let _uniV2PpblzBalance = await pepemon.contracts.uniV2_ppblz.balanceOf(getAccount());
+		setUniV2PpblzBalance(web3.utils.fromWei(_uniV2PpblzBalance.toString()));
+	},[pepemon, web3.utils, getAccount]);
+
+	const getPpdexBalance = useCallback(async () => {
+		let _ppdexBalance = await pepemon.contracts.ppdex.balanceOf(getAccount());
+		setPpdexBalance(web3.utils.fromWei(_ppdexBalance.toString()));
+	},[pepemon, web3.utils, getAccount]);
+
+	const getPpblzSupply = useCallback(async () => {
+		let _ppblzSupply = await pepemon.contracts.ppblz.totalSupply();
+		setTotalPpblzSupply(web3.utils.fromWei(_ppblzSupply.toString()));
+	},[pepemon, web3.utils]);
+
+	const getUniV2PpblzSupply = useCallback(async () => {
+		let _ppblzSupply = await pepemon.contracts.uniV2_ppblz.totalSupply();
+		setTotalUniV2PpblzSupply(web3.utils.fromWei(_ppblzSupply.toString()));
+	},[pepemon, web3.utils]);
+
+	const getMyPpblzStakeAmount = useCallback( async () => {
+		let stakeA = await pepemon.contracts.ppdex.getAddressPpblzStakeAmount(getAccount());
+		setPpblzStakedAmount(web3.utils.fromWei(stakeA.toString()));
+	}, [getAccount, pepemon, web3.utils]);
+
+	const getMyUniV2PpblzStakeAmount = useCallback(async () => {
+		let stakeA = await pepemon.contracts.ppdex.getAddressUniV2StakeAmount(getAccount());
+		setUniV2PpblzStakedAmount(web3.utils.fromWei(stakeA.toString()));
+	},[pepemon, web3.utils, getAccount, setUniV2PpblzStakedAmount]);
+
+	const getPpdexRewards = useCallback(async () => {
+		setIsUpdatingRewards(true);
+		let cRewards = (
+			await pepemon.contracts.ppdex.myRewardsBalance(getAccount())
+		).toString();
+		const ppblzStaked = (
+			await pepemon.contracts.ppdex.getAddressPpblzStakeAmount(getAccount())
+		).toString();
+		const uniV2Staked = (
+			await pepemon.contracts.ppdex.getAddressUniV2StakeAmount(getAccount())
+		).toString();
+
+		// Faulty myRewardsBalance edge case.. dont use view but recalculate!
+		if (ppblzStaked > 0 && uniV2Staked > 0) {
+			const lastRewardBlock =
+			await pepemon.contracts.ppdex.getLastBlockCheckedNum(getAccount());
+			const currentBlock = await pepemon.contracts.ppdex.getBlockNum();
+			const liquidityMultiplier =
+			await pepemon.contracts.ppdex.getLiquidityMultiplier();
+			const rewardsVar = 100000;
+
+			const ppblzRewardBalance =
+			(ppblzStaked * (currentBlock - lastRewardBlock)) / rewardsVar;
+			const uniV2RewardsBalance =
+			(uniV2Staked *
+				((currentBlock - lastRewardBlock) * liquidityMultiplier)) /
+			rewardsVar;
+			const originalReward =
+			cRewards - (ppblzRewardBalance + uniV2RewardsBalance);
+
+			if (originalReward > 10000) {
+			const realReward =
+				(cRewards - (ppblzRewardBalance + uniV2RewardsBalance)) / 2 +
+				(ppblzRewardBalance + uniV2RewardsBalance);
+			cRewards = realReward.toString();
+			}
+		}
+		setPpdexRewards(web3.utils.fromWei(cRewards));
+
+		const timer = setTimeout(() => {
+			setIsUpdatingRewards(false);
+			clearTimeout(timer);
+		}, 2000);
+	},[getAccount, pepemon, web3.utils]);
 
 	const stakePpblz = async () => {
 	if (
@@ -445,39 +439,40 @@ const Stake: React.FC<any> = ({ appChainId: chainId, setChainId }) => {
 	};
 
 	useEffect(() => {
-	if (!pepemon || !pepemon.contracts) {
-		return;
-	}
-	if (account) {
-		correctChainIsLoaded(pepemon).then((correct) => {
-		if (!correct) {
+		if (!pepemon || !pepemon.contracts) {
 			return;
 		}
-		try {
-			getPpblzAllowance();
-			getPpblzSupply();
-			getPpblzBalance();
-			getMyPpblzStakeAmount();
-			getUniV2PpblzAllowance();
-			getUniV2PpblzSupply();
-			getUniV2PpblzBalance();
-			getMyUniV2PpblzStakeAmount();
-			getPpdexBalance();
-			getPpdexRewards();
-			getUniV2PpblzBalance();
-			getUniV2PpblzSupply();
-			setIsApprovedPpblz(false);
-			setIsApprovedUniV2Ppblz(false);
-		} catch (error) {
-			// Catch any errors for any of the above operations.
-			alert(
-			`Failed to load web3, accounts, or contract. Check console for details.`
-			);
-			console.error(error);
+		if (account) {
+			correctChainIsLoaded(pepemon).then((correct) => {
+			if (!correct) {
+				return;
+			}
+			try {
+				getPpblzAllowance();
+				getPpblzSupply();
+				getPpblzBalance();
+				getMyPpblzStakeAmount();
+				getUniV2PpblzAllowance();
+				getUniV2PpblzSupply();
+				getUniV2PpblzBalance();
+				getMyUniV2PpblzStakeAmount();
+				getPpdexBalance();
+				getPpdexRewards();
+				getUniV2PpblzBalance();
+				getUniV2PpblzSupply();
+				setIsApprovedPpblz(false);
+				setIsApprovedUniV2Ppblz(false);
+			} catch (error) {
+				// Catch any errors for any of the above operations.
+				alert(
+				`Failed to load web3, accounts, or contract. Check console for details.`
+				);
+				console.error(error);
+			}
+			});
 		}
-		});
-	}
-	}, [account, pepemon, provider, transactionFinished]);
+	}, [account, pepemon, provider, transactionFinished, getMyPpblzStakeAmount, getMyUniV2PpblzStakeAmount, getPpblzAllowance,
+		getPpblzBalance, getUniV2PpblzBalance, getPpdexBalance, getPpblzSupply, getUniV2PpblzSupply, getPpdexRewards, getUniV2PpblzAllowance]);
 
 	return (
 		<StyledPageWrapperMain>

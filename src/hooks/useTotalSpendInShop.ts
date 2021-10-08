@@ -14,7 +14,7 @@ const useTotalSpendInShop = () => {
     const fetchTotalSpend = useCallback(async () => {
         const balance = parseInt(pepemon.chainId) === 56 ? await getTotalSpendBNB(storeContract) : await getTotalSpend(storeContract);
         setTotalSpend(new BigNumber(balance))
-    }, [account, pepemon])
+    }, [pepemon, storeContract])
 
     useEffect(() => {
         if (account && pepemon) {
@@ -24,7 +24,7 @@ const useTotalSpendInShop = () => {
                 }
             })
         }
-    }, [account, setTotalSpend, pepemon])
+    }, [account, setTotalSpend, pepemon, fetchTotalSpend])
 
     return totalSpend
 }

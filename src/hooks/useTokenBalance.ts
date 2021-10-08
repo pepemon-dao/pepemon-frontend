@@ -17,7 +17,7 @@ const useTokenBalance = (tokenAddress: string) => {
   const fetchBalance = useCallback(async () => {
     const balance = chainId === 56 ? await getNativeBalance(provider, account) : await getBalance(provider, tokenAddress, account)
     setBalance(new BigNumber(balance))
-  }, [account, provider, tokenAddress])
+  }, [account, provider, tokenAddress, chainId])
 
   useEffect(() => {
     if (account) {
@@ -27,7 +27,7 @@ const useTokenBalance = (tokenAddress: string) => {
         }
       });
     }
-  }, [account, provider, setBalance, tokenAddress])
+}, [account, provider, setBalance, tokenAddress, fetchBalance, pepemon])
 
   return balance
 }

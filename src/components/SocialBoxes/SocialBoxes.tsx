@@ -14,28 +14,28 @@ const SocialBoxes = () => {
 			<Spacer size="lg"/>
 			<ContentBoxGrid gridTemplate='"socialBox1 socialBox2 socialBox3 socialBox4"'>
 				<ContentBox bgColor={theme.color.purple[300]} style={{ gridArea: "socialBox1", boxShadow: "0 18.7px 14.2px 0 rgba(0, 0, 0, 0.1)" }}>
-					<StyledSocialIcon src={twitter} alt="twitter"/>
+					<StyledSocialIcon loading="lazy" src={twitter} alt="twitter"/>
 					<Spacer size="sm"/>
 					<StyledText as="p" size="2rem" font={theme.font.neometric} weight={900} align="center">Twitter</StyledText>
 					<Spacer size="sm"/>
 					<StyledText as="p" align="center" lineHeight="1.5">Follow us on Twitter for all updates and anouncements.</StyledText>
 				</ContentBox>
 				<ContentBox bgColor={theme.color.purple[300]} style={{ gridArea: "socialBox2", boxShadow: "0 18.7px 14.2px 0 rgba(0, 0, 0, 0.1)" }}>
-					<StyledSocialIcon src={telegram} alt="telegram"/>
+					<StyledSocialIcon loading="lazy" src={telegram} alt="telegram"/>
 					<Spacer size="sm"/>
 					<StyledText as="p" size="2rem" font={theme.font.neometric} weight={900} align="center">Telegram</StyledText>
 					<Spacer size="sm"/>
 					<StyledText as="p" align="center" lineHeight="1.5">Join us on Telegram to ask us questions and talk with your fellow Pepemon trainers.</StyledText>
 				</ContentBox>
 				<ContentBox bgColor={theme.color.purple[300]} style={{ gridArea: "socialBox3", boxShadow: "0 18.7px 14.2px 0 rgba(0, 0, 0, 0.1)" }}>
-					<StyledSocialIcon src={discord} alt="discord"/>
+					<StyledSocialIcon loading="lazy" src={discord} alt="discord"/>
 					<Spacer size="sm"/>
 					<StyledText as="p" size="2rem" font={theme.font.neometric} weight={900} align="center">Discord</StyledText>
 					<Spacer size="sm"/>
 					<StyledText as="p" align="center" lineHeight="1.5">Come hang out with us and all the Pepemon trainers on Discord.</StyledText>
 				</ContentBox>
 				<ContentBox bgColor={theme.color.purple[300]} style={{ gridArea: "socialBox4", boxShadow: "0 18.7px 14.2px 0 rgba(0, 0, 0, 0.1)" }}>
-					<StyledSocialIcon src={medium} alt="medium"/>
+					<StyledSocialIcon loading="lazy" src={medium} alt="medium"/>
 					<Spacer size="sm"/>
 					<StyledText as="p" size="2rem" font={theme.font.neometric} weight={900} align="center">Medium</StyledText>
 					<Spacer size="sm"/>

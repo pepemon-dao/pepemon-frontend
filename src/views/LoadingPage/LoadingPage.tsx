@@ -1,5 +1,3 @@
-import styled from "styled-components";
-import { theme } from "../../theme";
 import { StyledPageWrapperMain, StyledPageWrapperMainInner, Loading } from "../../components";
 
 const LoadingPage = () => {

@@ -70,7 +70,7 @@ export const PepemonCard: React.FC<{card: { name: string, cardsPerPack?: number;
 				{card.price} PPDEX
 			</StyledPepemonCardPrice>
 			<div>
-				<StyledPepemonCardImage active={active} src={card.url} onClick={() => selectCard(card)}/>
+				<StyledPepemonCardImage loading="lazy" active={active} src={card.url} onClick={() => selectCard(card)}/>
 				<StyledTitle as="h4" size="1rem" font={theme.font.neometric}>{card.cardsPerPack ? `${card.cardsPerPack} cards` : card.name}</StyledTitle>
 				<StyledSpacer bg={theme.color.gray[100]} size={2}/>
 				<Spacer size="sm"/>

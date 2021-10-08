@@ -16,30 +16,30 @@ const Footer = () => {
 					<div>
 						<StyledTitle as="h2" size="0.8rem" weight={400} color={theme.color.white}>PEPEMON</StyledTitle>
 						<StyledList>
-							<li><StyledLink href="#">About</StyledLink></li>
-							<li><StyledLink href="#">Whitepaper</StyledLink></li>
-							<li><StyledLink href="#">Pepemon the game</StyledLink></li>
+							<li><StyledLink href="https://example.com">About</StyledLink></li>
+							<li><StyledLink href="https://example.com">Whitepaper</StyledLink></li>
+							<li><StyledLink href="https://example.com">Pepemon the game</StyledLink></li>
 						</StyledList>
 					</div>
 					<div>
 						<StyledTitle as="h2" size="0.8rem" weight={400} color={theme.color.white}>TOKENS</StyledTitle>
 						<StyledList>
-							<li><StyledLink href="#">PPBLZ Contract</StyledLink></li>
-							<li><StyledLink href="#">PPDEX Contract</StyledLink></li>
-							<li><StyledLink href="#">Buy $PPBLZ</StyledLink></li>
-							<li><StyledLink href="#">Buy $PPDEX</StyledLink></li>
+							<li><StyledLink href="https://example.com">PPBLZ Contract</StyledLink></li>
+							<li><StyledLink href="https://example.com">PPDEX Contract</StyledLink></li>
+							<li><StyledLink href="https://example.com">Buy $PPBLZ</StyledLink></li>
+							<li><StyledLink href="https://example.com">Buy $PPDEX</StyledLink></li>
 						</StyledList>
 					</div>
 
 					<div>
 						<StyledTitle as="h2" size="0.8rem" weight={400} color={theme.color.white}>SOCIALS</StyledTitle>
 						<StyledList>
-							<li><StyledLink href="#">Twitter</StyledLink></li>
-							<li><StyledLink href="#">Telegram</StyledLink></li>
-							<li><StyledLink href="#">Discord </StyledLink></li>
-							<li><StyledLink href="#">Github</StyledLink></li>
-							<li><StyledLink href="#">Medium</StyledLink></li>
-							<li><StyledLink href="#">OpenSea</StyledLink></li>
+							<li><StyledLink href="https://example.com">Twitter</StyledLink></li>
+							<li><StyledLink href="https://example.com">Telegram</StyledLink></li>
+							<li><StyledLink href="https://example.com">Discord </StyledLink></li>
+							<li><StyledLink href="https://example.com">Github</StyledLink></li>
+							<li><StyledLink href="https://example.com">Medium</StyledLink></li>
+							<li><StyledLink href="https://example.com">OpenSea</StyledLink></li>
 						</StyledList>
 					</div>
 				</StyledFooterGrid>
@@ -47,9 +47,9 @@ const Footer = () => {
 					<hr/>
 					<StyledFooterLegalInner>
 						<StyledFooterLegalLinks>
-							<a href="#">Terms of service</a>
-							<a href="#">Privacy policy</a>
-							<a href="#">Cookie policy</a>
+							<a href="https://example.com">Terms of service</a>
+							<a href="https://example.com">Privacy policy</a>
+							<a href="https://example.com">Cookie policy</a>
 						</StyledFooterLegalLinks>
 						<div>
 							© 2021
