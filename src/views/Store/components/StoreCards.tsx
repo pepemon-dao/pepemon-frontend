@@ -66,7 +66,7 @@ export const PepemonCard: React.FC<{card: { name: string, cardsPerPack?: number;
 	return (
 		<StyledPepemonCard style={{ opacity: soldOut ? "50%" : "100%" }}>
 			<StyledPepemonCardPrice>
-				<img src={coin} alt="coin"/>
+				<img loading="lazy" src={coin} alt="coin"/>
 				{card.price} PPDEX
 			</StyledPepemonCardPrice>
 			<div>

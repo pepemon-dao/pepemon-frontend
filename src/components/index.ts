@@ -1,6 +1,6 @@
 export { Accordion, AccordionGroup } from './Accordion';
 export { Body } from './Body';
-export { Button, StyledButton } from './Button';
+export { Button, StyledButton, LinkButton } from './Button';
 export { Card } from './Card';
 export { ContentBox, ContentBoxNumber, ContentBoxGrid, ContentCentered, ContentColumn, ContentColumns } from './Content';
 export { DropDownMenu } from './DropDownMenu';

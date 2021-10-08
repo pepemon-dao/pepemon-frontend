@@ -9,7 +9,7 @@ const IbuttonPopover: React.FC<props> = ({ button, onHide }) => {
   return (
     <div className="popover-conatiner">
       <span className="APY">APY</span>
-      <img src={cross} alt="hide" onClick={onHide} className="cross" />
+      <img loading="lazy" src={cross} alt="hide" onClick={onHide} className="cross" />
       <div className="divider"></div>
       <table>
         <tr>

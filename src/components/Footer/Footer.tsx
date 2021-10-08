@@ -11,7 +11,7 @@ const Footer = () => {
 
 				<StyledFooterGrid>
 					<div>
-						<img src={logoexpand} alt="pepemon logo" style={{maxWidth: "10em"}}/>
+						<img loading="lazy" src={logoexpand} alt="pepemon logo" style={{maxWidth: "10em"}}/>
 					</div>
 					<div>
 						<StyledTitle as="h2" size="0.8rem" weight={400} color={theme.color.white}>PEPEMON</StyledTitle>

@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { theme } from "../../theme";
 
 interface ButtonProps {
 	bg?: string;
@@ -64,6 +65,23 @@ export const StyledButton = styled.button<{light?: boolean, width?: string}>`
 		border: ${props => !props.light && `1px solid ${props.theme.color.purple[600]}`};
 		color: ${props => props.light ? props.theme.color.white : props.theme.color.purple[600]};
 		box-shadow: 0 4px 10px 0 rgba(121, 121, 121, 0.5);
+	}
+`
+
+export const LinkButton = styled.button<{light?: boolean, width?: string}>`
+	background-color: transparent;
+	border: none;
+	color: ${theme.color.purple[600]};
+	font-size: 1rem;
+	font-family: ${theme.font.inter};
+	font-weight: 600;
+	padding: 12px 24px;
+	text-align: center;
+	text-decoration: none;
+	text-transform: uppercase;
+
+	&:hover {
+		color: ${theme.color.purple[500]};
 	}
 `
 

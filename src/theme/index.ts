@@ -1,16 +1,19 @@
 export const theme = {
 	borderRadius: 16,
 	breakpoints: {
-	mobile: 576,
-	tablet: 768,
-	desktop: 992,
-	ultra: 1200,
+		mobile: 576,
+		tablet: 768,
+		desktop: 992,
+		ultra: 1200,
 	},
 	color: {
 		transparent: "transparent",
 		white: "#fff",
 		black: "#000",
-		green: "#66d86a",
+		green: {
+			100: "#9feea3",
+			200: "#66d86a"
+		},
 		gray: {
 			100: "#f3f3f3",
 			200: "#f5f7fa",

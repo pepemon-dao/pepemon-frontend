@@ -27,7 +27,7 @@ const DropDown: React.FC<props> = ({ heading }) => {
         onClick={toggle}
       >
         <div className="header-sub-div">
-          <img
+          <img loading="lazy"
             src={pokeball}
             alt="logo"
             style={{ width: "50px", height: "50px" }}
@@ -38,7 +38,7 @@ const DropDown: React.FC<props> = ({ heading }) => {
         {dorpdown ? (
           <div className="header-sub-div">
             <span className="show-more">Show less</span>
-            <img
+            <img loading="lazy"
               src={uparrow}
               alt="logo"
               style={{
@@ -51,7 +51,7 @@ const DropDown: React.FC<props> = ({ heading }) => {
         ) : (
           <div className="header-sub-div">
             <span className="show-more">Show more</span>
-            <img
+            <img loading="lazy"
               src={dropdownarrow}
               alt="logo"
               style={{
@@ -92,9 +92,9 @@ const DropDown: React.FC<props> = ({ heading }) => {
               3.828 PPBLZ-ETH LP needed to subscribe
             </span>
 
-            {/* <img src={subscribeandstake} style={{ width: "58%", marginTop: "10px" }} />  */}
+            {/* <img loading="lazy" src={subscribeandstake} style={{ width: "58%", marginTop: "10px" }} />  */}
 
-            {/* <img src={approvelp} style={{ width: "58%", marginTop: "10px" }} /> */}
+            {/* <img loading="lazy" src={approvelp} style={{ width: "58%", marginTop: "10px" }} /> */}
             <br />
             <br />
 
@@ -105,7 +105,7 @@ const DropDown: React.FC<props> = ({ heading }) => {
               </span>
             </div>
             <br />
-            <img
+            <img loading="lazy"
               src={unsubscribe}
               style={{ width: "28%", marginTop: "10px" }}
             />
@@ -138,7 +138,7 @@ const DropDown: React.FC<props> = ({ heading }) => {
                   marginTop: "14px",
                 }}
               ></div>
-              <img
+              <img loading="lazy"
                 src={subscribetoclaim}
                 style={{ width: "99%", marginTop: "25px" }}
               />
@@ -159,7 +159,7 @@ const DropDown: React.FC<props> = ({ heading }) => {
       </div>
 
       <div style={{ marginTop: "6px" }}>
-        <img src={provideliquiditybutton} className="enable" />
+        <img loading="lazy" src={provideliquiditybutton} className="enable" />
       </div>
     </div>
 

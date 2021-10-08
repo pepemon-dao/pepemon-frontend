@@ -54,7 +54,7 @@ const StoreBoosterpacksAside: React.FC<any> = ({setSelectedPack, selectedPack}) 
 					<dt>Price:</dt>
 					<dd>
 						<StyledPepemonCardPrice styling="alt">
-							<img src={coin} alt="coin"/>
+							<img loading="lazy" src={coin} alt="coin"/>
 							{selectedPack.price} PPDEX
 						</StyledPepemonCardPrice>
 					</dd>
@@ -97,7 +97,7 @@ const Background = styled(BaseBox)`
 `;
 
 const Progress = styled(BaseBox)<{percent: number}>`
-	background: ${props => props.theme.color.green};
+	background: ${props => props.theme.color.green[200]};
 	width: ${({ percent }) => percent}%;
 `;
 

@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { Navigation } from "../../components";
 import { darktealTiles } from "../../assets";
+import { theme } from "../../theme";
 // import Footer from '../Footer'
 
 // const Page: React.FC<PageProps> = (props) => {
@@ -38,7 +39,7 @@ export const StyledPageWrapperMain = styled.main`
 `
 
 export const StyledPageWrapperMainInner = styled.div`
-	max-width: 940px;
+	max-width: ${theme.breakpoints.ultra}px;
 	margin-left: auto;
 	margin-right: auto;
 	padding-top: 10em;

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { Popover } from "reactstrap";
-import { StyledPageWrapperMain, StyledPageWrapperMainInner, Button, StyledText, StyledTitle, StyledPageTitle, IbuttonPopover, Spacer } from "../../components";
+import { ContentCentered, StyledPageWrapperMain, StyledPageWrapperMainInner, Button, LinkButton, StyledText, StyledTitle, StyledPageTitle, IbuttonPopover, Spacer } from "../../components";
 import { usePepemon, useWeb3Modal } from "../../hooks";
 import { correctChainIsLoaded } from "../../utils";
 import { theme } from "../../theme";
@@ -17,12 +17,10 @@ const Stake: React.FC<any> = ({ appChainId: chainId, setChainId }) => {
 	const toggle2 = () => setPopoverOpen2(!popoverOpen2);
 	const pepemon = usePepemon();
 	const [provider] = useWeb3Modal();
-
 	const web3: any = new Web3(provider);
 	//TODO: implement proper state / context management
 	const [ppblzStakeAdd, setPpblzStakeAdd] = useState(false);
 	const [ppblzStakeSub, setPpblzStakeSub] = useState(false);
-
 	const [ppblzStakeAmount, setPpblzStakeAmount] = useState<any>(null);
 	const [ppblzStakedAmount, setPpblzStakedAmount] = useState(0);
 	const [uniV2PpblzStakeAmount, setUniV2PpblzStakeAmount] = useState<any>(null);
@@ -490,13 +488,13 @@ const Stake: React.FC<any> = ({ appChainId: chainId, setChainId }) => {
 					<StakeGridArea area="ppblz">
 						<StakeGridAreaHeader>
 							<StakeGridAreaHeaderTitle>
-								<img src={pokeball} alt="Pokeball"/>
+								<img loading="lazy" src={pokeball} alt="Pokeball"/>
 								<Spacer size="sm"/>
 								<StyledTitle as="h2" size="1.125rem" color={theme.color.white} font={theme.font.neometric}>Stake PPBLZ</StyledTitle>
 							</StakeGridAreaHeaderTitle>
 							<StakeGridAreaHeaderMeta>
 								<span>{parseFloat(ppdexBalance.toString()).toFixed(2)}% APY</span>
-								<img id="Popover1" src={ibutton} alt="logo"/>
+								<img loading="lazy" id="Popover1" src={ibutton} alt="logo"/>
 								<Popover placement="bottom" isOpen={popoverOpen} target="Popover1" toggle={toggle}>
 									<IbuttonPopover onHide={toggle} button={"Buy PPBLZ"} />
 								</Popover>
@@ -516,72 +514,38 @@ const Stake: React.FC<any> = ({ appChainId: chainId, setChainId }) => {
 								</DataColumn>
 							</DataColumns>
 							<div style={{ marginTop: "auto" }}>
-								{!isApprovedPpblz && (
-								<div onClick={approvePpblz}>
-									{!isApprovingPpblz ? (
-									<div>
-										<div
-										onClick={approvePpblz}
-										>
-										<StyledButton borderless width="100%">ENABLE</StyledButton>
-										</div>
-									</div>
-									) : null}
-								</div>
-								)}
+								{(!isApprovedPpblz && !isApprovingPpblz) &&
+									<StyledButton onClick={approvePpblz} borderless width="100%">Enable</StyledButton>
+								}
 
 								{isApprovedPpblz && !ppblzStakeAdd && !ppblzStakeSub ? (
-								<div
-									className="enable"
-									style={{
-									display: "flex",
-									flexDirection: "row",
-									justifyContent: "center",
-									}}
-								>
-									<div>
-									{ppblzStakedAmount != 0 ? (
-										<div
-										onClick={() => {
-											setPpblzStakeSub(true);
-											setPpblzStakeAdd(false);
+									<ContentCentered
+										style={{
+										display: "flex",
+										flexDirection: "row",
+										justifyContent: "center",
 										}}
-										className="minus-act"
-										>
-										<p className="minus-act-text">-</p>
-										</div>
-									) : (
-										<div className="minus-passive">
-										<p className="disable-blue-btn-txt">-</p>
-										</div>
-									)}
-									</div>
-									<div>
-									{ppblzBalance != 0 ? (
-										<div
-										onClick={() => {
-											setPpblzStakeSub(false);
-											setPpblzStakeAdd(true);
-										}}
-										className="plus-act"
-										>
-										<p className="minus-act-text">+</p>
-										</div>
-									) : (
-										<div className="plus-passive">
-										<p className="disable-blue-btn-txt">+</p>
-										</div>
-									)}
-									</div>
-								</div>
+									>
+										{ppblzStakedAmount !== 0 ? (
+											<Button onClick={() => {
+												setPpblzStakeSub(true);
+												setPpblzStakeAdd(false);
+											}} borderless width="20%">-</Button>
+										) : (
+											<Button disabled bg={theme.color.purple[400]} color={theme.color.purple[500]} width="20%" borderless>-</Button>
+										)}
+										{ppblzBalance !== 0 ? (
+											<StyledButton onClick={() => {
+												setPpblzStakeSub(false);
+												setPpblzStakeAdd(true);
+											}} borderless width="80%">+</StyledButton>
+										) : (
+											<Button disabled bg={theme.color.purple[400]} color={theme.color.purple[500]} width="80%" borderless>+</Button>
+										)}
+									</ContentCentered>
 								) : null}
 								{isApprovingPpblz && !ppblzStakeAdd && !ppblzStakeSub ? (
-								<div
-									className="blue-button-enable"
-									onClick={approvePpblz}
-								>
-									<p className="bluebutton-text">ENABLING...</p>
-								</div>
+									<StyledButton borderless width="100%">ENABLING...</StyledButton>
 								) : null}
 
 								{isApprovedPpblz &&
@@ -589,139 +553,58 @@ const Stake: React.FC<any> = ({ appChainId: chainId, setChainId }) => {
 								!ppblzStakeSub &&
 								!isWithdrawingPpblz &&
 								!isStakingPpblz ? (
-								<div>
-									<div
-									className="enable"
-									style={{
-										display: "flex",
-										flexDirection: "row",
-										justifyContent: "space-between",
-										width: "590px",
-										height: "60px",
-										borderRadius: "10px",
-										border: "solid 1px #220245",
-									}}
-									>
-									<div className="max-contianer">
-										<input
-										className="input-amount"
-										placeholder="0.00"
-										value={setPpblzInputField() || ""}
-										onChange={(event) =>
-											updatePpblzStakingInput(event)
-										}
-										min="0.00"
-										step="1"
-										autoFocus={true}
-										/>
-									</div>
-									<div
-										style={{
-										display: "flex",
-										flexDirection: "row",
-										}}
-									>
-										<div className="max-contianer">
-										<span className="MAX" onClick={setMaxPpblz}>
-											MAX
-										</span>
-										</div>
-										<div className="stake-button-conatiner">
-										<div
-											onClick={stakePpblz}
-											className="blue-button"
-										>
-											<p className="bluebutton-text">Stake</p>
-										</div>
-										</div>
-									</div>
-									</div>
-								</div>
+									<ContentCentered direction="row" bgColor={theme.color.white} style={{ borderRadius: "8px", border: `1px solid ${theme.color.purple[700]}`, padding: ".1em .1em .1em 0.75em" }}>
+										<StyledInput
+											placeholder="0.00"
+											value={setPpblzInputField() || ""}
+											onChange={(event) =>
+												updatePpblzStakingInput(event)
+											}
+											min="0.00"
+											step="1"
+											autoFocus={true} />
+										<LinkButton onClick={setMaxPpblz}>Max</LinkButton>
+										<StyledButton onClick={stakePpblz} borderless>Stake</StyledButton>
+									</ContentCentered>
 								) : null}
 								{isApprovedPpblz &&
 								ppblzStakeSub &&
 								!ppblzStakeAdd &&
 								!isWithdrawingPpblz &&
 								!isStakingPpblz ? (
-								<div>
-									<div
-									className="enable"
-									style={{
-										display: "flex",
-										flexDirection: "row",
-										justifyContent: "space-between",
-										width: "590px",
-										height: "60px",
-										borderRadius: "10px",
-										border: "solid 1px #220245",
-									}}
-									>
-									<div className="max-contianer">
-										<input
-										className="input-amount"
-										placeholder="0.00"
-										value={setPpblzInputField() || ""}
-										onChange={(event) =>
-											updatePpblzStakingInput(event)
-										}
-										min="0.00"
-										step="1"
-										autoFocus={true}
-										/>
-									</div>
-									<div
-										style={{
-										display: "flex",
-										flexDirection: "row",
-										}}
-									>
-										<div className="max-contianer">
-										<span className="MAX" onClick={setMaxPpblz}>
-											MAX
-										</span>
-										</div>
-										<div className="stake-button-conatiner">
-										<div
-											onClick={withdrawPpblz}
-											className="blue-button"
-										>
-											<p className="bluebutton-text">Withdraw</p>
-										</div>
-										</div>
-									</div>
-									</div>
-								</div>
+									<ContentCentered direction="row" bgColor={theme.color.white} style={{ borderRadius: "8px", border: `1px solid ${theme.color.purple[700]}`, padding: ".1em .1em .1em 0.75em" }}>
+										<StyledInput
+											placeholder="0.00"
+											value={setPpblzInputField() || ""}
+											onChange={(event) =>
+												updatePpblzStakingInput(event)
+											}
+											min="0.00"
+											step="1"
+											autoFocus={true} />
+										<LinkButton onClick={setMaxPpblz}>Max</LinkButton>
+										<StyledButton onClick={withdrawPpblz} borderless>Withdraw</StyledButton>
+									</ContentCentered>
 								) : null}
-								{isStakingPpblz ? (
-								<div
-									className="blue-button-enable"
-									onClick={approvePpblz}
-								>
-									<p className="bluebutton-text">STAKING...</p>
-								</div>
-								) : null}
-
-								{isWithdrawingPpblz && (
-								<div
-									className="blue-button-enable"
-									onClick={approvePpblz}
-								>
-									<p className="bluebutton-text">WITHDRAWING...</p>
-								</div>
-								)}
+								{ (isStakingPpblz || isWithdrawingPpblz) &&
+									<StyledButton onClick={approvePpblz} borderless width="100%">
+										{isStakingPpblz && "Staking"}
+										{isWithdrawingPpblz &&  "Withdrawing"}
+									...</StyledButton>
+								}
 							</div>
 						</StakeGridAreaBody>
 					</StakeGridArea>
 					<StakeGridArea area="pplbzEthLp">
 						<StakeGridAreaHeader>
 							<StakeGridAreaHeaderTitle>
-								<img src={pokeball} alt="Pokeball"/>
+								<img loading="lazy" src={pokeball} alt="Pokeball"/>
 								<Spacer size="sm"/>
 								<StyledTitle as="h2" size="1.125rem" color={theme.color.white} font={theme.font.neometric}>Stake PPBLZ-ETH LP</StyledTitle>
 							</StakeGridAreaHeaderTitle>
 							<StakeGridAreaHeaderMeta>
 								<span className="StakeGridAreaHeader-number">87% APY</span>
-								<img id="Popover2" src={ibutton} alt="logo"
+								<img loading="lazy" id="Popover2" src={ibutton} alt="logo"
 								/>
 								<Popover placement="bottom" isOpen={popoverOpen2} target="Popover2" toggle={toggle2}>
 									<IbuttonPopover onHide={toggle2} button={"Buy PPBLZ-ETH"}/>
@@ -742,79 +625,29 @@ const Stake: React.FC<any> = ({ appChainId: chainId, setChainId }) => {
 								</DataColumn>
 							</DataColumns>
 							<div style={{ marginTop: "auto" }}>
-								{!isApprovedUniV2Ppblz ||
-								uniV2PpblAllowance < parseFloat(uniV2PpblzStakeAmount) ? (
-								<div
-									onClick={approveUniV2Ppblz}
-								>
-									{!isApprovingUniV2Ppblz ? (
-									<StyledButton borderless width="100%">ENABLE</StyledButton>
-									) : null}
-
-									{isApprovingUniV2Ppblz ? (
-									<p className="bluebutton-text">ENABLING...</p>
-									) : null}
-								</div>
-								) : null}
-								{isApprovedUniV2Ppblz ? (
-								<div>
-									<div
-									className="enable"
-									style={{
-										display: "flex",
-										flexDirection: "row",
-										justifyContent: "space-between",
-										width: "590px",
-										height: "60px",
-										borderRadius: "10px",
-										border: "solid 1px #220245",
-									}}
-									>
-									<div className="max-contianer">
-										<input
-										className="input-amount"
-										placeholder="0.00"
-										value={setUniV2PpblzInputField() || ""}
-										onChange={(event) =>
-											updateUniV2PpblzStakingInput(event)
-										}
-										min="0.00"
-										autoFocus={true}
-										/>
-									</div>
-									<div
-										style={{
-										display: "flex",
-										flexDirection: "row",
-										}}
-									>
-										<div className="max-contianer">
-										<span
-											className="MAX"
-											onClick={setMaxUniV2Ppblz}
-										>
-											MAX
-										</span>
-										</div>
-										<div className="stake-button-conatiner">
-										<div
-											onClick={stakeUniV2Ppblz}
-											className="blue-button"
-										>
-											<p className="bluebutton-text">Stake</p>
-										</div>
-										</div>
-									</div>
-									</div>
-								</div>
-								) : null}
+								{(!isApprovedUniV2Ppblz || uniV2PpblAllowance < parseFloat(uniV2PpblzStakeAmount)) &&
+									<StyledButton onClick={approveUniV2Ppblz} borderless width="100%">{!isApprovingUniV2Ppblz ? "Enable" : "Enabling..."}</StyledButton>
+								}
+								{isApprovedUniV2Ppblz &&
+									<ContentCentered direction="row" bgColor={theme.color.white} style={{ borderRadius: "8px", border: `1px solid ${theme.color.purple[700]}`, padding: ".1em .1em .1em 0.75em" }}>
+										<StyledInput
+											placeholder="0.00"
+											value={setUniV2PpblzInputField() || ""}
+											onChange={(event) =>
+												updateUniV2PpblzStakingInput(event)
+											}
+											min="0.00" autoFocus={true} />
+										<LinkButton onClick={setMaxUniV2Ppblz} >Max</LinkButton>
+										<StyledButton onClick={stakeUniV2Ppblz} borderless>Stake</StyledButton>
+									</ContentCentered>
+								}
 							</div>
 						</StakeGridAreaBody>
 					</StakeGridArea>
 					<StakeGridArea area="ppdexEarned">
 						<StakeGridAreaHeader>
 							<StakeGridAreaHeaderTitle>
-								<img src={pokeball} alt="Pokeball"/>
+								<img loading="lazy" src={pokeball} alt="Pokeball"/>
 								<Spacer size="sm"/>
 								<StyledTitle as="h2" size="1.125rem" color={theme.color.white} font={theme.font.neometric}>PPDEX Earned</StyledTitle>
 							</StakeGridAreaHeaderTitle>
@@ -841,23 +674,14 @@ const Stake: React.FC<any> = ({ appChainId: chainId, setChainId }) => {
 								<>
 									{ppblzStakedAmount > 0 ? (
 										<div>
-										{ppdexRewards > 0.001 ? (
-											<div
-											className="enable-blue-btn"
-											onClick={claimRewards}
-											>
-											<p className="bluebutton-text">
-												{isClaiming ? "CLAIMING..." : "CLAIM"}
-											</p>
-											</div>
-										) : (
-											<div className="disable-blue-btn">
-											<p className="disable-blue-btn-txt">CLAIM</p>
-											</div>
-										)}
+											{ppdexRewards > 0.001 ? (
+												<Button onClick={claimRewards} bg={theme.color.purple[400]} color={theme.color.purple[500]} width="50%" borderless>{isClaiming ? "CLAIMING..." : "CLAIM"}</Button>
+											) : (
+												<Button disabled bg={theme.color.purple[400]} color={theme.color.purple[500]} width="50%" borderless>CLAIM</Button>
+											)}
 										</div>
 									) : (
-										<Button disabled bg={theme.color.purple[400]} color={theme.color.purple[500]} width="100%" borderless>STAKE FIRST</Button>
+										<Button disabled bg={theme.color.purple[400]} color={theme.color.purple[500]} width="50%" borderless>STAKE FIRST</Button>
 									)}
 								</>
 							</div>
@@ -941,6 +765,16 @@ const DataColumn = styled.div`
 const StyledButton = styled(Button)`
 	background-image: linear-gradient(to bottom, #aa6cd6 -100%, ${props => props.theme.color.purple[600]});
 	box-shadow: 0 4px 10px 0 rgba(121, 121, 121, 0.5);
+`
+
+const StyledInput = styled.input`
+	border: none;
+	font-size: 1rem;
+	flex: 1 0 auto;
+
+	&:focus-within {
+		outline : none;
+	}
 `
 
 export default Stake;

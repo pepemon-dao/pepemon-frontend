@@ -1,14 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { Suspense, lazy, useEffect, useState } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
 import { theme } from "./theme";
-import Home from "./views/Home";
-import Stake from "./views/Stake";
-import Subscription from "./views/Subscription";
-import Store from "./views/Store";
 import PepemonProvider from "./contexts/PepemonProvider";
 import ModalsProvider from "./contexts/Modals";
 import { Page, TopBar } from "./components";
+import { LoadingPage } from "./views";
+// lazy import
+const Home = lazy(() =>  import("./views/Home").then((module) => ({ default: module.Home })));
+const Staking = lazy(() =>  import("./views/Staking").then((module) => ({ default: module.Staking })));
+const Subscription = lazy(() =>  import("./views/Subscription").then((module) => ({ default: module.Subscription })));
+const Store = lazy(() =>  import("./views/Store").then((module) => ({ default: module.Store })));
 
 const App: React.FC = () => {
 	const [ethChainId, setEthChainId] = useState(
@@ -25,6 +27,12 @@ const App: React.FC = () => {
 			});
 	}, []);
 
+	const pepemonState = {
+		appChainId: ethChainId,
+		providerChainId: providerChainId,
+		setChainId: setEthChainId,
+	}
+
 	return (
 		<Providers ethChainId={ethChainId}>
 			<TopBar
@@ -34,40 +42,25 @@ const App: React.FC = () => {
 			/>
 			<Router>
 				<Page>
-					<Switch>
-						<Route
-							path="/"
-							component={() => (
-								<Home
-								providerChainId={providerChainId}
-								appChainId={ethChainId}
-								setChainId={setEthChainId}
-								/>
-							)}
-							exact
-						/>
-						<Route path="/staking" exact>
-							<Stake
-								providerChainId={providerChainId}
-								appChainId={ethChainId}
-								setChainId={setEthChainId}
-							/>
-						</Route>
-						<Route path="/subscription" exact>
-							<Subscription
-								providerChainId={providerChainId}
-								appChainId={ethChainId}
-								setChainId={setEthChainId}
-							/>
-						</Route>
-						<Route path="/store/:storeState?">
-							<Store
-								providerChainId={providerChainId}
-								appChainId={ethChainId}
-								setChainId={setEthChainId}
-							/>
-						</Route>
-					</Switch>
+					<Suspense fallback={<LoadingPage/>}>
+						<Switch>
+							<Route path="/test" exact>
+								<LoadingPage/>
+							</Route>
+							<Route path="/staking" exact>
+								<Staking {...pepemonState}/>
+							</Route>
+							<Route path="/subscription" exact>
+								<Subscription {...pepemonState} />
+							</Route>
+							<Route path="/store/:storeState?">
+								<Store {...pepemonState} />
+							</Route>
+							<Route path="/">
+									<Home {...pepemonState}/>
+							</Route>
+						</Switch>
+					</Suspense>
 				</Page>
 			</Router>
 		</Providers>

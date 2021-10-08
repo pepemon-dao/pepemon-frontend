@@ -23,7 +23,7 @@ const StoreCardsAside: React.FC<any> = ({setSelectedCard, selectedCard}) => {
 				<Spacer size="sm"/>
 				<StyledText as="p" font={theme.font.inter} size=".875rem" color={theme.color.gray[600]}>Super cool discription about this card. Iuis aute irure dolor in reprehenderit in voluptate velit esse cillum.</StyledText>
 				<Spacer size="sm"/>
-				<img src={selectedCard.url} alt={selectedCard.name} style={{width: "100%"}}/>
+				<img loading="lazy" src={selectedCard.url} alt={selectedCard.name} style={{width: "100%"}}/>
 				<Spacer size='md'/>
 				<StyledPepemonCardMeta>
 					<dt>Rarity:</dt>
@@ -53,7 +53,7 @@ const StoreCardsAside: React.FC<any> = ({setSelectedCard, selectedCard}) => {
 					<dt>Price:</dt>
 					<dd>
 						<StyledPepemonCardPrice styling="alt">
-							<img src={coin} alt="coin"/>
+							<img loading="lazy" src={coin} alt="coin"/>
 							{selectedCard.price} PPDEX
 						</StyledPepemonCardPrice>
 					</dd>

@@ -10,7 +10,7 @@ const Navigation = () => {
 		<StyledMenuOuterWrapper>
 			<StyledMenuInnerWrapper>
 				<StyledLogoLink to="/" active>
-					<img src={pepemon} className="pepemon-icon" alt="logo" />
+					<img loading="lazy" src={pepemon} className="pepemon-icon" alt="logo" />
 					<span>Pepemon</span>
 				</StyledLogoLink>
 

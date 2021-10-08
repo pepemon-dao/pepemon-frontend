@@ -19,12 +19,12 @@ const Accordion: React.FC<AccordionProps> = ({ heading }) => {
 		<AccordionWrapper isOpen={isOpen}>
 			<AccordionHeader onClick={toggle} isOpen={isOpen}>
 				<AccordionHeaderTitle>
-					<img src={pokeball} alt="Pokeball" style={{ width: "40px", height: "40px", marginRight: "1em" }}/>
-					<StyledTitle as="h2" color={isOpen ? theme.color.green : theme.color.white} font={theme.font.neometric}>{heading}</StyledTitle>
+					<img loading="lazy" src={pokeball} alt="Pokeball" style={{ width: "40px", height: "40px", marginRight: "1em" }}/>
+					<StyledTitle as="h2" color={isOpen ? theme.color.green[200] : theme.color.white} font={theme.font.neometric}>{heading}</StyledTitle>
 				</AccordionHeaderTitle>
 				<AccordionHeaderButton onClick={toggle}>
 						<span>Show {isOpen ? "less" : "more"}</span>
-						<img src={isOpen ? uparrow : dropdownarrow} alt="logo" style={{ height: "0.5em", alignSelf: "center", }}/>
+						<img loading="lazy" src={isOpen ? uparrow : dropdownarrow} alt="logo" style={{ height: "0.5em", alignSelf: "center", }}/>
 				</AccordionHeaderButton>
 			</AccordionHeader>
 			{isOpen &&
@@ -46,8 +46,8 @@ const Accordion: React.FC<AccordionProps> = ({ heading }) => {
 						<StyledText as="p" size=".875rem">
 							3.828 PPBLZ-ETH LP needed to subscribe
 						</StyledText>
-						{/* <img src={subscribeandstake} style={{ width: "58%", marginTop: "10px" }} />    */}
-						{/* <img src={approvelp} style={{ width: "58%", marginTop: "10px" }} /> */}
+						{/* <img loading="lazy" src={subscribeandstake} style={{ width: "58%", marginTop: "10px" }} />    */}
+						{/* <img loading="lazy" src={approvelp} style={{ width: "58%", marginTop: "10px" }} /> */}
 						<Spacer size="md"/>
 						<StyledText as="p" size="2.5rem" color={theme.color.purple[600]} weight={900} font={theme.font.neometric}>
 							You have an active <wbr/>subscription!
@@ -96,7 +96,7 @@ const AccordionWrapper = styled.div<{isOpen: boolean}>`
 	background-color: ${props => props.theme.color.purple[800]};
 	border-radius: ${props => props.theme.borderRadius}px;
 	margin-bottom: .5em;
-	outline: ${props => props.isOpen && `2px solid ${props.theme.color.green}` };
+	outline: ${props => props.isOpen && `2px solid ${props.theme.color.green[200]}` };
 	width: 100%;
 `
 
