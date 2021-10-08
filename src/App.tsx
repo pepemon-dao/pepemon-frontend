@@ -13,19 +13,12 @@ import { Page, TopBar } from "./components";
 import { darktealTiles } from "./assets";
 
 const App: React.FC = () => {
-	const [mobileMenu, setMobileMenu] = useState(false);
 	const [ethChainId, setEthChainId] = useState(
 		parseInt((window as any).ethereum && (window as any).ethereum.chainId) || 1
 	); // ETH default
 	const [providerChainId, setProviderChainId] = useState(
 		parseInt((window as any).ethereum && (window as any).ethereum.chainId) || 1
 	);
-	const handleDismissMobileMenu = useCallback(() => {
-		setMobileMenu(false);
-	}, [setMobileMenu]);
-	const handlePresentMobileMenu = useCallback(() => {
-		setMobileMenu(true);
-	}, [setMobileMenu]);
 
 	useEffect(() => {
 	// @ts-ignore
