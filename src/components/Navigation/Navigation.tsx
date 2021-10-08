@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { pepemon, homeactive } from "../../assets";
+import { theme } from "../../theme";
 import { useLocation } from "react-router-dom"; // version 5.2.0
 
 const Navigation = () => {
@@ -9,44 +10,44 @@ const Navigation = () => {
 	return (
 		<StyledMenuOuterWrapper>
 			<StyledMenuInnerWrapper>
-				<StyledLogoLink to="/" active>
+				<StyledLogoLink to="/" isActive={true}>
 					<img loading="lazy" src={pepemon} className="pepemon-icon" alt="logo" />
 					<span>Pepemon</span>
 				</StyledLogoLink>
 
 				<StyledMenuList>
 					<StyledMenuListItem>
-						<StyledLink active={ pathname === "/" ? true : false } to="/">
+						<StyledLink isActive={ pathname === "/" && true } to="/">
 							<StyledLinkIcon loading="lazy" src={ homeactive } alt="logo" />
 							<span>Home</span>
 						</StyledLink>
 					</StyledMenuListItem>
 					<StyledMenuListItem>
-						<StyledLink active={ pathname.startsWith("/staking") ? true : false } to="/staking">
+						<StyledLink isActive={ pathname.startsWith("/staking") && true } to="/staking">
 							<StyledLinkIcon loading="lazy" src={ homeactive } alt="logo" />
 							<span>Staking</span>
 						</StyledLink>
 					</StyledMenuListItem>
 					<StyledMenuListItem>
-						<StyledLink active={ pathname.startsWith("/subscription") ? true : false } to="/subscription">
+						<StyledLink isActive={ pathname.startsWith("/subscription") && true } to="/subscription">
 							<StyledLinkIcon loading="lazy" src={ homeactive } alt="logo" />
 							<span>Subscription</span>
 						</StyledLink>
 					</StyledMenuListItem>
 					<StyledMenuListItem>
-						<StyledLink active={ pathname.startsWith("/store") ? true : false } to="/store">
+						<StyledLink isActive={ pathname.startsWith("/store") && true } to="/store">
 							<StyledLinkIcon loading="lazy" src={ homeactive } alt="logo" />
 							<span>Store</span>
 						</StyledLink>
 					</StyledMenuListItem>
 					<StyledMenuListItem>
-						<StyledLink active={ pathname === "/" ? true : false } to="/">
+						<StyledLink isActive={ pathname === "/" && true } to="/">
 							<StyledLinkIcon loading="lazy" src={ homeactive } alt="logo" />
 							<span>My Collection</span>
 						</StyledLink>
 					</StyledMenuListItem>
 					<StyledMenuListItem>
-						<StyledLink active={ pathname === "/" ? true : false } to="/">
+						<StyledLink isActive={ pathname === "/" && true } to="/">
 							<StyledLinkIcon loading="lazy" src={ homeactive } alt="logo" />
 							<span>Events</span>
 						</StyledLink>
@@ -59,8 +60,8 @@ const Navigation = () => {
 
 const StyledMenuOuterWrapper = styled.div`
 	&{
-		max-width: ${props => props.theme.sideBar.width}px;
-		background-color: ${props => props.theme.color.typographyAllTextOnDark};
+		max-width: ${theme.sideBar.width}px;
+		background-color: ${theme.color.typographyAllTextOnDark};
 		height: 100vh;
 		position: fixed;
 		left: 0;
@@ -93,16 +94,16 @@ const StyledMenuListItem = styled.li`
 	width: 100%;
 `
 
-const StyledLink = styled<any>(Link)`
+const StyledLink = styled(Link)<{isActive?: boolean}>`
 	&{
 		align-items: center;
-		color: ${props => props.theme.color.layoutPrimary};
+		color: ${theme.color.layoutPrimary};
 		display: flex;
-		font-family: ${props => props.theme.font.spaceMace};
+		font-family: ${theme.font.spaceMace};
 		justify-content: flex-start;
 		margin-bottom: 1.6em;
 		margin-top: 1.6em;
-		opacity: ${props => props.active ? 1 : 0.4};
+		opacity: ${props => props.isActive ? 1 : 0.4};
 		text-decoration: none;
 	}
 
@@ -131,8 +132,8 @@ const StyledLogoLink = styled<any>(StyledLink)`
 
 const StyledLinkIcon = styled.img`
 	height: auto;
-	height: ${props => props.theme.sideBar.width / 4}px;
-	width: ${props => props.theme.sideBar.width / 4}px;
+	height: ${theme.sideBar.width / 4}px;
+	width: ${theme.sideBar.width / 4}px;
 	margin-left: auto;
 	margin-right: auto;
 	object-fit: contain;

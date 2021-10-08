@@ -24,22 +24,22 @@ const Footer = () => {
 					<div>
 						<StyledTitle as="h2" size="0.8rem" weight={400} color={theme.color.white}>TOKENS</StyledTitle>
 						<StyledList>
-							<li><StyledLink href="https://example.com">PPBLZ Contract</StyledLink></li>
-							<li><StyledLink href="https://example.com">PPDEX Contract</StyledLink></li>
-							<li><StyledLink href="https://example.com">Buy $PPBLZ</StyledLink></li>
-							<li><StyledLink href="https://example.com">Buy $PPDEX</StyledLink></li>
+							<li><StyledLink rel="noopener noreferrer" target="_blank" href="https://etherscan.io/token/0x4d2ee5dae46c86da2ff521f7657dad98834f97b8">PPBLZ Contract</StyledLink></li>
+							<li><StyledLink rel="noopener noreferrer" target="_blank" href="https://etherscan.io/token/0xf1f508c7c9f0d1b15a76fba564eef2d956220cf7">PPDEX Contract</StyledLink></li>
+							<li><StyledLink rel="noopener noreferrer" target="_blank" href="https://app.uniswap.org/#/swap?outputCurrency=0x4d2ee5dae46c86da2ff521f7657dad98834f97b8">Buy $PPBLZ</StyledLink></li>
+							<li><StyledLink rel="noopener noreferrer" target="_blank" href="https://app.uniswap.org/#/swap?outputCurrency=0xf1f508c7c9f0d1b15a76fba564eef2d956220cf7">Buy $PPDEX</StyledLink></li>
 						</StyledList>
 					</div>
 
 					<div>
 						<StyledTitle as="h2" size="0.8rem" weight={400} color={theme.color.white}>SOCIALS</StyledTitle>
 						<StyledList>
-							<li><StyledLink href="https://example.com">Twitter</StyledLink></li>
-							<li><StyledLink href="https://example.com">Telegram</StyledLink></li>
-							<li><StyledLink href="https://example.com">Discord </StyledLink></li>
-							<li><StyledLink href="https://example.com">Github</StyledLink></li>
-							<li><StyledLink href="https://example.com">Medium</StyledLink></li>
-							<li><StyledLink href="https://example.com">OpenSea</StyledLink></li>
+							<li><StyledLink rel="noopener noreferrer" target="_blank" href="https://twitter.com/pepemonfinance">Twitter</StyledLink></li>
+							<li><StyledLink rel="noopener noreferrer" target="_blank" href="https://t.me/pepemonfinance">Telegram</StyledLink></li>
+							<li><StyledLink rel="noopener noreferrer" target="_blank" href="https://discord.gg/R8sZwMv">Discord</StyledLink></li>
+							<li><StyledLink rel="noopener noreferrer" target="_blank" href="https://github.com/pepem00n">Github</StyledLink></li>
+							<li><StyledLink rel="noopener noreferrer" target="_blank" href="https://medium.com/@pepemonfinance">Medium</StyledLink></li>
+							<li><StyledLink rel="noopener noreferrer" target="_blank" href="https://opensea.io/collection/pepemonfactory">OpenSea</StyledLink></li>
 						</StyledList>
 					</div>
 				</StyledFooterGrid>
