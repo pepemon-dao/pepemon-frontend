@@ -13,7 +13,7 @@ const StoreBoosterpacksAside: React.FC<any> = ({setSelectedPack, selectedPack}) 
 		<StyledStoreWrapper width="35%">
 			<StyledStoreHeader>
 				<div style={{display: 'flex', justifyContent: 'space-between', width: '100%'}}>
-					<StyledTitle as="h2" color={theme.color.white} font={theme.font.neometric} size="1.2rem">
+					<StyledTitle as="h2" color={theme.color.white} weight={900} font={theme.font.neometric} size="1.2rem">
 						Selected boosterpack
 					</StyledTitle>
 					<ActionClose onClick={() => setSelectedPack("")}/>

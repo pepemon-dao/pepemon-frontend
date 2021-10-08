@@ -20,6 +20,6 @@ export { Newsletter } from './Newsletter';
 export { Page, StyledPageWrapper, StyledPageWrapperMain, StyledPageWrapperMainInner } from './Page';
 export { SocialBoxes } from './SocialBoxes';
 export { Spacer, StyledSpacer } from './Spacer';
-export { StyledTitle, StyledPageTitle, StyledText } from './Text';
+export { StyledTitle, StyledPageTitle, StyledLinkTitle, StyledText } from './Text';
 export { TopBar } from './TopBar';
 export { Value } from './Value';

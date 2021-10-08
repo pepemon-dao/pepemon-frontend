@@ -1,8 +1,7 @@
 import React, { useState, Suspense, lazy } from 'react';
 import { Link, useParams, Redirect } from "react-router-dom";
 import { StoreCardsBody, StoreBoosterpacksBody, StyledStoreWrapper, StyledStoreHeader } from './components';
-import { StyledPageWrapperMain, StyledPageWrapperMainInner, StyledTitle, StyledPageTitle, Loading } from '../../components';
-import { theme } from '../../theme';
+import { StyledPageWrapperMain, StyledPageWrapperMainInner, StyledLinkTitle, StyledPageTitle, Loading } from '../../components';
 import { pokeCards, pokePacks } from '../../constants';
 const StoreCardsAside = lazy(() => import('./components').then((module) => ({
 	default: module.StoreCardsAside,
@@ -70,12 +69,12 @@ const Store: React.FC<any> = () => {
 										<StyledStoreWrapper width="100%">
 											<StyledStoreHeader>
 												<div style={{display: 'flex'}}>
-													<StyledTitle as="h2" weight={routerParams.storeState === "cards" ? 900 : 400} color={theme.color.white} size="1.2rem" font={theme.font.neometric}>
+													<StyledLinkTitle isInactive={routerParams.storeState !== "cards"}>
 														<Link to={`/store/cards`}>Cards</Link>
-													</StyledTitle>
-													<StyledTitle as="h2" weight={routerParams.storeState === "boosterpacks" ? 900 : 400} color={theme.color.white} size="1.2rem" font={theme.font.neometric}>
+													</StyledLinkTitle>
+													<StyledLinkTitle isInactive={routerParams.storeState !== "boosterpacks"}>
 														<Link to={`/store/boosterpacks`}>Boosterpacks</Link>
-													</StyledTitle>
+													</StyledLinkTitle>
 												</div>
 											</StyledStoreHeader>
 											{ routerParams.storeState === "cards" ?

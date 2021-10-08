@@ -77,5 +77,7 @@ export { default as pepemandercard } from "./pepemandercard.png";
 export { default as pokeball } from "./pokeball-temp.png";
 export { default as subscribetoclaim } from "./subscribetoclaim.png";
 export { default as unsubscribe } from "./unsubscribe.png";
+export { default as up_down_arrows_light } from "./up_down_arrows_light.png";
+export { default as up_down_arrows_dark } from "./up_down_arrows_dark.png";
 export { default as uparrow } from "./uparrow.png";
 export { default as cross } from "./cross.svg";

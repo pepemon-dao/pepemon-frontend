@@ -12,7 +12,7 @@ const StoreCardsAside: React.FC<any> = ({setSelectedCard, selectedCard}) => {
 		<StyledStoreWrapper>
 			<StyledStoreHeader>
 				<div style={{display: 'flex', justifyContent: 'space-between', width: '100%'}}>
-					<StyledTitle as="h2" color={theme.color.white} font={theme.font.neometric} size="1.2rem">
+					<StyledTitle as="h2" color={theme.color.white} font={theme.font.neometric} weight={900} size="1.2rem">
 						Selected Card
 					</StyledTitle>
 					<ActionClose onClick={() => setSelectedCard("")}/>

@@ -71,7 +71,7 @@ interface StyledProps {
 
 const StyledMenuContainer = styled.div`
     position: relative;
-    z-index: 10;
+    z-index: 2;
 `
 
 const StyledMenuTrigger = styled.button<StyledProps>`

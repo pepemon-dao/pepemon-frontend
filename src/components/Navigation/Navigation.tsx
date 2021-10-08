@@ -66,10 +66,12 @@ const StyledMenuOuterWrapper = styled.div`
 		position: fixed;
 		left: 0;
 		top: 0;
+		z-index: 99;
 	}
 
 	&:hover {
 		max-width: unset;
+		box-shadow: 0 4px 15px 10px rgba(121,121,121,0.5);
 	}
 
 	&:hover span {
@@ -86,8 +88,9 @@ const StyledMenuList = styled.ul`
 	align-items: center;
 	display: flex;
 	flex-direction: column;
-	padding-left: 0;
 	list-style-type: none;
+	padding-left: 32px;
+	width: 100%;
 `
 
 const StyledMenuListItem = styled.li`
@@ -117,25 +120,22 @@ const StyledLink = styled(Link)<{isActive?: boolean}>`
 `
 
 const StyledLogoLink = styled<any>(StyledLink)`
+	margin-left: ${(theme.sideBar.width - 80) / 2}px;
+	margin-right: ${(theme.sideBar.width - 80) / 2}px;
+
 	img {
 		width: 80px;
-		margin-left: ${20}px;
-		margin-right: ${20}px;
 	}
 
 	span {
 		font-size: 1.6rem;
 		font-weight: bold;
-		margin-left: ${-20}px;
 	}
 `
 
 const StyledLinkIcon = styled.img`
-	height: auto;
-	height: ${theme.sideBar.width / 4}px;
 	width: ${theme.sideBar.width / 4}px;
-	margin-left: auto;
-	margin-right: auto;
+	height: ${theme.sideBar.width / 4}px;
 	object-fit: contain;
 `
 

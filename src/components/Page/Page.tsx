@@ -31,11 +31,11 @@ export const StyledPageWrapperMain = styled.main`
 	background-repeat: no-repeat;
 	background-size: cover;
 	box-shadow: inset 0 0 0 2000px ${props => props.theme.color.buttonSecondaryDisabled};
-	margin-left: ${120}px;
+	margin-left: ${theme.sideBar.width}px;
 	padding-left: 2em;
 	padding-right: 2em;
 	min-height: 100vh;
-	width: calc(100vw - ${120}px);
+	width: calc(100vw - ${theme.sideBar.width}px);
 `
 
 export const StyledPageWrapperMainInner = styled.div`

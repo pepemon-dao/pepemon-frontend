@@ -1,7 +1,7 @@
-import "./TopBar.css";
 import React, { useCallback } from "react";
 import styled from "styled-components";
 import { useWeb3Modal, usePepemon, useTokenBalance } from "../../hooks";
+import { up_down_arrows_light, up_down_arrows_dark } from "../../assets";
 import { getPpblzContract, getPpdexContract } from "../../pepemon/utils";
 import { getBalanceNumber, formatAddress } from "../../utils";
 import { Button, StyledText } from "../../components";
@@ -32,8 +32,9 @@ const TopBar: React.FC<props> = ({ ethChainId, setEthChainId, staking }) => {
 			<StyledTopBarInner>
 				{ account &&
 					<StyledTopBarInfo>
-						<StyledTextInfo as="p" font={theme.font.spaceMace} color={theme.color.purple[800]}>
-						Ether
+						<StyledTextInfo as="p" font={theme.font.spaceMace} color={theme.color.purple[800]} style={{ borderRight: "1px solid currentColor" }}>
+							Ether
+							<img alt="change network" src={up_down_arrows_dark} style={{ width: ".5em", marginLeft: ".8em" }}/>
 						</StyledTextInfo>
 						{ppblzBalance && (
 							<StyledTextInfo as="p" font={theme.font.spaceMace} color={theme.color.purple[800]}>
@@ -76,8 +77,7 @@ const StyledTopBarInfo = styled.div`
 `
 
 const StyledTextInfo = styled(StyledText)`
-	padding-left: 1em;
-	padding-right: 1em;
+	padding: .4em 1em;
 `
 
 const GreenButton = styled(Button)`
