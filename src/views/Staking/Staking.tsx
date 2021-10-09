@@ -485,7 +485,7 @@ const Stake: React.FC<any> = ({ appChainId: chainId, setChainId }) => {
 							<StakeGridAreaHeaderTitle>
 								<img loading="lazy" src={pokeball} alt="Pokeball"/>
 								<Spacer size="sm"/>
-								<Title as="h2" size={1.125} color={theme.color.white} font={theme.font.neometric}>Stake PPBLZ</Title>
+								<Title as="h2" size={1.125} color={theme.color.white} font={theme.font.neometric} weight={900}>Stake PPBLZ</Title>
 							</StakeGridAreaHeaderTitle>
 							<StakeGridAreaHeaderMeta>
 								<span>{parseFloat(ppdexBalance.toString()).toFixed(2)}% APY</span>
@@ -596,7 +596,7 @@ const Stake: React.FC<any> = ({ appChainId: chainId, setChainId }) => {
 							<StakeGridAreaHeaderTitle>
 								<img loading="lazy" src={pokeball} alt="Pokeball"/>
 								<Spacer size="sm"/>
-								<Title as="h2" size={1.125} color={theme.color.white} font={theme.font.neometric}>Stake PPBLZ-ETH LP</Title>
+								<Title as="h2" size={1.125} color={theme.color.white} font={theme.font.neometric} weight={900}>Stake PPBLZ-ETH LP</Title>
 							</StakeGridAreaHeaderTitle>
 							<StakeGridAreaHeaderMeta>
 								<span className="StakeGridAreaHeader-number">87% APY</span>
@@ -645,7 +645,7 @@ const Stake: React.FC<any> = ({ appChainId: chainId, setChainId }) => {
 							<StakeGridAreaHeaderTitle>
 								<img loading="lazy" src={pokeball} alt="Pokeball"/>
 								<Spacer size="sm"/>
-								<Title as="h2" size={1.125} color={theme.color.white} font={theme.font.neometric}>PPDEX Earned</Title>
+								<Title as="h2" size={1.125} color={theme.color.white} font={theme.font.neometric} weight={900}>PPDEX Earned</Title>
 							</StakeGridAreaHeaderTitle>
 						</StakeGridAreaHeader>
 						<StakeGridAreaBody>

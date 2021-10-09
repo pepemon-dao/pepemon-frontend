@@ -21,7 +21,7 @@ const Accordion: React.FC<AccordionProps> = ({ heading, state }) => {
 			<AccordionHeader onClick={toggle} isOpen={isOpen}>
 				<AccordionHeaderTitle>
 					<img loading="lazy" src={pokeball} alt="Pokeball" style={{ width: "40px", height: "40px", marginRight: "1em" }}/>
-					<Title as="h2" color={isOpen ? theme.color.green[200] : theme.color.white} font={theme.font.neometric}>{heading}</Title>
+					<Title as="h2" color={isOpen ? theme.color.green[200] : theme.color.white} weight={900} font={theme.font.neometric}>{heading}</Title>
 				</AccordionHeaderTitle>
 				<AccordionHeaderButton onClick={toggle}>
 						<span>Show {isOpen ? "less" : "more"}</span>
