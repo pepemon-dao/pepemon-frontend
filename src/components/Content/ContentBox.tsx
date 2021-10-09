@@ -14,8 +14,10 @@ const ContentBox = styled.div<{bgColor?: string, shadow?: boolean}>`
 	`}
 `
 
-export const ContentBoxNumber = styled.h3`
+export const ContentBoxNumber = styled.span`
 	color: ${props => props.theme.color.white};
+	font-size: 1.125rem;
+	font-weight: 700;
 	left: 50%;
 	margin-bottom: -1em;
 	margin-top: 0;
