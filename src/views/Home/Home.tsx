@@ -1,7 +1,6 @@
 import styled from "styled-components";
-import { Link } from "react-router-dom";
 import { Button, ContentBox, ContentBoxNumber, ContentBoxGrid, ContentCentered, ContentColumn, ContentColumns, Footer,
-	Spacer, Title, Text, SocialBoxes, Newsletter, Value } from "../../components";
+	Spacer, ButtonLink, Title, Text, SocialBoxes, Newsletter, Value } from "../../components";
 import { theme } from "../../theme";
 import "./Home.css";
 import { dummyGraph, group, cover, coverblack, fudizardPng, pepemander, logoexpand, bluecard, pepechucard, witchenerycard, pepechurcard, downgreenarrow } from "../../assets";
@@ -22,44 +21,46 @@ const Home: React.FC<any> = ({ appChainId: chainId, setChainId }) => {
 					<Text as="p" font={theme.font.inter} size={1.375}>
 						Pepemon is a digital collectible card game on blockchain owned by players. Powered by DeFi and NFTs as in-game assets.
 					</Text>
+					<Spacer size="lg"/>
+					<Spacer size="lg"/>
+					<ContentColumns style={{width: "250%"}}>
+						<ContentColumn width="calc(1/3 * 100%)" space="1.25em">
+							<ContentBox shadow>
+								<ContentBoxNumber><span>1</span></ContentBoxNumber>
+								<Text as="p" align="center">
+									Become a true Pepetrainer by getting $PPBLZ
+								</Text>
+								<Spacer size="md"/>
+								<ButtonLink to="/store">Become a pepetrainer</ButtonLink>
+							</ContentBox>
+						</ContentColumn>
+						<ContentColumn width="calc(1/3 * 100%)" space="1.25em"  style={{transform: "translateY(30%)"}}>
+							<ContentBox shadow>
+								<ContentBoxNumber><span>2</span></ContentBoxNumber>
+								<Text as="p" align="center">
+									Stake your $PPBLZ with
+								</Text>
+								<Text as="p" size={2} font={theme.font.neometric} weight={900} align="center">
+									100% APY
+								</Text>
+								<Spacer size="md"/>
+								<ButtonLink light to="/staking">Sart staking</ButtonLink>
+							</ContentBox>
+						</ContentColumn>
+						<ContentColumn width="calc(1/3 * 100%)" space="1.25em"  style={{transform: "translateY(60%)"}}>
+							<ContentBox shadow>
+								<ContentBoxNumber><span>3</span></ContentBoxNumber>
+								<Text as="p" align="center">
+									Buy or claim your $PPDEX and get booster packs right now!
+								</Text>
+								<Spacer size="md"/>
+								<ButtonLink light to="/store/boosterpacks">Buy your boosterpack</ButtonLink>
+							</ContentBox>
+						</ContentColumn>
+					</ContentColumns>
 				</ContentColumn>
 				<ContentColumn width="60%">
 					<img loading="lazy" src={group} alt="Pepetrainers" style={{maxWidth: "120%", width: "750px"}}/>
-				</ContentColumn>
-			</ContentColumns>
-			<ContentColumns>
-				<ContentColumn width="calc(1/3 * 100%)" space="1.25em">
-					<ContentBox>
-						<ContentBoxNumber><span>1</span></ContentBoxNumber>
-						<Text as="p" align="center">
-							Become a true Pepetrainer by getting $PPBLZ
-						</Text>
-						<Spacer size="md"/>
-						<StyledLink to="/store">Become a pepetrainer</StyledLink>
-					</ContentBox>
-				</ContentColumn>
-				<ContentColumn width="calc(1/3 * 100%)" space="1.25em">
-					<ContentBox>
-						<ContentBoxNumber><span>2</span></ContentBoxNumber>
-						<Text as="p" align="center">
-							Stake your $PPBLZ with
-						</Text>
-						<Text as="p" size={2} font={theme.font.neometric} weight={900} align="center">
-							100% APY
-						</Text>
-						<Spacer size="md"/>
-						<StyledLink light to="/staking">Sart staking</StyledLink>
-					</ContentBox>
-				</ContentColumn>
-				<ContentColumn width="calc(1/3 * 100%)" space="1.25em">
-					<ContentBox>
-						<ContentBoxNumber><span>3</span></ContentBoxNumber>
-						<Text as="p" align="center">
-							Buy or claim your $PPDEX and get booster packs right now!
-						</Text>
-						<Spacer size="md"/>
-						<StyledLink light to="/store/boosterpacks">Buy your boosterpack</StyledLink>
-					</ContentBox>
 				</ContentColumn>
 			</ContentColumns>
 			<ContentColumns style={{marginTop: "23em", marginBottom: "7.5em"}}>
@@ -138,8 +139,8 @@ const Home: React.FC<any> = ({ appChainId: chainId, setChainId }) => {
 					</ContentBox>
 				</ContentBoxGrid>
 
-				<ContentColumns style={{marginTop: "23em", marginBottom: "7.5em"}}>
-					<ContentColumn width="40%" style={{paddingTop: "3.75em"}}>
+				<ContentColumns style={{marginTop: "10em", marginBottom: "7.5em"}}>
+					<ContentColumn width="40%" style={{paddingTop: "7em"}}>
 						<Title as="h2" font={theme.font.neometric} size={3} weight={900} lineHeight={1.04}>Get yours before it too late!</Title>
 						<Spacer size="md"/>
 						<ContentColumns justify="space-between">
@@ -259,29 +260,6 @@ const StyledSection = styled.section<{bgImage?: string, bgColor?: string}>`
 	background-position-y: 0;
 	padding-left: 2em;
 	padding-right: 2em;
-`
-
-const StyledLink = styled(Link)<{light?: boolean}>`
-	background-color: ${props => props.light && props.theme.color.white};
-	background-image: ${props => !props.light && `linear-gradient(to bottom, #aa6cd6 -100%, ${props.theme.color.purple[600]})`};
-	border-radius: 8px;
-	border: ${props => props.light && `1px solid ${props.theme.color.purple[600]}`};
-	box-shadow: ${props => !props.light && "0 4px 10px 0 rgba(121, 121, 121, 0.5)"};
-	color: ${props => props.light ? props.theme.color.purple[600] : props.theme.color.white};
-	font-family: ${props => props.theme.font.spaceMace};
-	padding: 12px 24px;
-	text-align: center;
-	text-decoration: none;
-	text-transform: uppercase;
-	transition: .2s all ease-in;
-
-	&:hover {
-		background-image: ${props => props.light ? `linear-gradient(to bottom, #aa6cd6 -100%, ${props.theme.color.purple[600]})` : "unset"};
-		background-color: ${props => !props.light && props.theme.color.white};
-		border: ${props => !props.light && `1px solid ${props.theme.color.purple[600]}`};
-		color: ${props => props.light ? props.theme.color.white : props.theme.color.purple[600]};
-		box-shadow: 0 4px 10px 0 rgba(121, 121, 121, 0.5);
-	}
 `
 
 export default Home;
