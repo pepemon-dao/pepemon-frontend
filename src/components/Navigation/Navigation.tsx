@@ -41,13 +41,13 @@ const Navigation = () => {
 						</StyledLink>
 					</StyledMenuListItem>
 					<StyledMenuListItem>
-						<StyledLink isActive={ pathname === "/" && true } to="/">
+						<StyledLink soon isActive={false} to="/">
 							<StyledLinkIcon loading="lazy" src={ homeactive } alt="logo" />
 							<span>My Collection</span>
 						</StyledLink>
 					</StyledMenuListItem>
 					<StyledMenuListItem>
-						<StyledLink isActive={ pathname === "/" && true } to="/">
+						<StyledLink soon isActive={false} to="/">
 							<StyledLinkIcon loading="lazy" src={ homeactive } alt="logo" />
 							<span>Events</span>
 						</StyledLink>
@@ -97,17 +97,21 @@ const StyledMenuListItem = styled.li`
 	width: 100%;
 `
 
-const StyledLink = styled(Link)<{isActive?: boolean}>`
+const StyledLink = styled(Link)<{isActive?: boolean, soon?: boolean}>`
 	&{
 		align-items: center;
-		color: ${theme.color.layoutPrimary};
+		color: ${props => props.isActive ? theme.color.layoutPrimary : theme.color.layoutOverlay};
 		display: flex;
 		font-family: ${theme.font.spaceMace};
 		justify-content: flex-start;
 		margin-bottom: 1.6em;
 		margin-top: 1.6em;
-		opacity: ${props => props.isActive ? 1 : 0.4};
 		text-decoration: none;
+		pointer-events: ${props => props.soon && "none"};
+	}
+
+	img {
+		opacity: ${props => props.isActive ? 1 : 0.6};
 	}
 
 	span {
@@ -116,6 +120,22 @@ const StyledLink = styled(Link)<{isActive?: boolean}>`
 		font-size: 1.25rem;
 		margin-left: 1em;
 		padding-right: 1.9em;
+		position: relative;
+
+		${({soon}) => soon && `
+			&::after {
+				background-image: linear-gradient(to bottom, #aa6cd6 -100%, #713aac);
+				border-radius: 8px;
+				padding: 3px 5px;
+				color: ${theme.color.white};
+				content: "soon";
+				font-family: "Inter";
+				font-size: .9rem;
+				opacity: 2;
+				position: absolute;
+				right: 1.9em;
+			}
+		`}
 	}
 `
 
