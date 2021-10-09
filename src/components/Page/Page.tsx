@@ -30,7 +30,6 @@ export const StyledPageWrapperMain = styled.main`
 	background-image: url(${darktealTiles});
 	background-repeat: no-repeat;
 	background-size: cover;
-	box-shadow: inset 0 0 0 2000px ${props => props.theme.color.buttonSecondaryDisabled};
 	margin-left: ${theme.sideBar.width}px;
 	padding-left: 2em;
 	padding-right: 2em;

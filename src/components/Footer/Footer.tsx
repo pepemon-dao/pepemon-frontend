@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { footercover, logoexpand } from "../../assets";
 import { theme } from "../../theme";
-import { StyledTitle } from "../../components";
+import { Title } from "../../components";
 
 const Footer = () => {
 	return (
@@ -14,7 +14,7 @@ const Footer = () => {
 						<img loading="lazy" src={logoexpand} alt="pepemon logo" style={{maxWidth: "10em"}}/>
 					</div>
 					<div>
-						<StyledTitle as="h2" size="0.8rem" weight={400} color={theme.color.white}>PEPEMON</StyledTitle>
+						<Title as="h2" size={.8} weight={400} color={theme.color.white}>PEPEMON</Title>
 						<StyledList>
 							<li><StyledLink href="https://example.com">About</StyledLink></li>
 							<li><StyledLink href="https://example.com">Whitepaper</StyledLink></li>
@@ -22,7 +22,7 @@ const Footer = () => {
 						</StyledList>
 					</div>
 					<div>
-						<StyledTitle as="h2" size="0.8rem" weight={400} color={theme.color.white}>TOKENS</StyledTitle>
+						<Title as="h2" size={.8} weight={400} color={theme.color.white}>TOKENS</Title>
 						<StyledList>
 							<li><StyledLink rel="noopener noreferrer" target="_blank" href="https://etherscan.io/token/0x4d2ee5dae46c86da2ff521f7657dad98834f97b8">PPBLZ Contract</StyledLink></li>
 							<li><StyledLink rel="noopener noreferrer" target="_blank" href="https://etherscan.io/token/0xf1f508c7c9f0d1b15a76fba564eef2d956220cf7">PPDEX Contract</StyledLink></li>
@@ -32,7 +32,7 @@ const Footer = () => {
 					</div>
 
 					<div>
-						<StyledTitle as="h2" size="0.8rem" weight={400} color={theme.color.white}>SOCIALS</StyledTitle>
+						<Title as="h2" size={.8} weight={400} color={theme.color.white}>SOCIALS</Title>
 						<StyledList>
 							<li><StyledLink rel="noopener noreferrer" target="_blank" href="https://twitter.com/pepemonfinance">Twitter</StyledLink></li>
 							<li><StyledLink rel="noopener noreferrer" target="_blank" href="https://t.me/pepemonfinance">Telegram</StyledLink></li>

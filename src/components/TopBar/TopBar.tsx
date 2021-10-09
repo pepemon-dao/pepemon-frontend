@@ -4,7 +4,7 @@ import { useWeb3Modal, usePepemon, useTokenBalance } from "../../hooks";
 import { up_down_arrows_dark } from "../../assets";
 import { getPpblzContract, getPpdexContract } from "../../pepemon/utils";
 import { getBalanceNumber, formatAddress } from "../../utils";
-import { Button, StyledText } from "../../components";
+import { Button, Text } from "../../components";
 import { theme } from "../../theme";
 
 type props = {
@@ -32,24 +32,24 @@ const TopBar: React.FC<props> = ({ ethChainId, setEthChainId, staking }) => {
 			<StyledTopBarInner>
 				{ account &&
 					<StyledTopBarInfo>
-						<StyledTextInfo as="p" font={theme.font.spaceMace} color={theme.color.purple[800]} style={{ borderRight: "1px solid currentColor" }}>
+						<TextInfo as="p" font={theme.font.spaceMace} color={theme.color.purple[800]} style={{ borderRight: "1px solid currentColor" }}>
 							Ether
 							<img alt="change network" src={up_down_arrows_dark} style={{ width: ".5em", marginLeft: ".8em" }}/>
-						</StyledTextInfo>
+						</TextInfo>
 						{ppblzBalance && (
-							<StyledTextInfo as="p" font={theme.font.spaceMace} color={theme.color.purple[800]}>
+							<TextInfo as="p" font={theme.font.spaceMace} color={theme.color.purple[800]}>
 							{getBalanceNumber(ppblzBalance).toFixed(2)}$PPBLZ
-							</StyledTextInfo>
+							</TextInfo>
 						)}
 						{ppblzBalance && (
-							<StyledTextInfo as="p" font={theme.font.spaceMace} color={theme.color.purple[800]}>
+							<TextInfo as="p" font={theme.font.spaceMace} color={theme.color.purple[800]}>
 							{getBalanceNumber(ppdexBalance).toFixed(2)}$PPDEX
-							</StyledTextInfo>
+							</TextInfo>
 						)}
-						<StyledTextInfo as="p" font={theme.font.spaceMace} color={theme.color.purple[800]}>3 unique cards</StyledTextInfo>
+						<TextInfo as="p" font={theme.font.spaceMace} color={theme.color.purple[800]}>3 unique cards</TextInfo>
 					</StyledTopBarInfo>
 				}
-				<GreenButton onClick={handleUnlockClick}>{!account ? 'Connect wallet' : formatAddress(account)}</GreenButton>
+				<Button styling="green" {...(!account && {onClick: handleUnlockClick} )}>{!account ? 'Connect wallet' : formatAddress(account)}</Button>
 			</StyledTopBarInner>
 		</StyledTopBar>
 	);
@@ -76,21 +76,8 @@ const StyledTopBarInfo = styled.div`
 	display: flex;
 `
 
-const StyledTextInfo = styled(StyledText)`
+const TextInfo = styled(Text)`
 	padding: .4em 1em;
-`
-
-const GreenButton = styled(Button)`
-	color: ${theme.color.purple[800]};
-	background-color: transparent;
-	background-image: linear-gradient(to bottom, ${theme.color.green[100]}, ${theme.color.green[200]});
-	border: none;
-	text-transform: uppercase;
-
-	&:hover {
-		background-image: linear-gradient(to bottom, ${theme.color.purple[600]}, ${theme.color.purple[800]});
-		color: ${theme.color.white};
-	}
 `
 
 /*...(!staking

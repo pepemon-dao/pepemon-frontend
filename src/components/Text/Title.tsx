@@ -1,28 +1,30 @@
 import styled from 'styled-components';
 import { theme } from '../../theme';
 
-interface StyledTitleProps {
+interface TitleProps {
 	as: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
 	align?: string;
-	isInactive?: boolean;
-	size?: string;
 	font?: string;
+	isInactive?: boolean;
+	lineHeight?: number;
+	size?: number;
 	weight?: number;
 }
 
-const StyledTitle = styled.div<StyledTitleProps>`
+const Title = styled.div<TitleProps>`
 	&{
 		color: ${props => props.color ? props.color : props.theme.color.black};
 		font-family: ${props => props.font ? props.font : props.theme.font.spaceMace};
-		font-size: ${props => props.size && props.size};
+		font-size: ${props => props.size && props.size}rem;
 		font-weight: ${props => props.weight ? props.weight : 500};
 		hyphens: none;
+		line-height: ${props => props.lineHeight && props.lineHeight};
 		margin: 0;
 		text-align: ${props => props.align && props.align};
 	}
 `
 
-export const StyledPageTitle = styled(StyledTitle)`
+export const StyledPageTitle = styled(Title)`
 	font-size: 2.5rem;
 	margin-bottom: .5em;
 `
@@ -66,4 +68,4 @@ export const StyledLinkTitle = styled.h2<{isInactive?: boolean}>`
 	`)}
 `
 
-export default StyledTitle;
+export default Title;

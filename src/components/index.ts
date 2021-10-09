@@ -1,6 +1,6 @@
 export { Accordion, AccordionGroup } from './Accordion';
 export { Body } from './Body';
-export { Button, StyledButton, LinkButton } from './Button';
+export { Button } from './Button';
 export { Card } from './Card';
 export { ContentBox, ContentBoxNumber, ContentBoxGrid, ContentCentered, ContentColumn, ContentColumns } from './Content';
 export { DropDownMenu } from './DropDownMenu';
@@ -20,6 +20,6 @@ export { Newsletter } from './Newsletter';
 export { Page, StyledPageWrapper, StyledPageWrapperMain, StyledPageWrapperMainInner } from './Page';
 export { SocialBoxes } from './SocialBoxes';
 export { Spacer, StyledSpacer } from './Spacer';
-export { StyledTitle, StyledPageTitle, StyledLinkTitle, StyledText } from './Text';
+export { Title, StyledPageTitle, StyledLinkTitle, Text } from './Text';
 export { TopBar } from './TopBar';
 export { Value } from './Value';
