@@ -57,7 +57,7 @@ const Store: React.FC<any> = () => {
 					<Redirect to={`/store/cards`}/> // default route
 					:
 					<>
-						<StyledPageTitle as="h1">Staking</StyledPageTitle>
+						<StyledPageTitle as="h1">Store</StyledPageTitle>
 							{account ? (
 								<>
 									{/*isOnSupportedChain() && (chainId === providerChainId) &&

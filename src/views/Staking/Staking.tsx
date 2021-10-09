@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import styled from "styled-components";
 import { Popover } from "reactstrap";
-import { ContentCentered, StyledPageWrapperMain, StyledPageWrapperMainInner, Button, LinkButton, StyledText, StyledTitle, StyledPageTitle, IbuttonPopover, Spacer } from "../../components";
+import { ContentCentered, StyledPageWrapperMain, StyledPageWrapperMainInner, Button, Text, Title, StyledPageTitle, IbuttonPopover, Spacer } from "../../components";
 import { usePepemon, useWeb3Modal } from "../../hooks";
 import { correctChainIsLoaded } from "../../utils";
 import { theme } from "../../theme";
@@ -485,7 +485,7 @@ const Stake: React.FC<any> = ({ appChainId: chainId, setChainId }) => {
 							<StakeGridAreaHeaderTitle>
 								<img loading="lazy" src={pokeball} alt="Pokeball"/>
 								<Spacer size="sm"/>
-								<StyledTitle as="h2" size="1.125rem" color={theme.color.white} font={theme.font.neometric}>Stake PPBLZ</StyledTitle>
+								<Title as="h2" size={1.125} color={theme.color.white} font={theme.font.neometric}>Stake PPBLZ</Title>
 							</StakeGridAreaHeaderTitle>
 							<StakeGridAreaHeaderMeta>
 								<span>{parseFloat(ppdexBalance.toString()).toFixed(2)}% APY</span>
@@ -498,19 +498,19 @@ const Stake: React.FC<any> = ({ appChainId: chainId, setChainId }) => {
 						<StakeGridAreaBody>
 							<DataColumns>
 								<DataColumn>
-									<StyledText as="p" font={theme.font.inter}>PPBLZ balance</StyledText>
+									<Text as="p" font={theme.font.inter}>PPBLZ balance</Text>
 									<Spacer size="sm"/>
-									<StyledText as="p" font={theme.font.neometric} weight={900} size="2rem">{parseFloat(ppblzBalance.toString()).toFixed(2)}</StyledText>
+									<Text as="p" font={theme.font.neometric} weight={900} size={2}>{parseFloat(ppblzBalance.toString()).toFixed(2)}</Text>
 								</DataColumn>
 								<DataColumn>
-									<StyledText as="p" font={theme.font.inter}>PPBLZ staked</StyledText>
+									<Text as="p" font={theme.font.inter}>PPBLZ staked</Text>
 									<Spacer size="sm"/>
-									<StyledText as="p" font={theme.font.neometric} weight={900} size="2rem">{parseFloat(ppblzStakedAmount.toString()).toFixed(2)}</StyledText>
+									<Text as="p" font={theme.font.neometric} weight={900} size={2}>{parseFloat(ppblzStakedAmount.toString()).toFixed(2)}</Text>
 								</DataColumn>
 							</DataColumns>
 							<div style={{ marginTop: "auto" }}>
 								{(!isApprovedPpblz && !isApprovingPpblz) &&
-									<StyledButton onClick={approvePpblz} borderless width="100%">Enable</StyledButton>
+									<Button styling="purple" onClick={approvePpblz} width="100%">Enable</Button>
 								}
 
 								{isApprovedPpblz && !ppblzStakeAdd && !ppblzStakeSub ? (
@@ -525,22 +525,23 @@ const Stake: React.FC<any> = ({ appChainId: chainId, setChainId }) => {
 											<Button onClick={() => {
 												setPpblzStakeSub(true);
 												setPpblzStakeAdd(false);
-											}} borderless width="20%">-</Button>
+											}} width="20%">-</Button>
 										) : (
-											<Button disabled bg={theme.color.purple[400]} color={theme.color.purple[500]} width="20%" borderless>-</Button>
+											<Button disabled width="20%">-</Button>
 										)}
+										<Spacer size="sm"/>
 										{ppblzBalance !== 0 ? (
-											<StyledButton onClick={() => {
+											<Button styling="purple" onClick={() => {
 												setPpblzStakeSub(false);
 												setPpblzStakeAdd(true);
-											}} borderless width="80%">+</StyledButton>
+											}} width="80%">+</Button>
 										) : (
-											<Button disabled bg={theme.color.purple[400]} color={theme.color.purple[500]} width="80%" borderless>+</Button>
+											<Button disabled width="80%">+</Button>
 										)}
 									</ContentCentered>
 								) : null}
 								{isApprovingPpblz && !ppblzStakeAdd && !ppblzStakeSub ? (
-									<StyledButton borderless width="100%">ENABLING...</StyledButton>
+									<Button styling="purple" width="100%">ENABLING...</Button>
 								) : null}
 
 								{isApprovedPpblz &&
@@ -558,8 +559,8 @@ const Stake: React.FC<any> = ({ appChainId: chainId, setChainId }) => {
 											min="0.00"
 											step="1"
 											autoFocus={true} />
-										<LinkButton onClick={setMaxPpblz}>Max</LinkButton>
-										<StyledButton onClick={stakePpblz} borderless>Stake</StyledButton>
+										<Button styling="link" onClick={setMaxPpblz}>Max</Button>
+										<Button styling="purple" onClick={stakePpblz}>Stake</Button>
 									</ContentCentered>
 								) : null}
 								{isApprovedPpblz &&
@@ -577,15 +578,15 @@ const Stake: React.FC<any> = ({ appChainId: chainId, setChainId }) => {
 											min="0.00"
 											step="1"
 											autoFocus={true} />
-										<LinkButton onClick={setMaxPpblz}>Max</LinkButton>
-										<StyledButton onClick={withdrawPpblz} borderless>Withdraw</StyledButton>
+										<Button styling="link" onClick={setMaxPpblz}>Max</Button>
+										<Button styling="purple" onClick={withdrawPpblz}>Withdraw</Button>
 									</ContentCentered>
 								) : null}
 								{ (isStakingPpblz || isWithdrawingPpblz) &&
-									<StyledButton onClick={approvePpblz} borderless width="100%">
+									<Button styling="purple" onClick={approvePpblz} width="100%" {...(isStakingPpblz && {disabled: true})}>
 										{isStakingPpblz && "Staking"}
 										{isWithdrawingPpblz &&  "Withdrawing"}
-									...</StyledButton>
+									...</Button>
 								}
 							</div>
 						</StakeGridAreaBody>
@@ -595,7 +596,7 @@ const Stake: React.FC<any> = ({ appChainId: chainId, setChainId }) => {
 							<StakeGridAreaHeaderTitle>
 								<img loading="lazy" src={pokeball} alt="Pokeball"/>
 								<Spacer size="sm"/>
-								<StyledTitle as="h2" size="1.125rem" color={theme.color.white} font={theme.font.neometric}>Stake PPBLZ-ETH LP</StyledTitle>
+								<Title as="h2" size={1.125} color={theme.color.white} font={theme.font.neometric}>Stake PPBLZ-ETH LP</Title>
 							</StakeGridAreaHeaderTitle>
 							<StakeGridAreaHeaderMeta>
 								<span className="StakeGridAreaHeader-number">87% APY</span>
@@ -609,19 +610,19 @@ const Stake: React.FC<any> = ({ appChainId: chainId, setChainId }) => {
 						<StakeGridAreaBody>
 							<DataColumns>
 								<DataColumn>
-									<StyledText as="p" font={theme.font.inter}>PPBLZ-ETH balance</StyledText>
+									<Text as="p" font={theme.font.inter}>PPBLZ-ETH balance</Text>
 									<Spacer size="sm"/>
-									<StyledText as="p" font={theme.font.neometric} weight={900} size="2rem">{parseFloat(uniV2PpblzBalance.toString()).toFixed(2)}</StyledText>
+									<Text as="p" font={theme.font.neometric} weight={900} size={2}>{parseFloat(uniV2PpblzBalance.toString()).toFixed(2)}</Text>
 								</DataColumn>
 								<DataColumn>
-									<StyledText as="p" font={theme.font.inter}>PPBLZ-ETH staked</StyledText>
+									<Text as="p" font={theme.font.inter}>PPBLZ-ETH staked</Text>
 									<Spacer size="sm"/>
-									<StyledText as="p" font={theme.font.neometric} weight={900} size="2rem">{parseFloat(uniV2PpblzStakedAmount.toString()).toFixed(2)}</StyledText>
+									<Text as="p" font={theme.font.neometric} weight={900} size={2}>{parseFloat(uniV2PpblzStakedAmount.toString()).toFixed(2)}</Text>
 								</DataColumn>
 							</DataColumns>
 							<div style={{ marginTop: "auto" }}>
 								{(!isApprovedUniV2Ppblz || uniV2PpblAllowance < parseFloat(uniV2PpblzStakeAmount)) &&
-									<StyledButton onClick={approveUniV2Ppblz} borderless width="100%">{!isApprovingUniV2Ppblz ? "Enable" : "Enabling..."}</StyledButton>
+									<Button styling="purple" onClick={approveUniV2Ppblz} width="100%">{!isApprovingUniV2Ppblz ? "Enable" : "Enabling..."}</Button>
 								}
 								{isApprovedUniV2Ppblz &&
 									<ContentCentered direction="row" bgColor={theme.color.white} style={{ borderRadius: "8px", border: `1px solid ${theme.color.purple[700]}`, padding: ".1em .1em .1em 0.75em" }}>
@@ -632,8 +633,8 @@ const Stake: React.FC<any> = ({ appChainId: chainId, setChainId }) => {
 												updateUniV2PpblzStakingInput(event)
 											}
 											min="0.00" autoFocus={true} />
-										<LinkButton onClick={setMaxUniV2Ppblz} >Max</LinkButton>
-										<StyledButton onClick={stakeUniV2Ppblz} borderless>Stake</StyledButton>
+										<Button styling="link" onClick={setMaxUniV2Ppblz} >Max</Button>
+										<Button styling="purple" onClick={stakeUniV2Ppblz}>Stake</Button>
 									</ContentCentered>
 								}
 							</div>
@@ -644,24 +645,24 @@ const Stake: React.FC<any> = ({ appChainId: chainId, setChainId }) => {
 							<StakeGridAreaHeaderTitle>
 								<img loading="lazy" src={pokeball} alt="Pokeball"/>
 								<Spacer size="sm"/>
-								<StyledTitle as="h2" size="1.125rem" color={theme.color.white} font={theme.font.neometric}>PPDEX Earned</StyledTitle>
+								<Title as="h2" size={1.125} color={theme.color.white} font={theme.font.neometric}>PPDEX Earned</Title>
 							</StakeGridAreaHeaderTitle>
 						</StakeGridAreaHeader>
 						<StakeGridAreaBody>
 							<div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-								<StyledText as="p" font={theme.font.neometric} weight={900} size="2rem">
+								<Text as="p" font={theme.font.neometric} weight={900} size={2}>
 									{parseFloat(ppdexBalance.toString()).toFixed(2)} PPDEX
-								</StyledText>
+								</Text>
 
 								<div style={{ display: "flex" }}>
-									<StyledText as="p" font={theme.font.inter}>
+									<Text as="p" font={theme.font.inter}>
 										Total value: $
 										{parseFloat((ppdexRewards * 0.9).toString()).toFixed(4)}
-									</StyledText>
+									</Text>
 									<Spacer size="md"/>
-									<StyledText as="p" font={theme.font.inter} color={theme.color.purple[600]} txtDecoration="underline">
+									<Text as="p" font={theme.font.inter} color={theme.color.purple[600]} underline>
 										{isUpdatingRewards ? "UPDATING..." : "UPDATE"}
-									</StyledText>
+									</Text>
 								</div>
 
 								<Spacer size="md"/>
@@ -670,13 +671,13 @@ const Stake: React.FC<any> = ({ appChainId: chainId, setChainId }) => {
 									{ppblzStakedAmount > 0 ? (
 										<div>
 											{ppdexRewards > 0.001 ? (
-												<Button onClick={claimRewards} bg={theme.color.purple[400]} color={theme.color.purple[500]} width="50%" borderless>{isClaiming ? "CLAIMING..." : "CLAIM"}</Button>
+												<Button onClick={claimRewards} width="50%">{isClaiming ? "CLAIMING..." : "CLAIM"}</Button>
 											) : (
-												<Button disabled bg={theme.color.purple[400]} color={theme.color.purple[500]} width="50%" borderless>CLAIM</Button>
+												<Button disabled width="50%">CLAIM</Button>
 											)}
 										</div>
 									) : (
-										<Button disabled bg={theme.color.purple[400]} color={theme.color.purple[500]} width="50%" borderless>STAKE FIRST</Button>
+										<Button disabled width="50%">STAKE FIRST</Button>
 									)}
 								</>
 							</div>
@@ -755,11 +756,6 @@ const DataColumns = styled.div`
 
 const DataColumn = styled.div`
 	flex: 1 0 auto;
-`
-
-const StyledButton = styled(Button)`
-	background-image: linear-gradient(to bottom, #aa6cd6 -100%, ${props => props.theme.color.purple[600]});
-	box-shadow: 0 4px 10px 0 rgba(121, 121, 121, 0.5);
 `
 
 const StyledInput = styled.input`
