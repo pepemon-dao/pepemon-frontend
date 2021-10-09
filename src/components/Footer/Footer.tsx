@@ -16,30 +16,30 @@ const Footer = () => {
 					<div>
 						<Title as="h2" size={.8} weight={400} color={theme.color.white}>PEPEMON</Title>
 						<StyledList>
-							<li><StyledLink href="https://example.com">About</StyledLink></li>
-							<li><StyledLink href="https://example.com">Whitepaper</StyledLink></li>
-							<li><StyledLink href="https://example.com">Pepemon the game</StyledLink></li>
+							<li><StyledLink href="/about">About</StyledLink></li>
+							<li><StyledLink href="/whitepaper">Whitepaper</StyledLink></li>
+							<li><StyledLink href="/game">Pepemon the game</StyledLink></li>
 						</StyledList>
 					</div>
 					<div>
 						<Title as="h2" size={.8} weight={400} color={theme.color.white}>TOKENS</Title>
 						<StyledList>
-							<li><StyledLink rel="noopener noreferrer" target="_blank" href="https://etherscan.io/token/0x4d2ee5dae46c86da2ff521f7657dad98834f97b8">PPBLZ Contract</StyledLink></li>
-							<li><StyledLink rel="noopener noreferrer" target="_blank" href="https://etherscan.io/token/0xf1f508c7c9f0d1b15a76fba564eef2d956220cf7">PPDEX Contract</StyledLink></li>
-							<li><StyledLink rel="noopener noreferrer" target="_blank" href="https://app.uniswap.org/#/swap?outputCurrency=0x4d2ee5dae46c86da2ff521f7657dad98834f97b8">Buy $PPBLZ</StyledLink></li>
-							<li><StyledLink rel="noopener noreferrer" target="_blank" href="https://app.uniswap.org/#/swap?outputCurrency=0xf1f508c7c9f0d1b15a76fba564eef2d956220cf7">Buy $PPDEX</StyledLink></li>
+							<li><ExternalStyledLink href="https://etherscan.io/token/0x4d2ee5dae46c86da2ff521f7657dad98834f97b8">PPBLZ Contract</ExternalStyledLink></li>
+							<li><ExternalStyledLink href="https://etherscan.io/token/0xf1f508c7c9f0d1b15a76fba564eef2d956220cf7">PPDEX Contract</ExternalStyledLink></li>
+							<li><ExternalStyledLink href="https://app.uniswap.org/#/swap?outputCurrency=0x4d2ee5dae46c86da2ff521f7657dad98834f97b8">Buy $PPBLZ</ExternalStyledLink></li>
+							<li><ExternalStyledLink href="https://app.uniswap.org/#/swap?outputCurrency=0xf1f508c7c9f0d1b15a76fba564eef2d956220cf7">Buy $PPDEX</ExternalStyledLink></li>
 						</StyledList>
 					</div>
 
 					<div>
 						<Title as="h2" size={.8} weight={400} color={theme.color.white}>SOCIALS</Title>
 						<StyledList>
-							<li><StyledLink rel="noopener noreferrer" target="_blank" href="https://twitter.com/pepemonfinance">Twitter</StyledLink></li>
-							<li><StyledLink rel="noopener noreferrer" target="_blank" href="https://t.me/pepemonfinance">Telegram</StyledLink></li>
-							<li><StyledLink rel="noopener noreferrer" target="_blank" href="https://discord.gg/R8sZwMv">Discord</StyledLink></li>
-							<li><StyledLink rel="noopener noreferrer" target="_blank" href="https://github.com/pepem00n">Github</StyledLink></li>
-							<li><StyledLink rel="noopener noreferrer" target="_blank" href="https://medium.com/@pepemonfinance">Medium</StyledLink></li>
-							<li><StyledLink rel="noopener noreferrer" target="_blank" href="https://opensea.io/collection/pepemonfactory">OpenSea</StyledLink></li>
+							<li><ExternalStyledLink href="https://twitter.com/pepemonfinance">Twitter</ExternalStyledLink></li>
+							<li><ExternalStyledLink href="https://t.me/pepemonfinance">Telegram</ExternalStyledLink></li>
+							<li><ExternalStyledLink href="https://discord.gg/R8sZwMv">Discord</ExternalStyledLink></li>
+							<li><ExternalStyledLink href="https://github.com/pepem00n">Github</ExternalStyledLink></li>
+							<li><ExternalStyledLink href="https://medium.com/@pepemonfinance">Medium</ExternalStyledLink></li>
+							<li><ExternalStyledLink href="https://opensea.io/collection/pepemonfactory">OpenSea</ExternalStyledLink></li>
 						</StyledList>
 					</div>
 				</StyledFooterGrid>
@@ -87,7 +87,7 @@ const StyledList = styled.ul`
 	padding-left: 0;
 `
 
-const StyledLink = styled.a`
+const footerLinks = `
 	color: ${theme.color.white};
 	font-size: .875rem;
 	line-height: 1.6;
@@ -97,6 +97,13 @@ const StyledLink = styled.a`
 		text-decoration: underline;
 	}
 `
+
+const StyledLink = styled.a`${footerLinks}`
+
+const ExternalStyledLink = styled.a.attrs({
+	target: "_blank",
+	rel: "noopener noreferrer",
+})`${footerLinks}`;
 
 const StyledFooterLegal = styled.div`
 	color: ${theme.color.white};

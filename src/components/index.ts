@@ -7,7 +7,7 @@ export { DropDownMenu } from './DropDownMenu';
 export { Footer } from './Footer';
 export { Header } from './Header';
 export { IbuttonPopover } from './IbuttonPopover';
-export { Link } from './Link';
+export { ExternalLink } from './Link';
 export { Loading } from './Loading';
 export { Modal } from './Modal';
 export type { ModalProps } from "./Modal";

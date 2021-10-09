@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Button, ContentBox, ContentBoxNumber, ContentBoxGrid, ContentCentered, ContentColumn, ContentColumns, Footer,
+import { Button, ContentBox, ContentBoxNumber, ContentBoxGrid, ContentCentered, ContentColumn, ContentColumns, ExternalLink, Footer,
 	Spacer, ButtonLink, Title, Text, SocialBoxes, Newsletter, Value } from "../../components";
 import { theme } from "../../theme";
 import "./Home.css";
@@ -222,7 +222,7 @@ const Home: React.FC<any> = ({ appChainId: chainId, setChainId }) => {
 					<Text as="p" font={theme.font.spaceMace} underline>Coming soon</Text>
 					<Spacer size="md"/>
 					<Text as="p" font={theme.font.inter}>
-						Duel other trainers on an epic game powered by DeFi and NFT's. Read more about the game mechanics here and let's discuss on the different strategies for the closed Beta launch happening soon for card holders.
+						Duel other trainers on an epic game powered by DeFi and NFT's. Read more about the game mechanics <ExternalLink>here</ExternalLink> and let's discuss on the different strategies for the closed Beta launch happening soon for card holders.
 					</Text>
 				</ContentColumn>
 				<ContentColumn width="45%">
