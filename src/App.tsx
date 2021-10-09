@@ -21,10 +21,10 @@ const App: React.FC = () => {
 	);
 
 	useEffect(() => {
-	// @ts-ignore
+		// @ts-ignore
 		window.ethereum && window.ethereum.on("chainChanged", (chainId: string) => {
 			setProviderChainId(parseInt(chainId));
-			});
+		});
 	}, []);
 
 	const pepemonState = {
@@ -44,9 +44,6 @@ const App: React.FC = () => {
 				<Page>
 					<Suspense fallback={<LoadingPage/>}>
 						<Switch>
-							<Route path="/test" exact>
-								<LoadingPage/>
-							</Route>
 							<Route path="/staking" exact>
 								<Staking {...pepemonState}/>
 							</Route>
@@ -57,7 +54,7 @@ const App: React.FC = () => {
 								<Store {...pepemonState} />
 							</Route>
 							<Route path="/">
-									<Home {...pepemonState}/>
+								<Home {...pepemonState}/>
 							</Route>
 						</Switch>
 					</Suspense>
