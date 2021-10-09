@@ -80,8 +80,4 @@ const TextInfo = styled(Text)`
 	padding: .4em 1em;
 `
 
-/*...(!staking
-? { className: "top-menu-bar" }
-: { className: "top-menu-bar-alt" })*/
-
 export default TopBar;
