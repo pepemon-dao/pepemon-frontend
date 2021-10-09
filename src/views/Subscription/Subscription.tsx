@@ -7,10 +7,10 @@ const Subscription: React.FC<any> = ({ appChainId: chainId, setChainId }) => {
 			<StyledPageWrapperMainInner>
 				<StyledPageTitle as="h1">Subscription</StyledPageTitle>
 				<AccordionGroup>
-					<Accordion heading="Pepemon One Subscription" />
-					<Accordion heading="Pepemon Two Subscription" />
-					<Accordion heading="Pepemon Three Subscription" />
-					<Accordion heading="Pepemon Four Subscription" />
+					<Accordion state="approve" heading="Pepemon One Subscription" />
+					<Accordion state="can_stake" heading="Pepemon Two Subscription" />
+					<Accordion state="active" heading="Pepemon Three Subscription" />
+					<Accordion state="active" heading="Pepemon Four Subscription" />
 				</AccordionGroup>
 			</StyledPageWrapperMainInner>
 		</StyledPageWrapperMain>
