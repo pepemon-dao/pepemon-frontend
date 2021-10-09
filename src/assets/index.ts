@@ -5,20 +5,20 @@ export { default as telegram } from "./telegram.svg";
 export { default as discord } from "./discord.svg";
 
 // cards
-export { default as pastry } from './cards/pastry.28dbecb0.gif';
-export { default as primariny } from './cards/primariny.7d23d991.gif';
+export { default as pastry } from './cards/pastry.gif';
+export { default as primariny } from './cards/primariny.gif';
 export { default as dumpesaur } from './cards/dumpesaur.gif';
-export { default as yugipepe } from './cards/yugipepe.22137425.gif';
-export { default as pepemander } from './cards/pepemander_res.18f06aa0.gif';
+export { default as yugipepe } from './cards/yugipepe.gif';
+export { default as pepemander } from './cards/pepemander_res.gif';
 export { default as fudizard } from './cards/fudizard.gif';
-export { default as witchenry } from './cards/witchenry.0e77510f.gif';
+export { default as witchenry } from './cards/witchenry.gif';
 export { default as cardback } from './cards/cardback_normal.gif';
-export { default as pepesaur } from './cards/pepesaur_res.aad82c9b.gif';
-export { default as cerbery } from './cards/cerbery.02cc13bd.gif';
-export { default as unifairy } from './cards/unifairy.97269183.gif';
-export { default as pepertle } from './cards/pepertle_res.4dcbd334.gif';
+export { default as pepesaur } from './cards/pepesaur_res.gif';
+export { default as cerbery } from './cards/cerbery.gif';
+export { default as unifairy } from './cards/unifairy.gif';
+export { default as pepertle } from './cards/pepertle_res.gif';
 export { default as pemeleon } from './cards/pemeleon.gif';
-export { default as pepechu } from './cards/pepechu_res.e60ae8cf.gif';
+export { default as pepechu } from './cards/pepechu_res.gif';
 
 // boosterpacks
 export { default as boosterpackGen13 } from './boosterpacks/Boosterpack_3_cards_Gen_1.png';
