@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import { ContentBox, ContentBoxNumber, ContentBoxGrid, ContentCentered, ContentColumn, ContentColumns, Footer,
-	Spacer, StyledTitle, StyledText, StyledButton, SocialBoxes, Newsletter, Value } from "../../components";
+import { Button, ContentBox, ContentBoxNumber, ContentBoxGrid, ContentCentered, ContentColumn, ContentColumns, Footer,
+	Spacer, Title, Text, SocialBoxes, Newsletter, Value } from "../../components";
 import { theme } from "../../theme";
 import "./Home.css";
 import { dummyGraph, group, cover, coverblack, fudizardPng, pepemander, logoexpand, bluecard, pepechucard, witchenerycard, pepechurcard, downgreenarrow } from "../../assets";
@@ -18,10 +18,10 @@ const Home: React.FC<any> = ({ appChainId: chainId, setChainId }) => {
 		<StyledSection bgImage={cover} style={{paddingTop: "12.125em"}}>
 			<ContentColumns>
 				<ContentColumn width="40%" style={{paddingTop: "3.75em"}}>
-					<StyledTitle as="h1" font={theme.font.spaceMace} size="4.5rem">Gotta claim ‘em all!</StyledTitle>
-					<StyledText as="p" font={theme.font.inter} size="1.375rem">
+					<Title as="h1" font={theme.font.spaceMace} size={4.5}>Gotta claim ‘em all!</Title>
+					<Text as="p" font={theme.font.inter} size={1.375}>
 						Pepemon is a digital collectible card game on blockchain owned by players. Powered by DeFi and NFTs as in-game assets.
-					</StyledText>
+					</Text>
 				</ContentColumn>
 				<ContentColumn width="60%">
 					<img loading="lazy" src={group} alt="Pepetrainers" style={{maxWidth: "120%", width: "750px"}}/>
@@ -31,9 +31,9 @@ const Home: React.FC<any> = ({ appChainId: chainId, setChainId }) => {
 				<ContentColumn width="calc(1/3 * 100%)" space="1.25em">
 					<ContentBox>
 						<ContentBoxNumber><span>1</span></ContentBoxNumber>
-						<StyledText as="p" align="center" lineHeight="1.5">
+						<Text as="p" align="center">
 							Become a true Pepetrainer by getting $PPBLZ
-						</StyledText>
+						</Text>
 						<Spacer size="md"/>
 						<StyledLink to="/store">Become a pepetrainer</StyledLink>
 					</ContentBox>
@@ -41,12 +41,12 @@ const Home: React.FC<any> = ({ appChainId: chainId, setChainId }) => {
 				<ContentColumn width="calc(1/3 * 100%)" space="1.25em">
 					<ContentBox>
 						<ContentBoxNumber><span>2</span></ContentBoxNumber>
-						<StyledText as="p" align="center" lineHeight="1.5">
+						<Text as="p" align="center">
 							Stake your $PPBLZ with
-						</StyledText>
-						<StyledText as="p" size="2rem" font={theme.font.neometric} weight={900} align="center">
+						</Text>
+						<Text as="p" size={2} font={theme.font.neometric} weight={900} align="center">
 							100% APY
-						</StyledText>
+						</Text>
 						<Spacer size="md"/>
 						<StyledLink light to="/staking">Sart staking</StyledLink>
 					</ContentBox>
@@ -54,9 +54,9 @@ const Home: React.FC<any> = ({ appChainId: chainId, setChainId }) => {
 				<ContentColumn width="calc(1/3 * 100%)" space="1.25em">
 					<ContentBox>
 						<ContentBoxNumber><span>3</span></ContentBoxNumber>
-						<StyledText as="p" align="center" lineHeight="1.5">
+						<Text as="p" align="center">
 							Buy or claim your $PPDEX and get booster packs right now!
-						</StyledText>
+						</Text>
 						<Spacer size="md"/>
 						<StyledLink light to="/store/boosterpacks">Buy your boosterpack</StyledLink>
 					</ContentBox>
@@ -72,99 +72,99 @@ const Home: React.FC<any> = ({ appChainId: chainId, setChainId }) => {
 					</div>
 				</ContentColumn>
 				<ContentColumn width="60%" style={{paddingTop: "3.75em"}}>
-					<StyledTitle as="h2" font={theme.font.neometric} size="3rem">Collect unique Pepemon cards created by real artists</StyledTitle>
+					<Title as="h2" font={theme.font.neometric} size={3} weight={900} lineHeight={1.15}>Collect unique Pepemon cards created by real artists</Title>
 					<Spacer size="md"/>
-					<StyledText as="p" font={theme.font.spaceMace} txtDecoration="underline">Pepemon NFT</StyledText>
+					<Text as="p" font={theme.font.spaceMace} underline>Pepemon NFT</Text>
 					<Spacer size="md"/>
-					<StyledText as="p" font={theme.font.inter} lineHeight="1.5">
+					<Text as="p" font={theme.font.inter}>
 						Use your Pepedex to claim these unique NFTs pepemon cards. All cards created by real artist all over the world.
 						<br/><br/>
 						Once you have claimed these cards, you can become the very best by using your NFTs in a trading card game on blockchain!
 						<br/><br/>
 						"Pepechu, I choose you!"
-					</StyledText>
+					</Text>
 					<Spacer size="md"/>
-					<StyledButton>Claim your card</StyledButton>
+					<Button styling="purple">Claim your card</Button>
 				</ContentColumn>
 			</ContentColumns>
 		</StyledSection>
 
 		<StyledSection bgImage={coverblack}>
 			<ContentCentered style={{paddingTop: "7.5em"}}>
-				<StyledTitle as="h1" font={theme.font.neometric} size="3rem" color={theme.color.white} weight={900} align="center">
+				<Title as="h1" font={theme.font.neometric} size={3} color={theme.color.white} weight={900} align="center" lineHeight={1.04}>
 					Lorem ipsum dolor sit amet,<br /> consectetur elit.
-				</StyledTitle>
+				</Title>
 				<Spacer size="md"/>
-				<StyledText as="p" font={theme.font.spaceMace} color={theme.color.white} align="center" txtDecoration="underline">To the moon</StyledText>
+				<Text as="p" font={theme.font.spaceMace} color={theme.color.white} align="center" underline>To the moon</Text>
 				<Spacer size="md"/>
-				<StyledText as="p" font={theme.font.inter} lineHeight="1.5" color={theme.color.white} align="center">
+				<Text as="p" font={theme.font.inter} color={theme.color.white} align="center">
 				Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
 				nisi ut aliquip ex ea commodo consequat.
-				</StyledText>
+				</Text>
 				<Spacer size="md"/>
 				<ContentBoxGrid gridTemplate='"box1 box1 box2 box2 box3 box3" "box4 box4 box4 box5 box5 box5"'>
 					<ContentBox style={{ gridArea: "box1" }}>
-						<StyledText as="p" align="center" lineHeight="1.5">Total PPBLZ value locked</StyledText>
-						<StyledText as="p" size="2rem" font={theme.font.neometric} weight={900} align="center">
+						<Text as="p" align="center">Total PPBLZ value locked</Text>
+						<Text as="p" size={2} font={theme.font.neometric} weight={900} align="center">
 							<Value value={
 								poolStatistics.ppblzPool && poolStatistics.uniV2Pool
 								? poolStatistics.uniV2Pool.tvl + poolStatistics.ppblzPool.tvl
 								: "Loading..." }/>
-						</StyledText>
+						</Text>
 					</ContentBox>
 					<ContentBox style={{ gridArea: "box2" }}>
-						<StyledText as="p" align="center" lineHeight="1.5">PPDEX Burned</StyledText>
-						<StyledText as="p" size="2rem" font={theme.font.neometric} weight={900} align="center">
+						<Text as="p" align="center">PPDEX Burned</Text>
+						<Text as="p" size={2} font={theme.font.neometric} weight={900} align="center">
 							<Value value={
 								!!pepemon.account ? getBalanceNumber(totalSpendInShop.multipliedBy(0.9))
 								: "Available before VCs can dump" }/>
-						</StyledText>
+						</Text>
 					</ContentBox>
 					<ContentBox style={{ gridArea: "box3" }}>
-						<StyledText as="p" align="center" lineHeight="1.5">Total NFT’s solds</StyledText>
-						<StyledText as="p" size="2rem" font={theme.font.neometric} weight={900} align="center">1029</StyledText>
+						<Text as="p" align="center">Total NFT’s solds</Text>
+						<Text as="p" size={2} font={theme.font.neometric} weight={900} align="center">1029</Text>
 					</ContentBox>
 					<ContentBox style={{ gridArea: "box4" }}>
-						<StyledText as="p" size="2rem" font={theme.font.neometric} weight={900} align="center">100% APY</StyledText>
-						<StyledText as="p" align="center" lineHeight="1.5">
+						<Text as="p" size={2} font={theme.font.neometric} weight={900} align="center">100% APY</Text>
+						<Text as="p" align="center">
 							Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-						</StyledText>
+						</Text>
 					</ContentBox>
 					<ContentBox style={{ gridArea: "box5" }}>
-						<StyledText as="p" size="2rem" font={theme.font.neometric} weight={900} align="center">Staking</StyledText>
-						<StyledText as="p" align="center" lineHeight="1.5">
+						<Text as="p" size={2} font={theme.font.neometric} weight={900} align="center">Staking</Text>
+						<Text as="p" align="center">
 							Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-						</StyledText>
+						</Text>
 					</ContentBox>
 				</ContentBoxGrid>
 
 				<ContentColumns style={{marginTop: "23em", marginBottom: "7.5em"}}>
 					<ContentColumn width="40%" style={{paddingTop: "3.75em"}}>
-						<StyledTitle as="h2" font={theme.font.neometric} size="3rem">Get yours before it too late!</StyledTitle>
+						<Title as="h2" font={theme.font.neometric} size={3} weight={900} lineHeight={1.04}>Get yours before it too late!</Title>
 						<Spacer size="md"/>
 						<ContentColumns justify="space-between">
 							<ContentColumn>
-								<StyledText as="p" font={theme.font.spaceMace} txtDecoration="underline">Golden Fudizard</StyledText>
+								<Text as="p" font={theme.font.spaceMace} underline>Golden Fudizard</Text>
 							</ContentColumn>
 							<ContentColumn>
 								<ContentBoxGrid gridTemplate='"meta1 meta2 meta3"'>
 									<div style={{ gridArea: "meta1" }}>
-										<StyledText as="p" align="center" lineHeight="1.5">total</StyledText>
-										<StyledText as="p" size="2rem" font={theme.font.neometric} weight={900} align="center">27</StyledText>
+										<Text as="p" align="center">total</Text>
+										<Text as="p" size={2} font={theme.font.neometric} weight={900} align="center">27</Text>
 									</div>
 									<div style={{ gridArea: "meta2" }}>
-										<StyledText as="p" align="center" lineHeight="1.5">total</StyledText>
-										<StyledText as="p" size="2rem" font={theme.font.neometric} weight={900} align="center">27</StyledText>
+										<Text as="p" align="center">total</Text>
+										<Text as="p" size={2} font={theme.font.neometric} weight={900} align="center">27</Text>
 									</div>
 									<div style={{ gridArea: "meta3" }}>
-										<StyledText as="p" align="center" lineHeight="1.5">total</StyledText>
-										<StyledText as="p" size="2rem" font={theme.font.neometric} weight={900} align="center">27</StyledText>
+										<Text as="p" align="center">total</Text>
+										<Text as="p" size={2} font={theme.font.neometric} weight={900} align="center">27</Text>
 									</div>
 								</ContentBoxGrid>
 							</ContentColumn>
 						</ContentColumns>
 						<img loading="lazy" src={dummyGraph} alt="graph"/>
-						<StyledButton width="100%">Buy now</StyledButton>
+						<Button styling="purple" width="100%">Buy now</Button>
 					</ContentColumn>
 					<ContentColumn width="60%">
 						<div style={{ position: "relative", height: "100%", width: "100%" }}>
@@ -176,45 +176,53 @@ const Home: React.FC<any> = ({ appChainId: chainId, setChainId }) => {
 				</ContentColumns>
 			</ContentCentered>
 		</StyledSection>
-		<div className="middle-container">
-		  <div className="stake-evolve">
-			<div className="img-evolve">
-			  <img loading="lazy" className="pepemander-display" src={pepemander} alt="pepemander" />
-			  <div className="dotted-div" style={{ marginTop: "470px" }}>
-				<img loading="lazy" src={downgreenarrow} alt="downgreenarrow" className="downgreenarrow" />
-			  </div>
-			  <div className="dotted-div" style={{ marginTop: "870px" }}></div>
-			</div>
-			<div className="text-evolve">
-			  <span className="Stake-to-evolve">Stake to evolve</span>
-			  <span className="underlined-text" style={{ width: "132px" }}>
-				Staking events
-				<div
-				  className="underline-div"
-				  style={{ width: "132px", marginLeft: "0" }}
-				></div>
-			  </span>
-			  <span className="Stake-your-awesome-P">
-				Stake your awesome Pepemon cards to receive even more awesome
-				exclusive Pepemon rewards.
-				<br />
-				<br />
-				Place Pepemander into the next rectangle to evolve!
-			  </span>
-			</div>
-		  </div>
-		</div>
+
+		<StyledSection>
+			<ContentColumns>
+				<ContentColumn width="40%">
+					<div style={{ position: "relative", height: "100%", width: "250%",
+						display: "grid",
+						gridAutoRows: "1fr"
+					}}>
+						<div>
+							<div style={{width: "28%"}}>
+								<img loading="lazy" src={pepemander} alt="pepemander" />
+							</div>
+						</div>
+						<div style={{width: "100%", margin: "0 auto", transform: "translateY(-30%)"}}>
+							<img loading="lazy" src={downgreenarrow} alt="downgreenarrow" style={{position: "relative", left: "40%", transform: "translateX(-50%) translateY(60%)"}}/>
+							<div style={{border: "1px dashed gray", borderRadius: "8px", height: "100%", left: "50%", transform: "translateX(-50%)", position: "absolute", width: "28%"}}/>
+						</div>
+						<div style={{width: "100%", margin: "0 0 0 auto", transform: "translateY(-60%)"}}>
+							<div style={{border: "1px dashed gray", borderRadius: "8px", height: "100%", right: "0", position: "absolute", width: "28%"}}/>
+						</div>
+					</div>
+				</ContentColumn>
+				<ContentColumn width="60%" style={{paddingTop: "3.75em"}}>
+					<Title as="h2" font={theme.font.neometric} size={3} weight={900}>Stake to evolve</Title>
+					<Spacer size="md"/>
+					<Text as="p" font={theme.font.spaceMace} underline>Staking events</Text>
+					<Spacer size="md"/>
+					<Text as="p" font={theme.font.inter}>
+						Stake your awesome Pepemon cards to receive even more awesome exclusive Pepemon rewards.
+					</Text>
+					<Text as="p" font={theme.font.inter}>
+						Place Pepemander into the next rectangle to evolve!
+					</Text>
+				</ContentColumn>
+			</ContentColumns>
+		</StyledSection>
 
 		<StyledSection>
 			<ContentColumns style={{marginBottom: "7.5em"}}>
 				<ContentColumn width="55%" style={{paddingTop: "3.75em"}}>
-					<StyledTitle as="h2" font={theme.font.neometric} size="3rem">The Pepemon Game</StyledTitle>
+					<Title as="h2" font={theme.font.neometric} size={3} weight={900}>The Pepemon Game</Title>
 					<Spacer size="md"/>
-					<StyledText as="p" font={theme.font.spaceMace} txtDecoration="underline">Coming soon</StyledText>
+					<Text as="p" font={theme.font.spaceMace} underline>Coming soon</Text>
 					<Spacer size="md"/>
-					<StyledText as="p" font={theme.font.inter} lineHeight="1.5">
+					<Text as="p" font={theme.font.inter}>
 						Duel other trainers on an epic game powered by DeFi and NFT's. Read more about the game mechanics here and let's discuss on the different strategies for the closed Beta launch happening soon for card holders.
-					</StyledText>
+					</Text>
 				</ContentColumn>
 				<ContentColumn width="45%">
 					<div style={{ position: "relative", height: "100%", width: "100%" }}>
