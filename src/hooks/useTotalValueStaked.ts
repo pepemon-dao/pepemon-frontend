@@ -42,15 +42,6 @@ const useTotalValueStaked = () => {
         return { ppblzBalance: addressInfo.tokens.find((token: any) => token.tokenInfo.symbol === 'PPBLZ').balance / (10 ** 18) };
     };
 
-    const fetchPpdexPrice = async () => {
-        const response = await fetch(
-            'https://api.ethplorer.io/getAddressInfo/0xf1F508c7C9f0d1b15a76fbA564eEf2d956220cf7?apiKey=EK-rbHn9-RbvTYb7-GWodE',
-            { method: 'GET'},
-        );
-        const addressInfo = await response.json();
-        return { ppblzBalance: addressInfo.tokens.find((token: any) => token.tokenInfo.symbol === 'PPBLZ').balance / (10 ** 18) };
-    };
-
     useEffect(() => {
         Promise.all([fetchUniV2PpblzStakedValue(), fetchPpblzStakedValue()])
         .then(([uniV2Pool, ppblzPool]) => {

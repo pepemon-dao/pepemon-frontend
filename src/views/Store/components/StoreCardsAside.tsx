@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { StyledStoreWrapper, StyledStoreHeader, StyledStoreBody, StyledPepemonCardImage, StyledPepemonCardMeta, StyledPepemonCardPrice } from './index';
-import { Button, StyledTitle, StyledText, Spacer, StyledSpacer } from '../../../components';
+import { StyledStoreWrapper, StyledStoreHeader, StyledStoreBody, StyledPepemonCardMeta, StyledPepemonCardPrice } from './index';
+import { Button, Title, Text, Spacer, StyledSpacer } from '../../../components';
 import { StoreClaimModal } from './index';
 import { ActionClose, coin } from '../../../assets';
 import { theme } from '../../../theme';
@@ -9,21 +9,21 @@ const StoreCardsAside: React.FC<any> = ({setSelectedCard, selectedCard}) => {
 	const [activeClaimModal, setActiveClaimModal] = useState(false);
 
 	return (
-		<StyledStoreWrapper width="35%">
+		<StyledStoreWrapper>
 			<StyledStoreHeader>
 				<div style={{display: 'flex', justifyContent: 'space-between', width: '100%'}}>
-					<StyledTitle as="h2" color={theme.color.white} font={theme.font.neometric} size="1.2rem">
+					<Title as="h2" color={theme.color.white} font={theme.font.neometric} weight={900} size={1.2}>
 						Selected Card
-					</StyledTitle>
+					</Title>
 					<ActionClose onClick={() => setSelectedCard("")}/>
 				</div>
 			</StyledStoreHeader>
 			<StyledStoreBody>
-				<StyledTitle as="h2" font={theme.font.neometric} size="1.3rem">{selectedCard.name}</StyledTitle>
+				<Title as="h2" font={theme.font.neometric} size={1.3}>{selectedCard.name}</Title>
 				<Spacer size="sm"/>
-				<StyledText as="p" font={theme.font.inter} size=".875rem" color={theme.color.gray[600]}>Super cool discription about this card. Iuis aute irure dolor in reprehenderit in voluptate velit esse cillum.</StyledText>
+				<Text as="p" font={theme.font.inter} size={.875} lineHeight={1.3} color={theme.color.gray[600]}>Super cool discription about this card. Iuis aute irure dolor in reprehenderit in voluptate velit esse cillum.</Text>
 				<Spacer size="sm"/>
-				<StyledPepemonCardImage src={selectedCard.url}/>
+				<img loading="lazy" src={selectedCard.url} alt={selectedCard.name} style={{width: "100%"}}/>
 				<Spacer size='md'/>
 				<StyledPepemonCardMeta>
 					<dt>Rarity:</dt>
@@ -53,13 +53,13 @@ const StoreCardsAside: React.FC<any> = ({setSelectedCard, selectedCard}) => {
 					<dt>Price:</dt>
 					<dd>
 						<StyledPepemonCardPrice styling="alt">
-							<img src={coin} alt="coin"/>
+							<img loading="lazy" src={coin} alt="coin"/>
 							{selectedCard.price} PPDEX
 						</StyledPepemonCardPrice>
 					</dd>
 				</StyledPepemonCardMeta>
 				<Spacer size='md'/>
-				<Button onClick={() => setActiveClaimModal(true) } width="100%">Claim card</Button>
+				<Button styling="purple" onClick={() => setActiveClaimModal(true) } width="100%">Claim card</Button>
 				{ activeClaimModal &&
 					<StoreClaimModal
 						dismiss={() => setActiveClaimModal(false)}

@@ -1,6 +1,5 @@
 import "./ibuttonpopover.css";
-import address from "../../assets/address.png";
-import cross from "../../assets/cross.svg";
+import { cross } from "../../assets";
 type props = {
   onHide: any;
   button: string;
@@ -10,7 +9,7 @@ const IbuttonPopover: React.FC<props> = ({ button, onHide }) => {
   return (
     <div className="popover-conatiner">
       <span className="APY">APY</span>
-      <img src={cross} onClick={onHide} className="cross" />
+      <img loading="lazy" src={cross} alt="hide" onClick={onHide} className="cross" />
       <div className="divider"></div>
       <table>
         <tr>

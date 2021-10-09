@@ -1,5 +1,5 @@
-import React, {createContext, useReducer, useState} from 'react';
-import {contractAddresses} from '../../pepemon/lib/constants';
+import React, { createContext, useReducer } from 'react';
+import { contractAddresses } from '../../pepemon/lib/constants';
 
 declare global {
   interface Window {

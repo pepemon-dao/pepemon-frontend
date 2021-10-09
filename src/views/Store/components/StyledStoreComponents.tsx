@@ -4,9 +4,7 @@ export const StyledStoreWrapper = styled.div<{width?: string}>`
     display: flex;
     flex-direction: column;
     color: ${props => props.theme.color.black};
-    min-width: ${props => props.width && props.width};
     max-width: ${props => props.width && props.width};
-    flex: 1 0 auto;
 
     &:last-child:not(:first-child) {
         margin-left: 1em;

@@ -17,7 +17,6 @@
   font-size: 15px;
   font-weight: 500;
   font-stretch: normal;
-  font-style: bold;
   line-height: 1;
   letter-spacing: normal;
   text-align: right;
@@ -106,7 +105,6 @@
   font-size: 49px;
   font-weight: bold;
   font-stretch: normal;
-  font-style: bold;
 
   letter-spacing: normal;
   color: #713aac;
@@ -119,7 +117,6 @@
   font-size: 28px;
   font-weight: bold;
   font-stretch: normal;
-  font-style: bold;
   /* line-height: 0.75; */
   letter-spacing: normal;
   color: var(--headers);

@@ -2,7 +2,7 @@ import { useContext } from 'react'
 import { Context } from '../contexts/PepemonProvider'
 
 const usePepemon = () => {
-  const [pepemon, dispatch] = useContext(Context)
+  const [pepemon] = useContext(Context)
   return pepemon
 }
 

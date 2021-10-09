@@ -18,7 +18,7 @@ const Value: React.FC<ValueProps> = ({ value, decimals, size }) => {
       updateStart(end)
       updateEnd(value)
     }
-  }, [value])
+  }, [end, value])
 
   return (
     <StyledValue

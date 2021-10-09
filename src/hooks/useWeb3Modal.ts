@@ -1,4 +1,4 @@
-import {useCallback, useContext, useEffect, useState} from 'react';
+import {useCallback, useContext, useState, useMemo} from 'react';
 import { Web3Provider } from "@ethersproject/providers";
 import Web3Modal from "web3modal";
 import WalletConnectProvider from "@walletconnect/web3-provider";
@@ -13,38 +13,28 @@ const NETWORK_NAME = "mainnet";
 
 function useWeb3Modal(config = {}) {
     const [provider, setProvider] = useState<any>(null);
-    const [autoLoaded, setAutoLoaded] = useState(false);
     const [, dispatch] = useContext(Context);
-    const { autoLoad = true, infuraId = INFURA_ID, NETWORK = NETWORK_NAME }: any = config;
+    const { infuraId = INFURA_ID, NETWORK = NETWORK_NAME }: any = config;
 
     // Web3Modal also supports many other wallets.
     // You can see other options at https://github.com/Web3Modal/web3modal
-    const web3Modal = new Web3Modal({
-        network: NETWORK,
-        cacheProvider: false,
-        providerOptions: {
-            walletconnect: {
-                package: WalletConnectProvider,
-                options: {
-                    infuraId,
-                },
-            },
-        },
-        theme: "light",
-    });
+    const web3Modal = useMemo(() => {
+		return new Web3Modal({
+	        network: NETWORK,
+	        cacheProvider: false,
+	        providerOptions: {
+	            walletconnect: {
+	                package: WalletConnectProvider,
+	                options: {
+	                    infuraId,
+	                },
+	            },
+	        },
+	        theme: "light",
+	    })
+	}, [NETWORK, infuraId]);
 
-    const resetApp = async () => {
-        provider && await provider.close();
-        setProvider(null);
-
-        await web3Modal.clearCachedProvider();
-        await dispatch({
-            type: 'reset',
-        })
-        window.location.reload();
-    }
-
-    const setPepemon = async (newProvider: any, newChainId: any = null) => {
+    const setPepemon = useCallback(async (newProvider: any, newChainId: any = null) => {
         if (!newProvider) {
             return;
         }
@@ -60,27 +50,9 @@ function useWeb3Modal(config = {}) {
             account: accounts[0],
             provider: newProvider,
         })
-    };
+    }, [dispatch]);
 
-    // Open wallet selection modal.
-    const loadWeb3Modal = useCallback(async () => {
-        const newProvider = await web3Modal.connect();
-        await subscribeProvider(newProvider);
-
-        await window.ethereum.enable();
-        const web3Provider = new Web3Provider(newProvider);
-        setProvider(web3Provider);
-        setPepemon(web3Provider).then(() => console.log('Contracts LOADED'));
-    }, [web3Modal]);
-
-    const logoutOfWeb3Modal = useCallback(
-        async function () {
-            await resetApp();
-        },
-        [web3Modal],
-    );
-
-    const subscribeProvider = async (provider: any) => {
+    const subscribeProvider = useCallback(async (provider: any) => {
         if (!provider.on) {
             return;
         }
@@ -97,15 +69,34 @@ function useWeb3Modal(config = {}) {
             const web3Provider = new Web3Provider(provider, "any");
             setPepemon(web3Provider).then(() => console.log('Contracts LOADED'));
         });
-    };
+    },[setPepemon]);
 
-    // If autoLoad is enabled and the the wallet had been loaded before, load it automatically now.
-    // useEffect(() => {
-    //     if (autoLoad && !autoLoaded && web3Modal.cachedProvider) {
-    //         loadWeb3Modal();
-    //         setAutoLoaded(true);
-    //     }
-    // }, [autoLoad, autoLoaded, loadWeb3Modal, setAutoLoaded, web3Modal.cachedProvider]);
+    // Open wallet selection modal.
+    const loadWeb3Modal = useCallback(async () => {
+        const newProvider = await web3Modal.connect();
+        await subscribeProvider(newProvider);
+
+        await window.ethereum.enable();
+        const web3Provider = new Web3Provider(newProvider);
+        setProvider(web3Provider);
+        setPepemon(web3Provider).then(() => console.log('Contracts LOADED'));
+    }, [web3Modal, setPepemon, subscribeProvider]);
+
+    const logoutOfWeb3Modal = useCallback(
+        async function () {
+			const resetApp = async () => {
+		        provider && await provider.close();
+		        setProvider(null);
+
+		        await web3Modal.clearCachedProvider();
+		        await dispatch({
+		            type: 'reset',
+		        })
+		        window.location.reload();
+		    }
+
+            await resetApp();
+        },[dispatch, provider, web3Modal]);
 
     return [provider, loadWeb3Modal, logoutOfWeb3Modal];
 }
