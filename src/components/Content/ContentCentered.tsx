@@ -4,6 +4,7 @@ interface ContentCenteredProps {
 	bgColor?: string;
 	direction?: string;
 	maxWidth?: string;
+	padding?: string;
 }
 
 const ContentCentered = styled.div<ContentCenteredProps>`
@@ -16,6 +17,7 @@ const ContentCentered = styled.div<ContentCenteredProps>`
 	max-width: ${ props => props.maxWidth ? props.maxWidth : "1120px"};
 	margin-left: auto;
 	margin-right: auto;
+	padding: ${ props => props.padding && props.padding };
 `
 
 export default ContentCentered;

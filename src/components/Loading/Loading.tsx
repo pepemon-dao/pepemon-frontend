@@ -12,8 +12,6 @@ const Loading = () => {
 
 const StyledLoading = styled.div`
 	display: flex;
-	background-color: ${props => props.theme.color.white};
-	border-radius: 16px;
 	justify-content: center;
 	align-items: flex-start;
 `

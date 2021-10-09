@@ -1,53 +1,93 @@
 import styled from "styled-components";
+import { theme } from "../../theme";
+import { Link } from "react-router-dom";
 
 interface ButtonProps {
-	bg?: string;
-	borderless?: boolean;
-	color?: string;
+	styling?: "purple" | "green" | "white" | "link" | "white_borderless";
 	disabled?: boolean;
-	font?: string;
-	hidden?: boolean;
 	width?: string;
 }
 
 const Button = styled.button<ButtonProps>`
 	&{
-		background-color: ${props => props.bg ? props.bg : props.theme.color.purple[600]};
-		border-color: ${props => props.color ? props.color : props.theme.color.white};
-		border-width: ${props => props.borderless && "0px"};
+		border-width: 1px;
 		border-style: solid;
 		border-radius: 8px;
-		color: ${props => props.color ? props.color : props.theme.color.white};
+		box-shadow: ${props => (!props.disabled && props.styling !== "link") && "0 4px 10px 0 rgba(121, 121, 121, 0.5)"};
 		cursor: ${props => !props.disabled && "pointer"};
-		font-family: ${props => props.font ? props.font : props.theme.font.spaceMace};
+		font-family: ${props => props.styling === "link" ? theme.font.inter : theme.font.spaceMace};
 		font-size: 1rem;
-		font-weight: bold;
+		font-weight: ${props => props.styling !== "link" && "bold"};
 		text-align: center;
-		text-decoration: none;
-		text-transform: uppercase;
+		text-transform: ${props => props.styling !== "link" && "uppercase"};
+		opacity: ${props => props.disabled && .5};
 		padding: .75em 1.5em;
+		transition: all .4s;
 		width: ${props => props.width && props.width};
-		transition: all .2s;
 	}
 
-	${(props) => !props.disabled && `
+	${({disabled}) => disabled && `
+		pointer-events: none;
+	`}
+
+	${({styling}) => styling === "purple" && `
+		background-image: linear-gradient(to bottom, #aa6cd6 -100%, ${theme.color.purple[600]});
+		border-color: transparent;
+		color: ${theme.color.white};
+
 		&:hover {
-			background-color: ${(props: any) => props.color ? props.color : props.theme.color.white};
-			border: 1px solid ${(props: any) => props.bg ? props.bg : props.theme.color.purple[600]};
-			color: ${(props: any) => props.bg ? props.bg : props.theme.color.purple[600]};
+			background-image: unset;
+			border-color: ${theme.color.purple[600]};
+			color: ${theme.color.purple[600]};
 		}
 	`}
 
-	${props => props.hidden && "hidden"} :focus {
-		outline: none;
-	}
+	${({styling}) => styling === "white" && `
+		background-image: linear-gradient(${theme.color.white}, ${theme.color.white});
+		border-color: ${theme.color.purple[600]};
+		color: ${theme.color.purple[600]};
+
+		&:hover {
+			background-image: linear-gradient(to bottom, #aa6cd6 -100%, ${theme.color.purple[600]});
+			border-color: transparent;
+			color: ${theme.color.white};
+		}
+	`}
+
+	${({styling}) => styling === "white_borderless" && `
+		background-color: ${theme.color.white};
+		border-color: transparent;
+		color: ${theme.color.purple[600]};
+	`}
+
+	${({styling}) => styling === "green" && `
+		background-image: linear-gradient(to bottom, ${theme.color.green[100]}, ${theme.color.green[200]});
+		border-color: transparent;
+		color: ${theme.color.purple[800]};
+
+		&:hover {
+			background-image: linear-gradient(to bottom, #aa6cd6 -100%, ${theme.color.purple[600]});
+			color: ${theme.color.white};
+		}
+	`}
+
+	${({styling}) => styling === "link" && `
+		background-color: transparent;
+		border-color: transparent;
+		color: ${theme.color.purple[600]};
+		text-decoration: underline;
+
+		&:hover {
+			color: ${theme.color.purple[700]};
+		}
+	`}
 `;
 
-export const StyledButton = styled.button<{light?: boolean, width?: string}>`
+export const ButtonLink = styled(Link)<{light?: boolean}>`
 	background-color: ${props => props.light && props.theme.color.white};
 	background-image: ${props => !props.light && `linear-gradient(to bottom, #aa6cd6 -100%, ${props.theme.color.purple[600]})`};
 	border-radius: 8px;
-	border: ${props => `1px solid ${props.light ? props.theme.color.purple[600] : "transparent"}`};
+	border: ${props => props.light && `1px solid ${props.theme.color.purple[600]}`};
 	box-shadow: ${props => !props.light && "0 4px 10px 0 rgba(121, 121, 121, 0.5)"};
 	color: ${props => props.light ? props.theme.color.purple[600] : props.theme.color.white};
 	font-family: ${props => props.theme.font.spaceMace};
@@ -56,7 +96,6 @@ export const StyledButton = styled.button<{light?: boolean, width?: string}>`
 	text-decoration: none;
 	text-transform: uppercase;
 	transition: .2s all ease-in;
-	width: ${props => props.width && props.width};
 
 	&:hover {
 		background-image: ${props => props.light ? `linear-gradient(to bottom, #aa6cd6 -100%, ${props.theme.color.purple[600]})` : "unset"};

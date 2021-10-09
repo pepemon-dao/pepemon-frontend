@@ -1,6 +1,6 @@
 import React from "react";
 import styled from 'styled-components';
-import { StyledTitle, Spacer, StyledSpacer } from '../../../components';
+import { Title, Spacer, StyledSpacer } from '../../../components';
 import { theme } from '../../../theme';
 import { coin } from '../../../assets';
 
@@ -16,7 +16,7 @@ const StoreCards: React.FC<StoreCardsProps> = (props) => {
 	return (
 		<StyledStoreContentWrapper>
 			<div>
-				<StyledTitle as="h3" size="1.3rem" font={theme.font.spaceMace}>{props.title}</StyledTitle>
+				<Title as="h3" size={1.3} font={theme.font.spaceMace}>{props.title}</Title>
 				<Spacer/>
 				<StyledStoreCardsWrapper gridCols={props.gridCols}>
 					{ Object.keys(props.pokeCards).map((card, key) => {
@@ -66,12 +66,12 @@ export const PepemonCard: React.FC<{card: { name: string, cardsPerPack?: number;
 	return (
 		<StyledPepemonCard style={{ opacity: soldOut ? "50%" : "100%" }}>
 			<StyledPepemonCardPrice>
-				<img src={coin} alt="coin"/>
+				<img loading="lazy" src={coin} alt="coin"/>
 				{card.price} PPDEX
 			</StyledPepemonCardPrice>
 			<div>
-				<StyledPepemonCardImage active={active} src={card.url} onClick={() => selectCard(card)}/>
-				<StyledTitle as="h4" size="1rem" font={theme.font.neometric}>{card.cardsPerPack ? `${card.cardsPerPack} cards` : card.name}</StyledTitle>
+				<StyledPepemonCardImage loading="lazy" active={active} src={card.url} onClick={() => selectCard(card)}/>
+				<Title as="h4" size={1} font={theme.font.neometric}>{card.cardsPerPack ? `${card.cardsPerPack} cards` : card.name}</Title>
 				<StyledSpacer bg={theme.color.gray[100]} size={2}/>
 				<Spacer size="sm"/>
 				<StyledPepemonCardMeta>
@@ -155,6 +155,7 @@ export const StyledPepemonCardMeta = styled.dl`
 	& dt {
 		color: ${props => props.theme.color.gray[300]};
 		text-transform: uppercase;
+		letter-spacing: 1.2px;
 	}
 
 	& dd {

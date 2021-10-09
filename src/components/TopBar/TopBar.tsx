@@ -1,77 +1,83 @@
-import "./TopBar.css";
-import address from "../../assets/address.png";
 import React, { useCallback } from "react";
+import styled from "styled-components";
 import { useWeb3Modal, usePepemon, useTokenBalance } from "../../hooks";
-import { Value } from "../index";
-import {
-  getPpblzAddress,
-  getPpblzContract,
-  getPpdexAddress,
-  getPpdexContract,
-} from "../../pepemon/utils";
+import { up_down_arrows_dark } from "../../assets";
+import { getPpblzContract, getPpdexContract } from "../../pepemon/utils";
 import { getBalanceNumber, formatAddress } from "../../utils";
+import { Button, Text } from "../../components";
+import { theme } from "../../theme";
 
 type props = {
-  staking: boolean;
-  ethChainId: number;
-  setEthChainId: any;
+	staking: boolean;
+	ethChainId: number;
+	setEthChainId: any;
 };
 const TopBar: React.FC<props> = ({ ethChainId, setEthChainId, staking }) => {
-  const [provider, loadWeb3Modal, logoutOfWeb3Modal] = useWeb3Modal();
-  const { account } = usePepemon();
-  const pepemon = usePepemon();
-  const { chainId } = usePepemon();
-  const ppblzBalance = useTokenBalance(
-    getPpblzContract(pepemon) ? getPpblzContract(pepemon).address : null
-  );
-  const ppdexBalance = useTokenBalance(
-    getPpdexContract(pepemon) ? getPpdexContract(pepemon).address : null
-  );
+	const [, loadWeb3Modal] = useWeb3Modal();
+	const { account } = usePepemon();
+	const pepemon = usePepemon();
+	const ppblzBalance = useTokenBalance(
+	getPpblzContract(pepemon) ? getPpblzContract(pepemon).address : null
+	);
+	const ppdexBalance = useTokenBalance(
+	getPpdexContract(pepemon) ? getPpdexContract(pepemon).address : null
+	);
 
-  const handleUnlockClick = useCallback(() => {
-    loadWeb3Modal();
-  }, [loadWeb3Modal]);
+	const handleUnlockClick = useCallback(() => {
+	loadWeb3Modal();
+	}, [loadWeb3Modal]);
 
-  return (
-    <div>
-      {!account ? (
-        <span onClick={handleUnlockClick} className="green-button">
-          <p className="green-buttontext">CONNECT WALLET</p>
-        </span>
-      ) : (
-        <div
-          {...(!staking ? { className: "h-bar" } : { className: "h-bar-alt" })}
-        >
-          <div className="menu-text" >
-            Ether
-          </div>
-
-          <div
-            {...(!staking
-              ? { className: "top-menu-bar" }
-              : { className: "top-menu-bar-alt" })}
-          >
-            {ppblzBalance && (
-              <div className="menu-text">
-                {getBalanceNumber(ppblzBalance).toFixed(2)}$PPBLZ
-              </div>
-            )}
-            {ppblzBalance && (
-              <div className="menu-text">
-                {getBalanceNumber(ppdexBalance).toFixed(2)}$PPDEX
-              </div>
-            )}
-            <div className="menu-text">3 unique cards</div>
-            <div className="green-text-addr">
-              <p className="green-buttontext">
-                {formatAddress(account)}
-              </p>
-            </div>
-          </div>
-        </div>
-      )}
-    </div>
-  );
+	return (
+		<StyledTopBar {...(account && {border: true})}>
+			<StyledTopBarInner>
+				{ account &&
+					<StyledTopBarInfo>
+						<TextInfo as="p" font={theme.font.spaceMace} color={theme.color.purple[800]} style={{ borderRight: "1px solid currentColor" }}>
+							Ether
+							<img alt="change network" src={up_down_arrows_dark} style={{ width: ".5em", marginLeft: ".8em" }}/>
+						</TextInfo>
+						{ppblzBalance && (
+							<TextInfo as="p" font={theme.font.spaceMace} color={theme.color.purple[800]}>
+							{getBalanceNumber(ppblzBalance).toFixed(2)}$PPBLZ
+							</TextInfo>
+						)}
+						{ppblzBalance && (
+							<TextInfo as="p" font={theme.font.spaceMace} color={theme.color.purple[800]}>
+							{getBalanceNumber(ppdexBalance).toFixed(2)}$PPDEX
+							</TextInfo>
+						)}
+						<TextInfo as="p" font={theme.font.spaceMace} color={theme.color.purple[800]}>3 unique cards</TextInfo>
+					</StyledTopBarInfo>
+				}
+				<Button styling="green" {...(!account && {onClick: handleUnlockClick} )}>{!account ? 'Connect wallet' : formatAddress(account)}</Button>
+			</StyledTopBarInner>
+		</StyledTopBar>
+	);
 };
+
+const StyledTopBar = styled.div<{border?: boolean}>`
+	background-color: ${props => props.border && "rgba(255, 255, 255, .6)"};
+	border-radius: 10px;
+	border: ${props => props.border && `1px solid ${theme.color.purple[800]}`};
+	overflow: hidden;
+	padding: .25em;
+	position: absolute;
+	right: 2.5em;
+	top: 2em;
+`
+
+const StyledTopBarInner = styled.div`
+	align-items: center;
+	display: flex;
+`
+
+const StyledTopBarInfo = styled.div`
+	align-items: center;
+	display: flex;
+`
+
+const TextInfo = styled(Text)`
+	padding: .4em 1em;
+`
 
 export default TopBar;

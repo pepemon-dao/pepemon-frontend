@@ -6,13 +6,6 @@ BigNumber.config({
   DECIMAL_PLACES: 80,
 })
 
-const GAS_LIMIT = {
-  STAKING: {
-    DEFAULT: 200000,
-    SNX: 850000,
-  },
-}
-
 export const getPpdexAddress = (pepemon) => {
   return pepemon && pepemon.ppdexAddress
 }
@@ -517,6 +510,3 @@ export const sendTransaction = async (provider, callback) => {
     console.error(err);
   }
 }
-
-
-

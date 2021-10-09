@@ -9,14 +9,8 @@ import PepemonFactoryAbi from './abi/pepemon_factory.json'
 import PepemonStakeAbi from './abi/pepemon_stake.json'
 import MerkleAbi from './abi/merkle.json'
 import LotteryAbi from './abi/pepemon_lottery.json'
-import PepemonPromoStoreAbi from './abi/pepemon_promo_store.json'
 import {Contract} from '@ethersproject/contracts';
-
-import {
-  contractAddresses,
-  SUBTRACT_GAS_LIMIT,
-  supportedPools,
-} from './constants.js'
+import { contractAddresses, SUBTRACT_GAS_LIMIT } from './constants.js'
 import * as Types from './types.js'
 
 export class Contracts {

@@ -1,21 +1,17 @@
 // @ts-ignore
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
-import { Button, Spacer, StyledTitle, StyledText } from "../../components";
+import { Button, ContentColumns, ContentColumn, Spacer, Title, Text } from "../../components";
 import { theme } from "../../theme";
-import dropdownarrow from "../../assets/dropdownarrow.png";
-import pepemandercard from "../../assets/pepemandercard.png";
-import pokeball from "../../assets/pokeball-temp.png";
-import subscribetoclaim from "../../assets/subscribetoclaim.png";
-import unsubscribe from "../../assets/unsubscribe.png";
-import uparrow from "../../assets/uparrow.png";
+import { dropdownarrow, yugipepe, pokeball, uparrow } from "../../assets";
 import "./dropdown.css";
 
 type AccordionProps = {
 	heading: string;
+	state?: "active" | "approve" | "can_stake";
 };
 
-const Accordion: React.FC<AccordionProps> = ({ heading }) => {
+const Accordion: React.FC<AccordionProps> = ({ heading, state }) => {
 	const [isOpen, setIsOpen] = useState(false);
 
 	const toggle = () => setIsOpen(!isOpen);
@@ -24,66 +20,72 @@ const Accordion: React.FC<AccordionProps> = ({ heading }) => {
 		<AccordionWrapper isOpen={isOpen}>
 			<AccordionHeader onClick={toggle} isOpen={isOpen}>
 				<AccordionHeaderTitle>
-					<img src={pokeball} alt="Pokeball" style={{ width: "40px", height: "40px", marginRight: "1em" }}/>
-					<StyledTitle as="h2" color={isOpen ? theme.color.green : theme.color.white} font={theme.font.neometric}>{heading}</StyledTitle>
+					<img loading="lazy" src={pokeball} alt="Pokeball" style={{ width: "40px", height: "40px", marginRight: "1em" }}/>
+					<Title as="h2" color={isOpen ? theme.color.green[200] : theme.color.white} weight={900} font={theme.font.neometric}>{heading}</Title>
 				</AccordionHeaderTitle>
 				<AccordionHeaderButton onClick={toggle}>
 						<span>Show {isOpen ? "less" : "more"}</span>
-						<img src={isOpen ? uparrow : dropdownarrow} alt="logo" style={{ height: "0.5em", alignSelf: "center", }}/>
+						<img loading="lazy" src={isOpen ? uparrow : dropdownarrow} alt="logo" style={{ height: "0.5em", alignSelf: "center", }}/>
 				</AccordionHeaderButton>
 			</AccordionHeader>
 			{isOpen &&
 				<AccordionBody>
 					<AccordionBodyContent side="left">
-						<StyledText as="p" size=".875rem">
+						<Text as="p" size={.875} lineHeight={1.125}>
 							Get Exclusive NFTs! Provide 100 PPDEX (+ETH) on Uniswap LP, stake these LP tokens and recieve a unique NFT every month. Your LP tokens will be locked for a minimum 32 days.
-						</StyledText>
+						</Text>
 						<Spacer size="md"/>
-						<div style={{display: "flex", alignItems: "center", justifyContent: "space-between"}}>
-							<StyledText as="p">PPBLZ-ETH LP balance</StyledText>
-							<StyledText as="p" font={theme.font.inter} txtDecoration="underline" color={theme.color.purple[600]}>Buy PPBLZ-ETH LP</StyledText>
-						</div>
-						<StyledText as="p" size="2.5rem" weight={900} font={theme.font.neometric}>4.00</StyledText>
+						<ContentColumns>
+							<ContentColumn width="50%">
+								<Spacer size="md"/>
+								<Text as="p" lineHeight={1}>PPBLZ-ETH LP balance</Text>
+								<Spacer size="sm"/>
+								<Text as="p" size={2.5} weight={900} lineHeight={1} font={theme.font.neometric}>4.00</Text>
+								<Spacer size="md"/>
+								<Text as="p" lineHeight={1}>PPBLZ-ETH LP staked</Text>
+								<Spacer size="sm"/>
+								<Text as="p" size={2.5} weight={900} lineHeight={1} font={theme.font.neometric}>0.00</Text>
+							</ContentColumn>
+							<ContentColumn width="50%">
+								<Spacer size="sm"/>
+								<Button styling="link">Buy PPBLZ-ETH LP</Button>
+							</ContentColumn>
+						</ContentColumns>
 						<Spacer size="md"/>
-						<StyledText as="p">PPBLZ-ETH LP staked</StyledText>
-						<StyledText as="p" size="2.5rem" weight={900} font={theme.font.neometric}>0.00</StyledText>
+						{ state === "active" ?
+							<>
+								<Text as="p" size={2.5} lineHeight={1.1} color={theme.color.purple[600]} weight={900} font={theme.font.neometric}>
+									You have an active <wbr/>subscription!
+								</Text>
+								<Spacer size="md"/>
+								<Button styling="white">Unsubscribe</Button>
+							</>
+						:
+							<div style={{ display: "inline-flex", flexDirection: "column" }}>
+								<Text as="p" size={.875}>
+									3.828 PPBLZ-ETH LP needed to subscribe
+								</Text>
+								<Spacer size="sm"/>
+								<Button styling="purple" width="100%">{ state === "approve" ? "Approve LP" : "Subscribe and stake LP" }</Button>
+							</div>
+						}
+
 						<Spacer size="md"/>
-						<StyledText as="p" size=".875rem">
-							3.828 PPBLZ-ETH LP needed to subscribe
-						</StyledText>
-						{/* <img src={subscribeandstake} style={{ width: "58%", marginTop: "10px" }} />    */}
-						{/* <img src={approvelp} style={{ width: "58%", marginTop: "10px" }} /> */}
-						<Spacer size="md"/>
-						<StyledText as="p" size="2.5rem" color={theme.color.purple[600]} weight={900} font={theme.font.neometric}>
-							You have an active <wbr/>subscription!
-						</StyledText>
-						<Spacer size="md"/>
-						<Button bg={theme.color.white} color={theme.color.purple[600]}>Unsubscribe</Button>
 					</AccordionBodyContent>
 
 					<AccordionBodyContent side="right">
 						<div>
-							<StyledText as="p" size=".75rem" color={theme.color.gray[400]} txtTransform="uppercase">This months card:</StyledText>
+							<Text as="p" size={.75} color={theme.color.gray[400]} txtTransform="uppercase">This months card:</Text>
 							<Spacer size="md"/>
-							<StyledText as="p" size="1.375rem" color={theme.color.headers} weight={900} font={theme.font.neometric}>Yugipepe</StyledText>
+							<Text as="p" size={1.375} color={theme.color.headers} weight={900} font={theme.font.neometric}>Yugipepe</Text>
 							<Spacer size="sm"/>
-							<StyledText as="p" size=".875rem" color={theme.color.headers}>
+							<Text as="p" size={.875} color={theme.color.headers}>
 								Super cool discription about this card. Iuis aute irure dolor in reprehenderit in.
-							</StyledText>
-							<div
-							style={{
-								display: "flex",
-								width: "253px",
-								height: "356px",
-								objectFit: "cover",
-								backgroundSize: "cover",
-								backgroundRepeat: "no-repeat",
-								backgroundImage: `url(${pepemandercard})`,
-								marginTop: "14px",
-							}}
-							></div>
+							</Text>
+							<Spacer size="sm"/>
+							<img src={yugipepe} alt="yugipepe"/>
 							<Spacer size="md"/>
-							<Button disabled bg={theme.color.purple[400]} color={theme.color.purple[500]} width="100%" borderless>Subscribe to claim</Button>
+							<Button disabled styling="white_borderless" width="100%">Subscribe to claim</Button>
 						</div>
 					</AccordionBodyContent>
 				</AccordionBody>
@@ -101,7 +103,7 @@ const AccordionWrapper = styled.div<{isOpen: boolean}>`
 	background-color: ${props => props.theme.color.purple[800]};
 	border-radius: ${props => props.theme.borderRadius}px;
 	margin-bottom: .5em;
-	outline: ${props => props.isOpen && `2px solid ${props.theme.color.green}` };
+	outline: ${props => props.isOpen && `2px solid ${props.theme.color.green[200]}` };
 	width: 100%;
 `
 
@@ -146,13 +148,6 @@ const AccordionBodyContent = styled.div<{side: "left" | "right"}>`
 	border-left: ${props => props.side === "right" && `2px solid ${props.theme.color.colorsLayoutBorders}`};
 	padding-left: ${props => props.side === "right" && "5.5em"};
 	padding-right: ${props => props.side === "left" && "5.5em"};
-`
-
-const Rectangle = styled.div`
-	border: 2px solid #f0f0f0;
-	height: 495px;
-	margin: 24px 82px 0 69px;
-	width: 2px;
 `
 
 export default Accordion;

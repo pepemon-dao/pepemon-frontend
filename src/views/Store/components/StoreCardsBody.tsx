@@ -10,17 +10,18 @@ const StoreCardsBody: React.FC<any> = ({pokeCardsArr, pokeCards, activeSeries, s
 			</StoreSelection>
 			{ pokeCardsArr.map((series: string, key: number) => {
 				const active = activeSeries.includes(pokeCards[series as keyof typeof pokeCards].title);
-				if (active || activeSeries.length === 0) {
-					return <StoreCards
-								key={key}
-								title={ pokeCards[series as keyof typeof pokeCards]?.title }
-								pokeCards={ pokeCards[series as keyof typeof pokeCards]?.cards }
-								gridCols={ Object.keys(selectedCard).length !== 0 ? 3 : 5 }
-								selectedCard={selectedCard}
-								selectCard={setSelectedCard}
-							/>
-				}
-				return;
+				return (
+					<>{(active || activeSeries.length === 0) &&
+						<StoreCards
+							key={key}
+							title={ pokeCards[series as keyof typeof pokeCards]?.title }
+							pokeCards={ pokeCards[series as keyof typeof pokeCards]?.cards }
+							gridCols={ Object.keys(selectedCard).length !== 0 ? 3 : 5 }
+							selectedCard={selectedCard}
+							selectCard={setSelectedCard}
+						/>
+					}</>
+				)
 			})}
 		</StyledStoreBody>
 	)

@@ -1,11 +1,17 @@
 import styled from "styled-components";
+import { theme } from "../../theme";
 
-const Link = styled.a.attrs({
-  target: "_blank",
-  rel: "noopener noreferrer",
+const ExternalLink = styled.a.attrs({
+	target: "_blank",
+	rel: "noopener noreferrer",
 })`
-  color: #61dafb;
-  margin-top: 10px;
+	color: ${theme.color.purple[600]};
+	cursor: pointer;
+	text-decoration: underline;
+
+	&:hover {
+		color: ${theme.color.purple[700]};
+	}
 `;
 
-export default Link;
+export default ExternalLink;
