@@ -1,3 +1,8 @@
+// logo
+export { default as pepemon } from "./pepemon.png";
+export { default as pokeball } from "./pokeball-temp.png";
+export { default as uniswap } from "./logo_uniswap.png";
+
 // social media
 export { default as twitter } from "./twitter.svg";
 export { default as medium } from "./medium.svg";
@@ -55,7 +60,6 @@ export { default as walkh } from "./walkh.png";
 export { default as walkw } from "./walkw.png";
 export { default as cover } from "./cover.png";
 export { default as coverblack } from "./coverblack.png";
-export { default as pepemon } from "./pepemon.png";
 export { default as homeactive } from "./homeactive.png";
 export { default as homefade } from "./homefade.png";
 export { default as fudizardPng } from "./fudizard.png";
@@ -74,7 +78,6 @@ export { default as pepechurcard } from "./pepechurcard.png";
 export { default as downgreenarrow } from "./downgreenarrow.svg";
 export { default as dropdownarrow } from "./dropdownarrow.png";
 export { default as pepemandercard } from "./pepemandercard.png";
-export { default as pokeball } from "./pokeball-temp.png";
 export { default as subscribetoclaim } from "./subscribetoclaim.png";
 export { default as unsubscribe } from "./unsubscribe.png";
 export { default as up_down_arrows_light } from "./up_down_arrows_light.png";

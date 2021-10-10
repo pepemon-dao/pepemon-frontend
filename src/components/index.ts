@@ -23,3 +23,4 @@ export { Spacer, StyledSpacer } from './Spacer';
 export { Title, StyledPageTitle, StyledLinkTitle, Text } from './Text';
 export { TopBar } from './TopBar';
 export { Value } from './Value';
+export { WalletButton } from './WalletButton';

@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import styled from "styled-components";
 import { useWeb3Modal, usePepemon, useTokenBalance } from "../../hooks";
 import { up_down_arrows_dark } from "../../assets";
@@ -14,18 +14,29 @@ type props = {
 };
 const TopBar: React.FC<props> = ({ ethChainId, setEthChainId, staking }) => {
 	const [, loadWeb3Modal] = useWeb3Modal();
+	const [ethChainName, setEthChainName] = useState("");
 	const { account } = usePepemon();
 	const pepemon = usePepemon();
 	const ppblzBalance = useTokenBalance(
-	getPpblzContract(pepemon) ? getPpblzContract(pepemon).address : null
+		getPpblzContract(pepemon) ? getPpblzContract(pepemon).address : null
 	);
 	const ppdexBalance = useTokenBalance(
 	getPpdexContract(pepemon) ? getPpdexContract(pepemon).address : null
 	);
 
 	const handleUnlockClick = useCallback(() => {
-	loadWeb3Modal();
+		loadWeb3Modal();
 	}, [loadWeb3Modal]);
+
+	useEffect(() => {
+		const chains = {
+			"1": "Ether",
+			"4": "Rinkeby",
+			"56": "BSC",
+			"137": "Matic",
+		};
+		setEthChainName(chains[ethChainId.toString() as keyof typeof chains]);
+	},[ethChainId]);
 
 	return (
 		<StyledTopBar {...(account && {border: true})}>
@@ -33,8 +44,8 @@ const TopBar: React.FC<props> = ({ ethChainId, setEthChainId, staking }) => {
 				{ account &&
 					<StyledTopBarInfo>
 						<TextInfo as="p" font={theme.font.spaceMace} color={theme.color.purple[800]} style={{ borderRight: "1px solid currentColor" }}>
-							Ether
-							<img alt="change network" src={up_down_arrows_dark} style={{ width: ".5em", marginLeft: ".8em" }}/>
+							{ethChainName}
+							<img alt="change network" src={up_down_arrows_dark} style={{ width: ".5em", marginLeft: ".8em" }} onClick={() => setEthChainId(1)}/>
 						</TextInfo>
 						{ppblzBalance && (
 							<TextInfo as="p" font={theme.font.spaceMace} color={theme.color.purple[800]}>

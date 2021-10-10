@@ -2,6 +2,7 @@ import React, { useRef, useState } from 'react';
 import { useOutsideClick } from '../../hooks';
 import styled from 'styled-components'
 import { Check, ChevronDown } from '../../assets';
+import { theme } from '../../theme';
 
 interface DropDownMenuProps {
     title: any;
@@ -93,7 +94,7 @@ const StyledMenuTrigger = styled.button<StyledProps>`
     transition: box-shadow 0.4s ease;
 
     &:hover {
-       box-shadow: 0 1px 8px rgba(0, 0, 0, 0.3);
+       box-shadow: 0 1px 8px ${theme.color.colorsLayoutShadows};
     }
 
     svg {
@@ -115,7 +116,7 @@ const StyledMenu = styled.div<StyledMenuProps>`
   transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s;
   font-size: 1rem;
   border-radius: 1em;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.12);
+  box-shadow: 0 4px 8px 0 ${theme.color.colorsLayoutShadows};
   border: solid 1px ${props => props.theme.color.purple[600]};
   width: 18.75em;
 

@@ -4,7 +4,7 @@ import { theme } from '../../../theme';
 
 const StoreClaimModal: React.FC<any> = ({dismiss, claimButtonText}) => {
 	return (
-		<Modal onDismiss={() => dismiss()} maxWidth={theme.page.maxWidth}>
+		<Modal rounded onDismiss={dismiss} maxWidth={theme.page.maxWidth}>
 		    <ModalTitle text="Claim ice pack" />
 			<ModalContent>
 				<Text as="p" font={theme.font.inter} size={.875} color={theme.color.gray[600]}>

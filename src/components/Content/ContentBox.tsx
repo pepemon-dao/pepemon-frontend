@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { theme } from '../../theme';
 
 const ContentBox = styled.div<{bgColor?: string, shadow?: boolean}>`
 	background-color: ${props => props.bgColor ? props.bgColor : props.theme.color.white};
@@ -10,7 +11,7 @@ const ContentBox = styled.div<{bgColor?: string, shadow?: boolean}>`
 	position: relative;
 
 	${({shadow}) => shadow && `
-		box-shadow: 2px 4px 10px 5px rgba(121,121,121,0.5);
+		box-shadow: 2px 4px 10px 5px ${theme.color.colorsLayoutShadows};
 	`}
 `
 

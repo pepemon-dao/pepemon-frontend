@@ -6,11 +6,16 @@ import PepemonProvider from "./contexts/PepemonProvider";
 import ModalsProvider from "./contexts/Modals";
 import { Page, TopBar } from "./components";
 import { LoadingPage } from "./views";
+import { withConnectedWallet } from './hocs';
 // lazy import
 const Home = lazy(() =>  import("./views/Home").then((module) => ({ default: module.Home })));
 const Staking = lazy(() =>  import("./views/Staking").then((module) => ({ default: module.Staking })));
 const Subscription = lazy(() =>  import("./views/Subscription").then((module) => ({ default: module.Subscription })));
 const Store = lazy(() =>  import("./views/Store").then((module) => ({ default: module.Store })));
+
+const StakingWithAuth = withConnectedWallet(Staking);
+const SubscriptionWithAuth = withConnectedWallet(Subscription);
+const StoreWithAuth = withConnectedWallet(Store);
 
 const App: React.FC = () => {
 	const [ethChainId, setEthChainId] = useState(
@@ -45,13 +50,13 @@ const App: React.FC = () => {
 					<Suspense fallback={<LoadingPage/>}>
 						<Switch>
 							<Route path="/staking" exact>
-								<Staking {...pepemonState}/>
+								<StakingWithAuth {...pepemonState}/>
 							</Route>
 							<Route path="/subscription" exact>
-								<Subscription {...pepemonState} />
+								<SubscriptionWithAuth {...pepemonState} />
 							</Route>
 							<Route path="/store/:storeState?">
-								<Store {...pepemonState} />
+								<StoreWithAuth {...pepemonState} />
 							</Route>
 							<Route path="/">
 								<Home {...pepemonState}/>

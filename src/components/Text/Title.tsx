@@ -8,7 +8,7 @@ interface TitleProps {
 	isInactive?: boolean;
 	lineHeight?: number;
 	size?: number;
-	weight?: number;
+	weight?: number | string;
 }
 
 const Title = styled.div<TitleProps>`

@@ -2,7 +2,6 @@ import styled from "styled-components";
 import { Button, ContentBox, ContentBoxNumber, ContentBoxGrid, ContentCentered, ContentColumn, ContentColumns, ExternalLink, Footer,
 	Spacer, ButtonLink, Title, Text, SocialBoxes, Newsletter, Value } from "../../components";
 import { theme } from "../../theme";
-import "./Home.css";
 import { dummyGraph, group, cover, coverblack, fudizardPng, pepemander, logoexpand, bluecard, pepechucard, witchenerycard, pepechurcard, downgreenarrow } from "../../assets";
 import { getBalanceNumber } from "../../utils";
 import { useTotalValueStaked, useTotalSpendInShop, usePepemon } from "../../hooks";

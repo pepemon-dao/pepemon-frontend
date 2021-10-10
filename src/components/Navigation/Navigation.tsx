@@ -71,7 +71,7 @@ const StyledMenuOuterWrapper = styled.div`
 
 	&:hover {
 		max-width: unset;
-		box-shadow: 0 4px 15px 10px rgba(121,121,121,0.5);
+		box-shadow: 0 4px 15px 10px ${theme.color.colorsLayoutShadows};
 	}
 
 	&:hover span {

@@ -3,14 +3,7 @@ import styled from 'styled-components'
 import { Navigation } from "../../components";
 import { darktealTiles } from "../../assets";
 import { theme } from "../../theme";
-// import Footer from '../Footer'
-
-// const Page: React.FC<PageProps> = (props) => {
-// 	const { children } = props;
-// 	return <>
-// 		{ children }
-// 	</>
-// }
+// import Footer from '../Footer';
 
 const Page: React.FC<any> = ({children}) => {
 	return (

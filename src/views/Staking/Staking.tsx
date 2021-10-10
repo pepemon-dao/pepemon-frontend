@@ -1,14 +1,12 @@
 import React, { useState, useEffect, useCallback } from "react";
 import styled from "styled-components";
-import { Popover } from "reactstrap";
-import { ContentCentered, StyledPageWrapperMain, StyledPageWrapperMainInner, Button, Text, Title, StyledPageTitle, IbuttonPopover, Spacer } from "../../components";
+import { ContentCentered, ExternalLink, StyledPageWrapperMain, StyledPageWrapperMainInner, Button, Text, Title, StyledPageTitle, IbuttonPopover, Spacer } from "../../components";
 import { usePepemon, useWeb3Modal } from "../../hooks";
 import { correctChainIsLoaded } from "../../utils";
 import { theme } from "../../theme";
 import { sendTransaction } from "../../pepemon/utils";
 import Web3 from "web3";
-import "./Stake.css";
-import { ibutton, pokeball } from "../../assets";
+import { pokeball, uniswap } from "../../assets";
 
 const Stake: React.FC<any> = ({ appChainId: chainId, setChainId }) => {
 	const [popoverOpen, setPopoverOpen] = useState(false);
@@ -169,37 +167,37 @@ const Stake: React.FC<any> = ({ appChainId: chainId, setChainId }) => {
 	},[getAccount, pepemon, web3.utils]);
 
 	const stakePpblz = async () => {
-	if (
-		isStakingPpblz ||
-		parseFloat(ppblzStakeAmount) === 0 ||
-		parseFloat(ppblzStakeAmount) > ppblzBalance
-	) {
-		return;
-	}
-
-	setIsStakingPpblz(true);
-	try {
-		let stakeRes = await sendTransaction(
-		provider,
-		async () =>
-			await pepemon.contracts.ppdex.stakePpblz(
-			web3.utils.toWei(ppblzStakeAmount.toString()),
-			{ gasLimit: 200000 }
-			)
-		);
-		if (stakeRes) {
-		setIsStakingPpblz(false);
-		setPpblzStakeAmount(null);
-		await getMyPpblzStakeAmount();
-		await getPpblzBalance();
-		await getPpblzAllowance();
-		await getPpdexRewards();
+		if (
+			isStakingPpblz ||
+			parseFloat(ppblzStakeAmount) === 0 ||
+			parseFloat(ppblzStakeAmount) > ppblzBalance
+		) {
+			return;
 		}
-		return setTransactionFinished(transactionFinished + 1);
-	} catch (error) {
-		console.log(error);
-		await resetToInitialStateOnReject();
-	}
+
+		setIsStakingPpblz(true);
+		try {
+			let stakeRes = await sendTransaction(
+			provider,
+			async () =>
+				await pepemon.contracts.ppdex.stakePpblz(
+				web3.utils.toWei(ppblzStakeAmount.toString()),
+				{ gasLimit: 200000 }
+				)
+			);
+			if (stakeRes) {
+				setIsStakingPpblz(false);
+				setPpblzStakeAmount(null);
+				await getMyPpblzStakeAmount();
+				await getPpblzBalance();
+				await getPpblzAllowance();
+				await getPpdexRewards();
+			}
+			return setTransactionFinished(transactionFinished + 1);
+		} catch (error) {
+			console.log(error);
+			await resetToInitialStateOnReject();
+		}
 	};
 
 	const stakeUniV2Ppblz = async () => {
@@ -416,26 +414,26 @@ const Stake: React.FC<any> = ({ appChainId: chainId, setChainId }) => {
 	};
 
 	const claimRewards = async () => {
-	if (isClaiming) {
-		return;
-	}
-
-	if (ppdexRewards > 0) {
-		setIsClaiming(true);
-		try {
-		await sendTransaction(
-			provider,
-			async () => await pepemon.contracts.ppdex.getReward()
-		);
-
-		await getPpdexRewards();
-		setTransactionFinished(transactionFinished + 1);
-		} catch (error) {
-		console.log(error);
-		await resetToInitialStateOnReject();
+		if (isClaiming) {
+			return;
 		}
-	}
-	setIsClaiming(false);
+
+		if (ppdexRewards > 0) {
+			setIsClaiming(true);
+			try {
+			await sendTransaction(
+				provider,
+				async () => await pepemon.contracts.ppdex.getReward()
+			);
+
+			await getPpdexRewards();
+			setTransactionFinished(transactionFinished + 1);
+			} catch (error) {
+			console.log(error);
+			await resetToInitialStateOnReject();
+			}
+		}
+		setIsClaiming(false);
 	};
 
 	useEffect(() => {
@@ -489,10 +487,9 @@ const Stake: React.FC<any> = ({ appChainId: chainId, setChainId }) => {
 							</StakeGridAreaHeaderTitle>
 							<StakeGridAreaHeaderMeta>
 								<span>{parseFloat(ppdexBalance.toString()).toFixed(2)}% APY</span>
-								<img loading="lazy" id="Popover1" src={ibutton} alt="logo"/>
-								<Popover placement="bottom" isOpen={popoverOpen} target="Popover1" toggle={toggle}>
-									<IbuttonPopover onHide={toggle} button={"Buy PPBLZ"} />
-								</Popover>
+								<IbuttonPopover toggle={toggle} isOpen={popoverOpen} heading="APY staking PPBLZ" button={
+									<ExternalLink size={.75} href="https://app.uniswap.org/#/swap?outputCurrency=0x4d2ee5dae46c86da2ff521f7657dad98834f97b8">Buy PPBLZ</ExternalLink>
+								}/>
 							</StakeGridAreaHeaderMeta>
 						</StakeGridAreaHeader>
 						<StakeGridAreaBody>
@@ -522,21 +519,21 @@ const Stake: React.FC<any> = ({ appChainId: chainId, setChainId }) => {
 										}}
 									>
 										{ppblzStakedAmount !== 0 ? (
-											<Button onClick={() => {
+											<Button styling="white" onClick={() => {
 												setPpblzStakeSub(true);
 												setPpblzStakeAdd(false);
-											}} width="20%">-</Button>
+											}} width="20%" symbol aria-label="withdraw">-</Button>
 										) : (
-											<Button disabled width="20%">-</Button>
+											<Button styling="white" disabled width="20%" symbol aria-label="withdraw">-</Button>
 										)}
 										<Spacer size="sm"/>
 										{ppblzBalance !== 0 ? (
 											<Button styling="purple" onClick={() => {
 												setPpblzStakeSub(false);
 												setPpblzStakeAdd(true);
-											}} width="80%">+</Button>
+											}} width="80%" symbol aria-label="stake">+</Button>
 										) : (
-											<Button disabled width="80%">+</Button>
+											<Button styling="purple" disabled width="80%" symbol aria-label="stake">+</Button>
 										)}
 									</ContentCentered>
 								) : null}
@@ -594,17 +591,15 @@ const Stake: React.FC<any> = ({ appChainId: chainId, setChainId }) => {
 					<StakeGridArea area="pplbzEthLp">
 						<StakeGridAreaHeader>
 							<StakeGridAreaHeaderTitle>
-								<img loading="lazy" src={pokeball} alt="Pokeball"/>
+								<img loading="lazy" src={uniswap} alt="Uniswap"/>
 								<Spacer size="sm"/>
 								<Title as="h2" size={1.125} color={theme.color.white} font={theme.font.neometric} weight={900}>Stake PPBLZ-ETH LP</Title>
 							</StakeGridAreaHeaderTitle>
 							<StakeGridAreaHeaderMeta>
-								<span className="StakeGridAreaHeader-number">87% APY</span>
-								<img loading="lazy" id="Popover2" src={ibutton} alt="logo"
-								/>
-								<Popover placement="bottom" isOpen={popoverOpen2} target="Popover2" toggle={toggle2}>
-									<IbuttonPopover onHide={toggle2} button={"Buy PPBLZ-ETH"}/>
-								</Popover>
+								<span>87% APY</span>
+								<IbuttonPopover toggle={toggle2} isOpen={popoverOpen2} heading="APY staking PPBLZ-ETH" button={
+									<ExternalLink size={.75} href="https://app.uniswap.org/#/swap?outputCurrency=0x4d2ee5dae46c86da2ff521f7657dad98834f97b8">Buy PPBLZ-ETH</ExternalLink>
+								}/>
 							</StakeGridAreaHeaderMeta>
 						</StakeGridAreaHeader>
 						<StakeGridAreaBody>
@@ -660,7 +655,7 @@ const Stake: React.FC<any> = ({ appChainId: chainId, setChainId }) => {
 										{parseFloat((ppdexRewards * 0.9).toString()).toFixed(4)}
 									</Text>
 									<Spacer size="md"/>
-									<Text as="p" font={theme.font.inter} color={theme.color.purple[600]} underline>
+									<Text as="p" font={theme.font.inter} color={theme.color.purple[600]} underline onClick={() => getPpdexRewards()}>
 										{isUpdatingRewards ? "UPDATING..." : "UPDATE"}
 									</Text>
 								</div>
@@ -669,15 +664,15 @@ const Stake: React.FC<any> = ({ appChainId: chainId, setChainId }) => {
 
 								<>
 									{ppblzStakedAmount > 0 ? (
-										<div>
+										<>
 											{ppdexRewards > 0.001 ? (
-												<Button onClick={claimRewards} width="50%">{isClaiming ? "CLAIMING..." : "CLAIM"}</Button>
+												<Button styling="purple" onClick={claimRewards} width="clamp(100px, 18em, 100%)">{isClaiming ? "Claim..." : "Claim"}</Button>
 											) : (
-												<Button disabled width="50%">CLAIM</Button>
+												<Button styling="purple" disabled width="clamp(100px, 18em, 100%)">Claim</Button>
 											)}
-										</div>
+										</>
 									) : (
-										<Button disabled width="50%">STAKE FIRST</Button>
+										<Button styling="purple" disabled width="clamp(100px, 18em, 100%)">Stake first</Button>
 									)}
 								</>
 							</div>
@@ -728,14 +723,14 @@ const StakeGridAreaHeaderMeta = styled.div`
 	&{
 		display: flex;
 		align-items: center;
+	}
+
+	span {
+		margin-right: .67em;
 		color: ${props => props.theme.color.white};
 		font-family: ${props => props.theme.font.neometric};
 		font-size: .75rem;
 		font-weight: 900;
-	}
-
-	span {
-		margin-right: .67em
 	}
 `
 
