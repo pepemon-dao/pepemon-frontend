@@ -5,8 +5,8 @@ const LoadingPage: React.FC<any> = ({children}) => {
 	return (
 		<StyledPageWrapperMain>
 			<StyledPageWrapperMainInner>
-				<Loading/>
 				{children}
+				<Loading/>
 			</StyledPageWrapperMainInner>
 		</StyledPageWrapperMain>
 	)

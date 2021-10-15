@@ -494,23 +494,19 @@ const StakeCard: React.FC<StakeCardProps> = ({ pepemon, web3 }) => {
 								justifyContent: "center",
 								}}
 							>
-								{ppblzStakedAmount !== 0 ? (
-									<Button styling="white" onClick={() => {
-										setPpblzStakeSub(true);
-										setPpblzStakeAdd(false);
-									}} width="20%" symbol aria-label="withdraw">-</Button>
-								) : (
-									<Button styling="white" disabled width="20%" symbol aria-label="withdraw">-</Button>
-								)}
+								<Button styling="white" onClick={() => {
+									setPpblzStakeSub(true);
+									setPpblzStakeAdd(false);
+								}} width="20%" symbol aria-label="withdraw"
+									{...(ppblzStakedAmount <= 0 && {disabled: true})}
+								>-</Button>
 								<Spacer size="sm"/>
-								{ppblzBalance !== 0 ? (
-									<Button styling="purple" onClick={() => {
-										setPpblzStakeSub(false);
-										setPpblzStakeAdd(true);
-									}} width="80%" symbol aria-label="stake">+</Button>
-								) : (
-									<Button styling="purple" disabled width="80%" symbol aria-label="stake">+</Button>
-								)}
+								<Button styling="purple" onClick={() => {
+									setPpblzStakeSub(false);
+									setPpblzStakeAdd(true);
+								}} width="80%" symbol aria-label="stake"
+								{...(ppblzBalance <= 0 && {disabled: true})}
+								>+</Button>
 							</ContentCentered>
 						}
 						{(!isApprovedPpblz || ppblzAllowance < parseFloat(ppblzStakeAmount)) &&
@@ -588,23 +584,19 @@ const StakeCard: React.FC<StakeCardProps> = ({ pepemon, web3 }) => {
 								justifyContent: "center",
 								}}
 							>
-								{uniV2PpblzStakedAmount !== 0 ? (
-									<Button styling="white" onClick={() => {
-										setUniV2PpblzStakeSub(true);
-										setUniV2PpblzStakeAdd(false);
-									}} width="20%" symbol aria-label="withdraw">-</Button>
-								) : (
-									<Button styling="white" disabled width="20%" symbol aria-label="withdraw">-</Button>
-								)}
+								<Button styling="white" onClick={() => {
+									setUniV2PpblzStakeSub(true);
+									setUniV2PpblzStakeAdd(false);
+								}} width="20%" symbol aria-label="withdraw"
+								{...(uniV2PpblzStakedAmount <= 0 && {disabled: true})}
+								>-</Button>
 								<Spacer size="sm"/>
-								{uniV2PpblzBalance !== 0 ? (
-									<Button styling="purple" onClick={() => {
-										setUniV2PpblzStakeSub(false);
-										setUniV2PpblzStakeAdd(true);
-									}} width="80%" symbol aria-label="stake">+</Button>
-								) : (
-									<Button styling="purple" disabled width="80%" symbol aria-label="stake">+</Button>
-								)}
+								<Button styling="purple" onClick={() => {
+									setUniV2PpblzStakeSub(false);
+									setUniV2PpblzStakeAdd(true);
+								}} width="80%" symbol aria-label="stake"
+								{...(uniV2PpblzBalance <= 0 && {disabled: true})}
+								>+</Button>
 							</ContentCentered>
 						}
 						{(!isApprovedUniV2Ppblz || uniV2PpblAllowance < parseFloat(uniV2PpblzStakeAmount)) &&

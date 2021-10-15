@@ -43,14 +43,14 @@ const StakeLotteryCard: React.FC<any> = ({ pepemon, account }) => {
 				<AccordionHeader onClick={toggleAccordion} isOpen={openAccordion}>
 					<AccordionHeaderTitle>
 						<img loading="lazy" src={pokeball} alt="Pokeball" style={{ width: "40px", height: "40px", marginRight: "1em" }}/>
-						<Title as="h2" color={true ? theme.color.green[200] : theme.color.white} weight={900} font={theme.font.neometric}>Real subscription</Title>
+						<Title as="h2" color={openAccordion ? theme.color.green[200] : theme.color.white} weight={900} font={theme.font.neometric}>Real subscription</Title>
 					</AccordionHeaderTitle>
 					<AccordionHeaderButton onClick={toggleAccordion}>
-							<span>Show {true ? "less" : "more"}</span>
-							<img loading="lazy" src={true ? uparrow : dropdownarrow} alt="logo" style={{ height: "0.5em", alignSelf: "center", }}/>
+							<span>Show {openAccordion ? "less" : "more"}</span>
+							<img loading="lazy" src={openAccordion ? uparrow : dropdownarrow} alt="logo" style={{ height: "0.5em", alignSelf: "center", }}/>
 					</AccordionHeaderButton>
 				</AccordionHeader>
-				{true &&
+				{openAccordion &&
 					<AccordionBody>
 						<AccordionBodyContent side="left">
 							<Text as="p" size={.875} lineHeight={1.125}>

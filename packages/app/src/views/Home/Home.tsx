@@ -1,11 +1,10 @@
 import React, { useEffect, useState} from 'react'
 import styled from 'styled-components'
-import { Button, ContentBox, ContentBoxNumber, ContentBoxGrid, ContentCentered, ContentColumn, ContentColumns, ExternalLink,
-	Footer, Spacer, ButtonLink, Title, Text, SocialBoxes, Newsletter, NotSupportedModal } from "../../components";
+import { Button, ContentBox, ContentBoxNumber, ContentBoxGrid, ContentCentered, ContentColumn, ContentColumns, Evolve, ExternalLink, Footer, Spacer, ButtonLink, Title, Text, SocialBoxes, Newsletter, NotSupportedModal } from "../../components";
 import { theme } from "../../theme";
 // OLD
 import { useModal, usePepemon } from '../../hooks';
-import { dummyGraph, group, cover, coverblack, fudizardPng, pepemander, logoexpand, bluecard, pepechucard, witchenerycard, pepechurcard, downgreenarrow } from "../../assets";
+import { dummyGraph, group, cover, coverblack, fudizardPng, logoexpand, bluecard, pepechucard, witchenerycard, pepechurcard } from "../../assets";
 import Balances from './components/Balances';
 
 const Home: React.FC<any> = ({ appChainId: chainId, setChainId }) => {
@@ -169,23 +168,7 @@ const Home: React.FC<any> = ({ appChainId: chainId, setChainId }) => {
 			<StyledSection>
 				<ContentColumns>
 					<ContentColumn width="40%">
-						<div style={{ position: "relative", height: "100%", width: "250%",
-							display: "grid",
-							gridAutoRows: "1fr"
-						}}>
-							<div>
-								<div style={{width: "28%"}}>
-									<img loading="lazy" src={pepemander} alt="pepemander" />
-								</div>
-							</div>
-							<div style={{width: "100%", margin: "0 auto", transform: "translateY(-30%)"}}>
-								<img loading="lazy" src={downgreenarrow} alt="downgreenarrow" style={{position: "relative", left: "40%", transform: "translateX(-50%) translateY(60%)"}}/>
-								<div style={{border: "1px dashed gray", borderRadius: "8px", height: "100%", left: "50%", transform: "translateX(-50%)", position: "absolute", width: "28%"}}/>
-							</div>
-							<div style={{width: "100%", margin: "0 0 0 auto", transform: "translateY(-60%)"}}>
-								<div style={{border: "1px dashed gray", borderRadius: "8px", height: "100%", right: "0", position: "absolute", width: "28%"}}/>
-							</div>
-						</div>
+						<Evolve/>
 					</ContentColumn>
 					<ContentColumn width="60%" style={{paddingTop: "3.75em"}}>
 						<Title as="h2" font={theme.font.neometric} size={3} weight={900}>Stake to evolve</Title>
