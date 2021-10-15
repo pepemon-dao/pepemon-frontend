@@ -72,7 +72,7 @@ const StakeLotteryCard: React.FC<any> = ({ pepemon, account }) => {
 									</Text>
 								</ContentColumn>
 								<ContentColumn width="50%">
-									<ExternalLink href={`https://app.uniswap.org/#/add/v2/ETH/${getPpdexAddress(pepemon)}`}>Buy PPBLZ-ETH LP</ExternalLink>
+									<ExternalLink href={`https://app.uniswap.org/#/add/v2/ETH/${getPpdexAddress(pepemon)}`}>Buy PPDEX-ETH LP</ExternalLink>
 								</ContentColumn>
 							</ContentColumns>
 							<Spacer size="md"/>
