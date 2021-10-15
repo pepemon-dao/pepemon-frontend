@@ -1,6 +1,21 @@
+:root {
+	font-size: 16px;
+	font-weight: normal;
+	letter-spacing: normal;
+}
+
+* {
+	box-sizing: border-box;
+	letter-spacing: normal;
+}
+
+html {
+	overflow-x: hidden;
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -10,4 +25,38 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+@font-face {
+	font-family: "SpaceMace";
+	src: local("SpaceMace"), url("./assets/fonts/SpaceMace/SpaceMace.otf") format("truetype");
+	font-weight: normal;
+}
+@font-face {
+	font-family: "Inter";
+	src: local("Inter"), url("./assets/fonts/Inter/Inter-Regular.ttf") format("truetype");
+	font-weight: normal;
+}
+@font-face {
+	font-family: "Inter";
+	src: local("Inter"), url("./assets/fonts/Inter/Inter-Bold.ttf") format("truetype");
+	font-weight: bold;
+}
+@font-face {
+	font-family: "Neometric";
+	src: local("Neometric"),
+	url("./assets/fonts/Neometric/Neometric-Regular.otf") format("truetype");
+	font-weight: normal;
+}
+
+@font-face {
+	font-family: "Neometric";
+	src: local("Neometric"),
+	url("./assets/fonts/Neometric/Neometric-Alt-Black.otf") format("truetype");
+	font-weight: 900;
+}
+
+img {
+	height: auto;
+	max-width: 100%;
 }

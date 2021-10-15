@@ -1,21 +1,22 @@
 import React from "react";
 import { Button } from "../index";
-import useWeb3Modal from "../../hooks/useWeb3Modal";
+import { useWeb3Modal } from "../../hooks";
 
-const WalletButton: React.FC<any> = () => {
-  const [provider, loadWeb3Modal, logoutWeb3Modal] = useWeb3Modal();
+const WalletButton: React.FC<any> = ({setConnecting}) => {
+	const [provider, loadWeb3Modal] = useWeb3Modal();
+
+	const handleClick = async () => {
+		if (!provider) {
+			await loadWeb3Modal();
+		}
+	}
 
   return (
-    <Button
-      onClick={async () => {
-        if (!provider) {
-          await loadWeb3Modal();
-        } else {
-          await logoutWeb3Modal();
-        }
-      }}
+    <Button styling="purple"
+      onClick={handleClick}
+	  {...(provider && {disabled: true})}
     >
-      {!provider ? "Connect Wallet" : "Disconnect Wallet"}
+      {!provider ? "Connect wallet" : "Connecting wallet..."}
     </Button>
   );
 };

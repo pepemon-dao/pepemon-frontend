@@ -1,18 +1,22 @@
 import React from "react";
-
-import useWalletProvider from "../hooks/useWalletProvider";
-import WalletButton from "../components/WalletButton/WalletButton";
+import { usePepemon } from "../hooks";
+import { theme } from "../theme";
+import { ContentCentered, Spacer, Title, WalletButton } from "../components";
+import { LoadingPage } from "../views";
 
 function withConnectedWallet(WrappedComponent: React.FC) {
   return function WithConnectedWalletComponent({ ...props }) {
-    const { wallet } = useWalletProvider();
+    const { account } = usePepemon();
 
-    if (!wallet.account) {
+    if (!account) {
       return (
-        <div>
-          <div>No WALLET connected</div>
-          <WalletButton />
-        </div>
+        <LoadingPage>
+			<ContentCentered>
+	      		<Title as="h1" size={2} font={theme.font.inter} weight="900">No WALLET connected</Title>
+				<Spacer size="sm"/>
+	      		<WalletButton/>
+			</ContentCentered>
+        </LoadingPage>
       );
     }
 

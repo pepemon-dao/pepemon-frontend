@@ -8,8 +8,8 @@
   ],
   "private": true,
   "scripts": {
-    "react-app:build": "yarn workspace @pepemon/app build",
-    "react-app:eject": "yarn workspace @pepemon/app eject",
+    "react-app:build": "NODE_ENV=production yarn workspace @pepemon/app build",
+	"react-app:eject": "yarn workspace @pepemon/app eject",
     "react-app:start": "yarn workspace @pepemon/app start",
     "react-app:test": "yarn workspace @pepemon/app test"
   },
@@ -23,5 +23,6 @@
   },
   "devDependencies": {
     "@types/styled-components": "^5.1.7"
-  }
+  },
+  "dependencies": {}
 }

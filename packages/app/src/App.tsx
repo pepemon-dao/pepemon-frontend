@@ -1,58 +1,90 @@
-import React from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
-import ModalProvider from "./context/ModalProvider";
-import { ThemeProvider } from "styled-components";
-import { TransactionProvider } from "./context/TransactionProvider";
-import { WalletProvider } from "./context/WalletProvider";
-import withConnectedWallet from "./hocs/withConnectedWallet";
-import Home from "./containers/Home/Home";
-import TopBar from "./containers/TopBar/TopBar";
-import theme from "./theme/theme";
-import SideBar from "./containers/SideBar/SideBar";
-import { Body } from "./components";
+import React, { Suspense, useEffect, useState, lazy } from 'react'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import { ThemeProvider } from 'styled-components'
+import { Page, TopBar } from './components'
+import ModalsProvider from './contexts/Modals'
+import PepemonProvider from './contexts/PepemonProvider'
+import { withConnectedWallet } from './hocs'
+import { theme } from './theme'
+// import Events from './views/Events'; Will probably be needed in the future?
+import { LoadingPage } from './views';
+const Home = lazy(() =>  import("./views/Home").then((module) => ({ default: module.default })));
+const Staking = lazy(() =>  import("./views/Staking").then((module) => ({ default: module.default })));
+const Subscription = lazy(() =>  import("./views/Subscription").then((module) => ({ default: module.default })));
+const Store = lazy(() =>  import("./views/Store").then((module) => ({ default: module.default })));
 
-const HomeWithAuth = withConnectedWallet(Home);
+const StakingWithAuth = withConnectedWallet(Staking);
+const SubscriptionWithAuth = withConnectedWallet(Subscription);
+const StoreWithAuth = withConnectedWallet(Store);
 
-function App() {
+const App: React.FC = () => {
+	const defaultChain = process.env.NODE_ENV !== 'production' ? 4 : 1;
+	const [ethChainId, setEthChainId] = useState(parseInt((window as any).ethereum && (window as any).ethereum.chainId) || defaultChain) // ETH default
+	const [providerChainId, setProviderChainId] = useState(parseInt((window as any).ethereum && (window as any).ethereum.chainId) || defaultChain)
+
+	useEffect(() => {
+		// Not working for some mobile implementation, alternative to check for pr
+		// @ts-ignore
+		window.ethereum && window.ethereum.on('chainChanged', (chainId: string) => {
+			setProviderChainId(parseInt(chainId));
+		})
+	}, []);
+
+	const pepemonState = {
+		appChainId: ethChainId,
+		providerChainId: providerChainId,
+		setChainId: setEthChainId,
+	}
+
   return (
-    <Providers>
-      <Router>
-        <Body>
-          <SideBar />
-          <div style={{ flex: 1, display: "flex", flexDirection: "column" }}>
-            <TopBar />
-            <div
-              style={{
-                flex: 1,
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                padding: "2rem",
-              }}
-            >
-              <Switch>
-                <Route path="/" exact component={HomeWithAuth} />
-                <Route path="/otherRoute" component={Home} />
-              </Switch>
-            </div>
-          </div>
-        </Body>
-      </Router>
-    </Providers>
-  );
+	<Providers ethChainId={ethChainId}>
+		<Router>
+			<TopBar {...pepemonState}/>
+			<Page>
+				<Suspense fallback={<LoadingPage/>}>
+					<Switch>
+						<Route path="/" exact>
+							<Home {...pepemonState}/>
+						</Route>
+						<Route path="/test" exact>
+							<LoadingPage/>
+						</Route>
+						<Route path="/staking">
+							<StakingWithAuth {...pepemonState}/>
+						</Route>
+						<Route path="/subscription">
+							<SubscriptionWithAuth {...pepemonState}/>
+						</Route>
+						<Route path="/store/:storeState?">
+							<StoreWithAuth {...pepemonState}/>
+						</Route>
+					</Switch>
+				</Suspense>
+			</Page>
+		</Router>
+	</Providers>
+  )
 }
 
-const Providers: React.FC<any> = ({ children }) => {
-  return (
-    <ThemeProvider theme={theme}>
-      <WalletProvider>
-        <TransactionProvider>
-          <ModalProvider>{children}</ModalProvider>
-        </TransactionProvider>
-      </WalletProvider>
-    </ThemeProvider>
-  );
-};
+const Providers: React.FC<any> = ({ ethChainId, children }) => {
+  // const getConnectorRpcUrl = () => {
+  //   switch (ethChainId) {
+  //     case 1: return 'https://mainnet.eth.aragon.network/' // MAIN
+  //     case 4: return 'https://api.infura.io/v1/jsonrpc/rinkeby' // RINKEBY
+  //     case 56: return 'https://bsc-dataseed.binance.org/' // BSC
+  //     case 137: return 'https://rpc-mainnet.matic.network'
+  //       //'https://rpc-mainnet.maticvigil.com/v1/7bb3aa1bee5774caa7c9eab73c97fa27ca388d95' // MATIC
+  //   }
+  // }
 
-export default App;
+  return (
+	<ThemeProvider theme={theme}>
+		<PepemonProvider>
+			<ModalsProvider>{children}</ModalsProvider>
+		</PepemonProvider>
+	</ThemeProvider>
+  )
+}
+
+export default App
