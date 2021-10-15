@@ -13,7 +13,7 @@ export const Context = createContext<ModalsContext>({
   onDismiss: () => {},
 })
 
-const Modals: React.FC = ({ children }) => {
+const ModalsProvider: React.FC = ({ children }) => {
   const [isOpen, setIsOpen] = useState(false)
   const [content, setContent] = useState<React.ReactNode>()
   const [, setModalKey] = useState<string>()
@@ -70,4 +70,4 @@ const StyledModalBackdrop = styled.div`
   top: 0; right: 0; bottom: 0; left: 0;
 `
 
-export default Modals
+export default ModalsProvider;

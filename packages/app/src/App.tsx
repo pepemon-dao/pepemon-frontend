@@ -3,11 +3,9 @@ import React, { Suspense, useEffect, useState, lazy } from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { ThemeProvider } from 'styled-components'
 import { Page, TopBar } from './components'
-import ModalsProvider from './contexts/Modals'
-import PepemonProvider from './contexts/PepemonProvider'
+import { ModalsProvider, PepemonProvider } from './contexts';
 import { withConnectedWallet } from './hocs'
 import { theme } from './theme'
-// import Events from './views/Events'; Will probably be needed in the future?
 import { LoadingPage } from './views';
 const Home = lazy(() =>  import("./views/Home").then((module) => ({ default: module.default })));
 const Staking = lazy(() =>  import("./views/Staking").then((module) => ({ default: module.default })));
