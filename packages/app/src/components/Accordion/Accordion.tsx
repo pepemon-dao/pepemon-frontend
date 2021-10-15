@@ -122,6 +122,7 @@ const AccordionHeaderButton = styled.button`
 	align-items: center;
 	background-color: ${props => props.theme.color.transparent};
 	border: none;
+	border-radius: 8px;
 	color: ${props => props.theme.color.white};
 	cursor: pointer;
 	display: flex;
@@ -130,6 +131,11 @@ const AccordionHeaderButton = styled.button`
 
 	img {
 		margin-left: .7em;
+	}
+
+	&:focus {
+		outline: none;
+		box-shadow: 0px 0px 10px 5px ${theme.color.purple[600]};
 	}
 `
 

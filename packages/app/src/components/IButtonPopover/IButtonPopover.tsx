@@ -115,6 +115,11 @@ const ImgButton = styled.button.attrs({
 		right: 0;
 		top: -3px;
 	`}
+
+	&:focus {
+		outline: none;
+		box-shadow: 0px 0px 10px 5px ${theme.color.purple[600]};
+	}
 `
 
 const Table = styled.table`

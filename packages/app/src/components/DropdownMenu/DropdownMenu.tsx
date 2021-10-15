@@ -87,6 +87,11 @@ const StyledMenuTrigger = styled.button<StyledProps>`
        box-shadow: 0 1px 8px ${theme.color.colorsLayoutShadows};
     }
 
+	&:focus {
+		outline: none;
+		box-shadow: 0px 0px 10px 5px ${theme.color.purple[600]};
+	}
+	
     svg {
         height: 1em;
         width: 1em;

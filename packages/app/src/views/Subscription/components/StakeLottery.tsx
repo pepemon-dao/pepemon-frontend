@@ -159,8 +159,8 @@ export const AccordionGroup = styled.section`
 `
 
 const AccordionWrapper = styled.div<{isOpen: boolean}>`
-	background-color: ${props => props.theme.color.purple[800]};
-	border-radius: ${props => props.theme.borderRadius}px;
+	background-color: ${theme.color.purple[800]};
+	border-radius: ${theme.borderRadius}px;
 	margin-bottom: .5em;
 	outline: ${props => props.isOpen && `2px solid ${props.theme.color.green[200]}` };
 	width: 100%;
@@ -180,23 +180,29 @@ const AccordionHeaderTitle = styled.div`
 
 const AccordionHeaderButton = styled.button`
 	align-items: center;
-	background-color: ${props => props.theme.color.transparent};
+	background-color: ${theme.color.transparent};
 	border: none;
-	color: ${props => props.theme.color.white};
+	border-radius: 8px;
+	color: ${theme.color.white};
 	cursor: pointer;
 	display: flex;
-	font-family: ${props => props.theme.font.neometric};
+	font-family: ${theme.font.neometric};
 	font-size: 0.75rem;
 
 	img {
 		margin-left: .7em;
 	}
+
+	&:focus {
+		outline: none;
+		box-shadow: 0px 0px 10px 5px ${theme.color.purple[600]};
+	}
 `
 
 const AccordionBody = styled.div`
-	background-color: ${props => props.theme.color.white};
-	border-bottom-left-radius: ${props => props.theme.borderRadius}px;
-	border-bottom-right-radius: ${props => props.theme.borderRadius}px;
+	background-color: ${theme.color.white};
+	border-bottom-left-radius: ${theme.borderRadius}px;
+	border-bottom-right-radius: ${theme.borderRadius}px;
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
@@ -204,7 +210,7 @@ const AccordionBody = styled.div`
 `
 
 const AccordionBodyContent = styled.div<{side: "left" | "right"}>`
-	border-left: ${props => props.side === "right" && `2px solid ${props.theme.color.colorsLayoutBorders}`};
+	border-left: ${props => props.side === "right" && `2px solid ${theme.color.colorsLayoutBorders}`};
 	padding-left: ${props => props.side === "right" && "5.5em"};
 	padding-right: ${props => props.side === "left" && "5.5em"};
 `

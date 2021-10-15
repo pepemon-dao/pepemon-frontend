@@ -49,6 +49,11 @@ const ChainsListButton = styled.button`
 	cursor: pointer;
 	font-size: inherit;
 	font-weight: inherit;
+
+	&:focus {
+		outline: none;
+		box-shadow: 0px 0px 10px 5px ${theme.color.purple[600]};
+	}
 `
 
 const ChainsList = styled.ul<{isOpen?: boolean}>`
