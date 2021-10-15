@@ -7,6 +7,7 @@ interface ButtonProps {
 	styling?: "purple" | "green" | "white" | "link" | "white_borderless";
 	symbol?: boolean;
 	width?: string;
+	onClick?: any;
 }
 
 // TODO: any => ButtonProps

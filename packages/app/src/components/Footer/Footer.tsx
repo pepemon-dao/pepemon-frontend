@@ -4,7 +4,7 @@ import { footercover, logoexpand } from "../../assets";
 import { theme } from "../../theme";
 import { Title } from "../../components";
 
-const Footer: React.FC<any> = () => {
+const Footer = () => {
 	return (
 		<StyledFooter>
 			<div style={{ height: "450px" }}/>

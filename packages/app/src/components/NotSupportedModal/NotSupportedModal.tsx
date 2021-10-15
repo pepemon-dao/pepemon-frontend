@@ -20,9 +20,9 @@ const NotSupportedModal: React.FC<any> = ({ onDismiss, setChainId, chainId, page
                 </div>
             </ModalContent>
             <ModalActions>
-                <Button onClick={() => {
+                <Button styling="purple" onClick={() => {
                     setChainId(1);
-                }} text="SWITCH TO ETH"/>
+                }}>Switch to ETH</Button>
             </ModalActions>
         </Modal>
     )

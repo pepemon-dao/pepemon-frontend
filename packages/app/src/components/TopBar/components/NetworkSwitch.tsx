@@ -27,18 +27,18 @@ export const NetworkModal: React.FC<any> = ({ onDismiss, options, chainId, setEt
                 <Spacer />
                 <Loader />
                 <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                    {`Please change your wallet providers network to ${chainTitle(chainId)}`}
+                    Please change your wallet providers network to {chainTitle(chainId)}
                 </div>
             </ModalContent>
             <ModalActions>
                 {options.includes(chainTitle(providerChainId)) ?
                     <Button onClick={() => {
                         setEthChainId(parseInt(providerChainId));
-                    }} text={`USE ${chainTitle(providerChainId)}`}/>:
+                    }}>Use {chainTitle(providerChainId)}</Button>:
                     <Button onClick={() => {
                         setEthChainId(providerChainId)
                         onDismiss();
-                    }} text="Cancel"/>
+                    }}>Cancel</Button>
                 }
             </ModalActions>
         </Modal>

@@ -60,9 +60,9 @@ const PromoStoreCard: React.FC<StakeCardProps> = ({
                       <StyledOverlayTitle>Approve {promo.token} spending in shop</StyledOverlayTitle>
                       <Spacer size="md"/>
                       <StyleOverlayButtonContainer>
-                        <Button size="md" variant="secondary" disabled={isApproving} onClick={() => onApprove().then(() => setDelayApprove(true))}>{isApproving ? 'Approving...' : 'Approve now'}</Button>
+                        <Button styling="purple" disabled={isApproving} onClick={() => onApprove().then(() => setDelayApprove(true))}>{isApproving ? 'Approving...' : 'Approve now'}</Button>
                         <Spacer size="lg"/>
-                        <Button size="md" variant="quaternary" disabled={isApproving} onClick={() => setDelayApprove(true)}>Just look around</Button>
+                        <Button styling="white" disabled={isApproving} onClick={() => setDelayApprove(true)}>Just look around</Button>
                       </StyleOverlayButtonContainer>
                     </StyledOverlay>
                     }
