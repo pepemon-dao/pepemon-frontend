@@ -31,6 +31,7 @@ const Button = styled.button<any>`
 	&:focus {
 		outline: none;
 		box-shadow: ${props => (!props.disabled && props.styling !== "link") && `0px 0px 10px 5px ${theme.color.purple[600]}`};
+		filter: ${props => (!props.disabled && props.styling === "link") && `drop-shadow(2px 2px 3px ${theme.color.purple[600]})`};
 	}
 
 	${({disabled}) => disabled && `
@@ -110,6 +111,11 @@ export const ButtonLink = styled(Link)<{light?: boolean}>`
 		border: ${props => !props.light && `1px solid ${props.theme.color.purple[600]}`};
 		color: ${props => props.light ? props.theme.color.white : props.theme.color.purple[600]};
 		box-shadow: 0 4px 10px 0 ${theme.color.colorsLayoutShadows};
+	}
+
+	&:focus {
+		filter: drop-shadow(2px 2px 3px ${theme.color.purple[600]});
+		outline: none;
 	}
 `
 
