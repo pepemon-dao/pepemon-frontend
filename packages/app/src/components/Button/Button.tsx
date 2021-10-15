@@ -28,6 +28,11 @@ const Button = styled.button<any>`
 		width: ${props => props.width && props.width};
 	}
 
+	&:focus {
+		outline: none;
+		box-shadow: ${props => (!props.disabled && props.styling !== "link") && `0px 0px 10px 5px ${theme.color.purple[600]}`};
+	}
+
 	${({disabled}) => disabled && `
 		pointer-events: none;
 	`}

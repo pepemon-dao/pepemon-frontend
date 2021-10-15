@@ -1,6 +1,6 @@
 import React, { useEffect, useState} from 'react'
 import styled from 'styled-components'
-import { Button, ContentBox, ContentBoxNumber, ContentBoxGrid, ContentCentered, ContentColumn, ContentColumns, Evolve, ExternalLink, Footer, Spacer, ButtonLink, Title, Text, SocialBoxes, Newsletter, NotSupportedModal } from "../../components";
+import { ContentBox, ContentBoxNumber, ContentBoxGrid, ContentCentered, ContentColumn, ContentColumns, Evolve, ExternalLink, Footer, Spacer, ButtonLink, Title, Text, SocialBoxes, Newsletter, NotSupportedModal } from "../../components";
 import { theme } from "../../theme";
 // OLD
 import { useModal, usePepemon } from '../../hooks';
@@ -152,7 +152,9 @@ const Home: React.FC<any> = ({ appChainId: chainId, setChainId }) => {
 								</ContentColumn>
 							</ContentColumns>
 							<img loading="lazy" src={dummyGraph} alt="graph"/>
-							<Button styling="purple" width="100%">Buy now</Button>
+							<ButtonLink style={{display: "inline-block", width: "100%"}} to="/store/cards">
+								Buy now
+							</ButtonLink>
 						</ContentColumn>
 						<ContentColumn width="60%">
 							<div style={{ position: "relative", height: "100%", width: "100%" }}>

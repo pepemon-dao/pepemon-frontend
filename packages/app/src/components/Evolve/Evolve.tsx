@@ -22,11 +22,11 @@ const Evolve = () => {
 }
 
 const DashedContainer = styled.div`
-	border: "1px dashed gray";
-	border-radius: "8px";
-	height: "100%";
-	position: "absolute";
-	width: "28%";
+	border: 1px dashed gray;
+	border-radius: 8px;
+	height: 100%;
+	position: absolute;
+	width: 28%;
 `
 
 export default Evolve;

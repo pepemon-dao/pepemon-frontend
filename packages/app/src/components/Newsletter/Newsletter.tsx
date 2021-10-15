@@ -1,4 +1,5 @@
 import React from "react";
+import styled from "styled-components";
 import { theme } from "../../theme";
 import { Button, ContentCentered, Title, Text, Spacer } from "../../components";
 
@@ -15,12 +16,21 @@ const Newsletter: React.FC<any> = () => {
 				Be the first to collect all the new Pepemons. You can unsunscribe anytime.
 			</Text>
 			<Spacer size="md"/>
-			<ContentCentered direction="row" bgColor={theme.color.white} style={{ borderRadius: "8px", border: `1px solid ${theme.color.purple[600]}` }}>
-					<input type="email" />
+			<ContentCentered direction="row" bgColor={theme.color.white} style={{ borderRadius: "8px", border: `1px solid ${theme.color.purple[600]}`, overflow: 'hidden' }}>
+					<StyledInput type="email" />
 					<Button styling="purple">Sign up</Button>
 			</ContentCentered>
 		</ContentCentered>
 	)
 }
+
+const StyledInput = styled.input`
+	border: none;
+	font-size: 1.2rem;
+	padding: 0.5em;
+	&:focus {
+		outline: none;
+	}
+`
 
 export default Newsletter;
