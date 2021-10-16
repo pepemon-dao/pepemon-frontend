@@ -1,4 +1,4 @@
-import React, { Suspense, useEffect, useState, lazy } from 'react'
+import React, { Suspense, lazy } from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { ThemeProvider } from 'styled-components'
 import { Page, TopBar } from './components'
@@ -16,55 +16,37 @@ const SubscriptionWithAuth = withConnectedWallet(Subscription);
 const StoreWithAuth = withConnectedWallet(Store);
 
 const App: React.FC = () => {
-	const defaultChain = process.env.NODE_ENV !== 'production' ? 4 : 1;
-	const [ethChainId, setEthChainId] = useState(parseInt((window as any).ethereum && (window as any).ethereum.chainId) || defaultChain) // ETH default
-	const [providerChainId, setProviderChainId] = useState(parseInt((window as any).ethereum && (window as any).ethereum.chainId) || defaultChain)
-
-	useEffect(() => {
-		// Not working for some mobile implementation, alternative to check for pr
-		// @ts-ignore
-		window.ethereum && window.ethereum.on('chainChanged', (chainId: string) => {
-			setProviderChainId(parseInt(chainId));
-		})
-	}, []);
-
-	const pepemonState = {
-		appChainId: ethChainId,
-		providerChainId: providerChainId,
-		setChainId: setEthChainId,
-	}
-
-  return (
-	<Providers ethChainId={ethChainId}>
-		<Router>
-			<TopBar {...pepemonState}/>
-			<Page>
-				<Suspense fallback={<LoadingPage/>}>
-					<Switch>
-						<Route path="/" exact>
-							<Home/>
-						</Route>
-						<Route path="/test" exact>
-							<LoadingPage/>
-						</Route>
-						<Route path="/staking">
-							<StakingWithAuth/>
-						</Route>
-						<Route path="/subscription">
-							<SubscriptionWithAuth/>
-						</Route>
-						<Route path="/store/:storeState?">
-							<StoreWithAuth/>
-						</Route>
-					</Switch>
-				</Suspense>
-			</Page>
-		</Router>
-	</Providers>
-  )
+	return (
+		<Providers>
+			<Router>
+				<TopBar/>
+				<Page>
+					<Suspense fallback={<LoadingPage/>}>
+						<Switch>
+							<Route path="/" exact>
+								<Home/>
+							</Route>
+							<Route path="/test" exact>
+								<LoadingPage/>
+							</Route>
+							<Route path="/staking">
+								<StakingWithAuth/>
+							</Route>
+							<Route path="/subscription">
+								<SubscriptionWithAuth/>
+							</Route>
+							<Route path="/store/:storeState?">
+								<StoreWithAuth/>
+							</Route>
+						</Switch>
+					</Suspense>
+				</Page>
+			</Router>
+		</Providers>
+	)
 }
 
-const Providers: React.FC<any> = ({ ethChainId, children }) => {
+const Providers: React.FC<any> = ({children}) => {
   // const getConnectorRpcUrl = () => {
   //   switch (ethChainId) {
   //     case 1: return 'https://mainnet.eth.aragon.network/' // MAIN

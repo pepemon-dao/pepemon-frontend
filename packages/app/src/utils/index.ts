@@ -1,5 +1,6 @@
 import BigNumber from 'bignumber.js'
 
+export { default as copyText } from './copyText';
 export { getBalanceOfBatch, getTotalSupply, getMaxSupply } from "./erc1155";
 export { getContract, getAllowance, getNativeBalance, getBalance } from "./erc20";
 export { default as formatAddress } from "./formatAddress";

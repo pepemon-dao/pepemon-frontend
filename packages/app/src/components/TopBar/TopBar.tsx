@@ -2,17 +2,13 @@ import React, { useEffect, useState, useCallback, useContext } from "react";
 import styled from "styled-components";
 import Web3 from "web3";
 import { useWeb3Modal, useTokenBalance } from "../../hooks";
-import { getBalanceNumber, formatAddress } from "../../utils";
+import { getBalanceNumber, formatAddress, copyText } from "../../utils";
 import { Button, Text } from "../../components";
 import { NetworkSwitch } from "./components";
 import { PepemonProviderContext } from "../../contexts";
 import { theme } from "../../theme";
 
-type TopBarProps = {
-	setChainId: any;
-};
-
-const TopBar: React.FC<TopBarProps> = ({setChainId}) => {
+const TopBar: React.FC<any> = ({setChainId}) => {
 	const [ppblzStakedAmount, setPpblzStakedAmount] = useState(0);
 	const [ppdexRewards, setPpdexRewards] = useState(0);
 	const [, loadWeb3Modal] = useWeb3Modal();
@@ -34,7 +30,7 @@ const TopBar: React.FC<TopBarProps> = ({setChainId}) => {
 	    })()
 	}, [contracts.ppdex, setPpblzStakedAmount, account, web3.utils]);
 	console.log(ppdexRewards);
-	
+
 	const totalPpblz = getBalanceNumber(ppblzBalance) + ppblzStakedAmount;
 
 	const handleUnlockClick = useCallback(() => {
@@ -62,7 +58,7 @@ const TopBar: React.FC<TopBarProps> = ({setChainId}) => {
 						<TextInfo as="p" font={theme.font.spaceMace} color={theme.color.purple[800]}>XX unique cards</TextInfo>
 					</StyledTopBarInfo>
 				}
-				<Button styling="green" {...(!account && {onClick: handleUnlockClick} )}>{!account ? 'Connect wallet' : formatAddress(account)}</Button>
+				<Button styling="green" title={account && 'Copy address'} onClick={account ? copyText(account) : handleUnlockClick}>{!account ? 'Connect wallet' : formatAddress(account)}</Button>
 			</StyledTopBarInner>
 		</StyledTopBar>
 	);
