@@ -1,16 +1,20 @@
-import React, {useEffect, useState} from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import Web3 from 'web3';
 import { StyledPageWrapperMain, StyledPageWrapperMainInner, StyledPageTitle, NotSupportedModal } from '../../components';
 import { useModal, usePepemon, useWeb3Modal } from '../../hooks';
+import { PepemonProviderContext } from '../../contexts';
 import StakeCard from './components/StakeCard';
 
-const Staking: React.FC<any> = ({ appChainId: chainId, setChainId }) => {
+const Staking: React.FC<any> = ({ setChainId }) => {
   const [provider] = useWeb3Modal();
+  const pepemonContext = useContext(PepemonProviderContext);
+  const { chainId } = pepemonContext[0];
   const [providerChainId, setProviderChainId] = useState((window.ethereum && parseInt(window.ethereum.chainId)) || 1);
   const pepemon = usePepemon()
   const web3 = new Web3(provider);
 
   const [onPresentSupportModal] = useModal(<NotSupportedModal setChainId={setChainId} chainId={chainId} page="Staking"/>, 'not-supported-modal')
+
   const isSupportedChain = (chainId: number) => {
 	return (chainId === 1 || chainId === 4)
   }

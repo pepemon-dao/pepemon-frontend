@@ -133,7 +133,7 @@ const AccordionHeaderButton = styled.button`
 		margin-left: .7em;
 	}
 
-	&:focus {
+	&:focus-visible {
 		outline: none;
 		box-shadow: 0px 0px 10px 5px ${theme.color.purple[600]};
 	}

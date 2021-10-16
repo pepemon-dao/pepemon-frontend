@@ -122,7 +122,8 @@ const StoreCard: React.FC<StakeCardProps> = ({
 	const [imageModal, setImageModal] = useState(null);
 	const [selectedCard, setSelectedCard] = useState(null);
 	const [activeSeries, setActiveSeries] = useState('All Series');
-	const { onRedeemCard, isRedeemingCard } = useRedeemCard(getPepemonStoreContract(pepemon));
+	const { onRedeemCard } = useRedeemCard(getPepemonStoreContract(pepemon));
+
 	const isAllowedSpending = () => {
 		// No allowance needed for native BNB payments
 		if (providerChainId === 56) {
@@ -163,7 +164,8 @@ const StoreCard: React.FC<StakeCardProps> = ({
 						</StyledStoreHeader>
 							<StyledStoreBody>
 								<StyledStoreContentWrapper>
-									<DropdownMenu title={'0 Selected'} options={OPTION_PER_CHAIN(setActiveSeries).get(providerChainId)}/>
+									<DropdownMenu style={{position: 'absolute',
+										right: '1.1em'}} title={'0 Selected'} options={OPTION_PER_CHAIN(setActiveSeries).get(providerChainId)}/>
 									{(!isAllowedSpending() && !delayApprove) &&
 										<StyledOverlay>
 											<Text as="p" size={2} weight={900} font={theme.font.neometric}>Approve PPDEX spending in shop</Text>
@@ -212,7 +214,6 @@ const StoreCard: React.FC<StakeCardProps> = ({
 																	setDelayApprove: setDelayApprove,
 																	setImageModal: setImageModal,
 																	onRedeemCard: onRedeemCard,
-																	isRedeemingCard: isRedeemingCard,
 																	providerChainId: providerChainId,
 																}
 
@@ -262,17 +263,6 @@ const StyledStoreContentWrapper = styled.div`
 	display: flex;
 	flex-direction: column;
 	width: 100%;
-  }
-  & * { box-sizing: border-box; }
-  @media (max-width: 880px) {
-    max-width: 600px;
-    padding: 0 2rem;
-    flex-direction: column;
-  }
-  @media (max-width: 450px) {
-    max-width: min-content;
-    padding: 0 2rem;
-    flex-direction: column;
   }
 `
 

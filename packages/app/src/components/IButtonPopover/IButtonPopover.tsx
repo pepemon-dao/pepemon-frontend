@@ -116,7 +116,7 @@ const ImgButton = styled.button.attrs({
 		top: -3px;
 	`}
 
-	&:focus {
+	&:focus-visible {
 		outline: none;
 		box-shadow: 0px 0px 10px 5px ${theme.color.purple[600]};
 	}

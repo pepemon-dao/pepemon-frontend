@@ -52,8 +52,8 @@ const Store: React.FC<any> = ({ appChainId: chainId, setChainId }) => {
 }
 
 
-export const StoreFront: React.FC<any> = ({ providerChainId, appChainId }) => {
-	const pepemon = usePepemon()
+export const StoreFront: React.FC<{providerChainId: number, appChainId: number}> = ({ providerChainId, appChainId }) => {
+	const pepemon = usePepemon();
 	const [activeCards, setActiveCards] = useState([]);
 	const [transactions, setTransactions] = useState(0);
 	const { onApprove, isApproving } = useApprove(getPepemonStoreContract(pepemon), getPpdexContract(pepemon));
@@ -64,12 +64,6 @@ export const StoreFront: React.FC<any> = ({ providerChainId, appChainId }) => {
 	const cardsPrice = useCardsStorePrices(activeCards);
 	const cardsMetadata = useCardsMetadata(activeCards);
 
-	const [loadedCards, setLoadedCards] = useState(0);
-
-	useEffect(() => {
-		setLoadedCards(loadedCards + 1);
-	}, [loadedCards])
-
 	useEffect(() => {
 		window.scrollTo(0, 0);
 	}, [])
@@ -77,10 +71,6 @@ export const StoreFront: React.FC<any> = ({ providerChainId, appChainId }) => {
 	useEffect(() => {
 		setActiveCards([...CARDS_PER_CHAIN.get(providerChainId)]);
 	}, [providerChainId, appChainId])
-	// @ts-ignore
-	// const openSeaUri = (providerChainId === 1) ? `https://opensea.io/accounts/${account}` :
-	// 	providerChainId === 4 ? `https://rinkeby.opensea.io/accounts/${account}` :
-	// 		providerChainId === 56 ? `https://treasureland.market/#/nft-market/pepemon` : `https://matic.opensea.io/accounts/${account}`;
 
 	return (
 		<>
@@ -109,7 +99,7 @@ export const StoreFront: React.FC<any> = ({ providerChainId, appChainId }) => {
 						justifyContent: 'center',
 					}}
 				>
-					<Loading text={loadedCards <= activeCards.length ? `Loading cards ${loadedCards + '/' + activeCards.length}` : 'Preparing store...'} />
+					<Loading text={'Loading cards...'} />
 				</div>
 			}
 		</>

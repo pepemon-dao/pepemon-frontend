@@ -2,7 +2,7 @@ import React from 'react';
 import { Button, Modal, ModalTitle, ModalContent, ModalActions, Text, Spacer } from '../../../components';
 import { theme } from '../../../theme';
 
-const StoreClaimModal: React.FC<any> = ({dismiss, claimButtonText}) => {
+const StoreClaimModal: React.FC<any> = ({dismiss, claimButtonText, claimButtonClick}) => {
 	return (
 		<Modal rounded onDismiss={dismiss} maxWidth={theme.page.maxWidth}>
 		    <ModalTitle text="Claim ice pack" />
@@ -14,7 +14,7 @@ const StoreClaimModal: React.FC<any> = ({dismiss, claimButtonText}) => {
 			<Spacer size="md"/>
 			<ModalActions>
 				<Button styling="white" onClick={() => dismiss()}>Cancel</Button>
-				<Button styling="purple">{claimButtonText}</Button>
+				<Button styling="purple" onClick={claimButtonClick}>{claimButtonText}</Button>
 			</ModalActions>
 		</Modal>
 	)

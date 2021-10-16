@@ -19,7 +19,6 @@ export const Context = createContext<any>({
 })
 
 export const PepemonProvider: React.FC<any> = ({ children }) => {
-
   const setContractAddresses = (networkId: any): any => ({
     // @ts-ignore
     ppblzAddress: contractAddresses.ppblz[networkId],
@@ -98,7 +97,7 @@ export const PepemonProvider: React.FC<any> = ({ children }) => {
   }
 
   const [state, dispatch] = useReducer(pepemonReducer, initial)
-
+  
   return (
       <Context.Provider value={[state, dispatch]}>
         {children}

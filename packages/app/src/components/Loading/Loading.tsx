@@ -11,12 +11,12 @@ interface LoadingProps {
 const Loading = ({text}: {text?: string|undefined}) => {
 	return (
 		<StyledLoading>
-			<AnimatedImg1 src={walk1} alt="loading"/>
-			<AnimatedImg2 src={walk2} alt="loading"/>
-			<AnimatedImg3 src={walk3} alt="loading"/>
 			{ text &&
 				<Title as="h1" size={2} font={theme.font.inter} weight="900">{text}</Title>
 			}
+			<AnimatedImg1 src={walk1} alt="loading"/>
+			<AnimatedImg2 src={walk2} alt="loading"/>
+			<AnimatedImg3 src={walk3} alt="loading"/>
 		</StyledLoading>
 	)
 }

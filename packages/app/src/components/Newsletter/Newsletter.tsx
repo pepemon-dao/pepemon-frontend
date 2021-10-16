@@ -28,7 +28,7 @@ const StyledInput = styled.input`
 	border: none;
 	font-size: 1.2rem;
 	padding: 0.5em;
-	&:focus {
+	&:focus-visible {
 		outline: none;
 	}
 `

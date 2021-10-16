@@ -63,19 +63,19 @@ const PepemonCard: React.FC<any> = ({
     const isMintable = () => {
         return balances && (parseInt(balances.totalSupply) < parseInt(balances.maxSupply));
     }
-    // const isAffordable = () => {
-    //     if (price.isEqualTo(ppdexBalance)) {
-    //         return true;
-    //     }
-    //     return price.comparedTo(ppdexBalance) === -1;
-    // }
-    // const isAllowedSpending = () => {
-    //     // No allowance needed for native BNB payments
-    //     if (providerChainId === 56) {
-    //         return true;
-    //     }
-    //     return price.comparedTo(allowance) === -1;
-    // }
+    const isAffordable = () => {
+        if (price.isEqualTo(ppdexBalance)) {
+            return true;
+        }
+        return price.comparedTo(ppdexBalance) === -1;
+    }
+    const isAllowedSpending = () => {
+        // No allowance needed for native BNB payments
+        if (providerChainId === 56) {
+            return true;
+        }
+        return price.comparedTo(allowance) === -1;
+    }
 
 	const isReleasingSoon = useCallback(() => {
         const birthdayMetaData = metadata.attributes.find(attribute => attribute.trait_type === 'birthday');
@@ -95,9 +95,9 @@ const PepemonCard: React.FC<any> = ({
     const isSoldOut = () => {
         return (!isMintable() && !isReleasingSoon()) || (!isForSale() && !isReleasingSoon());
     }
-    // const isNoLongerForSale = () => {
-    //     return !isReleasingSoon() && !isForSale()
-    // }
+    const isNoLongerForSale = () => {
+        return !isReleasingSoon() && !isForSale()
+    }
 
     // const calculateTimeLeft = useCallback(() => {
     //     const birthdayMetaData = metadata.attributes.find(attribute => attribute.trait_type === 'birthday');
@@ -151,21 +151,23 @@ const PepemonCard: React.FC<any> = ({
     //         {minutes.toFixed(0)}{pre} {minutes.toFixed(0) === '1' ? 'minute' : 'minutes'} {after}
     //     </span>);
     // }
-    // const isRedeemingThisCard = isRedeemingCard && isRedeemingCard[0] === tokenId && isRedeemingCard[1];
+    const isRedeemingThisCard = isRedeemingCard && isRedeemingCard[0] === tokenId && isRedeemingCard[1];
     const priceOfCard = parseFloat(getDisplayBalance(price, token ? token.decimals : 18)).toFixed(2);
-    // @ts-ignore
-    // const openSeaUri = (providerChainId === 1) ? `https://opensea.io/assets/` :
-    //     providerChainId === 4 ? `https://rinkeby.opensea.io/assets/` :
-    //         providerChainId === 56 ? `https://treasureland.market/#/nft-detail?version=pepemon&token_id=` : `https://matic.opensea.io/assets/`;
 
     return (
 		<StyledPepemonCard style={{ opacity: isSoldOut() ? "50%" : "100%" }}>
 			<StyledPepemonCardPrice>
-				<img loading="lazy" src={coin} alt="coin"/>
-				{priceOfCard} PPDEX
+				{parseInt(priceOfCard) === 0 ? "Unavailable" :
+					<>
+						<img loading="lazy" src={coin} alt="coin"/>
+						{priceOfCard} PPDEX
+					</>
+				}
 			</StyledPepemonCardPrice>
 			<div>
 				<StyledPepemonCardImage loading="lazy" active={active} src={isReleasingSoon() ? getCardInfo(0).img : metadata.image} alt={isReleasingSoon() ? 'Coming soon' : metadata.name} onClick={() => setSelectedCard({
+					tokenId: tokenId,
+					token: token,
 					priceOfCard: priceOfCard,
 					title: metadata.name,
 					description: metadata.description,
@@ -174,6 +176,17 @@ const PepemonCard: React.FC<any> = ({
 					type: metadata.attributes[4],
 					set: metadata.attributes[0],
 					artist: metadata.attributes[3],
+					isSoldOut: isSoldOut,
+					isAllowedSpending: isAllowedSpending,
+					isRedeemingCard: isRedeemingCard,
+					isRedeemingThisCard: isRedeemingThisCard,
+					isAffordable: isAffordable,
+					isReleasingSoon: isReleasingSoon,
+					isMintable: isMintable,
+					isNoLongerForSale: isNoLongerForSale,
+					setDelayApprove: setDelayApprove,
+					onRedeemCard: onRedeemCard,
+					setTransactions: setTransactions,
 				})}/>
 				<Title as="h4" size={1} font={theme.font.neometric}>{isReleasingSoon() ? 'Coming soon' : metadata.name}</Title>
 				<StyledSpacer bg={theme.color.gray[100]} size={2}/>

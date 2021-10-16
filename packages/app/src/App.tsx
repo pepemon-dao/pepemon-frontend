@@ -1,4 +1,3 @@
-
 import React, { Suspense, useEffect, useState, lazy } from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { ThemeProvider } from 'styled-components'
@@ -76,13 +75,15 @@ const Providers: React.FC<any> = ({ ethChainId, children }) => {
   //   }
   // }
 
-  return (
-	<ThemeProvider theme={theme}>
-		<PepemonProvider>
-			<ModalsProvider>{children}</ModalsProvider>
-		</PepemonProvider>
-	</ThemeProvider>
-  )
+	return (
+		<ThemeProvider theme={theme}>
+			<ModalsProvider>
+				<PepemonProvider>
+					{children}
+				</PepemonProvider>
+			</ModalsProvider>
+		</ThemeProvider>
+	)
 }
 
 export default App

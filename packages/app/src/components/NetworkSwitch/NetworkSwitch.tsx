@@ -50,7 +50,7 @@ const ChainsListButton = styled.button`
 	font-size: inherit;
 	font-weight: inherit;
 
-	&:focus {
+	&:focus-visible {
 		outline: none;
 		box-shadow: 0px 0px 10px 5px ${theme.color.purple[600]};
 	}

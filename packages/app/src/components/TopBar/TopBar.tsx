@@ -1,28 +1,22 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useContext } from "react";
 import styled from "styled-components";
-import { useWeb3Modal, usePepemon, useTokenBalance } from "../../hooks";
-import { getPpblzContract, getPpdexContract } from "../../pepemon/utils";
+import { useWeb3Modal, useTokenBalance } from "../../hooks";
 import { getBalanceNumber, formatAddress } from "../../utils";
 import { Button, NetworkSwitch, Text } from "../../components";
+import { PepemonProviderContext } from "../../contexts";
 import { theme } from "../../theme";
 
 type TopBarProps = {
-	appChainId: number,
-	providerChainId: number;
 	setChainId: any;
 };
 
-const TopBar: React.FC<TopBarProps> = ({ appChainId, providerChainId, setChainId }) => {
+const TopBar: React.FC<TopBarProps> = ({setChainId}) => {
 	const [, loadWeb3Modal] = useWeb3Modal();
-	const { account } = usePepemon();
-	const pepemon = usePepemon();
-	const ppblzBalance = useTokenBalance(
-		getPpblzContract(pepemon) ? getPpblzContract(pepemon).address : null
-	);
-
-	const ppdexBalance = useTokenBalance(
-		getPpdexContract(pepemon) ? getPpdexContract(pepemon).address : null
-	);
+	const pepemonContext = useContext(PepemonProviderContext);
+	const { account, chainId, ppblzAddress, ppdexAddress } = pepemonContext[0];
+	const ppblzBalance = useTokenBalance(ppblzAddress);
+	const ppdexBalance = useTokenBalance(ppdexAddress);
+	console.log(pepemonContext[0]);
 
 	const handleUnlockClick = useCallback(() => {
 		loadWeb3Modal();
@@ -34,7 +28,7 @@ const TopBar: React.FC<TopBarProps> = ({ appChainId, providerChainId, setChainId
 				{ account &&
 					<StyledTopBarInfo>
 						<TextInfo as="div" font={theme.font.spaceMace} color={theme.color.purple[800]} style={{ borderRight: "1px solid currentColor" }}>
-							<NetworkSwitch {...{appChainId: appChainId, providerChainId: providerChainId, setChainId: setChainId}}/>
+							<NetworkSwitch {...{appChainId: chainId, providerChainId: chainId, setChainId: setChainId}}/>
 						</TextInfo>
 						{ppblzBalance && (
 							<TextInfo as="p" font={theme.font.spaceMace} color={theme.color.purple[800]}>

@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect, useState, useRef} from 'react';
+import React, { useCallback, useEffect, useState, useRef } from 'react';
 import styled from 'styled-components';
 import { Spacer, Button, Title, IButtonPopover, ExternalLink, Text, ContentCentered } from '../../../components';
 import { useTokenPrices, usePepemon } from '../../../hooks';

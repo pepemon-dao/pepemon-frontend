@@ -29,7 +29,7 @@ const Button = styled.button<any>`
 		width: ${props => props.width && props.width};
 	}
 
-	&:focus {
+	&:focus-visible {
 		outline: none;
 		box-shadow: ${props => (!props.disabled && props.styling !== "link") && `0px 0px 10px 5px ${theme.color.purple[600]}`};
 		filter: ${props => (!props.disabled && props.styling === "link") && `drop-shadow(2px 2px 3px ${theme.color.purple[600]})`};
@@ -92,7 +92,11 @@ const Button = styled.button<any>`
 	`}
 `;
 
-export const ButtonLink = styled(Link)<{light?: boolean}>`
+interface ButtonLinkProps {
+	light?: boolean;
+}
+
+export const ButtonLink = styled(Link)<ButtonLinkProps>`
 	background-color: ${props => props.light && props.theme.color.white};
 	background-image: ${props => !props.light && `linear-gradient(to bottom, #aa6cd6 -100%, ${props.theme.color.purple[600]})`};
 	border-radius: 8px;
@@ -114,7 +118,7 @@ export const ButtonLink = styled(Link)<{light?: boolean}>`
 		box-shadow: 0 4px 10px 0 ${theme.color.colorsLayoutShadows};
 	}
 
-	&:focus {
+	&:focus-visible {
 		filter: drop-shadow(2px 2px 3px ${theme.color.purple[600]});
 		outline: none;
 	}
