@@ -8,7 +8,7 @@ const Subscription: React.FC<any> = ({ appChainId: chainId, setChainId }) => {
   const pepemon = usePepemon();
   const { account } = pepemon;
 
-  const [onPresentSupportModal] = useModal(<NotSupportedModal setChainId={setChainId} chainId={chainId} page="Subscription"/>, 'not-supported-modal')
+  const [onPresentSupportModal] = useModal(<NotSupportedModal page="Subscription"/>, 'not-supported-modal')
   const isSupportedChain = (chainId: number) => {
 	return (chainId === 1 || chainId === 4)
   }

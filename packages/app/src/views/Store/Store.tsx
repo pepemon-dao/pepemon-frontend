@@ -13,7 +13,7 @@ export const CARDS_PER_CHAIN = new Map([
 
 const Store: React.FC<any> = ({ appChainId: chainId, setChainId }) => {
 	const pepemon = usePepemon();
-	const [onPresentSupportModal] = useModal(<NotSupportedModal setChainId={setChainId} chainId={chainId} page="Store"/>, 'not-supported-modal')
+	const [onPresentSupportModal] = useModal(<NotSupportedModal page="Store"/>, 'not-supported-modal')
 	const isSupportedChain = (chainId: number) => {
 		return (chainId === 1 || chainId === 4 || chainId === 137 || chainId === 56);
 	}

@@ -1,134 +1,106 @@
-import React, {useEffect, useState} from 'react';
-import { useLocation } from 'react-router-dom';
-import { useModal, usePepemon, useDetectMobileScreen } from '../../../hooks';
-import { Button, DropdownMenu, Loader, Modal, ModalContent, ModalTitle, ModalActions, Spacer } from '../../../components';
-import styled from 'styled-components';
+import React, { useState, useRef, useContext } from "react";
+import styled from "styled-components";
+import { up_down_arrows_dark } from "../../../assets";
+import { Button, Modal, ModalTitle, ModalContent, ModalActions, Spacer, Text } from "../../../components";
+import { chains } from "../../../constants";
+import { PepemonProviderContext } from "../../../contexts";
+import { theme } from "../../../theme";
+import { useOutsideClick } from "../../../hooks";
 
-interface NetworkSwitchProps {
-    ethChainId: number;
-    setEthChainId: (chainId: number) => void;
-}
-
-export const chainTitle = (id: number) => {
-    switch (id) {
-        case 1: return 'ETH';
-        case 4: return 'RINKEBY';
-        case 56: return 'BSC';
-        case 137: return 'MATIC';
-        default: return 'UNSUPPORTED';
-    }
-}
-
-export const NetworkModal: React.FC<any> = ({ onDismiss, options, chainId, setEthChainId, providerChainId }) => {
-    return (
-        <Modal>
-            <ModalTitle text="Wrong network" />
-            <ModalContent>
-                <Spacer />
-                <Loader />
-                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                    Please change your wallet providers network to {chainTitle(chainId)}
-                </div>
-            </ModalContent>
-            <ModalActions>
-                {options.includes(chainTitle(providerChainId)) ?
-                    <Button onClick={() => {
-                        setEthChainId(parseInt(providerChainId));
-                    }}>Use {chainTitle(providerChainId)}</Button>:
-                    <Button onClick={() => {
-                        setEthChainId(providerChainId)
-                        onDismiss();
-                    }}>Cancel</Button>
-                }
-            </ModalActions>
-        </Modal>
-    )
-}
-
-const NetworkSwitch: React.FC<NetworkSwitchProps> = ({ ethChainId, setEthChainId }) => {
-	const location = useLocation();
-	const pepemon = usePepemon();
-	const isMobileResolution = useDetectMobileScreen();
-	const [options, setOptions] = useState([]);
-
-
-    // @ts-ignore
-    const [providerChainId, setProviderChainId] = useState((window.ethereum && parseInt(window.ethereum.chainId)) || 1);
-    const [onPresentNetworkModal, onDismissNetworkModal] = useModal(
-        <>{ options.length > 1 && <NetworkModal
-            chainId={ethChainId}
-            setEthChainId={setEthChainId}
-            providerChainId={providerChainId}
-            location={location}
-            options={options.map(option => option.title)}
-        />}</>,
-        'wrong-network-modal'
-    )
-
-    // useEffect(() => {
-    //     // @ts-ignore
-    //     window.ethereum && window.ethereum.on('chainChanged', (changedChainId: string) => {
-    //         setProviderChainId(parseInt(changedChainId));
-    //     })
-    // }, []);
-
-    useEffect(() => {
-        pepemon.provider && pepemon.provider.getNetwork().then((network: any) => {
-            setProviderChainId(parseInt(network.chainId));
-        })
-    }, [pepemon.provider])
-
-    useEffect(() => {
-		const handleSetChainId = (id: number) => {
-			setEthChainId(id);
+const NetworkSwitch: React.FC<any> = () => {
+	const [chainsListActive, setChainsListActive] = useState(false);
+	const networkSwitchRef = useRef(null);
+	useOutsideClick(networkSwitchRef, () => {
+		if (chainsListActive) {
+			setChainsListActive(false);
 		}
+	})
 
-		const networkOptions = () => {
-	        const options = [
-	            {title: 'ETH', onClick: () => handleSetChainId(1)},
-	            // {title: 'RINKEBY', onClick: () => handleSetChainId(4)},
-	        ]
-	        if (location.pathname === '/store' || location.pathname === '/pepemon-dego-promo') {
-	            // options.push({title: 'MATIC', onClick: () => handleSetChainId(137)});
-	            options.push({title: 'BSC', onClick: () => handleSetChainId(56)});
-	        }
-	        return options;
-	    }
+	const pepemonContext = useContext(PepemonProviderContext);
+	const { chainId } = pepemonContext[0];
+	const [currentChainId, setCurrentChainId] = useState(chainId); // set currentChainId to handle chain switch
 
-        setOptions(networkOptions());
-    }, [location.pathname, setEthChainId])
-
-    useEffect(() => {
-        if (providerChainId !== ethChainId) {
-            return onPresentNetworkModal();
-        }
-        if (providerChainId === ethChainId && options.map(option => option.title).includes(chainTitle(providerChainId))) {
-            return onDismissNetworkModal()
-        }
-    }, [options, ethChainId, providerChainId, onPresentNetworkModal, onDismissNetworkModal])
-
-    return (
-        <StyledWrapper>
-            <DropdownMenu
-                title={chainTitle(ethChainId)}
-                options={options}
-                style={{
-                    width: isMobileResolution ? '80px' : '120px',
-                    fontFamily: 'original',
-                    fontSize: '22px',
-                    bgColor: 'off',
-                    color: '#1D3557',
-                }}
-            >
-            </DropdownMenu>
-        </StyledWrapper>
-    )
+	return (
+		<>
+			<ChainsListButton onClick={() => setChainsListActive(!chainsListActive)}>{
+				chains[currentChainId] ? chains[currentChainId] : 'Not connected'
+			}</ChainsListButton>
+			<img alt="change network" src={up_down_arrows_dark} style={{ width: ".5em", marginLeft: ".8em" }}/>
+			<ChainsList isOpen={chainsListActive} ref={networkSwitchRef}>
+				{ Object.keys(chains).map((chainId, key) => {
+					const chainName = chains[chainId.toString() as keyof typeof chains];
+					return (
+						<li key={key}>
+							<ChainsListButton disabled={parseInt(chainId) === currentChainId} aria-label={`change to ${chainName}`} onClick={() => {
+								setCurrentChainId(chainId); setChainsListActive(false);
+							}}>
+								{chainName}
+							</ChainsListButton>
+						</li>
+					)
+				})}
+			</ChainsList>
+			{ chainId !== currentChainId &&
+				<Modal>
+					<ModalTitle text="Wrong network"/>
+					<ModalContent>
+						<Text as="p" font={theme.font.inter} size={.875} color={theme.color.gray[600]}>
+							Please change your wallet providers network to {chains[currentChainId.toString() as keyof typeof chains]}
+						</Text>
+					</ModalContent>
+					<Spacer size="md"/>
+					<ModalActions>
+						<Button styling="white" onClick={() => setCurrentChainId(chainId)}>Cancel</Button>
+					</ModalActions>
+				</Modal>
+			}
+		</>
+	)
 }
 
-const StyledWrapper = styled.div`
-  padding-right: ${(props) => props.theme.spacing[4]}px;
-  @media (max-width: 400px) {
-    padding-right: ${(props) => props.theme.spacing[1]}px;
-  }
+const ChainsListButton = styled.button`
+	background-color: transparent;
+	border: none;
+	color: currentColor;
+	cursor: pointer;
+	font-size: inherit;
+	font-weight: inherit;
+
+	&:focus-visible {
+		outline: none;
+		box-shadow: 0px 0px 10px 5px ${theme.color.purple[600]};
+	}
 `
-export default NetworkSwitch
+
+const ChainsList = styled.ul<{isOpen?: boolean}>`
+	background-color: rgba(255, 255, 255, .6);
+	border-radius: 10px;
+	border: 1px solid ${theme.color.purple[800]};
+	display: ${props => !props.isOpen && "none"};
+	left: 0;
+	list-style-type: none;
+	overflow: hidden;
+	padding: .25em;
+	position: absolute;
+
+	li {
+		&:not(:last-child) {
+			margin-bottom: .1em;
+		}
+	}
+
+	${ChainsListButton} {
+		border-radius: 10px;
+		padding: .4em .9em;
+		text-align: left;
+		transition: all .4s;
+		width: 100%;
+
+		&:hover {
+			background-image: linear-gradient(to bottom,#aa6cd6 -100%,#713aac);
+			color: ${theme.color.white};
+		}
+	}
+`
+
+export default NetworkSwitch;

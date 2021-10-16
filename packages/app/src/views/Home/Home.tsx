@@ -1,14 +1,14 @@
-import React, { useEffect, useState} from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
-import { ContentBox, ContentBoxNumber, ContentBoxGrid, ContentCentered, ContentColumn, ContentColumns, Evolve, ExternalLink, Footer, Spacer, ButtonLink, Title, Text, SocialBoxes, Newsletter, NotSupportedModal } from "../../components";
+import { ContentBox, ContentBoxNumber, ContentBoxGrid, ContentCentered, ContentColumn, ContentColumns, Evolve, ExternalLink, Footer, Spacer, ButtonLink, Title, Text, SocialBoxes, Newsletter } from "../../components";
 import { theme } from "../../theme";
 // OLD
-import { useModal, usePepemon } from '../../hooks';
+import { usePepemon } from '../../hooks';
 import { dummyGraph, group, cover, coverblack, fudizardPng, logoexpand, bluecard, pepechucard, witchenerycard, pepechurcard } from "../../assets";
 import Balances from './components/Balances';
 
 const Home: React.FC<any> = ({ appChainId: chainId, setChainId }) => {
-	const [onPresentSupportModal] = useModal(<NotSupportedModal setChainId={setChainId} chainId={chainId} page="Home"/>, 'not-supported-modal-home')
+	// const [onPresentSupportModal] = useModal(<NotSupportedModal page="Home"/>, 'not-supported-modal-home')
 	const isSupportedChain = (chainId: number) => {
 		return (chainId === 1 || chainId === 4);
 	}
@@ -24,13 +24,6 @@ const Home: React.FC<any> = ({ appChainId: chainId, setChainId }) => {
 			setProviderChainId(parseInt(network.chainId));
 		})
 	}, [pepemon.provider])
-
-	useEffect(() => {
-		const supported = isSupportedChain(chainId);
-		if (!supported) {
-			return onPresentSupportModal();
-		}
-	}, [chainId, onPresentSupportModal])
 
 	return (
 		<HomeWrapper>

@@ -2,7 +2,8 @@ import React, { useCallback, useContext } from "react";
 import styled from "styled-components";
 import { useWeb3Modal, useTokenBalance } from "../../hooks";
 import { getBalanceNumber, formatAddress } from "../../utils";
-import { Button, NetworkSwitch, Text } from "../../components";
+import { Button, Text } from "../../components";
+import { NetworkSwitch } from "./components";
 import { PepemonProviderContext } from "../../contexts";
 import { theme } from "../../theme";
 
@@ -16,7 +17,6 @@ const TopBar: React.FC<TopBarProps> = ({setChainId}) => {
 	const { account, chainId, ppblzAddress, ppdexAddress } = pepemonContext[0];
 	const ppblzBalance = useTokenBalance(ppblzAddress);
 	const ppdexBalance = useTokenBalance(ppdexAddress);
-	console.log(pepemonContext[0]);
 
 	const handleUnlockClick = useCallback(() => {
 		loadWeb3Modal();

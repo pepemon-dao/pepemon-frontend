@@ -1,28 +1,24 @@
 import React from 'react';
-import Modal from '../Modal';
-import ModalTitle from '../ModalTitle';
-import ModalContent from '../ModalContent';
-import {chainTitle} from '../TopBar/components/NetworkSwitch';
-import Button from '../Button';
-import ModalActions from '../ModalActions';
+import { Button, Modal, ModalTitle, ModalContent, ModalActions, Spacer, Text } from "../../components";
+import { chains } from "../../constants";
+import { theme } from "../../theme";
 
-const NotSupportedModal: React.FC<any> = ({ onDismiss, setChainId, chainId, page }) => {
+const NotSupportedModal: React.FC<{page: string}> = ({ page }) => {
 
     return (
         <Modal>
             <ModalTitle text="Not (yet) supported" />
             <ModalContent>
-                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column', flexGrow: 0 }}>
-                    {`${chainTitle(chainId)} network is currently not supported on the ${page} page.`}
-                    <div style={{maxWidth: '20rem', paddingTop: '1rem'}}>
-
-                    </div>
-                </div>
+				<Text as="p" font={theme.font.inter} size={.875} color={theme.color.gray[600]}>
+                	{`Your chosen network is currently not supported on the ${page} page.`}
+				</Text>
+				<Text as="p" font={theme.font.inter} size={.875} color={theme.color.gray[600]}>
+					Please change your wallet provider's network to ETH.
+				</Text>
             </ModalContent>
+			<Spacer size="md"/>
             <ModalActions>
-                <Button styling="purple" onClick={() => {
-                    setChainId(1);
-                }}>Switch to ETH</Button>
+                <Button styling="purple" disabled>Switch to ETH</Button>
             </ModalActions>
         </Modal>
     )

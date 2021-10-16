@@ -13,7 +13,7 @@ const Staking: React.FC<any> = ({ setChainId }) => {
   const pepemon = usePepemon()
   const web3 = new Web3(provider);
 
-  const [onPresentSupportModal] = useModal(<NotSupportedModal setChainId={setChainId} chainId={chainId} page="Staking"/>, 'not-supported-modal')
+  // const [onPresentSupportModal] = useModal(<NotSupportedModal page="Staking"/>, 'not-supported-modal')
 
   const isSupportedChain = (chainId: number) => {
 	return (chainId === 1 || chainId === 4)
@@ -28,13 +28,6 @@ const Staking: React.FC<any> = ({ setChainId }) => {
 	  setProviderChainId(parseInt(network.chainId));
 	})
   }, [pepemon.provider])
-
-  useEffect(() => {
-	const supported = isSupportedChain(chainId);
-	if (!supported) {
-	  return onPresentSupportModal();
-	}
-  }, [chainId, onPresentSupportModal])
 
   useEffect(() => {
 	window.scrollTo(0, 0)

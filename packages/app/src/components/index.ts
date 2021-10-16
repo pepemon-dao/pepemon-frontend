@@ -21,7 +21,6 @@ export type { ModalProps } from './Modal';
 export { default as ModalActions } from './ModalActions';
 export { default as ModalContent } from './ModalContent';
 export { default as ModalTitle } from './ModalTitle';
-export { default as NetworkSwitch } from './NetworkSwitch';
 export { default as Navigation } from './Navigation';
 export { default as Newsletter } from './Newsletter';
 export { default as NotSupportedModal } from './NotSupportedModal';
