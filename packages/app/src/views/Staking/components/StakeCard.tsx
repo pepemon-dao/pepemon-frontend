@@ -48,10 +48,6 @@ const StakeCard: React.FC<any> = () => {
     const { account, contracts, provider } = pepemonContext[0];
 	const web3 = new Web3(provider);
 
-    const getAccount = useCallback(() => {
-        return account
-    }, [account])
-
     const { ppblzPrice, ppdexPrice } = useTokenPrices();
     const calculateApy = () => {
         const rewardedPerYear = ppdexPrice * 20;
@@ -78,36 +74,36 @@ const StakeCard: React.FC<any> = () => {
     /** getters */
     const getPpblzAllowance = useCallback(async () => {
         // @ts-ignore
-        let _ppblzAllowance = await contracts.ppblz.allowance(getAccount(), contracts.ppdex.address);
+        let _ppblzAllowance = await contracts.ppblz.allowance(account, contracts.ppdex.address);
         setPpblzAllowance(parseInt(web3.utils.fromWei(_ppblzAllowance.toString())));
         if (_ppblzAllowance > 0 ) {
             setIsApprovedPpblz(true)
         }
-    }, [setPpblzAllowance, getAccount, contracts.ppblz, contracts.ppdex.address, web3.utils])
+    }, [setPpblzAllowance, account, contracts.ppblz, contracts.ppdex.address, web3.utils])
 
     const getUniV2PpblzAllowance = useCallback( async () => {
         // @ts-ignore
-        let _uniV2PpblzAllowance = await contracts.uniV2_ppblz.allowance(getAccount(), contracts.ppdex.address);
+        let _uniV2PpblzAllowance = await contracts.uniV2_ppblz.allowance(account, contracts.ppdex.address);
         setUniV2PpblzAllowance(parseInt(web3.utils.fromWei(_uniV2PpblzAllowance.toString())));
         if (_uniV2PpblzAllowance > 0 ) {
             setIsApprovedUniV2Ppblz(true)
         }
-    }, [contracts.uniV2_ppblz, contracts.ppdex.address, setUniV2PpblzAllowance, setIsApprovedUniV2Ppblz, getAccount, web3.utils])
+    }, [contracts.uniV2_ppblz, contracts.ppdex.address, setUniV2PpblzAllowance, setIsApprovedUniV2Ppblz, account, web3.utils])
 
     const getPpblzBalance = useCallback( async () => {
-        let _ppblzBalance = await contracts.ppblz.balanceOf(getAccount());
+        let _ppblzBalance = await contracts.ppblz.balanceOf(account);
         setPpblzBalance(parseInt(web3.utils.fromWei(_ppblzBalance.toString())));
-    }, [contracts.ppblz, setPpblzBalance, web3.utils, getAccount])
+    }, [contracts.ppblz, setPpblzBalance, web3.utils, account])
 
     const getUniV2PpblzBalance = useCallback( async () => {
-        let _uniV2PpblzBalance = await contracts.uniV2_ppblz.balanceOf(getAccount());
+        let _uniV2PpblzBalance = await contracts.uniV2_ppblz.balanceOf(account);
         setUniV2PpblzBalance(parseInt(web3.utils.fromWei(_uniV2PpblzBalance.toString())));
-    }, [contracts.uniV2_ppblz, setUniV2PpblzBalance, getAccount, web3.utils])
+    }, [contracts.uniV2_ppblz, setUniV2PpblzBalance, account, web3.utils])
 
     const getPpdexBalance = useCallback( async () => {
-        let _ppdexBalance = await contracts.ppdex.balanceOf(getAccount());
+        let _ppdexBalance = await contracts.ppdex.balanceOf(account);
         setPpdexBalance(parseInt(web3.utils.fromWei(_ppdexBalance.toString())));
-    }, [contracts.ppdex, setPpdexBalance, getAccount, web3.utils])
+    }, [contracts.ppdex, setPpdexBalance, account, web3.utils])
 
     const getPpblzSupply = useCallback( async () => {
         let _ppblzSupply = await contracts.ppblz.totalSupply();
@@ -120,24 +116,24 @@ const StakeCard: React.FC<any> = () => {
     }, [contracts.uniV2_ppblz, setTotalUniV2PpblzSupply, web3.utils])
 
     const getMyPpblzStakeAmount = useCallback( async () => {
-        let stakeA = await contracts.ppdex.getAddressPpblzStakeAmount(getAccount());
+        let stakeA = await contracts.ppdex.getAddressPpblzStakeAmount(account);
         setPpblzStakedAmount(parseInt(web3.utils.fromWei(stakeA.toString())));
-    }, [contracts.ppdex, setPpblzStakedAmount, getAccount, web3.utils])
+    }, [contracts.ppdex, setPpblzStakedAmount, account, web3.utils])
 
     const getMyUniV2PpblzStakeAmount = useCallback( async () => {
-        let stakeA = await contracts.ppdex.getAddressUniV2StakeAmount(getAccount());
+        let stakeA = await contracts.ppdex.getAddressUniV2StakeAmount(account);
         setUniV2PpblzStakedAmount(parseInt(web3.utils.fromWei(stakeA.toString())));
-    }, [contracts.ppdex, setUniV2PpblzStakedAmount, getAccount, web3.utils])
+    }, [contracts.ppdex, setUniV2PpblzStakedAmount, account, web3.utils])
 
     const getPpdexRewards = useCallback( async () => {
         setIsUpdatingRewards(true);
-        let cRewards = (await contracts.ppdex.myRewardsBalance(getAccount())).toString();
-        const ppblzStaked = (await contracts.ppdex.getAddressPpblzStakeAmount(getAccount())).toString();
-        const uniV2Staked = (await contracts.ppdex.getAddressUniV2StakeAmount(getAccount())).toString();
+        let cRewards = (await contracts.ppdex.myRewardsBalance(account)).toString();
+        const ppblzStaked = (await contracts.ppdex.getAddressPpblzStakeAmount(account)).toString();
+        const uniV2Staked = (await contracts.ppdex.getAddressUniV2StakeAmount(account)).toString();
 
         // Faulty myRewardsBalance edge case.. dont use view but recalculate!
         if (ppblzStaked > 0 && uniV2Staked > 0) {
-            const lastRewardBlock = await contracts.ppdex.getLastBlockCheckedNum(getAccount());
+            const lastRewardBlock = await contracts.ppdex.getLastBlockCheckedNum(account);
             const currentBlock = await contracts.ppdex.getBlockNum();
             const liquidityMultiplier = await contracts.ppdex.getLiquidityMultiplier();
             const rewardsVar = 100000;
@@ -157,7 +153,7 @@ const StakeCard: React.FC<any> = () => {
             setIsUpdatingRewards(false);
             clearTimeout(timer);
         }, 2000);
-    }, [getAccount, contracts.ppdex, web3.utils])
+    }, [account, contracts.ppdex, web3.utils])
 
     const stakePpblz = async () => {
         if ((isStakingPpblz || parseFloat(ppblzStakeAmount) === 0) || (parseFloat(ppblzStakeAmount) > ppblzBalance)) {
