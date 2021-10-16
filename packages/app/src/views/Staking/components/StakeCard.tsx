@@ -1,18 +1,15 @@
-import React, { useCallback, useEffect, useState, useRef } from 'react';
+import React, { useCallback, useEffect, useState, useRef, useContext } from 'react';
 import styled from 'styled-components';
+import Web3 from 'web3';
 import { Spacer, Button, Title, IButtonPopover, ExternalLink, Text, ContentCentered } from '../../../components';
-import { useTokenPrices, usePepemon } from '../../../hooks';
+import { PepemonProviderContext } from '../../../contexts';
+import { useTokenPrices } from '../../../hooks';
 import { correctChainIsLoaded } from '../../../utils';
 import { pokeball, uniswap } from '../../../assets';
 import { theme } from '../../../theme';
 import {sendTransaction} from '../../../pepemon/utils';
 
-interface StakeCardProps {
-    pepemon: any,
-    web3: any,
-}
-
-const StakeCard: React.FC<StakeCardProps> = ({ pepemon, web3 }) => {
+const StakeCard: React.FC<any> = () => {
     //TODO: implement proper state / context management
 	const [popoverOpen, setPopoverOpen] = useState(false);
 	const [popoverOpen2, setPopoverOpen2] = useState(false);
@@ -46,7 +43,11 @@ const StakeCard: React.FC<StakeCardProps> = ({ pepemon, web3 }) => {
 	const [uniV2PpblzStakeAdd, setUniV2PpblzStakeAdd]= useState(false);
 	const [uniV2PpblzStakeSub, setUniV2PpblzStakeSub]= useState(false);
 
-    const { provider, account } = usePepemon()
+    const pepemonContext = useContext(PepemonProviderContext);
+    const pepemon = pepemonContext[0];
+    const { account, contracts, provider } = pepemonContext[0];
+	const web3 = new Web3(provider);
+
     const getAccount = useCallback(() => {
         return account
     }, [account])
@@ -77,68 +78,68 @@ const StakeCard: React.FC<StakeCardProps> = ({ pepemon, web3 }) => {
     /** getters */
     const getPpblzAllowance = useCallback(async () => {
         // @ts-ignore
-        let _ppblzAllowance = await pepemon.contracts.ppblz.allowance(getAccount(), pepemon.contracts.ppdex.address);
-        setPpblzAllowance(web3.utils.fromWei(_ppblzAllowance.toString()));
+        let _ppblzAllowance = await contracts.ppblz.allowance(getAccount(), contracts.ppdex.address);
+        setPpblzAllowance(parseInt(web3.utils.fromWei(_ppblzAllowance.toString())));
         if (_ppblzAllowance > 0 ) {
             setIsApprovedPpblz(true)
         }
-    }, [setPpblzAllowance, getAccount, pepemon.contracts.ppblz, pepemon.contracts.ppdex.address, web3.utils])
+    }, [setPpblzAllowance, getAccount, contracts.ppblz, contracts.ppdex.address, web3.utils])
 
     const getUniV2PpblzAllowance = useCallback( async () => {
         // @ts-ignore
-        let _uniV2PpblzAllowance = await pepemon.contracts.uniV2_ppblz.allowance(getAccount(), pepemon.contracts.ppdex.address);
-        setUniV2PpblzAllowance(web3.utils.fromWei(_uniV2PpblzAllowance.toString()));
+        let _uniV2PpblzAllowance = await contracts.uniV2_ppblz.allowance(getAccount(), contracts.ppdex.address);
+        setUniV2PpblzAllowance(parseInt(web3.utils.fromWei(_uniV2PpblzAllowance.toString())));
         if (_uniV2PpblzAllowance > 0 ) {
             setIsApprovedUniV2Ppblz(true)
         }
-    }, [pepemon.contracts.uniV2_ppblz, pepemon.contracts.ppdex.address, setUniV2PpblzAllowance, setIsApprovedUniV2Ppblz, getAccount, web3.utils])
+    }, [contracts.uniV2_ppblz, contracts.ppdex.address, setUniV2PpblzAllowance, setIsApprovedUniV2Ppblz, getAccount, web3.utils])
 
     const getPpblzBalance = useCallback( async () => {
-        let _ppblzBalance = await pepemon.contracts.ppblz.balanceOf(getAccount());
-        setPpblzBalance(web3.utils.fromWei(_ppblzBalance.toString()));
-    }, [pepemon.contracts.ppblz, setPpblzBalance, web3.utils, getAccount])
+        let _ppblzBalance = await contracts.ppblz.balanceOf(getAccount());
+        setPpblzBalance(parseInt(web3.utils.fromWei(_ppblzBalance.toString())));
+    }, [contracts.ppblz, setPpblzBalance, web3.utils, getAccount])
 
     const getUniV2PpblzBalance = useCallback( async () => {
-        let _uniV2PpblzBalance = await pepemon.contracts.uniV2_ppblz.balanceOf(getAccount());
-        setUniV2PpblzBalance(web3.utils.fromWei(_uniV2PpblzBalance.toString()));
-    }, [pepemon.contracts.uniV2_ppblz, setUniV2PpblzBalance, getAccount, web3.utils])
+        let _uniV2PpblzBalance = await contracts.uniV2_ppblz.balanceOf(getAccount());
+        setUniV2PpblzBalance(parseInt(web3.utils.fromWei(_uniV2PpblzBalance.toString())));
+    }, [contracts.uniV2_ppblz, setUniV2PpblzBalance, getAccount, web3.utils])
 
     const getPpdexBalance = useCallback( async () => {
-        let _ppdexBalance = await pepemon.contracts.ppdex.balanceOf(getAccount());
-        setPpdexBalance(web3.utils.fromWei(_ppdexBalance.toString()));
-    }, [pepemon.contracts.ppdex, setPpdexBalance, getAccount, web3.utils])
+        let _ppdexBalance = await contracts.ppdex.balanceOf(getAccount());
+        setPpdexBalance(parseInt(web3.utils.fromWei(_ppdexBalance.toString())));
+    }, [contracts.ppdex, setPpdexBalance, getAccount, web3.utils])
 
     const getPpblzSupply = useCallback( async () => {
-        let _ppblzSupply = await pepemon.contracts.ppblz.totalSupply();
-        setTotalPpblzSupply(web3.utils.fromWei(_ppblzSupply.toString()));
-    }, [pepemon.contracts.ppblz, setTotalPpblzSupply, web3.utils])
+        let _ppblzSupply = await contracts.ppblz.totalSupply();
+        setTotalPpblzSupply(parseInt(web3.utils.fromWei(_ppblzSupply.toString())));
+    }, [contracts.ppblz, setTotalPpblzSupply, web3.utils])
 
     const getUniV2PpblzSupply = useCallback( async () => {
-        let _ppblzSupply = await pepemon.contracts.uniV2_ppblz.totalSupply();
-        setTotalUniV2PpblzSupply(web3.utils.fromWei(_ppblzSupply.toString()));
-    }, [pepemon.contracts.uniV2_ppblz, setTotalUniV2PpblzSupply, web3.utils])
+        let _ppblzSupply = await contracts.uniV2_ppblz.totalSupply();
+        setTotalUniV2PpblzSupply(parseInt(web3.utils.fromWei(_ppblzSupply.toString())));
+    }, [contracts.uniV2_ppblz, setTotalUniV2PpblzSupply, web3.utils])
 
     const getMyPpblzStakeAmount = useCallback( async () => {
-        let stakeA = await pepemon.contracts.ppdex.getAddressPpblzStakeAmount(getAccount());
-        setPpblzStakedAmount((web3.utils.fromWei(stakeA.toString())));
-    }, [pepemon.contracts.ppdex, setPpblzStakedAmount, getAccount, web3.utils])
+        let stakeA = await contracts.ppdex.getAddressPpblzStakeAmount(getAccount());
+        setPpblzStakedAmount(parseInt(web3.utils.fromWei(stakeA.toString())));
+    }, [contracts.ppdex, setPpblzStakedAmount, getAccount, web3.utils])
 
     const getMyUniV2PpblzStakeAmount = useCallback( async () => {
-        let stakeA = await pepemon.contracts.ppdex.getAddressUniV2StakeAmount(getAccount());
-        setUniV2PpblzStakedAmount((web3.utils.fromWei(stakeA.toString())));
-    }, [pepemon.contracts.ppdex, setUniV2PpblzStakedAmount, getAccount, web3.utils])
+        let stakeA = await contracts.ppdex.getAddressUniV2StakeAmount(getAccount());
+        setUniV2PpblzStakedAmount(parseInt(web3.utils.fromWei(stakeA.toString())));
+    }, [contracts.ppdex, setUniV2PpblzStakedAmount, getAccount, web3.utils])
 
     const getPpdexRewards = useCallback( async () => {
         setIsUpdatingRewards(true);
-        let cRewards = (await pepemon.contracts.ppdex.myRewardsBalance(getAccount())).toString();
-        const ppblzStaked = (await pepemon.contracts.ppdex.getAddressPpblzStakeAmount(getAccount())).toString();
-        const uniV2Staked = (await pepemon.contracts.ppdex.getAddressUniV2StakeAmount(getAccount())).toString();
+        let cRewards = (await contracts.ppdex.myRewardsBalance(getAccount())).toString();
+        const ppblzStaked = (await contracts.ppdex.getAddressPpblzStakeAmount(getAccount())).toString();
+        const uniV2Staked = (await contracts.ppdex.getAddressUniV2StakeAmount(getAccount())).toString();
 
         // Faulty myRewardsBalance edge case.. dont use view but recalculate!
         if (ppblzStaked > 0 && uniV2Staked > 0) {
-            const lastRewardBlock = await pepemon.contracts.ppdex.getLastBlockCheckedNum(getAccount());
-            const currentBlock = await pepemon.contracts.ppdex.getBlockNum();
-            const liquidityMultiplier = await pepemon.contracts.ppdex.getLiquidityMultiplier();
+            const lastRewardBlock = await contracts.ppdex.getLastBlockCheckedNum(getAccount());
+            const currentBlock = await contracts.ppdex.getBlockNum();
+            const liquidityMultiplier = await contracts.ppdex.getLiquidityMultiplier();
             const rewardsVar = 100000;
 
             const ppblzRewardBalance = ppblzStaked * (currentBlock - lastRewardBlock) / rewardsVar;
@@ -150,13 +151,13 @@ const StakeCard: React.FC<StakeCardProps> = ({ pepemon, web3 }) => {
                 cRewards = realReward.toString();
             }
         }
-        setPpdexRewards(web3.utils.fromWei(cRewards));
+        setPpdexRewards(parseInt(web3.utils.fromWei(cRewards)));
 
         setTimeout(() => {
             setIsUpdatingRewards(false);
             clearTimeout(timer);
         }, 2000);
-    }, [getAccount, pepemon.contracts.ppdex, web3.utils])
+    }, [getAccount, contracts.ppdex, web3.utils])
 
     const stakePpblz = async () => {
         if ((isStakingPpblz || parseFloat(ppblzStakeAmount) === 0) || (parseFloat(ppblzStakeAmount) > ppblzBalance)) {
@@ -165,7 +166,7 @@ const StakeCard: React.FC<StakeCardProps> = ({ pepemon, web3 }) => {
 
         setIsStakingPpblz(true);
         try {
-            let stakeRes = await sendTransaction(provider, async () => await pepemon.contracts.ppdex.stakePpblz(web3.utils.toWei(ppblzStakeAmount.toString()), { gasLimit: 200000 }));
+            let stakeRes = await sendTransaction(provider, async () => await contracts.ppdex.stakePpblz(web3.utils.toWei(ppblzStakeAmount.toString()), { gasLimit: 200000 }));
             if (stakeRes) {
                 setIsStakingPpblz(false);
                 setPpblzStakeAmount(null);
@@ -189,7 +190,7 @@ const StakeCard: React.FC<StakeCardProps> = ({ pepemon, web3 }) => {
 
         setIsStakingUniV2Ppblz(true);
         try {
-            let stakeRes = await sendTransaction(provider, async () => await pepemon.contracts.ppdex.stakeUniV2(web3.utils.toWei(uniV2PpblzStakeAmount.toString()), { gasLimit: 200000 }))
+            let stakeRes = await sendTransaction(provider, async () => await contracts.ppdex.stakeUniV2(web3.utils.toWei(uniV2PpblzStakeAmount.toString()), { gasLimit: 200000 }))
             if (stakeRes) {
                 setIsStakingUniV2Ppblz(false);
                 setUniV2PpblzStakeAmount(null);
@@ -212,7 +213,7 @@ const StakeCard: React.FC<StakeCardProps> = ({ pepemon, web3 }) => {
         }
         setIsWithdrawingPpblz(true);
         try {
-            let unstakeRes = await sendTransaction(provider, async () => await pepemon.contracts.ppdex.withdrawPpblz(web3.utils.toWei(ppblzStakeAmount.toString()), { gasLimit: 200000 }))
+            let unstakeRes = await sendTransaction(provider, async () => await contracts.ppdex.withdrawPpblz(web3.utils.toWei(ppblzStakeAmount.toString()), { gasLimit: 200000 }))
 
             if (unstakeRes) {
                 setIsWithdrawingPpblz(false);
@@ -238,7 +239,7 @@ const StakeCard: React.FC<StakeCardProps> = ({ pepemon, web3 }) => {
         }
         setIsWithdrawingUniV2Ppblz(true);
         try {
-            let unstakeRes = await sendTransaction(provider, async () => await pepemon.contracts.ppdex.withdrawUniV2(web3.utils.toWei(uniV2PpblzStakeAmount.toString()), { gasLimit: 200000 }))
+            let unstakeRes = await sendTransaction(provider, async () => await contracts.ppdex.withdrawUniV2(web3.utils.toWei(uniV2PpblzStakeAmount.toString()), { gasLimit: 200000 }))
 
             if (unstakeRes) {
                 setIsWithdrawingUniV2Ppblz(false);
@@ -265,8 +266,8 @@ const StakeCard: React.FC<StakeCardProps> = ({ pepemon, web3 }) => {
         setIsApprovingPpblz(true);
 
         try {
-            let approveStaking = await sendTransaction(provider, async () => await pepemon.contracts.ppblz.approve(
-                pepemon.contracts.ppdex.address,
+            let approveStaking = await sendTransaction(provider, async () => await contracts.ppblz.approve(
+                contracts.ppdex.address,
                 web3.utils.toWei(totalPpblzSupply.toString())
             ))
 
@@ -291,8 +292,8 @@ const StakeCard: React.FC<StakeCardProps> = ({ pepemon, web3 }) => {
         setIsApprovingUniV2Ppblz(true);
 
         try {
-            let approveStaking = await sendTransaction(provider, async () => await pepemon.contracts.uniV2_ppblz.approve(
-                pepemon.contracts.ppdex.address,
+            let approveStaking = await sendTransaction(provider, async () => await contracts.uniV2_ppblz.approve(
+                contracts.ppdex.address,
                 web3.utils.toWei(totalUniV2PpblzSupply.toString())
             ));
             await getUniV2PpblzAllowance();
@@ -395,7 +396,7 @@ const StakeCard: React.FC<StakeCardProps> = ({ pepemon, web3 }) => {
         if(ppdexRewards > 0) {
             setIsClaiming(true);
             try {
-                await sendTransaction(provider, async () => await pepemon.contracts.ppdex.getReward());
+                await sendTransaction(provider, async () => await contracts.ppdex.getReward());
 
                 await getPpdexRewards();
                 setTransactionFinished(transactionFinished + 1);
@@ -420,7 +421,7 @@ const StakeCard: React.FC<StakeCardProps> = ({ pepemon, web3 }) => {
     // }
 
     useEffect(() => {
-        if (!pepemon || !pepemon.contracts) {
+        if (!pepemon || !contracts) {
             return;
         }
         correctChainIsLoaded(pepemon).then(correct => {
@@ -451,7 +452,7 @@ const StakeCard: React.FC<StakeCardProps> = ({ pepemon, web3 }) => {
                 console.error(error);
             }
         })
-    }, [account, pepemon, provider, transactionFinished,
+    }, [account, pepemon, contracts, provider, transactionFinished,
 		getMyPpblzStakeAmount, getMyUniV2PpblzStakeAmount, getPpblzAllowance, getPpblzBalance, getPpblzSupply, getPpdexBalance, getPpdexRewards, getUniV2PpblzAllowance, getUniV2PpblzBalance, getUniV2PpblzSupply
 	]);
 
@@ -662,7 +663,7 @@ const StakeCard: React.FC<StakeCardProps> = ({ pepemon, web3 }) => {
 							</Button>
 						</div>
 						<Spacer size="md"/>
-						<Button styling="purple" disabled={isUpdatingRewards || ((ppblzStakedAmount > 0) && (!(ppdexRewards > 0.1) || isClaiming))} onClick={claimRewards} width="clamp(100px, 18em, 100%)">{isUpdatingRewards ? "Updating..." : isClaiming ? "Claim..." : "Claim"}</Button>
+						<Button styling="purple" disabled={(isStakingPpblz || isWithdrawingPpblz) || isUpdatingRewards || ((ppblzStakedAmount > 0) && (!(ppdexRewards > 0.1) || isClaiming))} onClick={claimRewards} width="clamp(100px, 18em, 100%)">{(isStakingPpblz || isWithdrawingPpblz || isUpdatingRewards) ? "Updating..." : isClaiming ? "Claim..." : "Claim"}</Button>
 					</div>
 				</StakeGridAreaBody>
 			</StakeGridArea>

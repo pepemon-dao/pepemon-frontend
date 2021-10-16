@@ -42,7 +42,7 @@ const App: React.FC = () => {
 				<Suspense fallback={<LoadingPage/>}>
 					<Switch>
 						<Route path="/" exact>
-							<Home {...pepemonState}/>
+							<Home/>
 						</Route>
 						<Route path="/test" exact>
 							<LoadingPage/>

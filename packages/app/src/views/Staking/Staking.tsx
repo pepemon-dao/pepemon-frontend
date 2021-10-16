@@ -1,49 +1,13 @@
-import React, { useEffect, useState, useContext } from 'react'
-import Web3 from 'web3';
-import { StyledPageWrapperMain, StyledPageWrapperMainInner, StyledPageTitle, NotSupportedModal } from '../../components';
-import { useModal, usePepemon, useWeb3Modal } from '../../hooks';
-import { PepemonProviderContext } from '../../contexts';
+import React from 'react'
+import { StyledPageWrapperMain, StyledPageWrapperMainInner, StyledPageTitle } from '../../components';
 import StakeCard from './components/StakeCard';
 
 const Staking: React.FC<any> = ({ setChainId }) => {
-  const [provider] = useWeb3Modal();
-  const pepemonContext = useContext(PepemonProviderContext);
-  const { chainId } = pepemonContext[0];
-  const [providerChainId, setProviderChainId] = useState((window.ethereum && parseInt(window.ethereum.chainId)) || 1);
-  const pepemon = usePepemon()
-  const web3 = new Web3(provider);
-
-  // const [onPresentSupportModal] = useModal(<NotSupportedModal page="Staking"/>, 'not-supported-modal')
-
-  const isSupportedChain = (chainId: number) => {
-	return (chainId === 1 || chainId === 4)
-  }
-
-  const isOnSupportedChain = () => {
-	return isSupportedChain(providerChainId);
-  }
-
-  useEffect(() => {
-	pepemon.provider && pepemon.provider.getNetwork().then((network: any) => {
-	  setProviderChainId(parseInt(network.chainId));
-	})
-  }, [pepemon.provider])
-
-  useEffect(() => {
-	window.scrollTo(0, 0)
-  }, [])
-
   return (
 	  <StyledPageWrapperMain>
 			<StyledPageWrapperMainInner>
 				<StyledPageTitle as="h1">Staking</StyledPageTitle>
-				{/* // TODO:  isOnSupportedChain() && chainId === providerChainId && */}
-				{ isOnSupportedChain() && parseInt(window.ethereum && window.ethereum.chainId) === providerChainId &&
-					<StakeCard
-						pepemon={pepemon}
-						web3={web3}
-					/>
-				}
+					<StakeCard/>
 			</StyledPageWrapperMainInner>
 		</StyledPageWrapperMain>
 	)

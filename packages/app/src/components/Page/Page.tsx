@@ -1,11 +1,9 @@
-import React, { useEffect, useContext } from 'react'
+import React, { useContext } from 'react'
 import styled from 'styled-components'
 import { Navigation, NotSupportedModal } from "../../components";
 import { PepemonProviderContext } from "../../contexts";
 import { darktealTiles } from "../../assets";
 import { theme } from "../../theme";
-import { useModal } from "../../hooks";
-
 // import Footer from '../Footer';
 
 const Page: React.FC<any> = ({children}) => {
@@ -22,8 +20,6 @@ const Page: React.FC<any> = ({children}) => {
 		return isSupportedChain(chainId);
 	}
 
-	// if(isSupportedChain(chainId)) { onPresentSupportModal() }
-	console.log(chainId);
 	return (
 		<>
 			<StyledPageWrapper>

@@ -1,14 +1,16 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { ContentBoxGrid, ContentBox, Text, Value } from '../../../components';
 import { theme } from '../../../theme';
+import { PepemonProviderContext } from "../../../contexts";
 //  Old
-import { usePepemon, useTotalValueStaked, useTotalSpendInShop } from '../../../hooks';
 import { getBalanceNumber } from '../../../utils';
+import { useTotalValueStaked, useTotalSpendInShop } from '../../../hooks';
 
 const Balances: React.FC = () => {
-  const pepemon = usePepemon();
   const poolStatistics = useTotalValueStaked();
   const totalSpendInShop = useTotalSpendInShop();
+  const pepemonContext = useContext(PepemonProviderContext);
+  const { account } = pepemonContext[0];
 
 	return (
 		<ContentBoxGrid gridTemplate='"box1 box1 box2 box2 box3 box3" "box4 box4 box4 box5 box5 box5"'>
@@ -27,7 +29,7 @@ const Balances: React.FC = () => {
 			<ContentBox style={{ gridArea: "box2" }}>
 				<Text as="p" align="center">PPDEX Burned</Text>
 				<Text as="p" size={2} font={theme.font.neometric} weight={900} align="center">
-					<Value value={!!pepemon.account ? getBalanceNumber(totalSpendInShop.multipliedBy(0.9)) : 'Available before VCs can dump'}/>
+					<Value value={!!account ? getBalanceNumber(totalSpendInShop.multipliedBy(0.9)) : 'Available before VCs can dump'}/>
 				</Text>
 			</ContentBox>
 			<ContentBox style={{ gridArea: "box3" }}>

@@ -1,6 +1,5 @@
 import React from 'react';
 import { Button, Modal, ModalTitle, ModalContent, ModalActions, Spacer, Text } from "../../components";
-import { chains } from "../../constants";
 import { theme } from "../../theme";
 
 const NotSupportedModal: React.FC<{page: string}> = ({ page }) => {

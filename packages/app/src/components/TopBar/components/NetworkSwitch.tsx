@@ -32,7 +32,7 @@ const NetworkSwitch: React.FC<any> = () => {
 					return (
 						<li key={key}>
 							<ChainsListButton disabled={parseInt(chainId) === currentChainId} aria-label={`change to ${chainName}`} onClick={() => {
-								setCurrentChainId(chainId); setChainsListActive(false);
+								setCurrentChainId(parseInt(chainId)); setChainsListActive(false);
 							}}>
 								{chainName}
 							</ChainsListButton>

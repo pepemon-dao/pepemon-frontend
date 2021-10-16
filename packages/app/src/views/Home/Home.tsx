@@ -1,29 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import { ContentBox, ContentBoxNumber, ContentBoxGrid, ContentCentered, ContentColumn, ContentColumns, Evolve, ExternalLink, Footer, Spacer, ButtonLink, Title, Text, SocialBoxes, Newsletter } from "../../components";
-import { theme } from "../../theme";
-// OLD
-import { usePepemon } from '../../hooks';
-import { dummyGraph, group, cover, coverblack, fudizardPng, logoexpand, bluecard, pepechucard, witchenerycard, pepechurcard } from "../../assets";
 import Balances from './components/Balances';
+import { theme } from "../../theme";
+import { dummyGraph, group, cover, coverblack, fudizardPng, logoexpand, bluecard, pepechucard, witchenerycard, pepechurcard } from "../../assets";
 
-const Home: React.FC<any> = ({ appChainId: chainId, setChainId }) => {
-	// const [onPresentSupportModal] = useModal(<NotSupportedModal page="Home"/>, 'not-supported-modal-home')
-	const isSupportedChain = (chainId: number) => {
-		return (chainId === 1 || chainId === 4);
-	}
-	const isOnSupportedChain = () => {
-		return isSupportedChain(providerChainId);
-	}
-
-	//TODO create solution to reuse over components
-	const pepemon = usePepemon();
-	const [providerChainId, setProviderChainId] = useState((window.ethereum && parseInt(window.ethereum.chainId)) || 1);
-	useEffect(() => {
-		pepemon.provider && pepemon.provider.getNetwork().then((network: any) => {
-			setProviderChainId(parseInt(network.chainId));
-		})
-	}, [pepemon.provider])
+const Home: React.FC<any> = () => {
 
 	return (
 		<HomeWrapper>
@@ -117,7 +99,7 @@ const Home: React.FC<any> = ({ appChainId: chainId, setChainId }) => {
 					</Text>
 					<Spacer size="md"/>
 
-					{ isOnSupportedChain() && <Balances /> }
+					<Balances />
 
 					<ContentColumns style={{marginTop: "10em", marginBottom: "7.5em"}}>
 						<ContentColumn width="40%" style={{paddingTop: "7em"}}>
