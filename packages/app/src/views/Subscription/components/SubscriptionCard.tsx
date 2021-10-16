@@ -1,14 +1,18 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import styled from 'styled-components';
 import BigNumber from 'bignumber.js';
 import { Accordion, Spacer, Button, Title, Text, ContentColumns, ContentColumn, ExternalLink } from "../../../components";
+import { PepemonProviderContext } from "../../../contexts";
 import { useCardsMetadata, useTokenBalance, useApprove, useAllowance, useLotteryMinLPTokens, useLotteryRewardCard, useLotteryLPBalance, useLotteryIsStaking, useLotteryHasClaimed, useLotteryStakingDeadline, useLotteryStakingStartblock, useLotteryClaim, useLotteryWithdraw, useLotteryStake, useBlock } from '../../../hooks';
 import { getPepemonLotteryContract, getPpdexAddress, getPpdexUniV2Contract, getUniV2PpdexAddress } from '../../../pepemon/utils';
 import { getBalanceNumber } from '../../../utils';
 import { cardback_normal, dropdownarrow, pokeball, uparrow } from "../../../assets";
 import { theme } from "../../../theme";
 
-const StakeLotteryCard: React.FC<any> = ({ pepemon, account }) => {
+const SubscriptionCard: React.FC<any> = () => {
+	const pepemonContext = useContext(PepemonProviderContext);
+	const pepemon = pepemonContext[0];
+
     const ppdexUniV2Balance = useTokenBalance(getUniV2PpdexAddress(pepemon));
     const [transaction, setTransaction] = useState(0);
     const { onApprove, isApproving } = useApprove(getPepemonLotteryContract(pepemon), getPpdexUniV2Contract(pepemon));
@@ -215,4 +219,4 @@ const AccordionBodyContent = styled.div<{side: "left" | "right"}>`
 	padding-right: ${props => props.side === "left" && "5.5em"};
 `
 
-export default StakeLotteryCard
+export default SubscriptionCard

@@ -48,10 +48,10 @@ const App: React.FC = () => {
 							<LoadingPage/>
 						</Route>
 						<Route path="/staking">
-							<StakingWithAuth {...pepemonState}/>
+							<StakingWithAuth/>
 						</Route>
 						<Route path="/subscription">
-							<SubscriptionWithAuth {...pepemonState}/>
+							<SubscriptionWithAuth/>
 						</Route>
 						<Route path="/store/:storeState?">
 							<StoreWithAuth {...pepemonState}/>
