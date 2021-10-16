@@ -54,7 +54,7 @@ const App: React.FC = () => {
 							<SubscriptionWithAuth/>
 						</Route>
 						<Route path="/store/:storeState?">
-							<StoreWithAuth {...pepemonState}/>
+							<StoreWithAuth/>
 						</Route>
 					</Switch>
 				</Suspense>

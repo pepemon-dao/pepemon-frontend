@@ -1,15 +1,14 @@
-import React, {useRef, useState} from 'react';
+import React, { useRef, useState, useContext } from 'react';
 import styled from 'styled-components';
 import { Link, useParams, Redirect } from "react-router-dom";
 import BigNumber from 'bignumber.js';
 import { Spacer, Button, PepemonCard, DropdownMenu, StyledLinkTitle, Text, Title } from '../../../components';
+import { PepemonProviderContext } from '../../../contexts';
 import { StyledStoreWrapper, StyledStoreHeader, StyledStoreBody, StoreCardsAside } from '../components';
 import { CardPrice, CardMetadata, CardBalances, useOutsideClick, useRedeemCard } from '../../../hooks';
 import { theme } from '../../../theme';
-import {getPepemonStoreContract} from '../../../pepemon/utils';
 
 interface StakeCardProps {
-	pepemon: any,
 	ppdexBalance: any;
 	cardsMetadata: CardMetadata[],
 	cardsBalances: CardBalances[],
@@ -19,7 +18,6 @@ interface StakeCardProps {
 	isApproving: boolean,
 	transactions: number;
 	setTransactions: any;
-	providerChainId: number;
 }
 
 // STORE CONSTANTS
@@ -106,7 +104,6 @@ const OPTION_PER_CHAIN = (setActiveSeries: any, setActiveCards?: any) => new Map
 ]);
 
 const StoreCard: React.FC<StakeCardProps> = ({
-												 pepemon,
 												 ppdexBalance,
 												 cardsMetadata,
 												 cardsBalances,
@@ -116,17 +113,19 @@ const StoreCard: React.FC<StakeCardProps> = ({
 												 isApproving,
 												 transactions,
 												 setTransactions,
-												 providerChainId,
 }) => {
 	const [delayApprove, setDelayApprove] = useState(false)
 	const [imageModal, setImageModal] = useState(null);
 	const [selectedCard, setSelectedCard] = useState(null);
 	const [activeSeries, setActiveSeries] = useState('All Series');
-	const { onRedeemCard } = useRedeemCard(getPepemonStoreContract(pepemon));
+	const pepemonContext = useContext(PepemonProviderContext);
+	const pepemon = pepemonContext[0];
+	const { chainId, contracts: { pepemonStore } } = pepemonContext[0];
+	const { onRedeemCard } = useRedeemCard(pepemonStore);
 
 	const isAllowedSpending = () => {
 		// No allowance needed for native BNB payments
-		if (providerChainId === 56) {
+		if (chainId === 56) {
 			return true
 		}
 		return new BigNumber(100000000000000000000).comparedTo(allowance) === -1;
@@ -139,7 +138,7 @@ const StoreCard: React.FC<StakeCardProps> = ({
 		}
 	})
 
-	// const allCardsInOrder = ALL_SERIES.get(providerChainId).flatMap((series) => {
+	// const allCardsInOrder = ALL_SERIES.get(chainId).flatMap((series) => {
 	//     return series.cards
 	// })
 
@@ -165,7 +164,7 @@ const StoreCard: React.FC<StakeCardProps> = ({
 							<StyledStoreBody>
 								<StyledStoreContentWrapper>
 									<DropdownMenu style={{position: 'absolute',
-										right: '1.1em'}} title={'0 Selected'} options={OPTION_PER_CHAIN(setActiveSeries).get(providerChainId)}/>
+										right: '1.1em'}} title={'0 Selected'} options={OPTION_PER_CHAIN(setActiveSeries).get(chainId)}/>
 									{(!isAllowedSpending() && !delayApprove) &&
 										<StyledOverlay>
 											<Text as="p" size={2} weight={900} font={theme.font.neometric}>Approve PPDEX spending in shop</Text>
@@ -182,7 +181,7 @@ const StoreCard: React.FC<StakeCardProps> = ({
 											<img ref={ref} height="600" src={imageModal} alt="imageModal"/>
 										</StyledOverlay>
 									}
-									{ ALL_SERIES.get(providerChainId).filter((series) => {
+									{ ALL_SERIES.get(chainId).filter((series) => {
 										if (activeSeries === 'All Series') {
 											return true;
 										}
@@ -214,7 +213,7 @@ const StoreCard: React.FC<StakeCardProps> = ({
 																	setDelayApprove: setDelayApprove,
 																	setImageModal: setImageModal,
 																	onRedeemCard: onRedeemCard,
-																	providerChainId: providerChainId,
+																	chainId: chainId,
 																}
 
 																return (
