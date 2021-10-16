@@ -1,1 +1,1 @@
-export { default, AccordionGroup } from './Accordion'
+export { AccordionGroup, AccordionWrapper, AccordionHeader, AccordionHeaderTitle, AccordionHeaderButton, AccordionBody, AccordionBodyContent } from './Accordion'
