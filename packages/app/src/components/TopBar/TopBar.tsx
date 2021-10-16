@@ -1,5 +1,6 @@
-import React, { useCallback, useContext } from "react";
+import React, { useEffect, useState, useCallback, useContext } from "react";
 import styled from "styled-components";
+import Web3 from "web3";
 import { useWeb3Modal, useTokenBalance } from "../../hooks";
 import { getBalanceNumber, formatAddress } from "../../utils";
 import { Button, Text } from "../../components";
@@ -12,11 +13,29 @@ type TopBarProps = {
 };
 
 const TopBar: React.FC<TopBarProps> = ({setChainId}) => {
+	const [ppblzStakedAmount, setPpblzStakedAmount] = useState(0);
+	const [ppdexRewards, setPpdexRewards] = useState(0);
 	const [, loadWeb3Modal] = useWeb3Modal();
 	const pepemonContext = useContext(PepemonProviderContext);
-	const { account, chainId, ppblzAddress, ppdexAddress } = pepemonContext[0];
+	const { account, chainId, ppblzAddress, ppdexAddress, contracts, provider } = pepemonContext[0];
+	const web3 = new Web3(provider);
 	const ppblzBalance = useTokenBalance(ppblzAddress);
 	const ppdexBalance = useTokenBalance(ppdexAddress);
+
+	useEffect(() => {
+		(async () => {
+			if(!contracts.ppdex) return;
+			// Get staked PPBLZ
+	        const stakeA = await contracts.ppdex.getAddressPpblzStakeAmount(account);
+	        setPpblzStakedAmount(parseInt(web3.utils.fromWei(stakeA.toString())));
+			// Get PPDEX rewards
+			const cRewards = (await contracts.ppdex.myRewardsBalance(account)).toString();
+			setPpdexRewards(parseInt(web3.utils.fromWei(cRewards)));
+	    })()
+	}, [contracts.ppdex, setPpblzStakedAmount, account, web3.utils]);
+	console.log(ppdexRewards);
+	
+	const totalPpblz = getBalanceNumber(ppblzBalance) + ppblzStakedAmount;
 
 	const handleUnlockClick = useCallback(() => {
 		loadWeb3Modal();
@@ -31,16 +50,16 @@ const TopBar: React.FC<TopBarProps> = ({setChainId}) => {
 							<NetworkSwitch {...{appChainId: chainId, providerChainId: chainId, setChainId: setChainId}}/>
 						</TextInfo>
 						{ppblzBalance && (
-							<TextInfo as="p" font={theme.font.spaceMace} color={theme.color.purple[800]}>
-							{getBalanceNumber(ppblzBalance).toFixed(2)}$PPBLZ
+							<TextInfo as="p" font={theme.font.spaceMace} color={theme.color.purple[800]} title="In Wallet + Staked PPBLZ">
+								{totalPpblz.toFixed(2)} $PPBLZ
 							</TextInfo>
 						)}
 						{ppblzBalance && (
-							<TextInfo as="p" font={theme.font.spaceMace} color={theme.color.purple[800]}>
-							{getBalanceNumber(ppdexBalance).toFixed(2)}$PPDEX
+							<TextInfo as="p" font={theme.font.spaceMace} color={theme.color.purple[800]} title="In Wallet + Not Claimed PPDEX">
+								{getBalanceNumber(ppdexBalance).toFixed(2)} $PPDEX
 							</TextInfo>
 						)}
-						<TextInfo as="p" font={theme.font.spaceMace} color={theme.color.purple[800]}>3 unique cards</TextInfo>
+						<TextInfo as="p" font={theme.font.spaceMace} color={theme.color.purple[800]}>XX unique cards</TextInfo>
 					</StyledTopBarInfo>
 				}
 				<Button styling="green" {...(!account && {onClick: handleUnlockClick} )}>{!account ? 'Connect wallet' : formatAddress(account)}</Button>

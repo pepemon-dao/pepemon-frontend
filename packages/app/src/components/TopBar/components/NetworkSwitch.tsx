@@ -22,10 +22,10 @@ const NetworkSwitch: React.FC<any> = () => {
 
 	return (
 		<>
-			<ChainsListButton onClick={() => setChainsListActive(!chainsListActive)}>{
-				chains[currentChainId] ? chains[currentChainId] : 'Not connected'
-			}</ChainsListButton>
-			<img alt="change network" src={up_down_arrows_dark} style={{ width: ".5em", marginLeft: ".8em" }}/>
+			<ChainsListButton onClick={() => setChainsListActive(!chainsListActive)}>
+				{chains[currentChainId] ? chains[currentChainId] : 'Not connected'}
+				<img alt="change network" src={up_down_arrows_dark} style={{ width: ".5em", marginLeft: ".8em" }}/>
+			</ChainsListButton>
 			<ChainsList isOpen={chainsListActive} ref={networkSwitchRef}>
 				{ Object.keys(chains).map((chainId, key) => {
 					const chainName = chains[chainId.toString() as keyof typeof chains];
