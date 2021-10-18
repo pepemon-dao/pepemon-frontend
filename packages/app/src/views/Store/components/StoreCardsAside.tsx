@@ -1,36 +1,95 @@
-import React, { useEffect, useState, useContext } from "react";
-import BigNumber from "bignumber.js";
+import React, { useState, useContext } from "react";
 import { StyledStoreWrapper, StyledStoreHeader, StyledStoreBody, StyledPepemonCardMeta, StyledPepemonCardPrice } from './index';
-import { Button, Title, Text, Spacer, StyledSpacer } from '../../../components';
+import { Button, ExternalLink, Title, Text, Spacer, StyledSpacer } from '../../../components';
 import { PepemonProviderContext } from '../../../contexts';
 import { StoreClaimModal } from '../components';
 import { getDisplayBalance } from "../../../utils";
 import { ActionClose, cardback_normal, coin } from '../../../assets';
-import { useCardsMetadata, useApprove, useAllowance, useTokenBalance, useCardsFactoryData, useCardsStorePrices } from "../../../hooks";
+import { useAllowance, useTokenBalance, useCardsFactoryData, useRedeemCard } from "../../../hooks";
 import { theme } from '../../../theme';
 
 const StoreCardsAside: React.FC<any> = ({setSelectedCard, selectedCard: { cardId, cardPrice, cardMetadata = null }}) => {
 	const [activeClaimModal, setActiveClaimModal] = useState(false);
+	const [transactions, setTransactions] = useState(0);
 	const pepemonContext = useContext(PepemonProviderContext);
-	const { chainId, contracts: { pepemonStore, ppdex }, ppdexAddress } = pepemonContext[0];
-	const allowance = useAllowance(pepemonStore);
+	const { chainId, contracts } = pepemonContext[0];
+	const cardsBalances = useCardsFactoryData([cardId], transactions)[0];
+	const allowance = useAllowance(contracts.pepemonStore.address);
+	const ppdexBalance = useTokenBalance(contracts.ppdex.address);
+	const { onRedeemCard, isRedeemingCard } = useRedeemCard(contracts.pepemonStore.address);
+
+	if (cardMetadata?.status === "failed") { setSelectedCard(null); return <></> } // bail out early if card infos couldn't be loaded
+
+	const isItemCard = (tokenId: number) => {
+        return [17, 18, 19].includes(tokenId);
+    }
+
+    const daysForSale = () => {
+        if (isItemCard(cardId)) {
+            return 1000000
+        }
+        return cardId > 5 ? (cardId > 12 ? 28 : 21) : 14;
+    }
 
 	const isAllowedSpending = () => {
         // No allowance needed for native BNB payments
         if (chainId === 56) { return true; }
-		if (cardPrice) return cardPrice?.comparedTo(allowance) === -1;
+		return cardPrice?.comparedTo(allowance) === -1;
     }
 
-	if (cardMetadata?.status === "failed") {
-		setSelectedCard(null);
-		return <></>
+	const isMintable = () => {
+		if (!cardsBalances) { return false }
+        return cardsBalances && (parseInt(cardsBalances.totalSupply) < parseInt(cardsBalances.maxSupply));
+    }
+
+	const isAffordable = () => {
+        if (cardPrice?.isEqualTo(ppdexBalance)) { return true; }
+        return cardPrice?.comparedTo(ppdexBalance) === -1;
+    }
+
+	const isReleasingSoon = () => {
+        const birthdayMetaData = cardMetadata?.attributes.find(attribute => attribute.trait_type === 'birthday');
+        if (parseInt(birthdayMetaData?.value) === 0) {
+            return true;
+        }
+        return parseInt(birthdayMetaData?.value) > (Date.now() / 1000);
+    }
+
+	const isForSale = () => {
+        const birthdayMetaData = cardMetadata?.attributes.find(attribute => attribute.trait_type === 'birthday');
+        if (parseInt(birthdayMetaData?.value) === 0) {
+            return false;
+        }
+        return (parseInt(birthdayMetaData?.value) + (daysForSale() * 24 * 60 * 60)) > (Date.now() / 1000)
+    }
+
+	const isSoldOut = () => {
+        return (!isMintable() && !isReleasingSoon()) || (!isForSale() && !isReleasingSoon());
+    }
+
+	const priceOfCard = cardPrice && parseFloat(getDisplayBalance(cardPrice, 18)).toFixed(2);
+
+	const getButtonText = () => {
+		if (isSoldOut()) {
+			return 'Sold out';
+		}
+		else if (isAllowedSpending()) {
+			if (isReleasingSoon()) {
+				return 'Releasing soon';
+			} else if (isAffordable()) {
+				return 'Claim card';
+			} else {
+				return 'Not enough balance';
+			}
+		} else {
+			return 'Enable';
+		}
 	}
 
-	// const priceOfCard = !cardPrice ? 0 : parseFloat(getDisplayBalance(cardPrice.price, 18)).toFixed(2);
 	const buttonProps = {
-		disabled: !isAllowedSpending(),
-		onClick: () => !isAllowedSpending() && setActiveClaimModal(true),
-		text: isAllowedSpending() ? 'Claim card' : 'Enable'
+		disabled: isRedeemingCard || isSoldOut() || !isAllowedSpending() || !isAffordable() || isReleasingSoon(),
+		onClick: () => isAllowedSpending() && setActiveClaimModal(true),
+		text: getButtonText()
 	}
 
 	return (
@@ -79,10 +138,17 @@ const StoreCardsAside: React.FC<any> = ({setSelectedCard, selectedCard: { cardId
 					<dd>
 						<StyledPepemonCardPrice styling="alt">
 							<img loading="lazy" src={coin} alt="coin"/>
-							{/*cardPrice ? `${priceOfCard} ${chainId === 56 ? 'BNB' : 'PPDEX'}` : 'fetching'*/}
+							{cardPrice ? `${priceOfCard} ${chainId === 56 ? 'BNB' : 'PPDEX'}` : 'fetching'}
 						</StyledPepemonCardPrice>
 					</dd>
 				</StyledPepemonCardMeta>
+				<Spacer size='md'/>
+				{isAffordable() && !isReleasingSoon() &&
+					<ExternalLink style={{ width: '100%' }} href={chainId === 137 ? 'https://quickswap.exchange/#/swap?outputCurrency=0x127984b5e6d5c59f81dacc9f1c8b3bdc8494572e' :
+					chainId === 56 ? 'https://www.binance.com/en/trade/BNB_ETH' : `https://app.uniswap.org/#/swap?outputCurrency=${contracts.ppdex.address}`}>
+						Buy {chainId === 56 ? 'BNB' : 'PPDEX'}
+					</ExternalLink>
+				}
 				<Spacer size='md'/>
 				<Button width="100%" styling="purple"
 					disabled={buttonProps.disabled}
@@ -92,57 +158,12 @@ const StoreCardsAside: React.FC<any> = ({setSelectedCard, selectedCard: { cardId
 				{ activeClaimModal &&
 					<StoreClaimModal
 						dismiss={() => setActiveClaimModal(false)}
-						claimButtonText="Claim card"/>
+						claimButtonText={isRedeemingCard ? 'Claiming...' : 'Claim card'}
+						claimButtonClick={() => onRedeemCard(cardId, chainId === 56 ? priceOfCard.toString() : null).then(() => setTransactions(transactions + 1))}
+						claimButtonDisabled={isRedeemingCard}
+					/>
 				}
 			</StyledStoreBody>
-			{/*	<Button size="sm" styling="purple"
-				disabled={!isMintable() || isRedeemingThisCard || priceOfCard === '0.00'}
-				onClick={() => setDelayApprove(false)}>APPROVE FIRST</Button>
-				: (isAffordable() && !isReleasingSoon() ?
-				(isMintable() && !isNoLongerForSale() ?
-				<Button size="sm" styling="purple"
-				disabled={isRedeemingThisCard || priceOfCard === '0.00'}
-				onClick={() => onRedeemCard(tokenId, providerChainId === 56 ? price.toString() : null).then(() => setTransactions(transactions + 1))}>{isRedeemingThisCard ? 'CLAIMING...' : 'CLAIM'}
-				</Button> :
-				providerChainId === 56 ?
-				<a style={{textDecoration: 'none'}}
-				href={`${openSeaUri}${tokenId}`}
-				target="_blank">
-				<Button styling="purple" size="sm">
-				VIEW ON TREASURELAND
-				</Button>
-				</a> :
-				<a style={{textDecoration: 'none'}}
-				href={`${openSeaUri}${getPepemonFactoryAddress(pepemon)}/${tokenId}/`}
-				target="_blank">
-				<Button styling="purple" size="sm">
-				VIEW ON OPENSEA
-				</Button>
-				</a>
-			) :
-			isSoldOut() ?
-			providerChainId === 56 ?
-			<a style={{textDecoration: 'none'}}
-			href={`${openSeaUri}${tokenId}`}
-			target="_blank">
-			<Button styling="purple" size="sm">
-			VIEW ON TREASURELAND
-			</Button>
-			</a> :
-			<a style={{textDecoration: 'none'}} href={`${openSeaUri}${getPepemonFactoryAddress(pepemon)}/${tokenId}/`} target="_blank">
-			<Button styling="purple" size="sm">
-			VIEW ON OPENSEA
-			</Button>
-			</a>
-			:
-			<a style={{textDecoration: 'none'}} href={providerChainId === 137 ? 'https://quickswap.exchange/#/swap?outputCurrency=0x127984b5e6d5c59f81dacc9f1c8b3bdc8494572e' :
-			providerChainId === 56 ? 'https://www.binance.com/en/trade/BNB_ETH' : `https://app.uniswap.org/#/swap?outputCurrency=${token ? getPepemonPromoTokenAddress(pepemon) : getPpdexAddress(pepemon)}`} target="_blank">
-			<Button styling="purple" buttonBackgroundColor="#da6b6b" size="sm">
-			BUY {providerChainId === 56 ? 'BNB' : (token && token.name) || 'PPDEX'}
-			</Button>
-			</a>
-		)
-	}*/}
 		</StyledStoreWrapper>
 	)
 }

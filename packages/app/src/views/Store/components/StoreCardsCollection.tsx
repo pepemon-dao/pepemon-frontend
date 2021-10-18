@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { Button, Title, Spacer, DropdownMenu } from '../../../components';
 import { PepemonProviderContext } from '../../../contexts';
 import { cards } from '../../../constants';
@@ -11,6 +11,10 @@ const StoreCardsCollection : React.FC<any> = ({selectedCard, setSelectedCard}) =
 	const { chainId } = pepemonContext[0];
 	const [activeSeries, setActiveSeries] = useState([]);
 	const [seriesToMap, setSeriesToMap] = useState(cards.get(chainId));
+
+	useEffect(() => {
+		setSelectedCard(null);
+	},[setSelectedCard, chainId])
 
 	const pokeCards = cards.get(chainId);
 	const pokeCardsArr = pokeCards;

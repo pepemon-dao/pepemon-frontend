@@ -29,6 +29,8 @@ const TopBar: React.FC<any> = ({setChainId}) => {
 			setPpdexRewards(parseInt(web3.utils.fromWei(cRewards)));
 	    })()
 	}, [contracts.ppdex, setPpblzStakedAmount, account, web3.utils]);
+	console.log(ppdexRewards);
+
 
 	const totalPpblz = getBalanceNumber(ppblzBalance) + ppblzStakedAmount;
 

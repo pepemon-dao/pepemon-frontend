@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useCallback, useContext } from "react";
 import styled from "styled-components";
 import { cardback_normal, coin } from "../../../assets";
 import { Title, Spacer, StyledSpacer } from "../../../components";
@@ -15,10 +15,65 @@ const CardSingle : React.FC<any> = ({cardId, selectedCard, selectCard}) => {
 	const cardsBalances = useCardsFactoryData([cardId], 0)[0] || null;
 
 	const priceOfCard = !cardPrice ? 0 : parseFloat(getDisplayBalance(cardPrice.price, 18)).toFixed(2);
+
 	const isSoldOut = () => {
 		if (!cardsBalances) return true;
 		return cardsBalances.totalSupply === parseInt(cardsBalances.maxSupply);
 	}
+
+	const isReleasingSoon = useCallback(() => {
+        const birthdayMetaData = cardMetadata?.attributes.find(attribute => attribute.trait_type === 'birthday');
+        if (parseInt(birthdayMetaData?.value) === 0) {
+            return true;
+        }
+        return parseInt(birthdayMetaData?.value) > (Date.now() / 1000);
+    },[cardMetadata])
+
+	const isItemCard = (tokenId: number) => {
+        return [17, 18, 19].includes(tokenId);
+    }
+
+	const daysForSale = useCallback(() => {
+        if (isItemCard(cardId)) {
+            return 1000000
+        }
+        return cardId > 5 ? (cardId > 12 ? 28 : 21) : 14;
+    },[cardId])
+
+	const calculateTimeLeft = useCallback(() => {
+        const birthdayMetaData = cardMetadata?.attributes.find(attribute => attribute.trait_type === 'birthday');
+        if (parseInt(birthdayMetaData?.value) === 0) { return 0; }
+
+        if (isReleasingSoon()) {
+            return parseInt(birthdayMetaData?.value) - (Date.now() / 1000);
+        }
+
+        if ((parseInt(birthdayMetaData?.value) + (daysForSale() * 60 * 60 * 24)) - (Date.now() / 1000) <= 0) {
+            return 0;
+        }
+        return (parseInt(birthdayMetaData?.value) + (daysForSale() * 60 * 60 * 24)) - (Date.now() / 1000);
+    }, [cardMetadata, daysForSale, isReleasingSoon])
+
+	const countdown = (pre: string = ' ', after: string = '') => {
+		const timeLeft = calculateTimeLeft();
+
+		const days = timeLeft / (60 * 60 * 24);
+        if (days > 1) {
+            return (<span>{Math.ceil(days).toFixed(0)}{pre} {Math.ceil(days).toFixed(0) === '1' ? 'day' : 'days'} {after}</span>);
+        }
+
+        const hours = timeLeft / (60 * 60);
+        if (hours > 1) {
+            return (<span>{Math.ceil(hours).toFixed(0)}{pre} {Math.ceil(hours).toFixed(0) === '1' ? 'hour' : 'hours'} {after}</span>);
+        }
+
+        const minutes = timeLeft / 60;
+        if (minutes <= 0) {
+            return null;
+        }
+
+        return (<span>{minutes.toFixed(0)}{pre} {minutes.toFixed(0) === '1' ? 'minute' : 'minutes'} {after}</span>);
+    }
 
 	if (cardMetadata?.status === "failed") {
 		return <></>
@@ -31,14 +86,14 @@ const CardSingle : React.FC<any> = ({cardId, selectedCard, selectCard}) => {
 	};
 
 	return (
-		<StyledPepemonCard style={{ opacity: isSoldOut() ? "50%" : "100%" }}>
+		<StyledPepemonCard style={{ opacity: (!isSoldOut() && cardMetadata && countdown() && cardsBalances) ? "100%" : "50%" }}>
 			<StyledPepemonCardPrice>
 				<img loading="lazy" src={coin} alt="coin"/>
 				{cardPrice ? `${priceOfCard} ${chainId === 56 ? 'BNB' : 'PPDEX'}` : 'fetching'}
 			</StyledPepemonCardPrice>
 			<div>
 				<StyledPepemonCardImage loading="lazy" active={cardId === selectedCard?.cardId} src={cardMetadata ? cardMetadata.image : cardback_normal} alt={cardMetadata ? cardMetadata.name : 'Loading card'}
-					onClick={() => cardMetadata && selectCard(self)}/>
+					onClick={() => cardMetadata && countdown() && cardsBalances && selectCard(self)}/>
 				<Title as="h4" size={1} font={theme.font.neometric}>{cardMetadata ? cardMetadata.name : 'Loading'}</Title>
 				<StyledSpacer bg={theme.color.gray[100]} size={2}/>
 				<Spacer size="sm"/>
@@ -48,7 +103,7 @@ const CardSingle : React.FC<any> = ({cardId, selectedCard, selectCard}) => {
 				</StyledPepemonCardMeta>
 				<StyledPepemonCardMeta>
 					<dt>Time</dt>
-					<dd>{'card.time'}</dd>
+					<dd>{countdown() ? countdown() : 'Soon'}</dd>
 				</StyledPepemonCardMeta>
 			</div>
 		</StyledPepemonCard>

@@ -6,7 +6,7 @@ export { default as useCardsApi, useCardsMetadata } from './useCardsApi';
 export type { CardMetadata } from './useCardsApi';
 export { default as useCardsFactoryData } from './useCardsFactoryData';
 export type { CardBalances } from './useCardsFactoryData';
-export { default as useCardsStorePrices } from './useCardsStorePrices';
+export { default as useCardsStorePrices, useCardStorePrices } from './useCardsStorePrices';
 export type { CardPrice } from './useCardsStorePrices';
 export { default as useClaimEvent } from './useClaimEvent';
 export { default as useClaimMerkle } from './useClaimMerkle';

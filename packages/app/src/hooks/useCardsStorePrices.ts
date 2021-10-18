@@ -38,4 +38,30 @@ const useCardsStorePrices = (tokenIds: number[], promo = false) => {
     return cardsPrices
 }
 
+export const useCardStorePrices = (tokenId: number, promo = false) => {
+    const { provider }: { provider: any } = usePepemon();
+    const pepemon = usePepemon();
+	let cardPrices;
+
+    const fetchCardsPrices = async (storeContract: any) => {
+        return await new Promise(tokenId => {
+            return {
+                tokenId,
+                price: getCardPrice(storeContract, tokenId)
+            }
+        });
+    };
+
+    if (pepemon && provider && tokenId) {
+        correctChainIsLoaded(pepemon).then((correct) => {
+            if (correct) {
+                const storeContract = promo ? getPepemonPromoStoreContract(pepemon) : getPepemonStoreContract(pepemon)
+                fetchCardsPrices(storeContract).then(prices => cardPrices = prices)
+            }
+        });
+    }
+
+    return cardPrices
+}
+
 export default useCardsStorePrices

@@ -1,7 +1,6 @@
 import React from "react";
 import { usePepemon } from "../hooks";
-import { theme } from "../theme";
-import { ContentCentered, Spacer, Title, WalletButton } from "../components";
+import { ContentCentered, Spacer, Title } from "../components";
 import { LoadingPage } from "../views";
 
 function withConnectedWallet(WrappedComponent: React.FC) {
