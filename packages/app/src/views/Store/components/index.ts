@@ -7,3 +7,4 @@ export { default as StoreCardsCollection } from './StoreCardsCollection';
 export { default as StorePacksAside } from './StorePacksAside';
 export { default as StorePacksCollection } from './StorePacksCollection';
 export { default as StoreClaimModal } from './StoreClaimModal';
+export { default as StoreSelectionWrapper } from './StoreSelection';
