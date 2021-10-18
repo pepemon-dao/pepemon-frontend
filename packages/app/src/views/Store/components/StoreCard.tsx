@@ -6,7 +6,6 @@ import { StyledStoreWrapper, StyledStoreHeader, StyledStoreBody, StoreCardsColle
 const StoreCard : React.FC<any> = () => {
 	const [selectedCard, setSelectedCard] = useState(null);
 	const [selectedPack, setSelectedPack] = useState(null);
-	console.log(selectedPack);
 
 	const routerParams : any = useParams();
 

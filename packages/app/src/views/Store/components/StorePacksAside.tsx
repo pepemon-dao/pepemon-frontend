@@ -15,7 +15,6 @@ const StorePacksAside: React.FC<any> = ({setSelectedPack, selectedPack}) => {
 	const pepemonContext = useContext(PepemonProviderContext);
 	const { chainId, contracts: { pepemonStore, ppdex }, ppdexAddress } = pepemonContext[0];
 	const allowance = useAllowance(pepemonStore);
-	console.log(selectedPack);
 
 	const isAllowedSpending = () => {
         // No allowance needed for native BNB payments
@@ -24,7 +23,6 @@ const StorePacksAside: React.FC<any> = ({setSelectedPack, selectedPack}) => {
         }
         return new BigNumber(100000000000000000000).comparedTo(allowance) === -1;
     }
-	console.log(isAllowedSpending());
 
 	return (
 		<StyledStoreWrapper style={{width: "34%"}}>

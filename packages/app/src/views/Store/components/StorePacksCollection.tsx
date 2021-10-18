@@ -16,9 +16,6 @@ const StorePacksCollection : React.FC<any> = ({selectedPack, setSelectedPack}) =
 		// TODO: Handle url to switch actice cards to boosterpacks
 	},[chainId])
 
-	console.log(activeSeries);
-	// return (<></>)
-
 	return (
 		<>{activeSeries.map((activeSerie, key) => {
 			return (
