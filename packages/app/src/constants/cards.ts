@@ -27,8 +27,7 @@ const FRIENDS_SERIES_CARDS: SeriesType = {
 const EVENT_ITEM_CARDS: SeriesType = {
 	title: 'Event Items',
 	title_formatted: 'EVENT_ITEM_CARDS',
-	cards: [17],
-	// cards: [17, 18, 19],
+	cards: process.env.NODE_ENV === 'development' ? [17] : [17, 18, 19],
 }
 
 const NEW_BEGINNING_CARDS: SeriesType = {
