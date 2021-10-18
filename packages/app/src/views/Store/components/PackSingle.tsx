@@ -1,12 +1,9 @@
-import React, { useContext } from "react";
+import React from "react";
 import styled from "styled-components";
-import { cardback_normal, coin } from "../../../assets";
+import { coin } from "../../../assets";
 import { Title, Spacer, StyledSpacer } from "../../../components";
 import { StyledPepemonCardMeta, StyledPepemonCardPrice } from "../components";
-import { getDisplayBalance } from "../../../utils";
 import { theme } from "../../../theme";
-import { useCardsMetadata, useCardsFactoryData, useCardsStorePrices } from "../../../hooks";
-import { PepemonProviderContext } from "../../../contexts";
 
 const PackSingle : React.FC<any> = ({packId, selectedPack, selectPack, chainId, packMeta}) => {
 

@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import { Button, Title, Spacer, DropdownMenu } from '../../../components';
 import { PepemonProviderContext } from '../../../contexts';
 import { cards } from '../../../constants';
@@ -15,7 +15,6 @@ const StoreCardsCollection : React.FC<any> = ({selectedCard, setSelectedCard}) =
 	const pokeCards = cards.get(chainId);
 	const pokeCardsArr = pokeCards;
 	const options = pokeCardsArr.map((series, key) => {
-		let newActiveSeries = activeSeries;
 		return {
 			title: series.title,
 			onClick: async () => {
@@ -24,9 +23,7 @@ const StoreCardsCollection : React.FC<any> = ({selectedCard, setSelectedCard}) =
 				if (index >= 0) { newActiveSeries.splice(index,1); }
 				else { newActiveSeries.push(series); }
 				setActiveSeries(newActiveSeries);
-				console.log(newActiveSeries.length > 0 ? newActiveSeries : cards.get(chainId));
-
-				setSeriesToMap(newActiveSeries.length > 0 ? newActiveSeries : cards.get(chainId));
+				setSeriesToMap(activeSeries.length > 0 ? activeSeries : cards.get(chainId));
 			}
 		}
 	});

@@ -1,28 +1,16 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useState, useContext } from "react";
 import styled from "styled-components";
-import BigNumber from "bignumber.js";
 import { StyledStoreWrapper, StyledStoreHeader, StyledStoreBody, StyledPepemonCardMeta, StyledPepemonCardPrice } from './index';
 import { Button, Title, Text, Spacer, StyledSpacer } from '../../../components';
 import { PepemonProviderContext } from '../../../contexts';
 import { StoreClaimModal } from '../components';
-import { getDisplayBalance } from "../../../utils";
-import { ActionClose, cardback_normal, coin } from '../../../assets';
-import { useCardsMetadata, useApprove, useAllowance, useTokenBalance, useCardsFactoryData, useCardsStorePrices } from "../../../hooks";
+import { ActionClose, coin } from '../../../assets';
 import { theme } from '../../../theme';
 
 const StorePacksAside: React.FC<any> = ({setSelectedPack, selectedPack}) => {
 	const [activeClaimModal, setActiveClaimModal] = useState(false);
 	const pepemonContext = useContext(PepemonProviderContext);
-	const { chainId, contracts: { pepemonStore, ppdex }, ppdexAddress } = pepemonContext[0];
-	const allowance = useAllowance(pepemonStore);
-
-	const isAllowedSpending = () => {
-        // No allowance needed for native BNB payments
-        if (chainId === 56) {
-            return true
-        }
-        return new BigNumber(100000000000000000000).comparedTo(allowance) === -1;
-    }
+	const { chainId } = pepemonContext[0];
 
 	return (
 		<StyledStoreWrapper style={{width: "34%"}}>
