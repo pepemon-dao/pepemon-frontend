@@ -5,20 +5,19 @@ import { PepemonProviderContext } from '../../../contexts';
 import { StoreClaimModal } from '../components';
 import { getDisplayBalance } from "../../../utils";
 import { ActionClose, cardback_normal, coin } from '../../../assets';
-import { useAllowance, useTokenBalance, useCardsFactoryData, useRedeemCard } from "../../../hooks";
+import { useAllowance, useTokenBalance, useRedeemCard, useApprove } from "../../../hooks";
 import { theme } from '../../../theme';
 
-const StoreCardsAside: React.FC<any> = ({setSelectedCard, selectedCard: { cardId, cardPrice, cardMetadata = null }}) => {
+const StoreCardsAside: React.FC<any> = ({setSelectedCard, selectedCard: { cardId, cardPrice, cardMetadata = null, cardsBalances = null }}) => {
 	const [activeClaimModal, setActiveClaimModal] = useState(false);
 	const [transactions, setTransactions] = useState(0);
 	const pepemonContext = useContext(PepemonProviderContext);
 	const { chainId, contracts } = pepemonContext[0];
-	const cardsBalances = useCardsFactoryData([cardId], transactions)[0];
+	const { onRedeemCard, isRedeemingCard } = useRedeemCard(contracts.pepemonStore.address);
+	const { onApprove, isApproving } = useApprove(contracts.pepemonStore.address, contracts.ppdex.address);
 	const allowance = useAllowance(contracts.pepemonStore.address);
 	const ppdexBalance = useTokenBalance(contracts.ppdex.address);
-	const { onRedeemCard, isRedeemingCard } = useRedeemCard(contracts.pepemonStore.address);
-
-	if (cardMetadata?.status === "failed") { setSelectedCard(null); return <></> } // bail out early if card infos couldn't be loaded
+	if (cardMetadata.status === "failed") { setSelectedCard(null); return <></> } // bail out early if card infos couldn't be loaded
 
 	const isItemCard = (tokenId: number) => {
         return [17, 18, 19].includes(tokenId);
@@ -38,7 +37,6 @@ const StoreCardsAside: React.FC<any> = ({setSelectedCard, selectedCard: { cardId
     }
 
 	const isMintable = () => {
-		if (!cardsBalances) { return false }
         return cardsBalances && (parseInt(cardsBalances.totalSupply) < parseInt(cardsBalances.maxSupply));
     }
 
@@ -48,48 +46,46 @@ const StoreCardsAside: React.FC<any> = ({setSelectedCard, selectedCard: { cardId
     }
 
 	const isReleasingSoon = () => {
-        const birthdayMetaData = cardMetadata?.attributes.find(attribute => attribute.trait_type === 'birthday');
-        if (parseInt(birthdayMetaData?.value) === 0) {
+        const birthdayMetaData = cardMetadata.attributes.find(attribute => attribute.trait_type === 'birthday');
+        if (parseInt(birthdayMetaData.value) === 0) {
             return true;
         }
-        return parseInt(birthdayMetaData?.value) > (Date.now() / 1000);
+
+        return parseInt(birthdayMetaData.value) > (Date.now() / 1000);
     }
 
 	const isForSale = () => {
-        const birthdayMetaData = cardMetadata?.attributes.find(attribute => attribute.trait_type === 'birthday');
-        if (parseInt(birthdayMetaData?.value) === 0) {
+        const birthdayMetaData = cardMetadata.attributes.find(attribute => attribute.trait_type === 'birthday');
+        if (parseInt(birthdayMetaData.value) === 0) {
             return false;
         }
-        return (parseInt(birthdayMetaData?.value) + (daysForSale() * 24 * 60 * 60)) > (Date.now() / 1000)
+        return (parseInt(birthdayMetaData.value) + (daysForSale() * 24 * 60 * 60)) > (Date.now() / 1000)
     }
 
 	const isSoldOut = () => {
         return (!isMintable() && !isReleasingSoon()) || (!isForSale() && !isReleasingSoon());
     }
+	const isNoLongerForSale = () => {
+        return !isReleasingSoon() && !isForSale()
+    }
 
 	const priceOfCard = cardPrice && parseFloat(getDisplayBalance(cardPrice, 18)).toFixed(2);
 
-	const getButtonText = () => {
-		if (isSoldOut()) {
-			return 'Sold out';
+	const buttonProps = () => {
+		if (isSoldOut() || isNoLongerForSale()) {
+			return { disabled: true, onClick: () => null, text: 'Sold out' }
 		}
 		else if (isAllowedSpending()) {
 			if (isReleasingSoon()) {
-				return 'Releasing soon';
-			} else if (isAffordable()) {
-				return 'Claim card';
+				return { disabled: true, onClick: () => null, text: 'Releasing soon' }
+			} else if (!isAffordable()) {
+				return { disabled: true, onClick: () => null, text: 'Not enough balance' };
 			} else {
-				return 'Not enough balance';
+				return { disabled: true, onClick: setActiveClaimModal(true), text: isRedeemingCard ? 'Claiming...' : 'Claim card' }
 			}
 		} else {
-			return 'Enable';
+			return { disabled: false, onClick: () => !isApproving && onApprove(), text: isApproving ? 'Enabling...' : 'Enable' }
 		}
-	}
-
-	const buttonProps = {
-		disabled: isRedeemingCard || isSoldOut() || !isAllowedSpending() || !isAffordable() || isReleasingSoon(),
-		onClick: () => isAllowedSpending() && setActiveClaimModal(true),
-		text: getButtonText()
 	}
 
 	return (
@@ -151,9 +147,9 @@ const StoreCardsAside: React.FC<any> = ({setSelectedCard, selectedCard: { cardId
 				}
 				<Spacer size='md'/>
 				<Button width="100%" styling="purple"
-					disabled={buttonProps.disabled}
-					onClick={buttonProps.onClick}>
-						{buttonProps.text}
+					disabled={buttonProps().disabled}
+					onClick={buttonProps().onClick}>
+						{buttonProps().text}
 				</Button>
 				{ activeClaimModal &&
 					<StoreClaimModal

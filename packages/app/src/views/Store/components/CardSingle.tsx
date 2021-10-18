@@ -82,7 +82,8 @@ const CardSingle : React.FC<any> = ({cardId, selectedCard, selectCard}) => {
 	const self = {
 		cardId: cardId,
 		cardPrice: cardPrice && cardPrice.price,
-		cardMetadata: cardMetadata
+		cardMetadata: cardMetadata,
+		cardsBalances: cardsBalances,
 	};
 
 	return (
