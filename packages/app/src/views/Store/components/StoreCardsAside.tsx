@@ -13,9 +13,9 @@ const StoreCardsAside: React.FC<any> = ({setSelectedCard, selectedCard: { cardId
 	const [transactions, setTransactions] = useState(0);
 	const pepemonContext = useContext(PepemonProviderContext);
 	const { chainId, contracts } = pepemonContext[0];
-	const { onRedeemCard, isRedeemingCard } = useRedeemCard(contracts.pepemonStore.address);
-	const { onApprove, isApproving } = useApprove(contracts.pepemonStore.address, contracts.ppdex.address);
-	const allowance = useAllowance(contracts.pepemonStore.address);
+	const { onRedeemCard, isRedeemingCard } = useRedeemCard(contracts.pepemonStore);
+	const { onApprove, isApproving } = useApprove(contracts.pepemonStore, contracts.ppdex);
+	const allowance = useAllowance(contracts.pepemonStore);
 	const ppdexBalance = useTokenBalance(contracts.ppdex.address);
 	if (cardMetadata.status === "failed") { setSelectedCard(null); return <></> } // bail out early if card infos couldn't be loaded
 
