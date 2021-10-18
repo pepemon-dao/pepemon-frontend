@@ -26,7 +26,7 @@ const CardSingle : React.FC<any> = ({cardId, selectedCard, selectCard}) => {
 
 	const self = {
 		cardId: cardId,
-		cardPrice: cardPrice ? `${priceOfCard} ${chainId === 56 ? 'BNB' : 'PPDEX'}` : 'fetching',
+		cardPrice: cardPrice && cardPrice.price,
 		cardMetadata: cardMetadata
 	};
 

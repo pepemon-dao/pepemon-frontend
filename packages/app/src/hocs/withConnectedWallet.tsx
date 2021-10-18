@@ -12,9 +12,8 @@ function withConnectedWallet(WrappedComponent: React.FC) {
       return (
         <LoadingPage>
 			<ContentCentered>
-	      		<Title as="h1" size={2} font={theme.font.inter} weight="900">No WALLET connected</Title>
-				<Spacer size="sm"/>
-	      		<WalletButton/>
+	      		<Title as="h1" size={2}>No wallet connected</Title>
+				<Spacer size="md"/>
 			</ContentCentered>
         </LoadingPage>
       );

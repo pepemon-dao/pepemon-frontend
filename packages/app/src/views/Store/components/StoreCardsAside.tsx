@@ -17,17 +17,20 @@ const StoreCardsAside: React.FC<any> = ({setSelectedCard, selectedCard: { cardId
 
 	const isAllowedSpending = () => {
         // No allowance needed for native BNB payments
-        if (chainId === 56) {
-            return true
-        }
-        return new BigNumber(100000000000000000000).comparedTo(allowance) === -1;
+        if (chainId === 56) { return true; }
+		if (cardPrice) return cardPrice?.comparedTo(allowance) === -1;
     }
-	console.log(isAllowedSpending());
-
 
 	if (cardMetadata?.status === "failed") {
 		setSelectedCard(null);
 		return <></>
+	}
+
+	// const priceOfCard = !cardPrice ? 0 : parseFloat(getDisplayBalance(cardPrice.price, 18)).toFixed(2);
+	const buttonProps = {
+		disabled: !isAllowedSpending(),
+		onClick: () => !isAllowedSpending() && setActiveClaimModal(true),
+		text: isAllowedSpending() ? 'Claim card' : 'Enable'
 	}
 
 	return (
@@ -76,18 +79,70 @@ const StoreCardsAside: React.FC<any> = ({setSelectedCard, selectedCard: { cardId
 					<dd>
 						<StyledPepemonCardPrice styling="alt">
 							<img loading="lazy" src={coin} alt="coin"/>
-							{cardPrice}
+							{/*cardPrice ? `${priceOfCard} ${chainId === 56 ? 'BNB' : 'PPDEX'}` : 'fetching'*/}
 						</StyledPepemonCardPrice>
 					</dd>
 				</StyledPepemonCardMeta>
 				<Spacer size='md'/>
-				<Button styling="purple" onClick={() => setActiveClaimModal(true) } width="100%">Claim card</Button>
+				<Button width="100%" styling="purple"
+					disabled={buttonProps.disabled}
+					onClick={buttonProps.onClick}>
+						{buttonProps.text}
+				</Button>
 				{ activeClaimModal &&
 					<StoreClaimModal
 						dismiss={() => setActiveClaimModal(false)}
 						claimButtonText="Claim card"/>
 				}
 			</StyledStoreBody>
+			{/*	<Button size="sm" styling="purple"
+				disabled={!isMintable() || isRedeemingThisCard || priceOfCard === '0.00'}
+				onClick={() => setDelayApprove(false)}>APPROVE FIRST</Button>
+				: (isAffordable() && !isReleasingSoon() ?
+				(isMintable() && !isNoLongerForSale() ?
+				<Button size="sm" styling="purple"
+				disabled={isRedeemingThisCard || priceOfCard === '0.00'}
+				onClick={() => onRedeemCard(tokenId, providerChainId === 56 ? price.toString() : null).then(() => setTransactions(transactions + 1))}>{isRedeemingThisCard ? 'CLAIMING...' : 'CLAIM'}
+				</Button> :
+				providerChainId === 56 ?
+				<a style={{textDecoration: 'none'}}
+				href={`${openSeaUri}${tokenId}`}
+				target="_blank">
+				<Button styling="purple" size="sm">
+				VIEW ON TREASURELAND
+				</Button>
+				</a> :
+				<a style={{textDecoration: 'none'}}
+				href={`${openSeaUri}${getPepemonFactoryAddress(pepemon)}/${tokenId}/`}
+				target="_blank">
+				<Button styling="purple" size="sm">
+				VIEW ON OPENSEA
+				</Button>
+				</a>
+			) :
+			isSoldOut() ?
+			providerChainId === 56 ?
+			<a style={{textDecoration: 'none'}}
+			href={`${openSeaUri}${tokenId}`}
+			target="_blank">
+			<Button styling="purple" size="sm">
+			VIEW ON TREASURELAND
+			</Button>
+			</a> :
+			<a style={{textDecoration: 'none'}} href={`${openSeaUri}${getPepemonFactoryAddress(pepemon)}/${tokenId}/`} target="_blank">
+			<Button styling="purple" size="sm">
+			VIEW ON OPENSEA
+			</Button>
+			</a>
+			:
+			<a style={{textDecoration: 'none'}} href={providerChainId === 137 ? 'https://quickswap.exchange/#/swap?outputCurrency=0x127984b5e6d5c59f81dacc9f1c8b3bdc8494572e' :
+			providerChainId === 56 ? 'https://www.binance.com/en/trade/BNB_ETH' : `https://app.uniswap.org/#/swap?outputCurrency=${token ? getPepemonPromoTokenAddress(pepemon) : getPpdexAddress(pepemon)}`} target="_blank">
+			<Button styling="purple" buttonBackgroundColor="#da6b6b" size="sm">
+			BUY {providerChainId === 56 ? 'BNB' : (token && token.name) || 'PPDEX'}
+			</Button>
+			</a>
+		)
+	}*/}
 		</StyledStoreWrapper>
 	)
 }

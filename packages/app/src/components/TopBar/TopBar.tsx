@@ -17,8 +17,7 @@ const TopBar: React.FC<any> = ({setChainId}) => {
 	const web3 = new Web3(provider);
 	const ppblzBalance = useTokenBalance(ppblzAddress);
 	const ppdexBalance = useTokenBalance(ppdexAddress);
-	console.log(ppdexRewards);
-	
+
 	useEffect(() => {
 		(async () => {
 			if(!contracts.ppdex) return;
