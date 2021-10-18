@@ -654,7 +654,7 @@ const StakeCard: React.FC<StakeCardProps> = ({ pepemon, web3 }) => {
 
 						<div style={{ display: "flex" }}>
 							<Text as="p" font={theme.font.inter}>
-								Total value: ${(ppdexRewards * ppdexPrice).toFixed(2)}
+								Total value: $ {(parseFloat(ppdexBalance.toString())+ (ppdexRewards * ppdexPrice)).toFixed(2)}
 							</Text>
 							<Spacer size="md"/>
 							<Button styling="link" style={{padding: 0}} onClick={() => !isUpdatingRewards && getPpdexRewards()} {...(isUpdatingRewards && {disabled: true})}>

@@ -20,7 +20,7 @@ const App: React.FC = () => {
 	const [ethChainId, setEthChainId] = useState(parseInt((window as any).ethereum && (window as any).ethereum.chainId) || defaultChain) // ETH default
 	const [providerChainId, setProviderChainId] = useState(parseInt((window as any).ethereum && (window as any).ethereum.chainId) || defaultChain)
 
-	useEffect(() => {
+	useEffect( () => {
 		// Not working for some mobile implementation, alternative to check for pr
 		// @ts-ignore
 		window.ethereum && window.ethereum.on('chainChanged', (chainId: string) => {
