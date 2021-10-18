@@ -33,7 +33,7 @@ export const useCardsMetadata = (tokenIds: number[]) => {
 	            { method: 'GET'},
 			)
 	        if (!response.ok) {
-	            return;
+	            return {tokenId, status: 'failed'};
 	        }
 	        return {tokenId,  ...await response.json()};
 	    }

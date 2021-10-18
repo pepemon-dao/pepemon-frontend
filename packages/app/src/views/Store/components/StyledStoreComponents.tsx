@@ -29,3 +29,11 @@ export const StyledStoreBody = styled.div`
     border-bottom-left-radius: 16px;
     border-bottom-right-radius: 16px;
 `
+
+export const StyledStoreCardsWrapper = styled.div<{gridCols: number}>`
+	display: grid;
+	grid-template-columns: repeat(${props => props.gridCols}, 1fr);
+	grid-row-gap: 2rem;
+	grid-column-gap: 1rem;
+	overflow: visible;
+`

@@ -4,6 +4,17 @@ export { default as cover } from './img/backgrounds/cover.png';
 export { default as coverblack } from './img/backgrounds/coverblack.png';
 export { default as footercover } from './img/backgrounds/foot.png';
 
+// boosterpacks
+export { default as Boosterpack_3_cards_Battle_Monsters } from './img/boosterpacks/Boosterpack_3_cards_Battle_Monsters.png';
+export { default as Boosterpack_3_cards_Battle_Support } from './img/boosterpacks/Boosterpack_3_cards_Battle_Support.png';
+export { default as Boosterpack_3_cards_Gen_1 } from './img/boosterpacks/Boosterpack_3_cards_Gen_1.png';
+export { default as Boosterpack_6_cards_Battle_Monsters } from './img/boosterpacks/Boosterpack_6_cards_Battle_Monsters.png';
+export { default as Boosterpack_6_cards_Battle_Support } from './img/boosterpacks/Boosterpack_6_cards_Battle_Support.png';
+export { default as Boosterpack_6_cards_Gen_1 } from './img/boosterpacks/Boosterpack_6_cards_Gen_1.png';
+export { default as Boosterpack_9_cards_Battle_Monsters } from './img/boosterpacks/Boosterpack_9_cards_Battle_Monsters.png';
+export { default as Boosterpack_9_cards_Battle_Support } from './img/boosterpacks/Boosterpack_9_cards_Battle_Support.png';
+export { default as Boosterpack_9_cards_Gen_1 } from './img/boosterpacks/Boosterpack_9_cards_Gen_1.png';
+
 // cards
 export { default as bluecard } from './img/cards/bluecard.png';
 export { default as cardback_normal } from './img/cards/cardback_normal.gif';

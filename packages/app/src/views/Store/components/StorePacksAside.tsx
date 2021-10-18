@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
+import styled from "styled-components";
 import BigNumber from "bignumber.js";
 import { StyledStoreWrapper, StyledStoreHeader, StyledStoreBody, StyledPepemonCardMeta, StyledPepemonCardPrice } from './index';
 import { Button, Title, Text, Spacer, StyledSpacer } from '../../../components';
@@ -9,11 +10,12 @@ import { ActionClose, cardback_normal, coin } from '../../../assets';
 import { useCardsMetadata, useApprove, useAllowance, useTokenBalance, useCardsFactoryData, useCardsStorePrices } from "../../../hooks";
 import { theme } from '../../../theme';
 
-const StoreCardsAside: React.FC<any> = ({setSelectedCard, selectedCard: { cardId, cardPrice, cardMetadata = null }}) => {
+const StorePacksAside: React.FC<any> = ({setSelectedPack, selectedPack}) => {
 	const [activeClaimModal, setActiveClaimModal] = useState(false);
 	const pepemonContext = useContext(PepemonProviderContext);
 	const { chainId, contracts: { pepemonStore, ppdex }, ppdexAddress } = pepemonContext[0];
 	const allowance = useAllowance(pepemonStore);
+	console.log(selectedPack);
 
 	const isAllowedSpending = () => {
         // No allowance needed for native BNB payments
@@ -24,12 +26,6 @@ const StoreCardsAside: React.FC<any> = ({setSelectedCard, selectedCard: { cardId
     }
 	console.log(isAllowedSpending());
 
-
-	if (cardMetadata?.status === "failed") {
-		setSelectedCard(null);
-		return <></>
-	}
-
 	return (
 		<StyledStoreWrapper style={{width: "34%"}}>
 			<StyledStoreHeader>
@@ -37,37 +33,37 @@ const StoreCardsAside: React.FC<any> = ({setSelectedCard, selectedCard: { cardId
 					<Title as="h2" color={theme.color.white} font={theme.font.neometric} weight={900} size={1.2}>
 						Selected Card
 					</Title>
-					<ActionClose onClick={() => setSelectedCard("")}/>
+					<ActionClose onClick={() => setSelectedPack(null)}/>
 				</div>
 			</StyledStoreHeader>
 			<StyledStoreBody>
-				<Title as="h2" font={theme.font.neometric} size={1.3}>{cardMetadata ? cardMetadata.name : 'Loading card'}</Title>
+				<Title as="h2" font={theme.font.neometric} size={1.3}>{selectedPack.name}</Title>
 				<Spacer size="sm"/>
-				<Text as="p" font={theme.font.inter} size={.875} lineHeight={1.3} color={theme.color.gray[600]}>{cardMetadata && cardMetadata.description}</Text>
+				<Text as="p" font={theme.font.inter} size={.875} lineHeight={1.3} color={theme.color.gray[600]}>When claiming this boorsterpack you will recieve {selectedPack.cardsPerPack} random cards.</Text>
 				<Spacer size="sm"/>
-				<img loading="lazy" src={cardMetadata ? cardMetadata.image : cardback_normal} alt={cardMetadata ? cardMetadata.name : 'Loading card'} style={{width: "100%"}}/>
+				<img loading="lazy" src={selectedPack.url} alt={selectedPack.name} style={{width: "100%"}}/>
 				<Spacer size='md'/>
 				<StyledPepemonCardMeta>
 					<dt>Rarity:</dt>
-					<dd>{cardMetadata && cardMetadata.attributes.find((trait) => trait.trait_type === 'Rarity').value}</dd>
+					<dd>Epic</dd>
 				</StyledPepemonCardMeta>
 				<Spacer size='sm'/>
 				<StyledSpacer bg={theme.color.gray[100]} size={2}/>
 				<StyledPepemonCardMeta>
 					<dt>Type:</dt>
-					<dd>{cardMetadata && cardMetadata.attributes.find((trait) => trait.trait_type === 'Type').value}</dd>
+					<dd>Collectors edition</dd>
 				</StyledPepemonCardMeta>
 				<Spacer size='sm'/>
 				<StyledSpacer bg={theme.color.gray[100]} size={2}/>
 				<StyledPepemonCardMeta>
 					<dt>Set:</dt>
-					<dd>{cardMetadata && cardMetadata.attributes.find((trait) => trait.trait_type === 'Set').value}</dd>
+					<dd>New beginning</dd>
 				</StyledPepemonCardMeta>
 				<Spacer size='sm'/>
 				<StyledSpacer bg={theme.color.gray[100]} size={2}/>
 				<StyledPepemonCardMeta>
 					<dt>Artist:</dt>
-					<dd>{cardMetadata && cardMetadata.attributes.find((trait) => trait.trait_type === 'Artist').value}</dd>
+					<dd>Azucena N.A.</dd>
 				</StyledPepemonCardMeta>
 				<Spacer size='sm'/>
 				<StyledSpacer bg={theme.color.gray[100]} size={2}/>
@@ -76,20 +72,53 @@ const StoreCardsAside: React.FC<any> = ({setSelectedCard, selectedCard: { cardId
 					<dd>
 						<StyledPepemonCardPrice styling="alt">
 							<img loading="lazy" src={coin} alt="coin"/>
-							{cardPrice}
+							{selectedPack.price} {chainId === 56 ? 'BNB' : 'PPDEX'}
 						</StyledPepemonCardPrice>
 					</dd>
 				</StyledPepemonCardMeta>
 				<Spacer size='md'/>
-				<Button styling="purple" onClick={() => setActiveClaimModal(true) } width="100%">Claim card</Button>
+				<Text as="p" font={theme.font.inter} size={.75} color={theme.color.gray[300]} spacing={1.2} txtTransform="uppercase">Chances of getting this card:</Text>
+				<Spacer size='sm'/>
+				<Container>
+					<Background />
+					<Progress percent={60}/>
+				</Container>
+				<Spacer size='md'/>
+				<Button disabled styling="purple" onClick={() => setActiveClaimModal(true) } width="100%">Not available (yet)</Button>
 				{ activeClaimModal &&
 					<StoreClaimModal
+						disabled
 						dismiss={() => setActiveClaimModal(false)}
-						claimButtonText="Claim card"/>
+						claimButtonText="Claim Deck"/>
 				}
 			</StyledStoreBody>
 		</StyledStoreWrapper>
 	)
 }
 
-export default StoreCardsAside;
+const Container = styled.div`
+  height: 8px;
+  width: 100%;
+  position: relative;
+`;
+
+const BaseBox = styled.div`
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  border-radius: 2px;
+  transition: width 10s ease-in-out;
+`;
+
+const Background = styled(BaseBox)`
+  background: ${props => props.theme.color.gray[100]};
+  width: 100%;
+`;
+
+const Progress = styled(BaseBox)<{percent: number}>`
+	background: ${props => props.theme.color.green[200]};
+	width: ${({ percent }) => percent}%;
+`;
+
+export default StorePacksAside;
