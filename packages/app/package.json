@@ -1,7 +1,6 @@
 {
   "name": "@pepemon/app",
   "version": "0.0.1",
-  "homepage": "./",
   "browserslist": {
     "production": [
       ">0.2%",
