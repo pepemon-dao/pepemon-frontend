@@ -1,7 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 import { AnimatedImg } from "../../components";
-import { downgreenarrow, pepemander, pemeleon, fudizard } from "../../assets";
+import {
+	// downgreenarrow,
+	pepemander, pemeleon, fudizard } from "../../assets";
 
 const Evolve = () => {
 	return (
