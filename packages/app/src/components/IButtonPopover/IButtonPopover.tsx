@@ -8,13 +8,14 @@ type ModalProps = {
 	isOpen: boolean;
 	heading: string;
 	toggle: () => void;
+	cursor?: string,
 	button?: React.ReactNode;
 };
 
-const IButtonPopover: React.FC<ModalProps> = ({ isOpen, heading, toggle, button}) => {
+const IButtonPopover: React.FC<ModalProps> = ({ isOpen, heading, toggle, cursor = 'pointer', button}) => {
   return (
 	<div>
-		<ImgButton aria-label="show APY informations"><img height="18px" width="18px" src={ibutton} alt="info" onClick={toggle}/></ImgButton>
+		<ImgButton aria-label="show APY informations" cursor={cursor}><img height="18px" width="18px" src={ibutton} alt="info" onClick={toggle}/></ImgButton>
 		<Modal isOpen={isOpen}>
 			<ModalContainer>
 			<ModalHeader>
@@ -103,10 +104,10 @@ const ModalHeader = styled.div`
 
 const ImgButton = styled.button.attrs({
 	type: "button"
-})<{absolute?: boolean}>`
+})<{absolute?: boolean, cursor?: string}>`
 	background: unset;
 	border: none;
-	cursor: pointer;
+	cursor: ${props => props.cursor ? props.cursor : 'pointer'};
 	padding: 0;
 	display: flex;
 
