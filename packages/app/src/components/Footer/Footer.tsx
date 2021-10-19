@@ -14,15 +14,15 @@ const Footer = () => {
 						<img loading="lazy" src={logoexpand} alt="pepemon logo" style={{maxWidth: "10em"}}/>
 					</div>
 					<div>
-						<Title as="h2" size={.8} weight={400} color={theme.color.white}>PEPEMON</Title>
+						<Title as="h2" size={.8} weight={400} color={theme.color.white}>Start researching</Title>
 						<StyledList>
-							<li><StyledLink href="/about">About</StyledLink></li>
-							<li><StyledLink href="/whitepaper">Whitepaper</StyledLink></li>
-							<li><StyledLink href="/game">Pepemon the game</StyledLink></li>
+							<li><StyledLink href="https://docs.pepemon.world/">Docs</StyledLink></li>
+							<li><StyledLink href="https://opensea.io/collection/pepemonfactory">Opensea</StyledLink></li>
+							<li><StyledLink href="https://docs.pepemon.world/gaming">Pepemon: Degen Battleground</StyledLink></li>
 						</StyledList>
 					</div>
 					<div>
-						<Title as="h2" size={.8} weight={400} color={theme.color.white}>TOKENS</Title>
+						<Title as="h2" size={.8} weight={400} color={theme.color.white}>Start earning</Title>
 						<StyledList>
 							<li><ExternalStyledLink href="https://etherscan.io/token/0x4d2ee5dae46c86da2ff521f7657dad98834f97b8">PPBLZ Contract</ExternalStyledLink></li>
 							<li><ExternalStyledLink href="https://etherscan.io/token/0xf1f508c7c9f0d1b15a76fba564eef2d956220cf7">PPDEX Contract</ExternalStyledLink></li>
@@ -32,7 +32,7 @@ const Footer = () => {
 					</div>
 
 					<div>
-						<Title as="h2" size={.8} weight={400} color={theme.color.white}>SOCIALS</Title>
+						<Title as="h2" size={.8} weight={400} color={theme.color.white}>Get in contact</Title>
 						<StyledList>
 							<li><ExternalStyledLink href="https://twitter.com/pepemonfinance">Twitter</ExternalStyledLink></li>
 							<li><ExternalStyledLink href="https://t.me/pepemonfinance">Telegram</ExternalStyledLink></li>
@@ -46,11 +46,11 @@ const Footer = () => {
 				<StyledFooterLegal>
 					<hr/>
 					<StyledFooterLegalInner>
-						<StyledFooterLegalLinks>
+						{/* <StyledFooterLegalLinks>
 							<a href="https://example.com">Terms of service</a>
 							<a href="https://example.com">Privacy policy</a>
 							<a href="https://example.com">Cookie policy</a>
-						</StyledFooterLegalLinks>
+						</StyledFooterLegalLinks> */}
 						<div>
 							© 2021
 						</div>

@@ -34,18 +34,18 @@ const Balances: React.FC = () => {
 			</ContentBox>
 			<ContentBox style={{ gridArea: "box3" }}>
 				<Text as="p" align="center">Total NFT’s solds</Text>
-				<Text as="p" size={2} font={theme.font.neometric} weight={900} align="center">1029</Text>
+				<Text as="p" size={2} font={theme.font.neometric} weight={900} align="center">Over 5000</Text>
 			</ContentBox>
 			<ContentBox style={{ gridArea: "box4" }}>
-				<Text as="p" size={2} font={theme.font.neometric} weight={900} align="center">100% APY</Text>
+				<Text as="p" size={2} font={theme.font.neometric} weight={900} align="center">70% APY</Text>
 				<Text as="p" align="center">
-					Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+					Pepemon uses a unique system for those participating in it's DeFi economy. Because we don't want to have surges of inflation periods and we want to offer a predictable yield, each PPBLZ produces around 14 PPDEX per year. Double that if your staking in the liquidity pool!
 				</Text>
 			</ContentBox>
 			<ContentBox style={{ gridArea: "box5" }}>
 				<Text as="p" size={2} font={theme.font.neometric} weight={900} align="center">Staking</Text>
 				<Text as="p" align="center">
-					Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+					Users have the choice of staking PPBLZ on our platform for basic APY, or stake PPBLZ-ETH LP tokens for double the rewards in PPDEX, because they're awesome and help the community trade tokens while collecting fees.
 				</Text>
 			</ContentBox>
 		</ContentBoxGrid>
