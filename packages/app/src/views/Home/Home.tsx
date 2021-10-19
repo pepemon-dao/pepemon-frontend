@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { AnimatedImg, ContentBox, ContentBoxNumber, ContentBoxGrid, ContentCentered, ContentColumn, ContentColumns, Evolve, ExternalLink, Footer, Spacer, ButtonLink, Title, Text, SocialBoxes, Newsletter } from "../../components";
+import { AnimatedImg, ContentBox, ContentBoxNumber, ContentBoxGrid, ContentCentered, ContentColumn, ContentColumns, Evolve, Footer, Spacer, ButtonLink, Title, Text, SocialBoxes, Newsletter } from "../../components";
 import Balances from './components/Balances';
 import { theme } from "../../theme";
 import { dummyGraph, group, cover, coverblack, fudizardPng, logoexpand, bluecard, pepechucard, witchenerycard, pepechurcard } from "../../assets";
@@ -14,7 +14,7 @@ const Home: React.FC<any> = () => {
 					<ContentColumn width="40%" style={{paddingTop: "3.75em"}}>
 						<Title as="h1" font={theme.font.spaceMace} size={4.5}>Gotta claim ‘em all!</Title>
 						<Text as="p" font={theme.font.inter} size={1.375}>
-							Pepemon is a digital collectible card game on blockchain owned by players. Powered by DeFi and NFTs as in-game assets.
+							Digital collectible card games on blockchain owned by the players. 100% airdropped. Play2Earn games powered by DeFi and NFTs in-game assets. 
 						</Text>
 						<Spacer size="lg"/>
 						<Spacer size="lg"/>
@@ -23,10 +23,10 @@ const Home: React.FC<any> = () => {
 								<ContentBox shadow>
 									<ContentBoxNumber><span>1</span></ContentBoxNumber>
 									<Text as="p" align="center">
-										Become a true Pepetrainer by getting $PPBLZ
+										Start your journey by getting $PPBLZ
 									</Text>
 									<Spacer size="md"/>
-									<ButtonLink to="/store">Become a pepetrainer</ButtonLink>
+									<ButtonLink to="/store">Become the very best</ButtonLink>
 								</ContentBox>
 							</ContentColumn>
 							<ContentColumn width="calc(1/3 * 100%)" space="1.25em"  style={{transform: "translateY(30%)"}}>
@@ -36,20 +36,20 @@ const Home: React.FC<any> = () => {
 										Stake your $PPBLZ with
 									</Text>
 									<Text as="p" size={2} font={theme.font.neometric} weight={900} align="center">
-										100% APY
+										70% APY
 									</Text>
 									<Spacer size="md"/>
-									<ButtonLink light to="/staking">Sart staking</ButtonLink>
+									<ButtonLink light to="/staking">Start staking</ButtonLink>
 								</ContentBox>
 							</ContentColumn>
 							<ContentColumn width="calc(1/3 * 100%)" space="1.25em"  style={{transform: "translateY(60%)"}}>
 								<ContentBox shadow>
 									<ContentBoxNumber><span>3</span></ContentBoxNumber>
 									<Text as="p" align="center">
-										Buy or claim your $PPDEX and get booster packs right now!
+										Buy or earn $PPDEX and get NFT Boosterpacks!
 									</Text>
 									<Spacer size="md"/>
-									<ButtonLink light to="/store/boosterpacks">Buy your boosterpack</ButtonLink>
+									<ButtonLink light to="/store/boosterpacks">Get your Boosterpacks</ButtonLink>
 								</ContentBox>
 							</ContentColumn>
 						</ContentColumns>
@@ -68,19 +68,19 @@ const Home: React.FC<any> = () => {
 						</div>
 					</ContentColumn>
 					<ContentColumn width="60%" style={{paddingTop: "3.75em"}}>
-						<Title as="h2" font={theme.font.neometric} size={3} weight={900} lineHeight={1.15}>Collect unique Pepemon cards created by real artists</Title>
+						<Title as="h2" font={theme.font.neometric} size={3} weight={900} lineHeight={1.15}>Collect unique Pepemon NFT cards</Title>
 						<Spacer size="md"/>
-						<Text as="p" font={theme.font.spaceMace} underline>Pepemon NFT</Text>
+						<Text as="p" font={theme.font.spaceMace} underline>Scarcity meets pixel perfect art</Text>
 						<Spacer size="md"/>
 						<Text as="p" font={theme.font.inter}>
-							Use your Pepedex to claim these unique NFTs pepemon cards. All cards created by real artist all over the world.
+							Use PPDEX to mint unique Pepemon NFT cards. All the cards are created by upcoming artists all over the world.
 							<br/><br/>
-							Once you have claimed these cards, you can become the very best by using your NFTs in a trading card game on blockchain!
+							Once you have minted your cards, you can become the very best by dueling with your NFTs in a Trading Card Game on blockchain!
 							<br/><br/>
 							"Pepechu, I choose you!"
 						</Text>
 						<Spacer size="md"/>
-						<ButtonLink to="/store/cards">Claim your card</ButtonLink>
+						<ButtonLink to="/store/cards">Mint your card</ButtonLink>
 					</ContentColumn>
 				</ContentColumns>
 			</StyledSection>
@@ -88,14 +88,14 @@ const Home: React.FC<any> = () => {
 			<StyledSection bgImage={coverblack}>
 				<ContentCentered style={{paddingTop: "7.5em"}}>
 					<Title as="h1" font={theme.font.neometric} size={3} color={theme.color.white} weight={900} align="center" lineHeight={1.04}>
-						Lorem ipsum dolor sit amet,<br /> consectetur elit.
+						Start earning<br /> before ETH 2.0.
 					</Title>
 					<Spacer size="md"/>
-					<Text as="p" font={theme.font.spaceMace} color={theme.color.white} align="center" underline>To the moon</Text>
+					<Text as="p" font={theme.font.spaceMace} color={theme.color.white} align="center" underline>NO VCs. No pre-sale.</Text>
 					<Spacer size="md"/>
 					<Text as="p" font={theme.font.inter} color={theme.color.white} align="center">
-					Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-					nisi ut aliquip ex ea commodo consequat.
+					Pepemon tokens were 100% airdropped. No VCs and no presale was held, just 300 people getting PPBLZ airdropped to their wallet.
+					Since then on average more than 80% of those tokens were staked to generate PPDEX and mint NFT Cards.
 					</Text>
 					<Spacer size="md"/>
 
@@ -112,22 +112,22 @@ const Home: React.FC<any> = () => {
 								<ContentColumn>
 									<ContentBoxGrid gridTemplate='"meta1 meta2 meta3"'>
 										<div style={{ gridArea: "meta1" }}>
-											<Text as="p" align="center">total</Text>
-											<Text as="p" size={2} font={theme.font.neometric} weight={900} align="center">27</Text>
+											<Text as="p" align="center">owners</Text>
+											<Text as="p" size={2} font={theme.font.neometric} weight={900} align="center">28</Text>
 										</div>
 										<div style={{ gridArea: "meta2" }}>
 											<Text as="p" align="center">total</Text>
-											<Text as="p" size={2} font={theme.font.neometric} weight={900} align="center">27</Text>
+											<Text as="p" size={2} font={theme.font.neometric} weight={900} align="center">30</Text>
 										</div>
 										<div style={{ gridArea: "meta3" }}>
-											<Text as="p" align="center">total</Text>
-											<Text as="p" size={2} font={theme.font.neometric} weight={900} align="center">27</Text>
+											<Text as="p" align="center">last sold</Text>
+											<Text as="p" size={2} font={theme.font.neometric} weight={900} align="center">2.8ETH</Text>
 										</div>
 									</ContentBoxGrid>
 								</ContentColumn>
 							</ContentColumns>
 							<img loading="lazy" src={dummyGraph} alt="graph"/>
-							<ButtonLink style={{display: "inline-block", width: "100%"}} to="/store/cards">
+							<ButtonLink style={{display: "inline-block", width: "100%"}} to="https://opensea.io/collection/pepemonfactory">
 								Buy now
 							</ButtonLink>
 						</ContentColumn>
@@ -153,10 +153,10 @@ const Home: React.FC<any> = () => {
 						<Text as="p" font={theme.font.spaceMace} underline>Staking events</Text>
 						<Spacer size="md"/>
 						<Text as="p" font={theme.font.inter}>
-							Stake your awesome Pepemon cards to receive even more awesome exclusive Pepemon rewards.
+							Evolve your awesome Pepemon cards to mint exclusive cards and crush your enemies in blockchain battles.
 						</Text>
 						<Text as="p" font={theme.font.inter}>
-							Place Pepemander into the next rectangle to evolve!
+							Don't forget to use special NFT Event items to save your monsters when evolving!
 						</Text>
 					</ContentColumn>
 				</ContentColumns>
@@ -165,12 +165,12 @@ const Home: React.FC<any> = () => {
 			<StyledSection>
 				<ContentColumns style={{marginBottom: "7.5em"}}>
 					<ContentColumn width="55%" style={{paddingTop: "3.75em"}}>
-						<Title as="h2" font={theme.font.neometric} size={3} weight={900}>The Pepemon Game</Title>
+						<Title as="h2" font={theme.font.neometric} size={3} weight={900}>Pepemon: Degen Battleground</Title>
 						<Spacer size="md"/>
-						<Text as="p" font={theme.font.spaceMace} underline>Coming soon</Text>
+						<Text as="p" font={theme.font.spaceMace} underline>Beta release late 2021</Text>
 						<Spacer size="md"/>
 						<Text as="p" font={theme.font.inter}>
-							Duel other trainers on an epic game powered by DeFi and NFT's. Read more about the game mechanics <ExternalLink href="https://example.com">here</ExternalLink> and let's discuss on the different strategies for the closed Beta launch happening soon for card holders.
+							Duel other trainers on an epic game powered by DeFi and NFT's. Become a professional Pepetrainer with the Play2Earn mechanism that enables each player to get exclusive drops after a battle no matter what the skill level or collection size, there is always an opportunity to earn!
 						</Text>
 					</ContentColumn>
 					<ContentColumn width="45%">
