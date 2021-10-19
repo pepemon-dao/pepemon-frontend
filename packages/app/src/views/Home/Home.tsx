@@ -55,7 +55,7 @@ const Home: React.FC<any> = () => {
 						</ContentColumns>
 					</ContentColumn>
 					<ContentColumn width="60%">
-						<img loading="lazy" src={group} alt="Pepetrainers" style={{maxWidth: "120%", width: "750px"}}/>
+						<img src={group} alt="Pepetrainers" style={{maxWidth: "120%", width: "750px"}}/>
 					</ContentColumn>
 				</ContentColumns>
 				<ContentColumns style={{marginTop: "23em", marginBottom: "7.5em"}}>

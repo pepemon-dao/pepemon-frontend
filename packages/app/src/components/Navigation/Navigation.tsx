@@ -13,7 +13,7 @@ const Navigation = () => {
 		<StyledMenuOuterWrapper onMouseEnter={() => setNavLogo(logoexpand)} onMouseLeave={() => setNavLogo(pepemon)}>
 			<StyledMenuInnerWrapper>
 				<StyledLogoLink to="/">
-					<img loading="lazy" src={navLogo} alt="logo" />
+					<img src={navLogo} alt="logo" />
 				</StyledLogoLink>
 
 				<StyledMenuList>
