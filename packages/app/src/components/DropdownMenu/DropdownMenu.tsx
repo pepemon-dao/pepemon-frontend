@@ -24,28 +24,29 @@ const DropdownMenu: React.FC<any> = ({ title, options, activeOptions, style, set
 		}
 	})
 
-	const editedTitle = () => {
-		if (activeOptions.length === options.length) { return 'all' }
-		else if (activeOptions.length !== 1) { return `${activeOptions.length} selected` }
-		else { return activeOptions[0].title };
-	}
+	// const editedTitle = () => {
+	// 	if (activeOptions.length === options.length) { return 'all' }
+	// 	else if (activeOptions.length !== 1) { return `${activeOptions.length} selected` }
+	// 	else { return activeOptions[0].title };
+	// }
 
 	return (
 		<StyledMenuContainer>
 			<StyledMenuTrigger onClick={toggleDropdown} width={style ? style.width : null} bgColor={style ? style.bgColor : null}>
-				<span>{editedTitle()}</span>
+				<span>{activeOptions.title}</span>
 				<ChevronDown/>
 			</StyledMenuTrigger>
 			<StyledMenu active={isActive} ref={dropdownRef}>
 				{(options.length > 1 || (options.length === 1 && title !== options[0].title)) &&
 					<StyledList>
 						{options.map((option, key) => {
-							const index = activeOptions.findIndex(serie => serie.title === option.title);
+							// const index = activeOptions.findIndex(serie => serie.title === option.title);
+							const isActive = activeOptions.title === option.title;
 							return (
-								<StyledListItem key={key} active={index >= 0}>
+								<StyledListItem key={key} active={isActive}>
 									<StyledListItemLink
 										onClick={() => { option.onClick(); setIsActive(false); }}>
-										{index >= 0 && <Check/> } {option.title}
+										{isActive && <Check/> } {option.title}
 									</StyledListItemLink>
 								</StyledListItem>
 							)
