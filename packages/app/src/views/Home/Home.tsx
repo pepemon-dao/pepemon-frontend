@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { AnimatedImg, ContentBox, ContentBoxNumber, ContentBoxGrid, ContentCentered, ContentColumn, ContentColumns, Evolve, ExternalLink, Footer, Spacer, ButtonLink, Title, Text, SocialBoxes, Newsletter } from "../../components";
+import { AnimatedImg, ContentBox, ContentBoxNumber, ContentBoxGrid, ContentCentered, ContentColumn, ContentColumns, Evolve, Footer, Spacer, ButtonLink, Title, Text, SocialBoxes, Newsletter } from "../../components";
 import Balances from './components/Balances';
 import { theme } from "../../theme";
 import { dummyGraph, group, cover, coverblack, fudizardPng, logoexpand, bluecard, pepechucard, witchenerycard, pepechurcard } from "../../assets";
