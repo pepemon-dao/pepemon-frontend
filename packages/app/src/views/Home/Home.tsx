@@ -26,7 +26,7 @@ const Home: React.FC<any> = () => {
 										Start your Pepetrainer journey by getting $PPBLZ
 									</Text>
 									<Spacer size="md"/>
-									<ButtonLink to="/store">Become a the very best</ButtonLink>
+									<ButtonLink to="/store">Become the very best</ButtonLink>
 								</ContentBox>
 							</ContentColumn>
 							<ContentColumn width="calc(1/3 * 100%)" space="1.25em"  style={{transform: "translateY(30%)"}}>
@@ -46,7 +46,7 @@ const Home: React.FC<any> = () => {
 								<ContentBox shadow>
 									<ContentBoxNumber><span>3</span></ContentBoxNumber>
 									<Text as="p" align="center">
-										Buy or claim your $PPDEX and get Boosterpacks!
+										Buy or claim your $PPDEX and get NFT Boosterpacks!
 									</Text>
 									<Spacer size="md"/>
 									<ButtonLink light to="/store/boosterpacks">Buy your Boosterpack</ButtonLink>
@@ -73,7 +73,7 @@ const Home: React.FC<any> = () => {
 						<Text as="p" font={theme.font.spaceMace} underline>Pepemon NFT</Text>
 						<Spacer size="md"/>
 						<Text as="p" font={theme.font.inter}>
-							Use PPDEX to mint unique Pepemon NFT cards. All cards created by real artist all over the world.
+							Use PPDEX to mint unique Pepemon NFT cards. All the cards are created by upcoming artists all over the world.
 							<br/><br/>
 							Once you have claimed these cards, you can become the very best by dueling with your NFTs in a Trading Card Game on blockchain!
 							<br/><br/>
@@ -88,7 +88,7 @@ const Home: React.FC<any> = () => {
 			<StyledSection bgImage={coverblack}>
 				<ContentCentered style={{paddingTop: "7.5em"}}>
 					<Title as="h1" font={theme.font.neometric} size={3} color={theme.color.white} weight={900} align="center" lineHeight={1.04}>
-						Start staking<br /> before ETH 2.0.
+						Start earning<br /> before ETH 2.0.
 					</Title>
 					<Spacer size="md"/>
 					<Text as="p" font={theme.font.spaceMace} color={theme.color.white} align="center" underline>NO VCs. No pre-sale.</Text>

@@ -32,7 +32,7 @@ const Footer = () => {
 					</div>
 
 					<div>
-						<Title as="h2" size={.8} weight={400} color={theme.color.white}>Get in contact</Title>
+						<Title as="h2" size={.8} weight={400} color={theme.color.white}>Get in touch</Title>
 						<StyledList>
 							<li><ExternalStyledLink href="https://twitter.com/pepemonfinance">Twitter</ExternalStyledLink></li>
 							<li><ExternalStyledLink href="https://t.me/pepemonfinance">Telegram</ExternalStyledLink></li>
