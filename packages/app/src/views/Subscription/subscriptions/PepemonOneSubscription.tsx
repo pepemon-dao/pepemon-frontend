@@ -1,8 +1,8 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import BigNumber from 'bignumber.js';
 import { AccordionWrapper, AccordionHeader, AccordionHeaderTitle, AccordionHeaderButton, AccordionBody, AccordionBodyContent, Spacer, Button, Title, Text, ContentColumns, ContentColumn, ExternalLink } from "../../../components";
 import { PepemonProviderContext } from "../../../contexts";
-import { useCardsMetadata, useTokenBalance, useApprove, useAllowance, useLotteryMinLPTokens, useLotteryRewardCard, useLotteryLPBalance, useLotteryIsStaking, useLotteryHasClaimed, useLotteryStakingDeadline, useLotteryStakingStartblock, useLotteryClaim, useLotteryWithdraw, useLotteryStake, useBlock } from '../../../hooks';
+import { getCardMeta, useTokenBalance, useApprove, useAllowance, useLotteryMinLPTokens, useLotteryRewardCard, useLotteryLPBalance, useLotteryIsStaking, useLotteryHasClaimed, useLotteryStakingDeadline, useLotteryStakingStartblock, useLotteryClaim, useLotteryWithdraw, useLotteryStake, useBlock } from '../../../hooks';
 import { getPepemonLotteryContract, getPpdexAddress, getPpdexUniV2Contract, getUniV2PpdexAddress } from '../../../pepemon/utils';
 import { getBalanceNumber } from '../../../utils';
 import { cardback_normal, dropdownarrow, pokeball, uparrow } from "../../../assets";
@@ -25,7 +25,11 @@ const PepemonOneSubscription: React.FC<any> = () => {
     const isStaking = useLotteryIsStaking(transaction);
     const stakedBalance = useLotteryLPBalance(transaction);
     const rewardCard = useLotteryRewardCard();
-	const cardMeta = useCardsMetadata([parseInt(rewardCard || 0 )])[0];
+	const [cardMeta, setCardMeta] = useState(null)
+	useEffect(() => {(async () => {
+			setCardMeta(await getCardMeta(parseInt(rewardCard || 0 ), pepemon))
+		})()
+	}, [rewardCard, pepemon]);
     const stakingDeadline = useLotteryStakingDeadline();
     const stakingStart = useLotteryStakingStartblock(transaction);
     const hasClaimed = useLotteryHasClaimed(rewardCard, transaction);
@@ -90,7 +94,7 @@ const PepemonOneSubscription: React.FC<any> = () => {
 								<Text as="p" size={.875}>
 									{ minLPTokens ?
 										`${parseFloat(parseFloat((getBalanceNumber(minLPTokens) + 0.01).toString()).toPrecision(3))} PPBLZ-ETH LP needed to subscribe` :
-										'fetching...'
+										'loading...'
 									}
 								</Text>
 								<Spacer size="sm"/>

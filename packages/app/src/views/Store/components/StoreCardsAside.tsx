@@ -8,7 +8,7 @@ import { ActionClose, cardback_normal, coin } from '../../../assets';
 import { useAllowance, useTokenBalance, useRedeemCard, useApprove } from "../../../hooks";
 import { theme } from '../../../theme';
 
-const StoreCardsAside: React.FC<any> = ({setSelectedCard, selectedCard: { cardId, cardPrice, cardMetadata = null, cardsBalances = null }}) => {
+const StoreCardsAside: React.FC<any> = ({setSelectedCard, selectedCard: { cardId, cardPrice, cardMeta = null, cardBalance = null }}) => {
 	const [activeClaimModal, setActiveClaimModal] = useState(false);
 	const [transactions, setTransactions] = useState(0);
 	const pepemonContext = useContext(PepemonProviderContext);
@@ -17,7 +17,7 @@ const StoreCardsAside: React.FC<any> = ({setSelectedCard, selectedCard: { cardId
 	const { onApprove, isApproving } = useApprove(contracts.pepemonStore, contracts.ppdex);
 	const allowance = useAllowance(contracts.pepemonStore);
 	const ppdexBalance = useTokenBalance(contracts.ppdex.address);
-	if (cardMetadata.status === "failed") { setSelectedCard(null); return <></> } // bail out early if card infos couldn't be loaded
+	if (cardMeta.status === "failed") { setSelectedCard(null); return <></> } // bail out early if card infos couldn't be loaded
 
 	const isItemCard = (tokenId: number) => {
         return [17, 18, 19].includes(tokenId);
@@ -37,7 +37,7 @@ const StoreCardsAside: React.FC<any> = ({setSelectedCard, selectedCard: { cardId
     }
 
 	const isMintable = () => {
-        return cardsBalances && (parseInt(cardsBalances.totalSupply) < parseInt(cardsBalances.maxSupply));
+        return cardBalance && (parseInt(cardBalance.totalSupply) < parseInt(cardBalance.maxSupply));
     }
 
 	const isAffordable = () => {
@@ -46,7 +46,7 @@ const StoreCardsAside: React.FC<any> = ({setSelectedCard, selectedCard: { cardId
     }
 
 	const isReleasingSoon = () => {
-        const birthdayMetaData = cardMetadata.attributes.find(attribute => attribute.trait_type === 'birthday');
+        const birthdayMetaData = cardMeta.attributes.find(attribute => attribute.trait_type === 'birthday');
         if (parseInt(birthdayMetaData.value) === 0) {
             return true;
         }
@@ -55,7 +55,7 @@ const StoreCardsAside: React.FC<any> = ({setSelectedCard, selectedCard: { cardId
     }
 
 	const isForSale = () => {
-        const birthdayMetaData = cardMetadata.attributes.find(attribute => attribute.trait_type === 'birthday');
+        const birthdayMetaData = cardMeta.attributes.find(attribute => attribute.trait_type === 'birthday');
         if (parseInt(birthdayMetaData.value) === 0) {
             return false;
         }
@@ -99,33 +99,33 @@ const StoreCardsAside: React.FC<any> = ({setSelectedCard, selectedCard: { cardId
 				</div>
 			</StyledStoreHeader>
 			<StyledStoreBody>
-				<Title as="h2" font={theme.font.neometric} size={1.3}>{cardMetadata ? cardMetadata.name : 'Loading card'}</Title>
+				<Title as="h2" font={theme.font.neometric} size={1.3}>{cardMeta ? cardMeta.name : 'Loading card'}</Title>
 				<Spacer size="sm"/>
-				<Text as="p" font={theme.font.inter} size={.875} lineHeight={1.3} color={theme.color.gray[600]}>{cardMetadata && cardMetadata.description}</Text>
+				<Text as="p" font={theme.font.inter} size={.875} lineHeight={1.3} color={theme.color.gray[600]}>{cardMeta && cardMeta.description}</Text>
 				<Spacer size="sm"/>
-				<img loading="lazy" src={cardMetadata ? cardMetadata.image : cardback_normal} alt={cardMetadata ? cardMetadata.name : 'Loading card'} style={{width: "100%"}}/>
+				<img loading="lazy" src={cardMeta ? cardMeta.image : cardback_normal} alt={cardMeta ? cardMeta.name : 'Loading card'} style={{width: "100%"}}/>
 				<Spacer size='md'/>
 				<StyledPepemonCardMeta>
 					<dt>Rarity:</dt>
-					<dd>{cardMetadata && cardMetadata.attributes.find((trait) => trait.trait_type === 'Rarity').value}</dd>
+					<dd>{cardMeta && cardMeta.attributes.find((trait) => trait.trait_type === 'Rarity').value}</dd>
 				</StyledPepemonCardMeta>
 				<Spacer size='sm'/>
 				<StyledSpacer bg={theme.color.gray[100]} size={2}/>
 				<StyledPepemonCardMeta>
 					<dt>Type:</dt>
-					<dd>{cardMetadata && cardMetadata.attributes.find((trait) => trait.trait_type === 'Type').value}</dd>
+					<dd>{cardMeta && cardMeta.attributes.find((trait) => trait.trait_type === 'Type').value}</dd>
 				</StyledPepemonCardMeta>
 				<Spacer size='sm'/>
 				<StyledSpacer bg={theme.color.gray[100]} size={2}/>
 				<StyledPepemonCardMeta>
 					<dt>Set:</dt>
-					<dd>{cardMetadata && cardMetadata.attributes.find((trait) => trait.trait_type === 'Set').value}</dd>
+					<dd>{cardMeta && cardMeta.attributes.find((trait) => trait.trait_type === 'Set').value}</dd>
 				</StyledPepemonCardMeta>
 				<Spacer size='sm'/>
 				<StyledSpacer bg={theme.color.gray[100]} size={2}/>
 				<StyledPepemonCardMeta>
 					<dt>Artist:</dt>
-					<dd>{cardMetadata && cardMetadata.attributes.find((trait) => trait.trait_type === 'Artist').value}</dd>
+					<dd>{cardMeta && cardMeta.attributes.find((trait) => trait.trait_type === 'Artist').value}</dd>
 				</StyledPepemonCardMeta>
 				<Spacer size='sm'/>
 				<StyledSpacer bg={theme.color.gray[100]} size={2}/>
@@ -134,7 +134,7 @@ const StoreCardsAside: React.FC<any> = ({setSelectedCard, selectedCard: { cardId
 					<dd>
 						<StyledPepemonCardPrice styling="alt">
 							<img loading="lazy" src={coin} alt="coin"/>
-							{cardPrice ? `${priceOfCard} ${chainId === 56 ? 'BNB' : 'PPDEX'}` : 'fetching'}
+							{cardPrice ? `${priceOfCard} ${chainId === 56 ? 'BNB' : 'PPDEX'}` : 'loading'}
 						</StyledPepemonCardPrice>
 					</dd>
 				</StyledPepemonCardMeta>

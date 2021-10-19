@@ -80,4 +80,53 @@ const useCardsFactoryData = (tokenIds: number[], transactions: number) => {
     return cardsBalance
 }
 
+export const getCardFactoryData = async (tokenId: number, pepemon: any, transactions: number) => {
+    const { account }: { account: string; provider: any, chainId: number } = pepemon;
+
+	const fetchCardBalances = async (factoryContract) => {
+        const batches = [tokenId].reduce((resultArray, item, index) => {
+            const chunkIndex = Math.floor(index / 10)
+
+            if(!resultArray[chunkIndex]) {
+                resultArray[chunkIndex] = [] // start a new chunk
+            }
+
+            resultArray[chunkIndex].push(item)
+
+            return resultArray
+        }, [])
+
+        let runBatch = 0;
+        let userBalances: any = []
+        await new Promise<void>((resolve) => {
+            setIntervalAsync(async () => {
+                if (runBatch >= batches.length) {
+                    return resolve()
+                }
+
+                const batchBalances = await getBalanceOfBatch(factoryContract, account, batches[runBatch]);
+                userBalances = [...userBalances, ...batchBalances];
+
+                runBatch += 1
+            }, 100);
+        });
+
+        // const userBalances = await getBalanceOfBatch(factoryContract, account, tokenIds);
+        return Promise.all([tokenId].map(async (tokenId, index) => {
+            return {
+                tokenId,
+                userBalance: userBalances && userBalances[index],
+                maxSupply: await getMaxSupply(factoryContract, tokenId),
+                totalSupply: await getTotalSupply(factoryContract, tokenId),
+            }
+        }))
+    };
+
+	const correct = await correctChainIsLoaded(pepemon);
+    if (correct) {
+        const factoryContract = getPepemonFactoryContract(pepemon);
+        return await fetchCardBalances(factoryContract);
+    }
+}
+
 export default useCardsFactoryData

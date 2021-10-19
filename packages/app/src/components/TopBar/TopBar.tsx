@@ -10,7 +10,7 @@ import { theme } from "../../theme";
 
 const TopBar: React.FC<any> = ({setChainId}) => {
 	const [ppblzStakedAmount, setPpblzStakedAmount] = useState(0);
-	const [ppdexRewards, setPpdexRewards] = useState(0);
+	const [, setPpdexRewards] = useState(0);
 	const [, loadWeb3Modal] = useWeb3Modal();
 	const pepemonContext = useContext(PepemonProviderContext);
 	const { account, chainId, ppblzAddress, ppdexAddress, contracts, provider } = pepemonContext[0];
@@ -29,8 +29,7 @@ const TopBar: React.FC<any> = ({setChainId}) => {
 			setPpdexRewards(parseInt(web3.utils.fromWei(cRewards)));
 	    })()
 	}, [contracts.ppdex, setPpblzStakedAmount, account, web3.utils]);
-	console.log(ppdexRewards);
-
+	// console.log(ppdexRewards);
 
 	const totalPpblz = getBalanceNumber(ppblzBalance) + ppblzStakedAmount;
 

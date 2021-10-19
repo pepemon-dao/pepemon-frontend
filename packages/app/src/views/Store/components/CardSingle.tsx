@@ -1,33 +1,44 @@
-import React, { useCallback, useContext } from "react";
+import React, { useEffect, useCallback, useContext, useState } from "react";
 import styled from "styled-components";
 import { cardback_normal, coin } from "../../../assets";
 import { Title, Spacer, StyledSpacer } from "../../../components";
 import { getDisplayBalance } from "../../../utils";
 import { theme } from "../../../theme";
-import { useCardsMetadata, useCardsFactoryData, useCardsStorePrices } from "../../../hooks";
+import { getCardMeta, getCardFactoryData, getCardStorePrices } from "../../../hooks";
 import { PepemonProviderContext } from "../../../contexts";
 
 const CardSingle : React.FC<any> = ({cardId, selectedCard, selectCard}) => {
 	const pepemonContext = useContext(PepemonProviderContext);
 	const { chainId } = pepemonContext[0];
-	const cardPrice = useCardsStorePrices([cardId])[0] || undefined;
-	const cardMetadata = useCardsMetadata([cardId])[0];
-	const cardsBalances = useCardsFactoryData([cardId], 0)[0] || null;
+	const [isLoaded, setIsLoaded] = useState(false);
+	const [cardPrice, setCardPrice] = useState(null);
+	const [cardMeta, setCardMeta] = useState(null);
+	const [cardBalance, setCardBalance] = useState([]);
+
+	useEffect(() => {(async() => {
+			setCardMeta(await getCardMeta(cardId, pepemonContext[0]));
+			setCardPrice(await getCardStorePrices(cardId, pepemonContext[0]));
+			setCardBalance(await getCardFactoryData(cardId, pepemonContext[0], 0));
+		})()
+	}, [cardId, pepemonContext]);
+
+	useEffect(() => {
+		if (cardPrice && cardMeta && cardBalance) setIsLoaded(true);
+	}, [cardPrice, cardMeta, cardBalance])
 
 	const priceOfCard = !cardPrice ? 0 : parseFloat(getDisplayBalance(cardPrice.price, 18)).toFixed(2);
-
 	const isSoldOut = () => {
-		if (!cardsBalances) return true;
-		return cardsBalances.totalSupply === parseInt(cardsBalances.maxSupply);
+		if (!cardBalance) return true;
+		return cardBalance[0]?.totalSupply === parseInt(cardBalance[0]?.maxSupply);
 	}
 
 	const isReleasingSoon = useCallback(() => {
-        const birthdayMetaData = cardMetadata?.attributes.find(attribute => attribute.trait_type === 'birthday');
+        const birthdayMetaData = cardMeta?.attributes.find(attribute => attribute.trait_type === 'birthday');
         if (parseInt(birthdayMetaData?.value) === 0) {
             return true;
         }
         return parseInt(birthdayMetaData?.value) > (Date.now() / 1000);
-    },[cardMetadata])
+    },[cardMeta])
 
 	const isItemCard = (tokenId: number) => {
         return [17, 18, 19].includes(tokenId);
@@ -41,7 +52,7 @@ const CardSingle : React.FC<any> = ({cardId, selectedCard, selectCard}) => {
     },[cardId])
 
 	const calculateTimeLeft = useCallback(() => {
-        const birthdayMetaData = cardMetadata?.attributes.find(attribute => attribute.trait_type === 'birthday');
+        const birthdayMetaData = cardMeta?.attributes.find(attribute => attribute.trait_type === 'birthday');
         if (parseInt(birthdayMetaData?.value) === 0) { return 0; }
 
         if (isReleasingSoon()) {
@@ -52,7 +63,7 @@ const CardSingle : React.FC<any> = ({cardId, selectedCard, selectCard}) => {
             return 0;
         }
         return (parseInt(birthdayMetaData?.value) + (daysForSale() * 60 * 60 * 24)) - (Date.now() / 1000);
-    }, [cardMetadata, daysForSale, isReleasingSoon])
+    }, [cardMeta, daysForSale, isReleasingSoon])
 
 	const countdown = (pre: string = ' ', after: string = '') => {
 		const timeLeft = calculateTimeLeft();
@@ -75,32 +86,31 @@ const CardSingle : React.FC<any> = ({cardId, selectedCard, selectCard}) => {
         return (<span>{minutes.toFixed(0)}{pre} {minutes.toFixed(0) === '1' ? 'minute' : 'minutes'} {after}</span>);
     }
 
-	if (cardMetadata?.status === "failed") {
-		return <></>
-	}
+	if (cardMeta?.status === "failed") return <></>
 
 	const self = {
 		cardId: cardId,
 		cardPrice: cardPrice && cardPrice.price,
-		cardMetadata: cardMetadata,
-		cardsBalances: cardsBalances,
+		cardMeta: cardMeta,
+		cardBalance: cardBalance,
 	};
 
 	return (
-		<StyledPepemonCard style={{ opacity: (!isSoldOut() && cardMetadata && countdown() && cardsBalances) ? "100%" : "50%" }}>
+		<StyledPepemonCard style={{ opacity: (!isSoldOut() && isLoaded && countdown()) ? "100%" : "50%" }}>
 			<StyledPepemonCardPrice>
 				<img loading="lazy" src={coin} alt="coin"/>
-				{cardPrice ? `${priceOfCard} ${chainId === 56 ? 'BNB' : 'PPDEX'}` : 'fetching'}
+				{cardPrice ? `${priceOfCard} ${chainId === 56 ? 'BNB' : 'PPDEX'}` : 'loading'}
 			</StyledPepemonCardPrice>
 			<div>
-				<StyledPepemonCardImage loading="lazy" active={cardId === selectedCard?.cardId} src={cardMetadata ? cardMetadata.image : cardback_normal} alt={cardMetadata ? cardMetadata.name : 'Loading card'}
-					onClick={() => cardMetadata && countdown() && cardsBalances && selectCard(self)}/>
-				<Title as="h4" size={1} font={theme.font.neometric}>{cardMetadata ? cardMetadata.name : 'Loading'}</Title>
+				<StyledPepemonCardImage loading="lazy" active={cardId === selectedCard?.cardId} src={cardMeta ? cardMeta.image : cardback_normal} alt={cardMeta ? cardMeta.name : 'Loading card'}
+					onClick={() => isLoaded && countdown() && selectCard(self)}/>
+				<Title as="h4" size={1} font={theme.font.neometric}>{cardMeta ? cardMeta.name : 'Loading'}</Title>
 				<StyledSpacer bg={theme.color.gray[100]} size={2}/>
 				<Spacer size="sm"/>
 				<StyledPepemonCardMeta>
 					<dt>Minted</dt>
-					<dd>{cardsBalances === null ? 'fetching' : `${cardsBalances.totalSupply} / ${parseInt(cardsBalances.maxSupply) > 10000 ? '♾️': cardsBalances.maxSupply}`}</dd>
+					{/*console.log(cardBalance)*/}
+					<dd>{cardBalance === null ? 'loading' : `${parseInt(cardBalance[0]?.totalSupply)} / ${parseInt(cardBalance[0]?.maxSupply) > 10000 ? '♾️': parseInt(cardBalance[0]?.maxSupply)}`}</dd>
 				</StyledPepemonCardMeta>
 				<StyledPepemonCardMeta>
 					<dt>Time</dt>

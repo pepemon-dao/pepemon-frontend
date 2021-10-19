@@ -13,10 +13,10 @@ interface DropdownMenuProps {
 	style?: any;
 }
 
-const DropdownMenu: React.FC<any> = ({title, options, activeOptions, style}) => {
+const DropdownMenu: React.FC<any> = ({ title, options, activeOptions, style, setActiveSeries}) => {
 	const dropdownRef = useRef(null);
 	const [isActive, setIsActive] = useState(false);
-	const onClick = () => setIsActive(!isActive);
+	const toggleDropdown = () => setIsActive(!isActive);
 
 	useOutsideClick(dropdownRef, () => {
 		if (isActive) {
@@ -32,8 +32,8 @@ const DropdownMenu: React.FC<any> = ({title, options, activeOptions, style}) => 
 
 	return (
 		<StyledMenuContainer>
-			<StyledMenuTrigger onClick={onClick} width={style ? style.width : null} bgColor={style ? style.bgColor : null}>
-				<span onClick={onClick}>{editedTitle()}</span>
+			<StyledMenuTrigger onClick={toggleDropdown} width={style ? style.width : null} bgColor={style ? style.bgColor : null}>
+				<span>{editedTitle()}</span>
 				<ChevronDown/>
 			</StyledMenuTrigger>
 			<StyledMenu active={isActive} ref={dropdownRef}>
