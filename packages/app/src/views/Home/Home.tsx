@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { ContentBox, ContentBoxNumber, ContentBoxGrid, ContentCentered, ContentColumn, ContentColumns, Evolve, ExternalLink, Footer, Spacer, ButtonLink, Title, Text, SocialBoxes, Newsletter } from "../../components";
+import { AnimatedImg, ContentBox, ContentBoxNumber, ContentBoxGrid, ContentCentered, ContentColumn, ContentColumns, Evolve, ExternalLink, Footer, Spacer, ButtonLink, Title, Text, SocialBoxes, Newsletter } from "../../components";
 import Balances from './components/Balances';
 import { theme } from "../../theme";
 import { dummyGraph, group, cover, coverblack, fudizardPng, logoexpand, bluecard, pepechucard, witchenerycard, pepechurcard } from "../../assets";
@@ -175,7 +175,7 @@ const Home: React.FC<any> = () => {
 					</ContentColumn>
 					<ContentColumn width="45%">
 						<div style={{ position: "relative", height: "100%", width: "100%" }}>
-							<img loading="lazy" src={logoexpand} alt="Pepemon"/>
+							<AnimatedImg src={logoexpand} alt="Pepemon"/>
 						</div>
 					</ContentColumn>
 				</ContentColumns>

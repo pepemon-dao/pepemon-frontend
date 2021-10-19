@@ -15,6 +15,7 @@ export { default as useDetectMobileScreen } from './useDetectMobileScreen';
 export { default as useEarnings } from './useEarnings';
 export { default as useIsApprovedForAll } from './useIsApprovedForAll';
 export { default as useIsClaimedMerkle } from './useIsClaimedMerkle';
+export { default as useIsVisible } from './useIsVisible';
 export { default as useJoinEvent } from './useJoinEvent';
 export { default as useLotteryClaim } from './useLotteryClaim';
 export { default as useLotteryHasClaimed } from './useLotteryHasClaimed';
