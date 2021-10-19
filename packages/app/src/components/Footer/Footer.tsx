@@ -46,11 +46,11 @@ const Footer = () => {
 				<StyledFooterLegal>
 					<hr/>
 					<StyledFooterLegalInner>
-						{/* <StyledFooterLegalLinks>
-							<a href="https://example.com">Terms of service</a>
-							<a href="https://example.com">Privacy policy</a>
-							<a href="https://example.com">Cookie policy</a>
-						</StyledFooterLegalLinks> */}
+						<StyledFooterLegalLinks>
+							<a href="https://pepemon.finance/">Terms of service</a>
+							<a href="https://pepemon.finance/">Privacy policy</a>
+							<a href="https://pepemon.finance/">Cookie policy</a>
+						</StyledFooterLegalLinks>
 						<div>
 							© 2021
 						</div>
@@ -119,17 +119,17 @@ const StyledFooterLegalInner = styled.div`
 	padding-top: 1.5em;
 `
 
-// const StyledFooterLegalLinks = styled.div`
-// 	display: flex;
+const StyledFooterLegalLinks = styled.div`
+	display: flex;
 
-// 	a {
-// 		color: currentColor;
-// 		text-decoration: none;
+	a {
+		color: currentColor;
+		text-decoration: none;
 
-// 		&:not(:first-child) {
-// 			margin-left: 1.5em;
-// 		}
-// 	}
+		&:not(:first-child) {
+			margin-left: 1.5em;
+		}
+	}
 `
 
 export default Footer;

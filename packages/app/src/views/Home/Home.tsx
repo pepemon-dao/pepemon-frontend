@@ -88,7 +88,7 @@ const Home: React.FC<any> = () => {
 			<StyledSection bgImage={coverblack}>
 				<ContentCentered style={{paddingTop: "7.5em"}}>
 					<Title as="h1" font={theme.font.neometric} size={3} color={theme.color.white} weight={900} align="center" lineHeight={1.04}>
-						Start earning<br /> before ETH 2.0.
+						Start staking<br /> before ETH 2.0.
 					</Title>
 					<Spacer size="md"/>
 					<Text as="p" font={theme.font.spaceMace} color={theme.color.white} align="center" underline>NO VCs. No pre-sale.</Text>
