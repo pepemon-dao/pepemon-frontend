@@ -14,7 +14,7 @@ const Home: React.FC<any> = () => {
 					<ContentColumn width="40%" style={{paddingTop: "3.75em"}}>
 						<Title as="h1" font={theme.font.spaceMace} size={4.5}>Gotta claim ‘em all!</Title>
 						<Text as="p" font={theme.font.inter} size={1.375}>
-							PDigital collectible card games on blockchain owned by the players. 100% airdropped. Play2Earn powered by DeFi and NFTs in-game assets. 
+							Digital collectible card games on blockchain owned by the players. 100% airdropped. Play2Earn powered by DeFi and NFTs in-game assets. 
 						</Text>
 						<Spacer size="lg"/>
 						<Spacer size="lg"/>
