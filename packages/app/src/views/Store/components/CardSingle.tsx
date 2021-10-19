@@ -96,7 +96,7 @@ const CardSingle : React.FC<any> = ({cardId, selectedCard, selectCard}) => {
 	};
 
 	return (
-		<StyledPepemonCard style={{ opacity: (!isSoldOut() && isLoaded && countdown()) ? "100%" : "50%" }}>
+		<StyledPepemonCard style={{ opacity: (!isSoldOut() && isLoaded && countdown()) ? "100%" : "50%" }} isClickable={(!isSoldOut() && isLoaded && countdown()) && true}>
 			<StyledPepemonCardPrice>
 				<img loading="lazy" src={coin} alt="coin"/>
 				{cardPrice ? `${priceOfCard} ${chainId === 56 ? 'BNB' : 'PPDEX'}` : 'loading'}
@@ -121,14 +121,11 @@ const CardSingle : React.FC<any> = ({cardId, selectedCard, selectCard}) => {
 	)
 }
 
-const StyledPepemonCard = styled.div`
+const StyledPepemonCard = styled.div<{isClickable?: boolean}>`
 	display: flex;
+	cursor: ${props => props.isClickable ? 'pointer' : 'not-allowed'};
 	justify-content: center;
 	flex-direction: column;
-
-	&:hover {
-		cursor: pointer;
-	}
 `
 
 export const StyledPepemonCardPrice = styled.span<{styling?: string}>`
