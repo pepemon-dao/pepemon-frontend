@@ -4,17 +4,13 @@ import { PepemonProviderContext } from '../../contexts';
 
 const TestPage: React.FC<any> = () => {
 	const pepemonContext = useContext(PepemonProviderContext);
-	const { chainId } = pepemonContext[0];
-
-	const handleClick = () => {
-		console.log(pepemonContext);
-	}
+	console.log(pepemonContext);
 
 	return (
 		<StyledPageWrapperMain>
 			<StyledPageWrapperMainInner>
-				<StyledPageTitle as="h1">Store</StyledPageTitle>
-				<button onClick={handleClick}>Bruh</button>
+				<StyledPageTitle as="h1">Test</StyledPageTitle>
+				// Your test code goes here!
 			</StyledPageWrapperMainInner>
 		</StyledPageWrapperMain>
 	)
