@@ -1,10 +1,10 @@
-import Web3 from 'web3'
-import BigNumber from 'bignumber.js'
-import { Contracts } from './lib/contracts.js'
-import { Account } from './lib/accounts.js'
-import { EVM } from './lib/evm.js'
+import Web3 from 'web3';
+import BigNumber from 'bignumber.js';
+import { Contracts } from './lib/contracts.js';
+import { Account } from './lib/accounts.js';
+import { EVM } from './lib/evm.js';
 
-import { contractAddresses } from './lib/constants'
+import { contractAddresses } from './lib/constants';
 
 export class Pepemon {
   networkId;
@@ -58,6 +58,7 @@ export class Pepemon {
     this.merkleAddressPpblz = contractAddresses.merklePpblz[networkId]
     this.merkleAddressPpdex = contractAddresses.merklePpdex[networkId]
     this.merkleAddressUniV2 = contractAddresses.merkleUniV2[networkId]
+	this.merkleDistributor = contractAddresses.merkleDistributor[networkId]
     this.pepemonLottery = contractAddresses.pepemonLottery[networkId]
     this.uniV2PpdexAddress = contractAddresses.uniV2_ppdex[networkId]
     this.pepemonPromoStoreAddress = contractAddresses.pepemonPromoStore[networkId]
@@ -106,4 +107,3 @@ export class Pepemon {
     return BigNumber(a)
   }
 }
-

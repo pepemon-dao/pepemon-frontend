@@ -42,6 +42,8 @@ export const PepemonProvider: React.FC<any> = ({ children }) => {
     merkleAddressPpdex: contractAddresses.merklePpdex[networkId],
     // @ts-ignore
     merkleAddressUniV2: contractAddresses.merkleUniV2[networkId],
+	// @ts-ignore
+	merkleDistributor: contractAddresses.merkleDistributor[networkId],
     // @ts-ignore
     pepemonLottery: contractAddresses.pepemonLottery[networkId],
     // @ts-ignore
@@ -97,7 +99,7 @@ export const PepemonProvider: React.FC<any> = ({ children }) => {
   }
 
   const [state, dispatch] = useReducer(pepemonReducer, initial)
-  
+
   return (
       <Context.Provider value={[state, dispatch]}>
         {children}

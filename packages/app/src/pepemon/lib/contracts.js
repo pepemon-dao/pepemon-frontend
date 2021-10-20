@@ -1,16 +1,17 @@
-import BigNumber from 'bignumber.js/bignumber'
-import ERC20Abi from './abi/erc20.json'
-import PpdexAbi from './abi/ppdex.json'
-import PpblzAbi from './abi/ppblz.json'
-import UNIV2PairAbi from './abi/uni_v2_lp.json'
-import PepemonStoreAbi from './abi/pepemon_store.json'
-import PepemonStoreNativeAbi from './abi/pepemon_store_native.json'
-import PepemonFactoryAbi from './abi/pepemon_factory.json'
-import PepemonStakeAbi from './abi/pepemon_stake.json'
-import MerkleAbi from './abi/merkle.json'
-import MerkleBSCAbi from './abi/merkleBSC.json'
-import LotteryAbi from './abi/pepemon_lottery.json'
-import {Contract} from '@ethersproject/contracts';
+import BigNumber from 'bignumber.js/bignumber';
+import ERC20Abi from './abi/erc20.json';
+import PpdexAbi from './abi/ppdex.json';
+import PpblzAbi from './abi/ppblz.json';
+import UNIV2PairAbi from './abi/uni_v2_lp.json';
+import PepemonStoreAbi from './abi/pepemon_store.json';
+import PepemonStoreNativeAbi from './abi/pepemon_store_native.json';
+import PepemonFactoryAbi from './abi/pepemon_factory.json';
+import PepemonStakeAbi from './abi/pepemon_stake.json';
+import MerkleDistributor from './abi/merkle_distributor.json';
+import MerkleAbi from './abi/merkle.json';
+import MerkleBSCAbi from './abi/merkleBSC.json';
+import LotteryAbi from './abi/pepemon_lottery.json';
+import { Contract } from '@ethersproject/contracts';
 
 import { contractAddresses, SUBTRACT_GAS_LIMIT } from './constants.js'
 import * as Types from './types.js'
@@ -24,6 +25,10 @@ export class Contracts {
     //   options.confirmationType || Types.ConfirmationType.Confirmed
     // this.defaultGas = options.defaultGas
     // this.defaultGasPrice = options.defaultGasPrice
+    if (parseInt(networkId) === 1) {
+		this.merkleDistributor = new Contract(contractAddresses.merkleDistributor[networkId], MerkleDistributor, provider.getSigner())
+	}
+
     if (parseInt(networkId) === 1 || parseInt(networkId) === 4) {
       this.ppblz = new Contract(contractAddresses.ppblz[networkId], PpblzAbi, provider.getSigner())
       this.uniV2_ppblz = new Contract(contractAddresses.uniV2_ppblz[networkId], UNIV2PairAbi, provider.getSigner())
@@ -65,6 +70,10 @@ export class Contracts {
       contract.setProvider(provider)
       if (address) contract.options.address = address
       else console.error('Contract address not found in network', networkId)
+    }
+
+	if (networkId === 1) {
+      setProvider(this.merkleDistributor, contractAddresses.merkleDistributor[networkId])
     }
 
     if (networkId === 1 || networkId === 4) {
