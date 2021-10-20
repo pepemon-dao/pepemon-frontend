@@ -11,11 +11,7 @@ const Staking = lazy(() =>  import("./views/Staking").then((module) => ({ defaul
 const Subscription = lazy(() =>  import("./views/Subscription").then((module) => ({ default: module.default })));
 const Store = lazy(() =>  import("./views/Store").then((module) => ({ default: module.default })));
 const Error404 = lazy(() =>  import("./views/Error404").then((module) => ({ default: module.default })));
-
-let TestPage = undefined;
-if (process.env.NODE_ENV !== 'production') {
-	TestPage = lazy(() =>  import("./views").then((module) => ({ default: module.TestPage })));
-}
+const TestPage = lazy(() =>  import("./views").then((module) => ({ default: module.TestPage })));
 
 const StakingWithAuth = withConnectedWallet(Staking);
 const SubscriptionWithAuth = withConnectedWallet(Subscription);
@@ -32,11 +28,9 @@ const App: React.FC = () => {
 							<Route path="/" exact>
 								<Home/>
 							</Route>
-							{ process.env.NODE_ENV !== 'production' &&
-								<Route path="/test">
-									<TestPage/>
-								</Route>
-							}
+							<Route path="/test">
+								<TestPage/>
+							</Route>
 							<Route path="/staking">
 								<StakingWithAuth/>
 							</Route>
