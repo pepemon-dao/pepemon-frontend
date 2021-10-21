@@ -32,7 +32,7 @@ const CardToClaim: React.FC<CardToClaimProps> = ({title, text, tokenId, img}) =>
 	// @dev for more info: https://etherscan.io/address/0x3f739128c99B111901d011903309151A26a43b6F#writeContract
 	const { onClaimMerkle, isClaiming } = useClaimMerkle( response && response.index ? { account, ...response } : null, merkleType, tokenId);
 
-	const isDisabled = !account || isFetching || isClaimed || !canClaim;
+	const isDisabled = !account || isFetching || isClaimed || !canClaim || isClaiming;
 
 	return (
 		<CardToClaimWrapper isDisabled={isDisabled}>
@@ -48,8 +48,8 @@ const CardToClaim: React.FC<CardToClaimProps> = ({title, text, tokenId, img}) =>
 			>{
 				isFetching ? 'Checking...'
 				: isClaimed ? 'Claimed'
-				: canClaim ? 'Claim'
-				: isClaiming ? 'Claiming...' : "Can't claim"
+				: isClaiming ? 'Claiming...'
+				: canClaim ? 'Claim' : "Can't claim"
 			}</Button>
 		</CardToClaimWrapper>
 	)
