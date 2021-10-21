@@ -54,11 +54,11 @@ export const AccordionBody = styled.div`
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
-	padding: 1.5em 5.3em 2em 2em;
+	padding: 1.5em 2em 2em;
 `
 
 export const AccordionBodyContent = styled.div<{side: "left" | "right"}>`
 	border-left: ${props => props.side === "right" && `2px solid ${theme.color.colorsLayoutBorders}`};
 	padding-left: ${props => props.side === "right" && "5.5em"};
-	padding-right: ${props => props.side === "left" && "5.5em"};
+	padding-right: ${props => props.side === "left" ? "5.5em" : "2.5em"};;
 `

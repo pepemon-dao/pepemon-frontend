@@ -16,6 +16,7 @@ export { default as Boosterpack_9_cards_Battle_Support } from './img/boosterpack
 export { default as Boosterpack_9_cards_Gen_1 } from './img/boosterpacks/Boosterpack_9_cards_Gen_1.png';
 
 // cards
+export { default as anniv_pepemander } from './img/cards/anniversary/anniversarycard_pepemander.png';
 export { default as bluecard } from './img/cards/bluecard.png';
 export { default as cardback_normal } from './img/cards/cardback_normal.gif';
 export { default as cerbery } from './img/cards/cerbery.gif';

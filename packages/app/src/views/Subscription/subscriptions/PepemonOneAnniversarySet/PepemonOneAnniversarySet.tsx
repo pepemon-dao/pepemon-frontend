@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { AccordionWrapper, AccordionHeader, AccordionHeaderTitle, AccordionHeaderButton, AccordionBody, Spacer, Title, Text, ContentColumns, ContentColumn } from '../../../../components';
 import { theme } from '../../../../theme';
-import { pokeball, uparrow, dropdownarrow } from '../../../../assets';
+import { pokeball, uparrow, dropdownarrow, anniv_pepemander } from '../../../../assets';
 import { CardToClaim } from './CardToClaim';
 
 const PepemonOneAnniversarySet: React.FC<any> = () => {
@@ -39,21 +39,33 @@ const PepemonOneAnniversarySet: React.FC<any> = () => {
 						</ContentColumns>
 						<Spacer size="lg"/>
 						<ContentColumns>
-							<ContentColumn width="25%">
-								<p>Token ID 75:</p>
-								<CardToClaim tokenId={75}/>
+							<ContentColumn width="25%" space="3.5em">
+								<CardToClaim
+									title="Pepertle"
+									text="Providing ppblz liquidity to recieve this card"
+									img={{url: anniv_pepemander, title: 'pepemander anniversary'}}
+									tokenId={75}/>
 							</ContentColumn>
-							<ContentColumn width="25%">
-								<p>Token ID 76:</p>
-								<CardToClaim tokenId={76}/>
+							<ContentColumn width="25%" space="3.5em">
+								<CardToClaim
+									title="Pepemander"
+									text="Donate 1 card to recieve this card"
+									img={{url: anniv_pepemander, title: 'pepemander anniversary'}}
+									tokenId={76}/>
 							</ContentColumn>
-							<ContentColumn width="25%">
-								<p>Token ID 77:</p>
-								<CardToClaim tokenId={77}/>
+							<ContentColumn width="25%" space="3.5em">
+								<CardToClaim
+									title="Pepesaur"
+									text="Providing ppblz liquidity to recieve this card"
+									img={{url: anniv_pepemander, title: 'pepemander anniversary'}}
+									tokenId={77}/>
 							</ContentColumn>
-							<ContentColumn width="25%">
-								<p>Token ID 78:</p>
-								<CardToClaim tokenId={78}/>
+							<ContentColumn width="25%" space="3.5em">
+								<CardToClaim
+									title="Pepechu"
+									text="Providing ppblz liquidity to recieve this card"
+									img={{url: anniv_pepemander, title: 'pepemander anniversary'}}
+									tokenId={78}/>
 							</ContentColumn>
 						</ContentColumns>
 					</div>
