@@ -1,10 +1,11 @@
 import React from 'react'
 import { AccordionGroup } from "../../../components";
-import { PepemonOneSubscription } from "../subscriptions";
+import { PepemonOneSubscription, PepemonOneAnniversarySet } from "../subscriptions";
 
 const SubscriptionCard: React.FC<any> = () => {
     return (
 		<AccordionGroup>
+			<PepemonOneAnniversarySet/>
 			<PepemonOneSubscription/>
 		</AccordionGroup>
     )
