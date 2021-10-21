@@ -1,9 +1,9 @@
 import {useCallback, useEffect, useState} from 'react'
 import usePepemon from './usePepemon'
-import { getMerkleContract, getMerkleDegoContract, getMerklePpblzContract, getMerklePpdexContract, merkleIsClaimed } from '../pepemon/utils'
+import { getMerkleContract, getMerkleDegoContract, getMerklePpblzContract, getMerklePpdexContract, getMerkleDistributor, merkleIsClaimed } from '../pepemon/utils'
 import {Contract} from '@ethersproject/contracts';
 
-const useIsClaimedMerkle = (index: number, merkleType?: 'ppblz' | 'ppdex' | 'univ2' | 'dego') => {
+const useIsClaimedMerkle = (index: number, merkleType?: 'ppblz' | 'ppdex' | 'univ2' | 'dego' | 'distributor', tokenId = null) => {
     const [isClaimed, setIsClaimed] = useState(null);
     const { account } = usePepemon()
     const pepemon = usePepemon()
@@ -18,6 +18,9 @@ const useIsClaimedMerkle = (index: number, merkleType?: 'ppblz' | 'ppdex' | 'uni
         case 'dego':
             contract = getMerkleDegoContract(pepemon);
             break;
+		case 'distributor':
+            contract = getMerkleDistributor(pepemon);
+            break;
         default:
             contract = getMerkleContract(pepemon);
     }
@@ -28,12 +31,13 @@ const useIsClaimedMerkle = (index: number, merkleType?: 'ppblz' | 'ppdex' | 'uni
                     contract,
                     merkleType === 'dego' ? account : index,
                     merkleType === 'dego',
+					tokenId && tokenId
                 )
             } catch(err) {
                 console.error(err);
             }
         },
-        [account, index, contract, merkleType]
+        [account, index, contract, merkleType, tokenId]
     )
 
     useEffect(() => {

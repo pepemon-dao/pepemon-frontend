@@ -1,16 +1,16 @@
 import {useCallback, useState} from 'react'
 import usePepemon from './usePepemon'
-import { claimMerkle, getMerkleContract, getMerkleDegoContract, getMerklePpblzContract, getMerklePpdexContract } from '../pepemon/utils'
+import { claimMerkle, getMerkleContract, getMerkleDegoContract, getMerklePpblzContract, getMerklePpdexContract, getMerkleDistributor } from '../pepemon/utils'
 import {Contract} from '@ethersproject/contracts';
 
 export interface Merkle {
     account: string,
     index: number,
-    amount: string,
+    amount: string|number,
     proof: string[],
 }
 
-const useClaimMerkle = (merkle: Merkle, merkleType?: 'ppblz' | 'ppdex' | 'univ2' | 'dego') => {
+const useClaimMerkle = (merkle: Merkle, merkleType?: 'ppblz' | 'ppdex' | 'univ2' | 'dego' | 'distributor', tokenId = null) => {
     const [isClaiming, setIsClaiming] = useState<boolean>(false)
     const { provider } = usePepemon()
     const pepemon = usePepemon()
@@ -25,6 +25,9 @@ const useClaimMerkle = (merkle: Merkle, merkleType?: 'ppblz' | 'ppdex' | 'univ2'
             break;
         case 'dego':
             contract = getMerkleDegoContract(pepemon);
+            break;
+        case 'distributor':
+            contract = getMerkleDistributor(pepemon);
             break;
         default:
             contract = getMerkleContract(pepemon);
@@ -45,6 +48,7 @@ const useClaimMerkle = (merkle: Merkle, merkleType?: 'ppblz' | 'ppdex' | 'univ2'
                     merkle.account,
                     merkle.amount,
                     merkle.proof,
+					tokenId && tokenId
                 )
                 setIsClaiming(false);
             } catch(err) {
@@ -52,7 +56,7 @@ const useClaimMerkle = (merkle: Merkle, merkleType?: 'ppblz' | 'ppdex' | 'univ2'
                 setIsClaiming(false);
             }
         },
-        [merkle, contract, provider],
+        [merkle, contract, provider, tokenId],
     )
 
     return { onClaimMerkle: handleClaimMerkle, isClaiming }

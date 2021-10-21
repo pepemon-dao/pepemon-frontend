@@ -24,9 +24,9 @@ const usePepemonApi = (endpoint: string) => {
 	    }
 
         // @ts-ignore
-        if (!networkId || networkId === 0) {
-            return;
-        }
+        // if (!networkId || networkId === 0) {
+        //     return;
+        // }
         fetchData(endpoint).then(res => setResponse(res)).catch(err => console.error(err));
     }, [provider, endpoint])
 

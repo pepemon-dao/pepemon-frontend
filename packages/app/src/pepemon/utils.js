@@ -73,6 +73,9 @@ export const getMerklePpdexContract = (pepemon) => {
 export const getMerkleUniV2Contract = (pepemon) => {
   return pepemon && pepemon.contracts && pepemon.contracts.merkleUniV2
 }
+export const getMerkleDistributor = (pepemon) => {
+  return pepemon && pepemon.contracts && pepemon.contracts.merkleDistributor
+}
 export const getPepemonLotteryContract = (pepemon) => {
   return pepemon && pepemon.contracts && pepemon.contracts.pepemonLottery
 }
@@ -385,10 +388,13 @@ export const getClosedEvents = async (stakeContract) => {
   }
 }
 
-export const merkleIsClaimed = async (merkleContract, index, bsc = false) => {
+export const merkleIsClaimed = async (merkleContract, index, bsc = false, tokenId = null) => {
   try {
     if (!bsc) {
-      return merkleContract.isClaimed(index)
+		if (tokenId) {
+			return merkleContract.isClaimed(tokenId, index);
+		}
+        return merkleContract.isClaimed(index);
     }
     //TODO create new function for new variation of merkle contract
     return merkleContract.isAddressClaimed(index);
@@ -397,8 +403,16 @@ export const merkleIsClaimed = async (merkleContract, index, bsc = false) => {
   }
 }
 
-export const claimMerkle = async (provider, merkleContract, index, account, amount, proof) => {
+export const claimMerkle = async (provider, merkleContract, index, account, amount, proof, tokenId = null) => {
   try {
+	  if (tokenId) {
+		console.log('tokenId:', tokenId);
+		console.log('index:', index);
+		console.log('account:', account);
+		console.log('amount:', parseInt(amount));
+		console.log('proof:', proof);
+	  	return await sendTransaction(provider, async () => await merkleContract.claim(tokenId, index, account, amount, proof));
+	  }
     return await sendTransaction(provider, async () => await merkleContract.claim(index, account, amount, proof));
   } catch (e) {
     console.log(`[merkleContract, claim] error: ${e}`);

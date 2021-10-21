@@ -10,6 +10,7 @@ export { default as useCardsStorePrices, getCardStorePrices } from './useCardsSt
 export type { CardPrice } from './useCardsStorePrices';
 export { default as useClaimEvent } from './useClaimEvent';
 export { default as useClaimMerkle } from './useClaimMerkle';
+export type { Merkle } from './useClaimMerkle';
 export { default as useDetectMobile } from './useDetectMobile';
 export { default as useDetectMobileScreen } from './useDetectMobileScreen';
 export { default as useEarnings } from './useEarnings';

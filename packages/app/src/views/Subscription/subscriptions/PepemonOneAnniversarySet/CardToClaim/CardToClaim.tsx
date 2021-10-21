@@ -1,8 +1,8 @@
-import React, { useState, useContext, useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
 import { Button, Spacer, Title, Text } from '../../../../../components';
-import { PepemonProviderContext } from '../../../../../contexts';
 import { theme } from '../../../../../theme';
+import { usePepemonApi, useIsClaimedMerkle, useClaimMerkle } from '../../../../../hooks';
 
 interface CardToClaimProps {
 	title: string,
@@ -15,63 +15,30 @@ interface CardToClaimProps {
 }
 
 const CardToClaim: React.FC<CardToClaimProps> = ({title, text, tokenId, img}) => {
-	const [isLoading, setIsLoading] = useState(true);
-	const [isClaimed, setIsClaimed] = useState(false);
-	const [canClaim, setCanClaim] = useState(false);
-	const [claimArgs, setClaimArgs] = useState(null);
-	const pepemonContext = useContext(PepemonProviderContext);
-	const { account, contracts } = pepemonContext[0];
+	// const { account, contracts } = pepemonContext[0];
+	const account = '0x66a7DCDf060aC715d0D0bFA8FbfFb1A321fdC2AD';
+	const { response, isFetching } = usePepemonApi(`/merkle/${tokenId}/${account}`);
+	const canClaim = response && response.index;
 
-	useEffect(() => {
-		if (!account) return;
-		// const apiBaseUri = `https://pepemon.finance/api/merkle/${tokenId}/${account}`;
-		const apiBaseUri = `https://pepemon.finance/api/merkle/${tokenId}/${account}`;
-
-		(async () => {
-			try {
-				const response = await fetch(`${apiBaseUri}`).then(res => res.json());
-				console.log(response.code);
-
-				if (!response.message) {
-					await setClaimArgs({...response})
-					// check if card is already claimed
-					// @dev for more info: https://etherscan.io/address/0x3f739128c99B111901d011903309151A26a43b6F#readContract
-					if (await contracts.merkleDistributor.isClaimed(tokenId, response.index)) {
-						setIsClaimed(true);
-					} else {
-						setCanClaim(true);
-					}
-				}
-			} catch (error) {
-				console.log(error);
-			}
-			setIsLoading(false);
-		})()
-	}, [account, tokenId, contracts.merkleDistributor]);
+	// @dev for more info: https://etherscan.io/address/0x3f739128c99B111901d011903309151A26a43b6F#readContract
+	const isClaimed = useIsClaimedMerkle( (response && response.index) &&
+		response.index,
+		'distributor',
+		tokenId,
+	);
 
 	// @dev for more info: https://etherscan.io/address/0x3f739128c99B111901d011903309151A26a43b6F#writeContract
-	const claim = async () => {
-		if (!claimArgs) return;
-		const { index, amount, proof } = claimArgs;
-		try {
-			await contracts.merkleDistributor.claim(
-				tokenId,
-				index,
-				account,
-				parseInt(amount),
-				proof);
+	const { onClaimMerkle, isClaiming } = useClaimMerkle( (response && response.index) && {
+		account: response.account,
+		index: response.index,
+		amount: parseInt(response.amount),
+		proof: response.proof
+	}, 'distributor', tokenId);
 
-			setCanClaim(false);
-			setIsClaimed(true);
-		} catch (error) {
-			console.log(error);
-		}
-	}
-
-	const isDisabled = !account || isLoading || isClaimed || !canClaim;
+	const isDisabled = !account || isFetching || isClaimed || !canClaim;
 
 	return (
-		<CardToClaimWrapper>
+		<CardToClaimWrapper isDisabled={isDisabled}>
 			<Title as="h3" size={1} weight={900} font={theme.font.neometric}>{title}</Title>
 			<Spacer size="sm"/>
 			<StyledFigure>
@@ -79,20 +46,26 @@ const CardToClaim: React.FC<CardToClaimProps> = ({title, text, tokenId, img}) =>
 			  <figcaption><Text as="p" size={.875} lineHeight={1.125} align="center" color={theme.color.gray[300]}>{text}</Text></figcaption>
 			</StyledFigure>
 			<Spacer size="sm"/>
-			<Button width="100%" styling="purple" disabled={isDisabled} onClick={claim} style={{marginTop: "auto"}}>{
-				!account ? 'Connect wallet first'
-				: isLoading ? 'Loading...'
+			<Button width="100%" styling="purple" style={{marginTop: "auto"}}
+			onClick={onClaimMerkle} disabled={isDisabled}
+			>{
+				isFetching ? 'Checking...'
 				: isClaimed ? 'Claimed'
-				: canClaim ? 'Claim' : "Can't claim"
+				: canClaim ? 'Claim'
+				: isClaiming ? 'Claiming...' : "Can't claim"
 			}</Button>
 		</CardToClaimWrapper>
 	)
 }
 
-const CardToClaimWrapper = styled.div`
+const CardToClaimWrapper = styled.div<{isDisabled: boolean}>`
 	display: flex;
 	flex-direction: column;
 	height: 100%;
+
+	:not(button) {
+		opacity: ${props => props.isDisabled && '.5'};
+	}
 `
 
 const StyledFigure = styled.figure`
