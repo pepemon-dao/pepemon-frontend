@@ -406,12 +406,7 @@ export const merkleIsClaimed = async (merkleContract, index, bsc = false, tokenI
 export const claimMerkle = async (provider, merkleContract, index, account, amount, proof, tokenId = null) => {
   try {
 	  if (tokenId) {
-		console.log('tokenId:', tokenId);
-		console.log('index:', index);
-		console.log('account:', account);
-		console.log('amount:', parseInt(amount));
-		console.log('proof:', proof);
-	  	return await sendTransaction(provider, async () => await merkleContract.claim(tokenId, index, account, amount, proof));
+		  return await sendTransaction(provider, async () => await merkleContract.claim(tokenId, index, account, amount, proof));
 	  }
     return await sendTransaction(provider, async () => await merkleContract.claim(index, account, amount, proof));
   } catch (e) {

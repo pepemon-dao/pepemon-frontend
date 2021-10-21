@@ -16,6 +16,7 @@ interface CardToClaimProps {
 }
 
 const CardToClaim: React.FC<CardToClaimProps> = ({title, text, tokenId, img}) => {
+	const merkleType = 'distributor';
 	const pepemonContext = useContext(PepemonProviderContext);
 	const { account } = pepemonContext[0];
 	const { response, isFetching } = usePepemonApi(`/merkle/${tokenId}/${account}`);
@@ -24,17 +25,12 @@ const CardToClaim: React.FC<CardToClaimProps> = ({title, text, tokenId, img}) =>
 	// @dev for more info: https://etherscan.io/address/0x3f739128c99B111901d011903309151A26a43b6F#readContract
 	const isClaimed = useIsClaimedMerkle( (response && response.index) &&
 		response.index,
-		'distributor',
+		merkleType,
 		tokenId,
 	);
 
 	// @dev for more info: https://etherscan.io/address/0x3f739128c99B111901d011903309151A26a43b6F#writeContract
-	const { onClaimMerkle, isClaiming } = useClaimMerkle( (response && response.index) && {
-		account: response.account,
-		index: response.index,
-		amount: parseInt(response.amount),
-		proof: response.proof
-	}, 'distributor', tokenId);
+	const { onClaimMerkle, isClaiming } = useClaimMerkle( response && response.index ? { account, ...response } : null, merkleType, tokenId);
 
 	const isDisabled = !account || isFetching || isClaimed || !canClaim;
 
