@@ -16,7 +16,7 @@ const PepemonOneAnniversarySet: React.FC<any> = () => {
 			<AccordionHeader onClick={toggleAccordion} isOpen={openAccordion}>
 				<AccordionHeaderTitle>
 					<img loading="lazy" src={pokeball} alt="Pokeball" style={{ width: "40px", height: "40px", marginRight: "1em" }}/>
-					<Title as="h2" color={openAccordion ? theme.color.green[200] : theme.color.white} weight={900} font={theme.font.neometric}>Pepemon One Subscription</Title>
+					<Title as="h2" color={openAccordion ? theme.color.green[200] : theme.color.white} weight={900} font={theme.font.neometric}>Pepemon One 1st Anniversary set</Title>
 				</AccordionHeaderTitle>
 				<AccordionHeaderButton onClick={toggleAccordion}>
 						<span>Show {openAccordion ? "less" : "more"}</span>
