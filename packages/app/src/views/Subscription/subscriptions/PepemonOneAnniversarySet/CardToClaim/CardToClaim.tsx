@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import { Button, Spacer, Title, Text } from '../../../../../components';
 import { theme } from '../../../../../theme';
+import { PepemonProviderContext } from '../../../../../contexts';
 import { usePepemonApi, useIsClaimedMerkle, useClaimMerkle } from '../../../../../hooks';
 
 interface CardToClaimProps {
@@ -15,7 +16,8 @@ interface CardToClaimProps {
 }
 
 const CardToClaim: React.FC<CardToClaimProps> = ({title, text, tokenId, img}) => {
-	const { account, contracts } = pepemonContext[0];
+	const pepemonContext = useContext(PepemonProviderContext);
+	const { account } = pepemonContext[0];
 	const { response, isFetching } = usePepemonApi(`/merkle/${tokenId}/${account}`);
 	const canClaim = response && response.index;
 
