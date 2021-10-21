@@ -1,5 +1,39 @@
-import styled from "styled-components";
-import { theme } from "../../theme";
+import React, { useState } from 'react';
+import styled from 'styled-components';
+import { Title } from '../../components';
+import { theme } from '../../theme';
+import { pokeball, uparrow, dropdownarrow } from '../../assets';
+
+interface AccordionProps {
+	title: string,
+	isOpen?: boolean,
+	children: any
+}
+
+const Accordion: React.FC<AccordionProps> = ({title, isOpen = false, children}) => {
+	const [openAccordion, setOpenAccordion] = useState(isOpen);
+	const toggleAccordion = () => {
+		setOpenAccordion(!openAccordion)
+	}
+
+	return (
+		<AccordionWrapper isOpen={openAccordion}>
+			<AccordionHeader onClick={toggleAccordion} isOpen={openAccordion}>
+				<AccordionHeaderTitle>
+					<img loading="lazy" src={pokeball} alt="Pokeball" style={{ width: "40px", height: "40px", marginRight: "1em" }}/>
+					<Title as="h2" color={openAccordion ? theme.color.green[200] : theme.color.white} weight={900} font={theme.font.neometric}>{title}</Title>
+				</AccordionHeaderTitle>
+				<AccordionHeaderButton onClick={toggleAccordion}>
+						<span>Show {openAccordion ? "less" : "more"}</span>
+						<img loading="lazy" src={openAccordion ? uparrow : dropdownarrow} alt="logo" style={{ height: "0.5em", alignSelf: "center", }}/>
+				</AccordionHeaderButton>
+			</AccordionHeader>
+			<AccordionBody isOpen={openAccordion}>
+				{children}
+			</AccordionBody>
+		</AccordionWrapper>
+	)
+}
 
 export const AccordionGroup = styled.section`
 	display: flex;
@@ -47,11 +81,11 @@ export const AccordionHeaderButton = styled.button`
 	}
 `
 
-export const AccordionBody = styled.div`
+export const AccordionBody = styled.div<{isOpen: boolean}>`
 	background-color: ${theme.color.white};
 	border-bottom-left-radius: ${theme.borderRadius}px;
 	border-bottom-right-radius: ${theme.borderRadius}px;
-	display: flex;
+	display: ${props => props.isOpen ? 'flex' : 'none'};
 	flex-direction: row;
 	justify-content: space-between;
 	padding: 1.5em 2em 2em;
@@ -62,3 +96,5 @@ export const AccordionBodyContent = styled.div<{side: "left" | "right"}>`
 	padding-left: ${props => props.side === "right" && "5.5em"};
 	padding-right: ${props => props.side === "left" ? "5.5em" : "2.5em"};;
 `
+
+export default Accordion;

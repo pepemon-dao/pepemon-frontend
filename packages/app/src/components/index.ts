@@ -1,4 +1,4 @@
-export { AccordionGroup, AccordionWrapper, AccordionHeader, AccordionHeaderTitle, AccordionHeaderButton, AccordionBody, AccordionBodyContent } from './Accordion'
+export { default as Accordion, AccordionGroup, AccordionWrapper, AccordionHeader, AccordionHeaderTitle, AccordionHeaderButton, AccordionBody, AccordionBodyContent } from './Accordion'
 export { default as AnimatedImg } from './AnimatedImg';
 export { default as Button, ButtonLink } from './Button';
 export { default as Card } from './Card';
