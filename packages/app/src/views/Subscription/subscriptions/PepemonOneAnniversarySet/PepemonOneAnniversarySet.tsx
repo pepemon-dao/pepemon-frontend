@@ -1,7 +1,7 @@
 import React from 'react'
 import { Accordion, Spacer, Title, Text, ContentColumns, ContentColumn } from '../../../../components';
 import { theme } from '../../../../theme';
-import { anniv_pepemander } from '../../../../assets';
+import { pepechu1stanniversarycard, pepemander1stanniversarycard, pepertle1stanniversarycard, pepesaur1stanniversarycard } from '../../../../assets';
 import { CardToClaim } from './CardToClaim';
 
 const PepemonOneAnniversarySet: React.FC<any> = () => {
@@ -25,28 +25,28 @@ const PepemonOneAnniversarySet: React.FC<any> = () => {
 						<CardToClaim
 							title="Pepertle"
 							text="Providing ppblz liquidity to recieve this card"
-							img={{url: anniv_pepemander, title: 'Pepertle anniversary'}}
+							img={{url: pepertle1stanniversarycard, title: 'Pepertle anniversary'}}
 							tokenId={75}/>
 					</ContentColumn>
 					<ContentColumn width="25%" space="3.5em">
 						<CardToClaim
 							title="Pepemander"
 							text="Donate 1 card to recieve this card"
-							img={{url: anniv_pepemander, title: 'Pepemander anniversary'}}
+							img={{url: pepemander1stanniversarycard, title: 'Pepemander anniversary'}}
 							tokenId={76}/>
 					</ContentColumn>
 					<ContentColumn width="25%" space="3.5em">
 						<CardToClaim
 							title="Pepesaur"
 							text="Providing ppblz liquidity to recieve this card"
-							img={{url: anniv_pepemander, title: 'Pepesaur anniversary'}}
+							img={{url: pepesaur1stanniversarycard, title: 'Pepesaur anniversary'}}
 							tokenId={77}/>
 					</ContentColumn>
 					<ContentColumn width="25%" space="3.5em">
 						<CardToClaim
 							title="Pepechu"
 							text="Providing ppblz liquidity to recieve this card"
-							img={{url: anniv_pepemander, title: 'Pepechu anniversary'}}
+							img={{url: pepechu1stanniversarycard, title: 'Pepechu anniversary'}}
 							tokenId={78}/>
 					</ContentColumn>
 				</ContentColumns>
