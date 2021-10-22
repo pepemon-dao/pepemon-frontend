@@ -5,6 +5,7 @@ import { theme } from "../../theme";
 import { Spacer, Text, Title } from "../../components";
 
 type ModalProps = {
+	apy: string;
 	isOpen: boolean;
 	heading: string;
 	toggle: () => void;
@@ -12,7 +13,7 @@ type ModalProps = {
 	button?: React.ReactNode;
 };
 
-const IButtonPopover: React.FC<ModalProps> = ({ isOpen, heading, toggle, cursor = 'pointer', button}) => {
+const IButtonPopover: React.FC<ModalProps> = ({ apy, isOpen, heading, toggle, cursor = 'pointer', button}) => {
   return (
 	<div>
 		<ImgButton aria-label="show APY informations" cursor={cursor}><img height="18px" width="18px" src={ibutton} alt="info" onClick={toggle}/></ImgButton>
@@ -48,7 +49,7 @@ const IButtonPopover: React.FC<ModalProps> = ({ isOpen, heading, toggle, cursor 
 							</tr>
 							<tr>
 								<td style={{ paddingLeft: "0px" }}>365d(APY)</td>
-								<td>87%</td>
+								<td>{apy}%</td>
 								<td>80.38</td>
 							</tr>
 						</tbody>

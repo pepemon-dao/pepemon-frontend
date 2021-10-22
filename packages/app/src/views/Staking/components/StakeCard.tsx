@@ -49,7 +49,7 @@ const StakeCard: React.FC<any> = () => {
 	const web3 = new Web3(provider);
 
     const { ppblzPrice, ppdexPrice } = useTokenPrices();
-    const calculateApy = () => {
+    const calculatePpblzApy = () => {
         const rewardedPerYear = ppdexPrice * 20;
         return (rewardedPerYear * 100) / ppblzPrice;
     }
@@ -463,10 +463,10 @@ const StakeCard: React.FC<any> = () => {
 						<Title as="h2" size={1.125} color={theme.color.white} font={theme.font.neometric} weight={900}>Stake PPBLZ</Title>
 					</StakeGridAreaHeaderTitle>
 					<StakeGridAreaHeaderMeta>
-						<span>{calculateApy().toFixed(0)}% APY</span>
-						<IButtonPopover toggle={toggle} cursor={'help'} isOpen={popoverOpen} heading="APY staking PPBLZ" button={
-							<ExternalLink size={.75} href="https://app.uniswap.org/#/swap?outputCurrency=0x4d2ee5dae46c86da2ff521f7657dad98834f97b8">Buy PPBLZ</ExternalLink>
-						}/>
+						<span>{calculatePpblzApy().toFixed(0)}% APY</span>
+						<IButtonPopover toggle={toggle} cursor={'help'} isOpen={popoverOpen} heading="APY staking PPBLZ"
+							apy={calculatePpblzApy().toFixed(0)}
+							button={<ExternalLink size={.75} href="https://app.uniswap.org/#/swap?outputCurrency=0x4d2ee5dae46c86da2ff521f7657dad98834f97b8">Buy PPBLZ</ExternalLink>}/>
 					</StakeGridAreaHeaderMeta>
 				</StakeGridAreaHeader>
 				<StakeGridAreaBody>
@@ -554,9 +554,9 @@ const StakeCard: React.FC<any> = () => {
 					</StakeGridAreaHeaderTitle>
 					<StakeGridAreaHeaderMeta>
 						<span>87% APY</span>
-						<IButtonPopover toggle={toggle2} cursor={'help'} isOpen={popoverOpen2} heading="APY staking PPBLZ-ETH" button={
-							<ExternalLink size={.75} href="https://app.uniswap.org/#/swap?outputCurrency=0x4d2ee5dae46c86da2ff521f7657dad98834f97b8">Buy PPBLZ-ETH</ExternalLink>
-						}/>
+						<IButtonPopover toggle={toggle2} cursor={'help'} isOpen={popoverOpen2} heading="APY staking PPBLZ-ETH"
+							apy='87'
+							button={<ExternalLink size={.75} href="https://app.uniswap.org/#/swap?outputCurrency=0x4d2ee5dae46c86da2ff521f7657dad98834f97b8">Buy PPBLZ-ETH</ExternalLink>}/>
 					</StakeGridAreaHeaderMeta>
 				</StakeGridAreaHeader>
 				<StakeGridAreaBody>
