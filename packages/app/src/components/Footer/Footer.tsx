@@ -7,7 +7,7 @@ import { Title } from "../../components";
 const Footer = () => {
 	return (
 		<StyledFooter>
-			<div style={{ height: "450px" }}/>
+			<div style={{ height: `${theme.footer.height}px` }}/>
 			<StyledFooterInner>
 				<StyledFooterGrid>
 					<div>
@@ -67,6 +67,10 @@ const StyledFooter = styled.footer`
 	background-image: url(${footercover});
 	background-size: 100% auto;
 	background-repeat: no-repeat;
+	position: absolute;
+	bottom: 0;
+	margin-left: ${theme.sideBar.width}px;
+	width: calc(100vw - ${theme.sideBar.width}px);
 `
 
 const StyledFooterInner = styled.div`

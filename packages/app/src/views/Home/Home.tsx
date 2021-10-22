@@ -188,13 +188,13 @@ const Home: React.FC<any> = () => {
 			<StyledSection bgColor={theme.color.purple[200]}>
 				<SocialBoxes/>
 			</StyledSection>
-			<Footer/>
 		</HomeWrapper>
 	)
 }
 
 const HomeWrapper = styled.div`
 	margin-left: ${props => props.theme.sideBar.width}px;
+	padding-bottom: ${2 * theme.footer.height}px;
 	width: calc(100vw - ${props => props.theme.sideBar.width}px);
 `
 

@@ -76,6 +76,9 @@ const theme = {
 	sideBar: {
 		width: 96
 	},
+	footer: {
+		height: 450
+	},
 	page: {
 		maxWidth: 1120
 	}

@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import styled from 'styled-components'
-import { Navigation, NotSupportedModal } from "../../components";
+import { Footer, Navigation, NotSupportedModal } from "../../components";
 import { PepemonProviderContext } from "../../contexts";
 import { darktealTiles } from "../../assets";
 import { theme } from "../../theme";
@@ -21,13 +21,14 @@ const Page: React.FC<any> = ({children}) => {
 	}
 
 	return (
-		<>
+		<div style={{ position: 'relative' }}>
 			<StyledPageWrapper>
 				<Navigation/>
 				{children}
 			</StyledPageWrapper>
+			<Footer/>
 			{ (!isOnSupportedChain() && chainId) && <NotSupportedModal page="Home"/> }
-		</>
+		</div>
 	)
 }
 
@@ -46,6 +47,7 @@ export const StyledPageWrapperMain = styled.main`
 	padding-right: 2em;
 	min-height: 100vh;
 	width: calc(100vw - ${theme.sideBar.width}px);
+	padding-bottom: ${2 * theme.footer.height}px;
 `
 
 export const StyledPageWrapperMainInner = styled.div`

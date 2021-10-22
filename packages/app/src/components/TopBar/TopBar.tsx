@@ -62,7 +62,7 @@ const TopBar: React.FC<any> = ({setChainId}) => {
 						<TextInfo as="p" font={theme.font.spaceMace} color={theme.color.purple[800]}>XX unique cards</TextInfo>
 					</StyledTopBarInfo>
 				}
-				<Button styling="green" title={account && 'Copy address'} onClick={handleUnlockClick}>{!account ? 'Connect wallet' : formatAddress(account)}</Button>
+				<Button styling="green" title={account ? 'Copy address' : 'Connect wallet'} onClick={handleUnlockClick}>{!account ? 'Connect wallet' : formatAddress(account)}</Button>
 			</StyledTopBarInner>
 		</StyledTopBar>
 	);
@@ -76,6 +76,7 @@ const StyledTopBar = styled.div<{border?: boolean}>`
 	position: absolute;
 	right: 2.5em;
 	top: 2em;
+	z-index: 1;
 `
 
 const StyledTopBarInner = styled.div`
