@@ -1,5 +1,6 @@
-import React, { useContext } from 'react'
-import styled from 'styled-components'
+import React, { useContext } from 'react';
+import styled from 'styled-components';
+import { useLocation } from "react-router-dom";
 import { Footer, Navigation, NotSupportedModal } from "../../components";
 import { PepemonProviderContext } from "../../contexts";
 import { darktealTiles } from "../../assets";
@@ -10,9 +11,13 @@ const Page: React.FC<any> = ({children}) => {
 	const pepemonContext = useContext(PepemonProviderContext);
 	const { chainId } = pepemonContext[0];
 
+	const { pathname } = useLocation();
 	// const [onPresentSupportModal] = useModal(, 'not-supported-modal-home');
 
 	const isSupportedChain = (chainId: number) => {
+		if (pathname.startsWith("/store")) {
+			return (chainId === 1 || chainId === 4 || chainId === 56);
+		}
 		return (chainId === 1 || chainId === 4);
 	}
 
@@ -24,10 +29,11 @@ const Page: React.FC<any> = ({children}) => {
 		<div style={{ position: 'relative' }}>
 			<StyledPageWrapper>
 				<Navigation/>
-				{children}
+				{ (!isOnSupportedChain() && chainId) ? <NotSupportedModal page="Home"/>
+				: children
+				}
 			</StyledPageWrapper>
 			<Footer/>
-			{ (!isOnSupportedChain() && chainId) && <NotSupportedModal page="Home"/> }
 		</div>
 	)
 }

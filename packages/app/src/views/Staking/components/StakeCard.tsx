@@ -7,7 +7,7 @@ import { useTokenPrices } from '../../../hooks';
 import { correctChainIsLoaded } from '../../../utils';
 import { pokeball, uniswap } from '../../../assets';
 import { theme } from '../../../theme';
-import {sendTransaction} from '../../../pepemon/utils';
+import { sendTransaction } from '../../../pepemon/utils';
 
 const StakeCard: React.FC<any> = () => {
     //TODO: implement proper state / context management
@@ -651,7 +651,7 @@ const StakeCard: React.FC<any> = () => {
 
 						<div style={{ display: "flex" }}>
 							<Text as="p" font={theme.font.inter}>
-								Total value: $ {(parseFloat(ppdexBalance.toString())+ (ppdexRewards * ppdexPrice)).toFixed(2)}
+								Total value: $ {((parseFloat(ppdexBalance.toString()) * ppdexPrice) + (ppdexRewards * ppdexPrice)).toFixed(2)}
 							</Text>
 							<Spacer size="md"/>
 							<Button styling="link" style={{padding: 0}} onClick={() => !isUpdatingRewards && getPpdexRewards()} {...(isUpdatingRewards && {disabled: true})}>

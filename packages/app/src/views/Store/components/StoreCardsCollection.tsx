@@ -10,7 +10,12 @@ import { CardSingle, StyledStoreCardsWrapper, StoreSelectionWrapper } from '../c
 const StoreCardsCollection : React.FC<any> = ({selectedCard, setSelectedCard}) => {
 	const pepemonContext = useContext(PepemonProviderContext);
 	const { chainId } = pepemonContext[0];
-	const [activeSeries, setActiveSeries] = useState(cards.get(chainId).find(series => series.title_formatted === 'EVENT_ITEM_CARDS'));
+	const [activeSeries, setActiveSeries] = useState(cards.get(chainId).find(series => {
+		if (chainId === 56) {
+			return series.title_formatted === 'CARTOONIZED_SERIES'
+		}
+		return series.title_formatted === 'EVENT_ITEM_CARDS'
+	}));
 
 	useEffect(() => {
 		setSelectedCard(null);
@@ -32,16 +37,18 @@ const StoreCardsCollection : React.FC<any> = ({selectedCard, setSelectedCard}) =
 			{/*{seriesToMap.map((activeSerie, key) => {
 				return (
 					<div key={key}>*/}
-					<div>
-						<Title as="h3" size={1.3} font={theme.font.spaceMace}>{activeSeries.title}</Title>
-						<Spacer size="sm"/>
-						<StyledStoreCardsWrapper gridCols={selectedCard ? 3 : 5}>
-							{activeSeries.cards.map(cardId => {
-								return <CardSingle key={cardId} cardId={cardId} selectedCard={selectedCard} selectCard={setSelectedCard}/>
-							})}
-						</StyledStoreCardsWrapper>
-						<Spacer size="md"/>
-					</div>
+					{ activeSeries &&
+						<div>
+							<Title as="h3" size={1.3} font={theme.font.spaceMace}>{activeSeries.title}</Title>
+							<Spacer size="sm"/>
+							<StyledStoreCardsWrapper gridCols={selectedCard ? 3 : 5}>
+								{activeSeries.cards.map(cardId => {
+									return <CardSingle key={cardId} cardId={cardId} selectedCard={selectedCard} selectCard={setSelectedCard}/>
+								})}
+							</StyledStoreCardsWrapper>
+							<Spacer size="md"/>
+						</div>
+					}
 				{/*)
 			})}*/}
 		</div>

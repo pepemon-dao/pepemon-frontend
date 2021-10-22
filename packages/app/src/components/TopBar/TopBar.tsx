@@ -10,7 +10,7 @@ import { theme } from "../../theme";
 
 const TopBar: React.FC<any> = ({setChainId}) => {
 	const [ppblzStakedAmount, setPpblzStakedAmount] = useState(0);
-	const [, setPpdexRewards] = useState(0);
+	const [ppdexRewards, setPpdexRewards] = useState(0);
 	const [, loadWeb3Modal] = useWeb3Modal();
 	const pepemonContext = useContext(PepemonProviderContext);
 	const { account, chainId, ppblzAddress, ppdexAddress, contracts, provider } = pepemonContext[0];
@@ -29,9 +29,9 @@ const TopBar: React.FC<any> = ({setChainId}) => {
 			setPpdexRewards(parseInt(web3.utils.fromWei(cRewards)));
 	    })()
 	}, [contracts.ppdex, setPpblzStakedAmount, account, web3.utils]);
-	// console.log(ppdexRewards);
 
 	const totalPpblz = getBalanceNumber(ppblzBalance) + ppblzStakedAmount;
+	const totalPpdex = getBalanceNumber(ppdexBalance) + ppdexRewards;
 
 	const handleUnlockClick = () => {
 		if (account) {
@@ -56,7 +56,7 @@ const TopBar: React.FC<any> = ({setChainId}) => {
 						)}
 						{ppblzBalance && (
 							<TextInfo as="p" font={theme.font.spaceMace} color={theme.color.purple[800]} title="In Wallet + Not Claimed PPDEX">
-								{getBalanceNumber(ppdexBalance).toFixed(2)} $PPDEX
+								{totalPpdex.toFixed(2)} $PPDEX
 							</TextInfo>
 						)}
 						<TextInfo as="p" font={theme.font.spaceMace} color={theme.color.purple[800]}>XX unique cards</TextInfo>

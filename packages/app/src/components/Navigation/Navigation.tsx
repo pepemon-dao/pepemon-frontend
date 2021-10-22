@@ -1,9 +1,8 @@
 import React, {useState} from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import styled from "styled-components";
 import { pepemon, events, home, my_collection, staking, store, subscriptions, logoexpand } from "../../assets";
 import { theme } from "../../theme";
-import { useLocation } from "react-router-dom"; // version 5.2.0
 
 const Navigation = () => {
 	const [navLogo, setNavLogo] = useState(pepemon);
@@ -151,11 +150,15 @@ const StyledMenuOuterWrapper = styled.div`
 	&{
 		max-width: ${theme.sideBar.width}px;
 		background-color: ${theme.color.typographyAllTextOnDark};
-		height: 100vh;
-		position: fixed;
+		height: 100%;
 		left: 0;
+		position: fixed;
 		top: 0;
-		z-index: 99;
+		z-index: 1000;
+
+		@media (min-height: 645px) {
+			height: 100vh;
+		}
 	}
 
 	&:hover {
