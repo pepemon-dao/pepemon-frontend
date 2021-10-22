@@ -1,11 +1,17 @@
 import React from 'react'
 import styled from 'styled-components'
-import { AnimatedImg, ContentBox, ContentBoxNumber, ContentBoxGrid, ContentCentered, ContentColumn, ContentColumns, Evolve, Footer, Spacer, ButtonLink, Title, Text, SocialBoxes, Newsletter } from "../../components";
+import { AnimatedImg, ContentBox, ContentBoxNumber, ContentBoxGrid, ContentCentered, ContentColumn, ContentColumns, ExternalLink, Evolve, Spacer, ButtonLink, Title, Text, SocialBoxes, Newsletter } from "../../components";
 import Balances from './components/Balances';
 import { theme } from "../../theme";
+import { useTokenPrices } from "../../hooks";
 import { dummyGraph, group, cover, coverblack, fudizardPng, logoexpand, bluecard, pepechucard, witchenerycard, pepechurcard } from "../../assets";
 
 const Home: React.FC<any> = () => {
+	const { ppblzPrice, ppdexPrice } = useTokenPrices();
+    const calculatePpblzApy = () => {
+        const rewardedPerYear = ppdexPrice * 20;
+        return (rewardedPerYear * 100) / ppblzPrice;
+    }
 
 	return (
 		<HomeWrapper>
@@ -14,7 +20,7 @@ const Home: React.FC<any> = () => {
 					<ContentColumn width="40%" style={{paddingTop: "3.75em"}}>
 						<Title as="h1" font={theme.font.spaceMace} size={4.5}>Gotta claim ‘em all!</Title>
 						<Text as="p" font={theme.font.inter} size={1.375}>
-							Digital collectible card games on blockchain owned by the players. 100% airdropped. Play2Earn games powered by DeFi and NFTs in-game assets. 
+							Digital collectible card games on blockchain owned by the players. 100% airdropped. Play2Earn games powered by DeFi and NFTs in-game assets.
 						</Text>
 						<Spacer size="lg"/>
 						<Spacer size="lg"/>
@@ -26,7 +32,9 @@ const Home: React.FC<any> = () => {
 										Start your journey by getting $PPBLZ
 									</Text>
 									<Spacer size="md"/>
-									<ButtonLink to="/store">Become the very best</ButtonLink>
+									<ExternalLink href="https://app.uniswap.org/#/swap?outputCurrency=0x4d2ee5dae46c86da2ff521f7657dad98834f97b8" styling='button'>
+										Become the very best
+									</ExternalLink>
 								</ContentBox>
 							</ContentColumn>
 							<ContentColumn width="calc(1/3 * 100%)" space="1.25em"  style={{transform: "translateY(30%)"}}>
@@ -36,7 +44,7 @@ const Home: React.FC<any> = () => {
 										Stake your $PPBLZ with
 									</Text>
 									<Text as="p" size={2} font={theme.font.neometric} weight={900} align="center">
-										70% APY
+										{calculatePpblzApy().toFixed(0)}% APY
 									</Text>
 									<Spacer size="md"/>
 									<ButtonLink light to="/staking">Start staking</ButtonLink>

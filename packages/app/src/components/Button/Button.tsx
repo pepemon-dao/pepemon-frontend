@@ -1,8 +1,8 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { theme } from "../../theme";
 import { Link } from "react-router-dom";
 
-interface ButtonProps {
+export interface ButtonProps {
 	disabled?: boolean;
 	styling?: "purple" | "green" | "white" | "link" | "white_borderless";
 	symbol?: boolean;
@@ -92,11 +92,11 @@ const Button = styled.button<any>`
 	`}
 `;
 
-interface ButtonLinkProps {
+export interface ButtonLinkProps {
 	light?: boolean;
 }
 
-export const ButtonLink = styled(Link)<ButtonLinkProps>`
+export const buttonLinksStyling = css<ButtonLinkProps>`
 	background-color: ${props => props.light && props.theme.color.white};
 	background-image: ${props => !props.light && `linear-gradient(to bottom, #aa6cd6 -100%, ${props.theme.color.purple[600]})`};
 	border-radius: 8px;
@@ -122,6 +122,10 @@ export const ButtonLink = styled(Link)<ButtonLinkProps>`
 		filter: drop-shadow(2px 2px 3px ${theme.color.purple[600]});
 		outline: none;
 	}
+`
+
+export const ButtonLink = styled(Link)<ButtonLinkProps>`
+	${buttonLinksStyling}
 `
 
 export default Button;
