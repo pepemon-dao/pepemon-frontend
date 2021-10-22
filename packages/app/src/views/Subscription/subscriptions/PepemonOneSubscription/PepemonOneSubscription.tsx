@@ -73,13 +73,17 @@ const PepemonOneSubscription: React.FC<any> = () => {
 					</>
 				}
 					<div style={{ display: "inline-flex", flexDirection: "column" }}>
-						<Text as="p" size={.875}>
-							{ minLPTokens ?
-								`${parseFloat(parseFloat((getBalanceNumber(minLPTokens) + 0.01).toString()).toPrecision(3))} PPBLZ-ETH LP needed to subscribe` :
-								'loading...'
-							}
-						</Text>
-						<Spacer size="sm"/>
+						{ !isStaking &&
+							<>
+								<Text as="p" size={.875}>
+									{ minLPTokens ?
+										`${parseFloat(parseFloat((getBalanceNumber(minLPTokens) + 0.01).toString()).toPrecision(3))} PPDEX-ETH LP needed to subscribe` :
+										'loading...'
+									}
+								</Text>
+								<Spacer size="sm"/>
+							</>
+						}
 						{allowance.comparedTo(minLPTokens) === -1 ?
 							<Button disabled={isApproving} size="sm" styling="purple" onClick={onApprove}>
 								{isApproving ? 'Approving...' : 'Approve LP'}

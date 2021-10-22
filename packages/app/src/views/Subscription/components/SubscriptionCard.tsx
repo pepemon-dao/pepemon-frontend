@@ -5,7 +5,7 @@ import { PepemonOneSubscription, PepemonOneAnniversarySet } from "../subscriptio
 const SubscriptionCard: React.FC<any> = () => {
     return (
 		<AccordionGroup>
-			<PepemonOneAnniversarySet isOpen={true}/>
+			<PepemonOneAnniversarySet/>
 			<PepemonOneSubscription/>
 		</AccordionGroup>
     )

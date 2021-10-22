@@ -10,7 +10,7 @@ interface AccordionProps {
 	children: any
 }
 
-const Accordion: React.FC<AccordionProps> = ({title, isOpen = false, children}) => {
+const Accordion: React.FC<AccordionProps> = ({title, isOpen = true, children}) => {
 	const [openAccordion, setOpenAccordion] = useState(isOpen);
 	const toggleAccordion = () => {
 		setOpenAccordion(!openAccordion)
