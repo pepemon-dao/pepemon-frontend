@@ -37,7 +37,7 @@ const StoreCardsAside: React.FC<any> = ({setSelectedCard, selectedCard: { cardId
     }
 
 	const isMintable = () => {
-        return cardBalance && (parseInt(cardBalance.totalSupply) < parseInt(cardBalance.maxSupply));
+        return cardBalance && (parseFloat(cardBalance.totalSupply) < parseFloat(cardBalance.maxSupply));
     }
 
 	const isAffordable = () => {
@@ -47,19 +47,19 @@ const StoreCardsAside: React.FC<any> = ({setSelectedCard, selectedCard: { cardId
 
 	const isReleasingSoon = () => {
         const birthdayMetaData = cardMeta.attributes.find(attribute => attribute.trait_type === 'birthday');
-        if (parseInt(birthdayMetaData.value) === 0) {
+        if (parseFloat(birthdayMetaData.value) === 0) {
             return true;
         }
 
-        return parseInt(birthdayMetaData.value) > (Date.now() / 1000);
+        return parseFloat(birthdayMetaData.value) > (Date.now() / 1000);
     }
 
 	const isForSale = () => {
         const birthdayMetaData = cardMeta.attributes.find(attribute => attribute.trait_type === 'birthday');
-        if (parseInt(birthdayMetaData.value) === 0) {
+        if (parseFloat(birthdayMetaData.value) === 0) {
             return false;
         }
-        return (parseInt(birthdayMetaData.value) + (daysForSale() * 24 * 60 * 60)) > (Date.now() / 1000)
+        return (parseFloat(birthdayMetaData.value) + (daysForSale() * 24 * 60 * 60)) > (Date.now() / 1000)
     }
 
 	const isSoldOut = () => {

@@ -63,7 +63,7 @@ const CARTOONIZED_SERIES: SeriesType = {
 }
 
 // PepemonOneAnniversarySet
-const PPMNONE_ANNIVERSARY_SET = {
+export const PPMNONE_ANNIVERSARY_SET = {
 	cards: [75, 76, 77, 78],
 }
 

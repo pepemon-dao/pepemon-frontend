@@ -31,8 +31,8 @@ const NetworkSwitch: React.FC<any> = () => {
 					const chainName = chains[chainId.toString() as keyof typeof chains];
 					return (
 						<li key={key}>
-							<ChainsListButton disabled={parseInt(chainId) === currentChainId} aria-label={`change to ${chainName}`} onClick={() => {
-								setCurrentChainId(parseInt(chainId)); setChainsListActive(false);
+							<ChainsListButton disabled={parseFloat(chainId) === currentChainId} aria-label={`change to ${chainName}`} onClick={() => {
+								setCurrentChainId(parseFloat(chainId)); setChainsListActive(false);
 							}}>
 								{chainName}
 							</ChainsListButton>

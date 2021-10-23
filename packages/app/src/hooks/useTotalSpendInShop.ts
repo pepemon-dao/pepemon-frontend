@@ -11,7 +11,7 @@ const useTotalSpendInShop = () => {
     const storeContract = getPepemonStoreContract(pepemon)
 
     const fetchTotalSpend = useCallback(async () => {
-        const balance = parseInt(pepemon.chainId) === 56 ? await getTotalSpendBNB(storeContract) : await getTotalSpend(storeContract);
+        const balance = parseFloat(pepemon.chainId) === 56 ? await getTotalSpendBNB(storeContract) : await getTotalSpend(storeContract);
         setTotalSpend(new BigNumber(balance))
     }, [pepemon, storeContract])
 

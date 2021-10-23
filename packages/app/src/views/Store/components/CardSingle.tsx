@@ -29,15 +29,15 @@ const CardSingle : React.FC<any> = ({cardId, selectedCard, selectCard}) => {
 	const priceOfCard = !cardPrice ? 0 : parseFloat(getDisplayBalance(cardPrice.price, 18)).toFixed(2);
 	const isSoldOut = () => {
 		if (!cardBalance) return true;
-		return cardBalance[0]?.totalSupply === parseInt(cardBalance[0]?.maxSupply);
+		return cardBalance[0]?.totalSupply === parseFloat(cardBalance[0]?.maxSupply);
 	}
 
 	const isReleasingSoon = useCallback(() => {
         const birthdayMetaData = cardMeta?.attributes.find(attribute => attribute.trait_type === 'birthday');
-        if (parseInt(birthdayMetaData?.value) === 0) {
+        if (parseFloat(birthdayMetaData?.value) === 0) {
             return true;
         }
-        return parseInt(birthdayMetaData?.value) > (Date.now() / 1000);
+        return parseFloat(birthdayMetaData?.value) > (Date.now() / 1000);
     },[cardMeta])
 
 	const isItemCard = (tokenId: number) => {
@@ -53,16 +53,16 @@ const CardSingle : React.FC<any> = ({cardId, selectedCard, selectCard}) => {
 
 	const calculateTimeLeft = useCallback(() => {
         const birthdayMetaData = cardMeta?.attributes.find(attribute => attribute.trait_type === 'birthday');
-        if (parseInt(birthdayMetaData?.value) === 0) { return 0; }
+        if (parseFloat(birthdayMetaData?.value) === 0) { return 0; }
 
         if (isReleasingSoon()) {
-            return parseInt(birthdayMetaData?.value) - (Date.now() / 1000);
+            return parseFloat(birthdayMetaData?.value) - (Date.now() / 1000);
         }
 
-        if ((parseInt(birthdayMetaData?.value) + (daysForSale() * 60 * 60 * 24)) - (Date.now() / 1000) <= 0) {
+        if ((parseFloat(birthdayMetaData?.value) + (daysForSale() * 60 * 60 * 24)) - (Date.now() / 1000) <= 0) {
             return 0;
         }
-        return (parseInt(birthdayMetaData?.value) + (daysForSale() * 60 * 60 * 24)) - (Date.now() / 1000);
+        return (parseFloat(birthdayMetaData?.value) + (daysForSale() * 60 * 60 * 24)) - (Date.now() / 1000);
     }, [cardMeta, daysForSale, isReleasingSoon])
 
 	const countdown = (pre: string = ' ', after: string = '') => {
@@ -110,7 +110,7 @@ const CardSingle : React.FC<any> = ({cardId, selectedCard, selectCard}) => {
 				<StyledPepemonCardMeta>
 					<dt>Minted</dt>
 					{/*console.log(cardBalance)*/}
-					<dd>{cardBalance === null ? 'loading' : `${parseInt(cardBalance[0]?.totalSupply)} / ${parseInt(cardBalance[0]?.maxSupply) > 10000 ? '♾️': parseInt(cardBalance[0]?.maxSupply)}`}</dd>
+					<dd>{cardBalance === null ? 'loading' : `${parseFloat(cardBalance[0]?.totalSupply)} / ${parseFloat(cardBalance[0]?.maxSupply) > 10000 ? '♾️': parseFloat(cardBalance[0]?.maxSupply)}`}</dd>
 				</StyledPepemonCardMeta>
 				<StyledPepemonCardMeta>
 					<dt>Time</dt>

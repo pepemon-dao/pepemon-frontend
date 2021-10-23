@@ -8,7 +8,8 @@ import { Button, Text } from "../../components";
 import { NetworkSwitch } from "./components";
 import { PepemonProviderContext } from "../../contexts";
 import { theme } from "../../theme";
-import { ALL_CARDS } from "../../constants/cards";
+import { PPMNONE_ANNIVERSARY_SET } from "../../constants/cards";
+import { cards } from "../../constants";
 
 const TopBar: React.FC<any> = ({setChainId}) => {
 	const [ppblzStakedAmount, setPpblzStakedAmount] = useState(0);
@@ -18,30 +19,36 @@ const TopBar: React.FC<any> = ({setChainId}) => {
 	const [pepemon] = useContext(PepemonProviderContext);
 	const { account, chainId, ppblzAddress, ppdexAddress, contracts, provider } = pepemon;
 	const web3 = new Web3(provider);
+	// define balances
 	const ppblzBalance = useTokenBalance(ppblzAddress);
 	const ppdexBalance = useTokenBalance(ppdexAddress);
-	const tokenIds = ALL_CARDS;
+	// get all tokenIds from cards
+	const tokenIds = cards.get(chainId)?.reduce(function(pv: any, cv: any) {
+			return pv.length ? [...pv, ...cv.cards] : [...cv.cards];
+	}, 0);
+
+	const batchBalanceIds = (chainId === 1 && tokenIds) ? [...tokenIds, ...PPMNONE_ANNIVERSARY_SET.cards] : tokenIds ? [...tokenIds] : [];
 
 	useEffect(() => {
 		(async () => {
-			const batchBalance = await getBalanceOfBatch(contracts.pepemonFactory, account, tokenIds);
+			const batchBalance = await getBalanceOfBatch(contracts.pepemonFactory, account, batchBalanceIds);
 			if (batchBalance) {
 				// sum of all cards owned
-				const sum = batchBalance.reduce((pv, cv) => parseInt(pv) + parseInt(cv), 0);
+				const sum = batchBalance.reduce((pv, cv) => parseFloat(pv) + parseFloat(cv), 0);
 				setPpmnCardsOwned(sum);
 			}
 		})()
-	}, [contracts.pepemonFactory, chainId, account, tokenIds])
+	}, [contracts.pepemonFactory, chainId, account, batchBalanceIds])
 
 	useEffect(() => {
 		(async () => {
 			if(!contracts.ppdex) return;
 			// Get staked PPBLZ
 	        const stakeA = await contracts.ppdex.getAddressPpblzStakeAmount(account);
-	        setPpblzStakedAmount(parseInt(web3.utils.fromWei(stakeA.toString())));
+	        setPpblzStakedAmount(parseFloat(web3.utils.fromWei(stakeA.toString())));
 			// Get PPDEX rewards
 			const cRewards = (await contracts.ppdex.myRewardsBalance(account)).toString();
-			setPpdexRewards(parseInt(web3.utils.fromWei(cRewards)));
+			setPpdexRewards(parseFloat(web3.utils.fromWei(cRewards)));
 	    })()
 	}, [contracts.ppdex, setPpblzStakedAmount, account, web3.utils]);
 

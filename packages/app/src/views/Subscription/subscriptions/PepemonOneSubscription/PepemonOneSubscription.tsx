@@ -25,13 +25,13 @@ const PepemonOneSubscription: React.FC<any> = () => {
     const rewardCard = useLotteryRewardCard();
 	const [cardMeta, setCardMeta] = useState(null)
 	useEffect(() => {(async () => {
-			setCardMeta(await getCardMeta(parseInt(rewardCard || 0 ), pepemon))
+			setCardMeta(await getCardMeta(parseFloat(rewardCard || 0 ), pepemon))
 		})()
 	}, [rewardCard, pepemon]);
     const stakingDeadline = useLotteryStakingDeadline();
     const stakingStart = useLotteryStakingStartblock(transaction);
     const hasClaimed = useLotteryHasClaimed(rewardCard, transaction);
-    const lockedBlocks = (parseInt(stakingStart) + lockedPeriod) - blockNumber;
+    const lockedBlocks = (parseFloat(stakingStart) + lockedPeriod) - blockNumber;
     const canClaimCurrentCard = () => {
         return stakingDeadline > stakingStart;
     }

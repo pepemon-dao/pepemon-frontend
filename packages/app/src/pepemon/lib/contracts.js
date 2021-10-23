@@ -25,11 +25,11 @@ export class Contracts {
     //   options.confirmationType || Types.ConfirmationType.Confirmed
     // this.defaultGas = options.defaultGas
     // this.defaultGasPrice = options.defaultGasPrice
-    if (parseInt(networkId) === 1) {
+    if (parseFloat(networkId) === 1) {
 		this.merkleDistributor = new Contract(contractAddresses.merkleDistributor[networkId], MerkleDistributor, provider.getSigner())
 	}
 
-    if (parseInt(networkId) === 1 || parseInt(networkId) === 4) {
+    if (parseFloat(networkId) === 1 || parseFloat(networkId) === 4) {
       this.ppblz = new Contract(contractAddresses.ppblz[networkId], PpblzAbi, provider.getSigner())
       this.uniV2_ppblz = new Contract(contractAddresses.uniV2_ppblz[networkId], UNIV2PairAbi, provider.getSigner())
       this.uniV2_ppdex = new Contract(contractAddresses.uniV2_ppdex[networkId], UNIV2PairAbi, provider.getSigner())
@@ -43,13 +43,13 @@ export class Contracts {
       this.pepemonPromoToken = new Contract(contractAddresses.pepemonPromoToken[networkId], ERC20Abi, provider.getSigner())
     }
 
-    if (parseInt(networkId) === 1 || parseInt(networkId) === 4 || parseInt(networkId) === 56 || parseInt(networkId) === 137) {
+    if (parseFloat(networkId) === 1 || parseFloat(networkId) === 4 || parseFloat(networkId) === 56 || parseFloat(networkId) === 137) {
       this.ppdex = new Contract(contractAddresses.ppdex[networkId], PpdexAbi, provider.getSigner());
       this.pepemonFactory = new Contract(contractAddresses.pepemonFactory[networkId], PepemonFactoryAbi, provider.getSigner());
-      this.pepemonStore = new Contract(contractAddresses.pepemonStore[networkId], parseInt(networkId) === 56 ? PepemonStoreNativeAbi : PepemonStoreAbi, provider.getSigner());
+      this.pepemonStore = new Contract(contractAddresses.pepemonStore[networkId], parseFloat(networkId) === 56 ? PepemonStoreNativeAbi : PepemonStoreAbi, provider.getSigner());
     }
 
-    if (parseInt(networkId) === 56) {
+    if (parseFloat(networkId) === 56) {
       this.merkleDego = new Contract(contractAddresses.merkleDego[networkId], MerkleBSCAbi, provider.getSigner());
     }
     // this.pools = supportedPools.map((pool) =>

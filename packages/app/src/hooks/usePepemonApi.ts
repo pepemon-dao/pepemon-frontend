@@ -10,7 +10,7 @@ const usePepemonApi = (endpoint: string) => {
 		const fetchData = async (endpoint: string) => {
 	        setIsFetching(true)
 	        const { chainId } = await provider.getNetwork();
-	        const host = parseInt(chainId) === 1 ? `https://pepemon.finance/api` : `https://dev.pepemon.finance/api`;
+	        const host = parseFloat(chainId) === 1 ? `https://pepemon.finance/api` : `https://dev.pepemon.finance/api`;
 	        const response = await fetch(
 	            `${host}${endpoint}`,
 	            { method: 'GET'},

@@ -61,7 +61,7 @@ const PepemonCard: React.FC<any> = ({
     }, [tokenId])
 
     const isMintable = () => {
-        return balances && (parseInt(balances.totalSupply) < parseInt(balances.maxSupply));
+        return balances && (parseFloat(balances.totalSupply) < parseFloat(balances.maxSupply));
     }
     const isAffordable = () => {
         if (price.isEqualTo(ppdexBalance)) {
@@ -79,18 +79,18 @@ const PepemonCard: React.FC<any> = ({
 
 	const isReleasingSoon = useCallback(() => {
         const birthdayMetaData = metadata.attributes.find(attribute => attribute.trait_type === 'birthday');
-        if (parseInt(birthdayMetaData.value) === 0) {
+        if (parseFloat(birthdayMetaData.value) === 0) {
             return true;
         }
-        return parseInt(birthdayMetaData.value) > (Date.now() / 1000);
+        return parseFloat(birthdayMetaData.value) > (Date.now() / 1000);
     }, [metadata.attributes])
 
     const isForSale = () => {
         const birthdayMetaData = metadata.attributes.find(attribute => attribute.trait_type === 'birthday');
-        if (parseInt(birthdayMetaData.value) === 0) {
+        if (parseFloat(birthdayMetaData.value) === 0) {
             return false;
         }
-        return (parseInt(birthdayMetaData.value) + (daysForSale() * 24 * 60 * 60)) > (Date.now() / 1000)
+        return (parseFloat(birthdayMetaData.value) + (daysForSale() * 24 * 60 * 60)) > (Date.now() / 1000)
     }
     const isSoldOut = () => {
         return (!isMintable() && !isReleasingSoon()) || (!isForSale() && !isReleasingSoon());
@@ -101,18 +101,18 @@ const PepemonCard: React.FC<any> = ({
 
     // const calculateTimeLeft = useCallback(() => {
     //     const birthdayMetaData = metadata.attributes.find(attribute => attribute.trait_type === 'birthday');
-    //     if (parseInt(birthdayMetaData.value) === 0) {
+    //     if (parseFloat(birthdayMetaData.value) === 0) {
     //         return 0;
     //     }
 	//
     //     if (isReleasingSoon()) {
-    //         return parseInt(birthdayMetaData.value) - (Date.now() / 1000);
+    //         return parseFloat(birthdayMetaData.value) - (Date.now() / 1000);
     //     }
 	//
-    //     if ((parseInt(birthdayMetaData.value) + (daysForSale() * 60 * 60 * 24)) - (Date.now() / 1000) <= 0) {
+    //     if ((parseFloat(birthdayMetaData.value) + (daysForSale() * 60 * 60 * 24)) - (Date.now() / 1000) <= 0) {
     //         return 0;
     //     }
-    //     return (parseInt(birthdayMetaData.value) + (daysForSale() * 60 * 60 * 24)) - (Date.now() / 1000);
+    //     return (parseFloat(birthdayMetaData.value) + (daysForSale() * 60 * 60 * 24)) - (Date.now() / 1000);
     // }, [metadata.attributes, isReleasingSoon, daysForSale])
 
     // const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
@@ -157,7 +157,7 @@ const PepemonCard: React.FC<any> = ({
     return (
 		<StyledPepemonCard style={{ opacity: isSoldOut() ? "50%" : "100%" }}>
 			<StyledPepemonCardPrice>
-				{parseInt(priceOfCard) === 0 ? "Unavailable" :
+				{parseFloat(priceOfCard) === 0 ? "Unavailable" :
 					<>
 						<img loading="lazy" src={coin} alt="coin"/>
 						{priceOfCard} PPDEX
@@ -193,7 +193,7 @@ const PepemonCard: React.FC<any> = ({
 				<Spacer size="sm"/>
 				<StyledPepemonCardMeta>
 					<dt>Minted</dt>
-					<dd>{isReleasingSoon() ? '0 / 0' : `${balances.totalSupply} / ${parseInt(balances.maxSupply) > 10000 ? '∞': balances.maxSupply}`}</dd>
+					<dd>{isReleasingSoon() ? '0 / 0' : `${balances.totalSupply} / ${parseFloat(balances.maxSupply) > 10000 ? '∞': balances.maxSupply}`}</dd>
 				</StyledPepemonCardMeta>
 				<StyledPepemonCardMeta>
 					<dt>Time</dt>
