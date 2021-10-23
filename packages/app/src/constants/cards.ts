@@ -62,6 +62,14 @@ const CARTOONIZED_SERIES: SeriesType = {
 	cards: [3, 4, 5, 6, 7, 8, 10, 11, 12],
 }
 
+// PepemonOneAnniversarySet
+const PPMNONE_ANNIVERSARY_SET = {
+	cards: [75, 76, 77, 78],
+}
+
+// All cards ID's
+export const ALL_CARDS = [...ORIGIN_SERIES.cards, ...CHARACTER_SERIES_CARDS.cards, ...FRIENDS_SERIES_CARDS.cards, ...NEW_BEGINNING_CARDS.cards, ...DUNGEONS_AND_DRAGONS.cards, ...NEW_BEGINNING_PIXEL_CARDS.cards, ...PPMNONE_ANNIVERSARY_SET.cards];
+
 
 // series per chainId
 const ALL_SERIES = new Map([

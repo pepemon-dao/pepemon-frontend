@@ -3,20 +3,35 @@ import styled from "styled-components";
 import Web3 from "web3";
 import { useWeb3Modal, useTokenBalance } from "../../hooks";
 import { getBalanceNumber, formatAddress, copyText } from "../../utils";
+import { getBalanceOfBatch } from "../../utils/erc1155";
 import { Button, Text } from "../../components";
 import { NetworkSwitch } from "./components";
 import { PepemonProviderContext } from "../../contexts";
 import { theme } from "../../theme";
+import { ALL_CARDS } from "../../constants/cards";
 
 const TopBar: React.FC<any> = ({setChainId}) => {
 	const [ppblzStakedAmount, setPpblzStakedAmount] = useState(0);
 	const [ppdexRewards, setPpdexRewards] = useState(0);
+	const [ppmnCardsOwned, setPpmnCardsOwned] = useState(0);
 	const [, loadWeb3Modal] = useWeb3Modal();
 	const pepemonContext = useContext(PepemonProviderContext);
 	const { account, chainId, ppblzAddress, ppdexAddress, contracts, provider } = pepemonContext[0];
 	const web3 = new Web3(provider);
 	const ppblzBalance = useTokenBalance(ppblzAddress);
 	const ppdexBalance = useTokenBalance(ppdexAddress);
+	const tokenIds = ALL_CARDS;
+
+	useEffect(() => {
+		(async () => {
+			const batchBalance = await getBalanceOfBatch(contracts.pepemonFactory, account, tokenIds);
+			if (batchBalance) {
+				// sum of all cards owned
+				const sum = batchBalance.reduce((pv, cv) => parseInt(pv) + parseInt(cv), 0);
+				setPpmnCardsOwned(sum);
+			}
+		})()
+	}, [contracts.pepemonFactory, chainId, account, tokenIds])
 
 	useEffect(() => {
 		(async () => {
@@ -59,7 +74,7 @@ const TopBar: React.FC<any> = ({setChainId}) => {
 								{totalPpdex.toFixed(2)} $PPDEX
 							</TextInfo>
 						)}
-						<TextInfo as="p" font={theme.font.spaceMace} color={theme.color.purple[800]}>XX unique cards</TextInfo>
+						<TextInfo as="p" font={theme.font.spaceMace} color={theme.color.purple[800]}>{ppmnCardsOwned} unique card{ppmnCardsOwned !== 1 && 's'}</TextInfo>
 					</StyledTopBarInfo>
 				}
 				<Button styling="green" title={account ? 'Copy address' : 'Connect wallet'} onClick={handleUnlockClick}>{!account ? 'Connect wallet' : formatAddress(account)}</Button>
