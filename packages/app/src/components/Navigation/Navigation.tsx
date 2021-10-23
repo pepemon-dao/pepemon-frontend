@@ -59,10 +59,11 @@ const Navigation = () => {
 }
 
 const StyledMenuInnerWrapper = styled.div`
-	height: 100vh;
+	align-items: center;
 	display: flex;
 	flex-direction: column;
-	align-items: center;
+	height: 100vh;
+	overflow-y: auto;
 `
 const StyledMenuList = styled.ul`
 	align-items: center;
