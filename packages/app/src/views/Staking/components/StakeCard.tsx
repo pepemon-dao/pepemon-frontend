@@ -43,9 +43,8 @@ const StakeCard: React.FC<any> = () => {
 	const [uniV2PpblzStakeAdd, setUniV2PpblzStakeAdd]= useState(false);
 	const [uniV2PpblzStakeSub, setUniV2PpblzStakeSub]= useState(false);
 
-    const pepemonContext = useContext(PepemonProviderContext);
-    const pepemon = pepemonContext[0];
-    const { account, contracts, provider } = pepemonContext[0];
+    const [pepemon, dispatch] = useContext(PepemonProviderContext);
+    const { account, contracts, provider } = pepemon;
 	const web3 = new Web3(provider);
 
     const { ppblzPrice, ppdexPrice } = useTokenPrices();
@@ -170,7 +169,6 @@ const StakeCard: React.FC<any> = () => {
                 await getPpblzBalance();
                 await getPpblzAllowance();
                 await getPpdexRewards();
-
             }
             return setTransactionFinished(transactionFinished + 1);
         } catch (error) {
@@ -194,7 +192,6 @@ const StakeCard: React.FC<any> = () => {
                 await getUniV2PpblzBalance();
                 await getUniV2PpblzAllowance();
                 await getPpdexRewards();
-
             }
             return setTransactionFinished(transactionFinished + 1);
         } catch (error) {

@@ -9,9 +9,7 @@ import { cardback_normal } from '../../../../assets';
 import { theme } from '../../../../theme';
 
 const PepemonOneSubscription: React.FC<any> = () => {
-	const pepemonContext = useContext(PepemonProviderContext);
-	const pepemon = pepemonContext[0];
-
+	const [pepemon] = useContext(PepemonProviderContext);
     const ppdexUniV2Balance = useTokenBalance(getUniV2PpdexAddress(pepemon));
     const [transaction, setTransaction] = useState(0);
     const { onApprove, isApproving } = useApprove(getPepemonLotteryContract(pepemon), getPpdexUniV2Contract(pepemon));

@@ -15,8 +15,8 @@ const TopBar: React.FC<any> = ({setChainId}) => {
 	const [ppdexRewards, setPpdexRewards] = useState(0);
 	const [ppmnCardsOwned, setPpmnCardsOwned] = useState(0);
 	const [, loadWeb3Modal] = useWeb3Modal();
-	const pepemonContext = useContext(PepemonProviderContext);
-	const { account, chainId, ppblzAddress, ppdexAddress, contracts, provider } = pepemonContext[0];
+	const [pepemon] = useContext(PepemonProviderContext);
+	const { account, chainId, ppblzAddress, ppdexAddress, contracts, provider } = pepemon;
 	const web3 = new Web3(provider);
 	const ppblzBalance = useTokenBalance(ppblzAddress);
 	const ppdexBalance = useTokenBalance(ppdexAddress);

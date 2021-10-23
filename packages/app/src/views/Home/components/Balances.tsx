@@ -9,8 +9,8 @@ import { useTotalValueStaked, useTotalSpendInShop } from '../../../hooks';
 const Balances: React.FC = () => {
   const poolStatistics = useTotalValueStaked();
   const totalSpendInShop = useTotalSpendInShop();
-  const pepemonContext = useContext(PepemonProviderContext);
-  const { account } = pepemonContext[0];
+  const [pepemon] = useContext(PepemonProviderContext);
+  const { account } = pepemon;
 
 	return (
 		<ContentBoxGrid gridTemplate='"box1 box1 box2 box2 box3 box3" "box4 box4 box4 box5 box5 box5"'>

@@ -8,19 +8,19 @@ import { getCardMeta, getCardFactoryData, getCardStorePrices } from "../../../ho
 import { PepemonProviderContext } from "../../../contexts";
 
 const CardSingle : React.FC<any> = ({cardId, selectedCard, selectCard}) => {
-	const pepemonContext = useContext(PepemonProviderContext);
-	const { chainId } = pepemonContext[0];
+	const [pepemon] = useContext(PepemonProviderContext);
+	const { chainId } = pepemon;
 	const [isLoaded, setIsLoaded] = useState(false);
 	const [cardPrice, setCardPrice] = useState(null);
 	const [cardMeta, setCardMeta] = useState(null);
 	const [cardBalance, setCardBalance] = useState([]);
 
 	useEffect(() => {(async() => {
-			setCardMeta(await getCardMeta(cardId, pepemonContext[0]));
-			setCardPrice(await getCardStorePrices(cardId, pepemonContext[0]));
-			setCardBalance(await getCardFactoryData(cardId, pepemonContext[0], 0));
+			setCardMeta(await getCardMeta(cardId, pepemon));
+			setCardPrice(await getCardStorePrices(cardId, pepemon));
+			setCardBalance(await getCardFactoryData(cardId, pepemon, 0));
 		})()
-	}, [cardId, pepemonContext]);
+	}, [cardId, pepemon]);
 
 	useEffect(() => {
 		if (cardPrice && cardMeta && cardBalance) setIsLoaded(true);

@@ -7,8 +7,8 @@ import { theme } from '../../../theme';
 import { PackSingle, StyledStoreCardsWrapper } from '../components';
 
 const StorePacksCollection : React.FC<any> = ({selectedPack, setSelectedPack}) => {
-	const pepemonContext = useContext(PepemonProviderContext);
-	const { chainId } = pepemonContext[0];
+	const [pepemon] = useContext(PepemonProviderContext);
+	const { chainId } = pepemon;
 	const [activeSeries, setActiveSeries] = useState([]);
 
 	useEffect(() => {

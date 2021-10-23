@@ -9,8 +9,8 @@ import { theme } from '../../../theme';
 
 const StorePacksAside: React.FC<any> = ({setSelectedPack, selectedPack}) => {
 	const [activeClaimModal, setActiveClaimModal] = useState(false);
-	const pepemonContext = useContext(PepemonProviderContext);
-	const { chainId } = pepemonContext[0];
+	const [pepemon] = useContext(PepemonProviderContext);
+	const { chainId } = pepemon;
 
 	return (
 		<StyledStoreWrapper style={{width: "34%"}}>

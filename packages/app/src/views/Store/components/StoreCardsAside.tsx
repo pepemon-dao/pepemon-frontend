@@ -11,8 +11,8 @@ import { theme } from '../../../theme';
 const StoreCardsAside: React.FC<any> = ({setSelectedCard, selectedCard: { cardId, cardPrice, cardMeta = null, cardBalance = null }}) => {
 	const [activeClaimModal, setActiveClaimModal] = useState(false);
 	const [transactions, setTransactions] = useState(0);
-	const pepemonContext = useContext(PepemonProviderContext);
-	const { chainId, contracts } = pepemonContext[0];
+	const [pepemon] = useContext(PepemonProviderContext);
+	const { chainId, contracts } = pepemon;
 	const { onRedeemCard, isRedeemingCard } = useRedeemCard(contracts.pepemonStore);
 	const { onApprove, isApproving } = useApprove(contracts.pepemonStore, contracts.ppdex);
 	const allowance = useAllowance(contracts.pepemonStore);

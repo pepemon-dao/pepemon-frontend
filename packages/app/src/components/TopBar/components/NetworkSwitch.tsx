@@ -16,8 +16,8 @@ const NetworkSwitch: React.FC<any> = () => {
 		}
 	})
 
-	const pepemonContext = useContext(PepemonProviderContext);
-	const { chainId } = pepemonContext[0];
+	const [pepemon] = useContext(PepemonProviderContext);
+	const { chainId } = pepemon;
 	const [currentChainId, setCurrentChainId] = useState(chainId); // set currentChainId to handle chain switch
 
 	return (

@@ -8,8 +8,8 @@ import { theme } from "../../theme";
 // import Footer from '../Footer';
 
 const Page: React.FC<any> = ({children}) => {
-	const pepemonContext = useContext(PepemonProviderContext);
-	const { chainId } = pepemonContext[0];
+	const [pepemon] = useContext(PepemonProviderContext);
+	const { chainId } = pepemon;
 
 	const { pathname } = useLocation();
 	// const [onPresentSupportModal] = useModal(, 'not-supported-modal-home');

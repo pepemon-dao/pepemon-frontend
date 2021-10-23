@@ -17,8 +17,8 @@ interface CardToClaimProps {
 
 const CardToClaim: React.FC<CardToClaimProps> = ({title, text, tokenId, img}) => {
 	const merkleType = 'distributor';
-	const pepemonContext = useContext(PepemonProviderContext);
-	const { account } = pepemonContext[0];
+	const [pepemon] = useContext(PepemonProviderContext);
+	const { account } = pepemon;
 	const { response, isFetching } = usePepemonApi(`/merkle/${tokenId}/${account}`);
 	const canClaim = response && response.index;
 

@@ -8,8 +8,8 @@ import { theme } from '../../../theme';
 import { CardSingle, StyledStoreCardsWrapper, StoreSelectionWrapper } from '../components';
 
 const StoreCardsCollection : React.FC<any> = ({selectedCard, setSelectedCard}) => {
-	const pepemonContext = useContext(PepemonProviderContext);
-	const { chainId } = pepemonContext[0];
+	const [pepemon] = useContext(PepemonProviderContext);
+	const { chainId } = pepemon;
 	const [activeSeries, setActiveSeries] = useState(cards.get(chainId).find(series => {
 		if (chainId === 56) {
 			return series.title_formatted === 'CARTOONIZED_SERIES'
