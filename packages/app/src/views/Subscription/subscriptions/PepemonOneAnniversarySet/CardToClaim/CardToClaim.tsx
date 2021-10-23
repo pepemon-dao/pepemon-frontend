@@ -33,7 +33,7 @@ const CardToClaim: React.FC<CardToClaimProps> = ({title, text, tokenId, img}) =>
 	const { onClaimMerkle, isClaiming } = useClaimMerkle( response && response.index ? {
 		account,
 		index: response.index,
-		amount: parseFloat(response.amount),
+		amount: parseInt(response.amount),
 		proof: response.proof,
 	} : null, merkleType, tokenId);
 

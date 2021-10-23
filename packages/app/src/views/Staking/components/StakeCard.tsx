@@ -553,7 +553,7 @@ const StakeCard: React.FC<any> = () => {
 						<span>87% APY</span>
 						<IButtonPopover toggle={toggle2} cursor={'help'} isOpen={popoverOpen2} heading="APY staking PPBLZ-ETH"
 							apy='87'
-							button={<ExternalLink size={.75} href="https://app.uniswap.org/#/swap?outputCurrency=0x4d2ee5dae46c86da2ff521f7657dad98834f97b8">Buy PPBLZ-ETH</ExternalLink>}/>
+							button={<ExternalLink size={.75} href="https://app.uniswap.org/#/add/0x4D2eE5DAe46C86DA2FF521F7657dad98834f97b8/ETH">Buy PPBLZ-ETH</ExternalLink>}/>
 					</StakeGridAreaHeaderMeta>
 				</StakeGridAreaHeader>
 				<StakeGridAreaBody>

@@ -5,6 +5,7 @@ export const getBalanceOfBatch = async (
     tokenIds: number[],
 ): Promise<any[]> => {
     try {
+		if (tokenIds.length === 0) return;
         const result = await contract.balanceOfBatch(tokenIds.map(() => userAddress), tokenIds)
         return result;
     } catch (e) {
