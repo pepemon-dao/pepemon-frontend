@@ -656,7 +656,7 @@ const StakeCard: React.FC<any> = () => {
 							</Button>
 						</div>
 						<Spacer size="md"/>
-						<Button styling="purple" disabled={(isStakingPpblz || isWithdrawingPpblz) || isUpdatingRewards || ((ppblzStakedAmount > 0) && (!(ppdexRewards > 0.1) || isClaiming))} onClick={claimRewards} width="clamp(100px, 18em, 100%)">{(isStakingPpblz || isWithdrawingPpblz || isUpdatingRewards) ? "Updating..." : isClaiming ? "Claim..." : "Claim"}</Button>
+						<Button styling="purple" disabled={(isStakingPpblz || isWithdrawingPpblz) || isUpdatingRewards || (!(ppblzStakedAmount > 0) && (!(ppdexRewards > 0.1) || isClaiming))} onClick={claimRewards} width="clamp(100px, 18em, 100%)">{(isStakingPpblz || isWithdrawingPpblz || isUpdatingRewards) ? "Updating..." : isClaiming ? "Claiming..." : `${ppdexRewards.toFixed(2)} PPDEX to claim`}</Button>
 					</div>
 				</StakeGridAreaBody>
 			</StakeGridArea>

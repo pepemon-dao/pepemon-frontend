@@ -49,7 +49,7 @@ const CardToClaim: React.FC<CardToClaimProps> = ({title, text, tokenId, img}) =>
 			</StyledFigure>
 			<Spacer size="sm"/>
 			<Button width="100%" styling="purple" style={{marginTop: "auto"}}
-			onClick={onClaimMerkle} disabled={false}
+			onClick={onClaimMerkle} disabled={isDisabled}
 			>{
 				isFetching ? 'Checking...'
 				: isClaimed ? 'Already claimed'
