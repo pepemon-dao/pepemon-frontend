@@ -37,7 +37,7 @@ const chains = {
 		blockExplorerUrls: 'https://rinkeby.etherscan.io',
 	},
 	"56": {
-		idHex: "0x56",
+		idHex: "0x38",
 		name: "BSC",
 		chainName: "BSC Mainnet",
 		nativeCurrency: {

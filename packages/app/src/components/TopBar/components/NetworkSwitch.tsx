@@ -1,5 +1,6 @@
 import React, { useState, useRef, useContext } from "react";
 import styled from "styled-components";
+import { useLocation } from "react-router-dom";
 import { up_down_arrows_dark } from "../../../assets";
 import { chains } from "../../../constants";
 import { PepemonProviderContext } from "../../../contexts";
@@ -17,6 +18,14 @@ const NetworkSwitch: React.FC<any> = () => {
 		}
 	})
 
+	const { pathname } = useLocation();
+
+	const isSupportedChain = (chainId: number) => {
+		if (pathname.startsWith("/store")) {
+			return (chainId === 1 || chainId === 4 || chainId === 56);
+		}
+		return (chainId === 1 || chainId === 4);
+	}
 
 	const [pepemon] = useContext(PepemonProviderContext);
 	const { chainId } = pepemon;
@@ -30,8 +39,6 @@ const NetworkSwitch: React.FC<any> = () => {
 		} catch (switchError: any) {
 			// This error code indicates that the chain has not been added to MetaMask.
 			if (switchError.code === 4902) {
-				console.log('foo');
-
 				try {
 					await window.ethereum.request({
 						method: 'wallet_addEthereumChain',
@@ -72,9 +79,10 @@ const NetworkSwitch: React.FC<any> = () => {
 			<ChainsList isOpen={chainsListActive} ref={networkSwitchRef}>
 				{ Object.keys(chains).map((chId, key) => {
 					const chain = chains[chId.toString() as keyof typeof chains];
-					return (
+
+					return (<>{ isSupportedChain(parseInt(chId)) &&
 						<li key={key}>
-							<ChainsListButton disabled={parseFloat(chId) === chainId} aria-label={`change to ${chain.name}`}
+							<ChainsListButton disabled={parseInt(chId) === chainId} aria-label={`change to ${chain.name}`}
 								onClick={() => {
 									handleChainSwitch(chain);
 									setChainsListActive(false);
@@ -82,10 +90,15 @@ const NetworkSwitch: React.FC<any> = () => {
 								{chain.name}
 							</ChainsListButton>
 						</li>
-					)
+					}</>)
 				})}
 			</ChainsList>
-			{unhandledError.errCode && <UnhandledError errCode={unhandledError.errCode} errMsg={unhandledError.errMsg} onDismiss={() => setUnhandledError({errCode: null, errMsg: ''})}/>}
+			{ unhandledError.errCode &&
+				<UnhandledError
+					errCode={unhandledError.errCode}
+					errMsg={unhandledError.errMsg}
+					onDismiss={() => setUnhandledError({errCode: null, errMsg: ''})}/>
+			}
 		</>
 	)
 }

@@ -12,7 +12,6 @@ const Page: React.FC<any> = ({children}) => {
 	const { chainId } = pepemon;
 
 	const { pathname } = useLocation();
-	// const [onPresentSupportModal] = useModal(, 'not-supported-modal-home');
 
 	const isSupportedChain = (chainId: number) => {
 		if (pathname.startsWith("/store")) {
