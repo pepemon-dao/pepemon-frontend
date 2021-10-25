@@ -34,7 +34,7 @@ const NetworkSwitch: React.FC<any> = () => {
 		try {
 			await window.ethereum.request({
 				method: 'wallet_switchEthereumChain',
-				params: [{ chainId: chain.idHex }],
+				params: [{ chainId: chain.chainId }],
 			});
 		} catch (switchError: any) {
 			// This error code indicates that the chain has not been added to MetaMask.
@@ -43,7 +43,7 @@ const NetworkSwitch: React.FC<any> = () => {
 					await window.ethereum.request({
 						method: 'wallet_addEthereumChain',
 						params: [{
-							chainId: chain.idHex,
+							chainId: chain.chainId,
 							chainName: chain.chainName,
 							nativeCurrency: chain.nativeCurrency,
 							rpcUrls: chain.rpcUrls,
@@ -68,27 +68,24 @@ const NetworkSwitch: React.FC<any> = () => {
 				})
 			}
 		}
+		setChainsListActive(false);
 	}
 
-	const supportedChains = Object.keys(chains).filter(chId => isSupportedChain(parseInt(chId)));
+	const supportedChains = chains.filter(chain => isSupportedChain(parseInt(chain.chainId)));
+	const currentChain = chains.filter(chain => (parseInt(chain.chainId) === chainId) && chain.chainName);
 
 	return (
 		<>
 			<ChainsListButton onClick={() => setChainsListActive(!chainsListActive)}>
-				{chains[chainId] ? chains[chainId].name : 'Not connected'}
+				{ currentChain ? currentChain[0].name : 'Not connected' }
 				<img alt="change network" src={up_down_arrows_dark} style={{ width: ".5em", marginLeft: ".8em" }}/>
 			</ChainsListButton>
 			<ChainsList isOpen={chainsListActive} ref={networkSwitchRef}>
-				{ supportedChains.map((chId, key) => {
-					const chain = chains[chId.toString() as keyof typeof chains];
-
+				{ supportedChains.map((chain, key) => {
 					return (
 						<li key={key}>
-							<ChainsListButton disabled={parseInt(chId) === chainId} aria-label={`change to ${chain.name}`}
-								onClick={() => {
-									handleChainSwitch(chain);
-									setChainsListActive(false);
-								}}>
+							<ChainsListButton disabled={parseInt(chain.chainId) === chainId} aria-label={`change to ${chain.name}`}
+								onClick={() => handleChainSwitch(chain)}>
 								{chain.name}
 							</ChainsListButton>
 						</li>

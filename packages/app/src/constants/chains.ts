@@ -1,19 +1,25 @@
+// https://docs.metamask.io/guide/rpc-api.html#other-rpc-methods
 interface AddEthereumChainParameter {
-	// chainId: string; // A 0x-prefixed hexadecimal string
-	// chainName: string;
+	chainId: string; // A 0x-prefixed hexadecimal string
+	chainName: string;
 	nativeCurrency: {
-	name: string;
-	symbol: string; // 2-6 characters long
-	decimals: 18
+		name: string;
+		symbol: string; // 2-6 characters long
+		decimals: 18;
 	};
 	rpcUrls: string[];
 	blockExplorerUrls?: string[];
 	iconUrls?: string[]; // Currently ignored.
 }
 
-const chains = {
-	"1": {
-		idHex: "0x1",
+
+interface ChainsProps extends AddEthereumChainParameter {
+	name: string
+}
+
+const chains: ChainsProps[] = [
+	{
+		chainId: "0x1",
 		name: "ETH",
 		chainName: "Etherem Mainnet",
 		nativeCurrency: {
@@ -24,8 +30,8 @@ const chains = {
 		rpcUrls: ['https://main-light.eth.linkpool.io'],
 		blockExplorerUrls: ['https://etherscan.io'],
 	},
-	"4": {
-		idHex: "0x4",
+	{
+		chainId: "0x4",
 		name: "RINKEBY",
 		chainName: "Rinkeby Testnet",
 		nativeCurrency: {
@@ -36,8 +42,8 @@ const chains = {
 		rpcUrls: ['https://rinkeby-light.eth.linkpool.io'],
 		blockExplorerUrls: ['https://rinkeby.etherscan.io'],
 	},
-	"56": {
-		idHex: "0x38",
+	{
+		chainId: "0x38", // = 56
 		name: "BSC",
 		chainName: "BSC Mainnet",
 		nativeCurrency: {
@@ -48,7 +54,18 @@ const chains = {
 		rpcUrls: ["https://bsc-dataseed.binance.org/"],
 		blockExplorerUrls: ['https://bscscan.com'],
 	},
-	// "137": "MATIC",
-};
+	{
+		chainId: "0x89", // = 137
+		name: "Matic",
+		chainName: "Matic Mainnet",
+		nativeCurrency: {
+	      name: "Matic",
+	      symbol: "MATIC",
+	      decimals: 18
+	  	},
+		rpcUrls: ["https://rpc-mainnet.maticvigil.com/"],
+		blockExplorerUrls: ['https://explorer.matic.network/'],
+	}
+];
 
 export default chains;
