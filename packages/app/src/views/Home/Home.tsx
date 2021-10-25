@@ -47,7 +47,7 @@ const Home: React.FC<any> = () => {
 										{calculatePpblzApy().toFixed(0)}% APY
 									</Text>
 									<Spacer size="md"/>
-									<ButtonLink light to="/staking">Start staking</ButtonLink>
+									<ButtonLink light="true" to="/staking">Start staking</ButtonLink>
 								</ContentBox>
 							</ContentColumn>
 							<ContentColumn width="calc(1/3 * 100%)" space="1.25em"  style={{transform: "translateY(60%)"}}>
@@ -57,7 +57,7 @@ const Home: React.FC<any> = () => {
 										Buy or earn $PPDEX and get NFT Boosterpacks!
 									</Text>
 									<Spacer size="md"/>
-									<ButtonLink light to="/store/boosterpacks">Get your Boosterpacks</ButtonLink>
+									<ButtonLink light="true" to="/store/boosterpacks">Get your Boosterpacks</ButtonLink>
 								</ContentBox>
 							</ContentColumn>
 						</ContentColumns>

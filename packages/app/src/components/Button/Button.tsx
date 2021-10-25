@@ -93,7 +93,7 @@ const Button = styled.button<any>`
 `;
 
 export interface ButtonLinkProps {
-	light?: boolean;
+	light?: string;
 }
 
 export const buttonLinksStyling = css<ButtonLinkProps>`
