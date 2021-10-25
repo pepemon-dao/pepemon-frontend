@@ -42,11 +42,12 @@ function useWeb3Modal(config = {}) {
 
 			const { chainId } = await newProvider.getNetwork();
 			const accounts = await newProvider.listAccounts();
-			const contracts = new Contracts(newProvider, newChainId ? parseFloat(newChainId) : chainId)
+			const contracts = new Contracts(newProvider, newChainId ? parseInt(newChainId, 16) : chainId)
+
 			return await dispatch({
 				type: 'all',
 				contracts,
-				chainId: newChainId ? parseFloat(newChainId) : chainId,
+				chainId: newChainId ? parseInt(newChainId, 16) : chainId,
 				// account: newProvider.provider.selectedAddress ? newProvider.provider.selectedAddress : newProvider.provider.accounts[0],
 				account: accounts[0],
 				provider: newProvider,

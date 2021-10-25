@@ -31,5 +31,6 @@ export { default as SocialBoxes } from './SocialBoxes';
 export { default as Spacer, StyledSpacer } from './Spacer';
 export { Title, StyledPageTitle, StyledLinkTitle, Text } from './Text';
 export { default as TopBar } from './TopBar';
+export { default as UnhandledError } from './UnhandledError';
 export { default as Value } from './Value';
 export { default as WalletButton } from './WalletButton';
