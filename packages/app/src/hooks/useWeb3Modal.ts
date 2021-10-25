@@ -92,7 +92,6 @@ function useWeb3Modal(config = {}) {
 				await dispatch({
 					type: 'reset',
 				})
-				window.location.reload();
 			}
 
 			await resetApp();

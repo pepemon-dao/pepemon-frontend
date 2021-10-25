@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { Button, ExternalLink, Modal, ModalTitle, ModalContent, ModalActions, ModalProps, Spacer, Text } from "../../../components";
 import { PepemonProviderContext } from "../../../contexts";
+import { useWeb3Modal } from "../../../hooks";
 import { theme } from "../../../theme";
 import { chains } from "../../../constants";
 import { copyText } from "../../../utils";
@@ -11,7 +12,8 @@ interface WalletModal extends ModalProps {
 
 const WalletModal: React.FC<WalletModal> = ({onDismiss, account}) => {
 	const [copied, setCopied] = useState(false);
-	const [{chainId}, dispatch] = useContext(PepemonProviderContext);
+	const [{chainId}] = useContext(PepemonProviderContext);
+	const [,,logoutOfWeb3Modal] = useWeb3Modal();
 
 	const handleCopy = () => {
 		copyText(account);
@@ -19,7 +21,7 @@ const WalletModal: React.FC<WalletModal> = ({onDismiss, account}) => {
 	}
 
 	const handleLogout = async () => {
-		await dispatch({type: 'reset'});
+		await logoutOfWeb3Modal();
 		onDismiss();
 	}
 
