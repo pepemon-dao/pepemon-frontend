@@ -16,10 +16,10 @@ const bounceIn = keyframes`
 	}
 	50% {
 		opacity: 1;
-		transform: translateY(30px);
+		transform: translateY(10px);
 	}
 	70% {
-		transform: translateY(60px);
+		transform: translateY(15px);
 	}
 	100% {
 		transform: translateY(0px);
@@ -27,7 +27,7 @@ const bounceIn = keyframes`
 `
 
 const bounceInCss = css`
-	animation: 1.5s ${bounceIn};
+	animation: 1s ${bounceIn} ease-out;
 `
 
 const StyledAnimatedImg = styled.img<{isVisible?: boolean}>`
