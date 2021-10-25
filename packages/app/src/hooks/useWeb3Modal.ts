@@ -3,7 +3,7 @@ import { Web3Provider } from "@ethersproject/providers";
 import Web3Modal from "web3modal";
 import WalletConnectProvider from "@walletconnect/web3-provider";
 import {Contracts} from '../pepemon/lib/contracts';
-import {Context} from '../contexts/PepemonProvider';
+import {PepemonProviderContext} from '../contexts';
 
 // Enter a valid infura key here to avoid being rate limited
 // You can get a key for free at https://infura.io/register
@@ -14,7 +14,7 @@ const NETWORK_NAME = "mainnet";
 function useWeb3Modal(config = {}) {
     const [provider, setProvider] = useState(null);
     // const [autoLoaded, setAutoLoaded] = useState(false);
-    const [, dispatch] = useContext(Context);
+    const [, dispatch] = useContext(PepemonProviderContext);
     const { infuraId = INFURA_ID, NETWORK = NETWORK_NAME }: any = config;
 
     // Web3Modal also supports many other wallets.

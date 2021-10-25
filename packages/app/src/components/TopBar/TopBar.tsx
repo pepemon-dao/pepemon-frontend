@@ -1,17 +1,19 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { Suspense, lazy, useEffect, useState, useContext } from "react";
 import styled from "styled-components";
 import Web3 from "web3";
 import { useWeb3Modal, useTokenBalance } from "../../hooks";
-import { getBalanceNumber, formatAddress, copyText } from "../../utils";
+import { getBalanceNumber, formatAddress } from "../../utils";
 import { getBalanceOfBatch } from "../../utils/erc1155";
 import { Button, Text } from "../../components";
 import { NetworkSwitch } from "./components";
 import { PepemonProviderContext } from "../../contexts";
 import { theme } from "../../theme";
+const WalletModal = lazy(() =>  import("./components/WalletModal").then((module) => ({ default: module.default })));
 // import { PPMNONE_ANNIVERSARY_SET } from "../../constants/cards";
 // import { cards } from "../../constants";
 
 const TopBar: React.FC<any> = ({setChainId}) => {
+	const [visibleWalletModal, setVisibleWalletModal] = useState(false);
 	const [ppblzStakedAmount, setPpblzStakedAmount] = useState(0);
 	const [ppdexRewards, setPpdexRewards] = useState(0);
 	const [ppmnCardsOwned, setPpmnCardsOwned] = useState(0);
@@ -59,9 +61,9 @@ const TopBar: React.FC<any> = ({setChainId}) => {
 	const totalPpblz = getBalanceNumber(ppblzBalance) + ppblzStakedAmount;
 	const totalPpdex = getBalanceNumber(ppdexBalance) + ppdexRewards;
 
-	const handleUnlockClick = () => {
+	const handleWalletButtonClick = () => {
 		if (account) {
-			copyText(account);
+			setVisibleWalletModal(!visibleWalletModal);
 		} else {
 			loadWeb3Modal();
 		}
@@ -88,8 +90,13 @@ const TopBar: React.FC<any> = ({setChainId}) => {
 						<TextInfo as="p" font={theme.font.spaceMace} color={theme.color.purple[800]}>{ppmnCardsOwned} unique card{ppmnCardsOwned !== 1 && 's'}</TextInfo>
 					</StyledTopBarInfo>
 				}
-				<Button styling="green" title={account ? 'Copy address' : 'Connect wallet'} onClick={handleUnlockClick}>{!account ? 'Connect wallet' : formatAddress(account)}</Button>
+				<Button styling="green" title={account ? 'My account' : 'Connect wallet'} onClick={handleWalletButtonClick}>{!account ? 'Connect wallet' : formatAddress(account)}</Button>
 			</StyledTopBarInner>
+			{ visibleWalletModal &&
+				<Suspense fallback={<></>}>
+					<WalletModal account={account} onDismiss={() => setVisibleWalletModal(!visibleWalletModal)}/>
+				</Suspense>
+			}
 		</StyledTopBar>
 	);
 };

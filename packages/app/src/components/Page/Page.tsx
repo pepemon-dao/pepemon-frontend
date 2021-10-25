@@ -25,6 +25,9 @@ const Page: React.FC<any> = ({children}) => {
 		return isSupportedChain(chainId);
 	}
 
+	// go to top
+	window.scrollTo(0,0);
+
 	return (
 		<div style={{ position: 'relative' }}>
 			<StyledPageWrapper>
