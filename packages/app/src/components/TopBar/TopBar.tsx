@@ -8,8 +8,8 @@ import { Button, Text } from "../../components";
 import { NetworkSwitch } from "./components";
 import { PepemonProviderContext } from "../../contexts";
 import { theme } from "../../theme";
-import { PPMNONE_ANNIVERSARY_SET } from "../../constants/cards";
-import { cards } from "../../constants";
+// import { PPMNONE_ANNIVERSARY_SET } from "../../constants/cards";
+// import { cards } from "../../constants";
 
 const TopBar: React.FC<any> = ({setChainId}) => {
 	const [ppblzStakedAmount, setPpblzStakedAmount] = useState(0);
@@ -22,19 +22,23 @@ const TopBar: React.FC<any> = ({setChainId}) => {
 	// define balances
 	const ppblzBalance = useTokenBalance(ppblzAddress);
 	const ppdexBalance = useTokenBalance(ppdexAddress);
-	// get all tokenIds from cards
-	const tokenIds = cards.get(chainId)?.reduce(function(pv: any, cv: any) {
-			return pv.length ? [...pv, ...cv.cards] : [...cv.cards];
-	}, 0);
 
-	const batchBalanceIds = (chainId === 1 && tokenIds) ? [...tokenIds, ...PPMNONE_ANNIVERSARY_SET.cards] : tokenIds ? [...tokenIds] : [];
+	// @dev dirty fix: set IDs from 0 to 100
+	// TODO: Get all real existing IDs
+	// get all tokenIds from cards
+	// const tokenIds = cards.get(chainId)?.reduce(function(pv: any, cv: any) {
+		// 		return pv.length ? [...pv, ...cv.cards] : [...cv.cards];
+		// }, 0);
+	// const batchBalanceIds = (chainId === 1 && tokenIds) ? [...tokenIds, ...PPMNONE_ANNIVERSARY_SET.cards] : tokenIds ? [...tokenIds] : [];
+	const batchBalanceIds = Array.from(Array(100).keys());
 
 	useEffect(() => {
 		(async () => {
+			if (!contracts.pepemonFactory) return;
 			const batchBalance = await getBalanceOfBatch(contracts.pepemonFactory, account, batchBalanceIds);
 			if (batchBalance) {
 				// sum of all cards owned
-				const sum = batchBalance.reduce((pv, cv) => parseFloat(pv) + parseFloat(cv), 0);
+				const sum = batchBalance.reduce((pv, cv) => parseInt(pv) + parseInt(cv), 0);
 				setPpmnCardsOwned(sum);
 			}
 		})()
