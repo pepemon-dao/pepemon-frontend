@@ -135,9 +135,9 @@ const Home: React.FC<any> = () => {
 								</ContentColumn>
 							</ContentColumns>
 							<img loading="lazy" src={dummyGraph} alt="graph"/>
-							<ButtonLink style={{display: "inline-block", width: "100%"}} to="https://opensea.io/collection/pepemonfactory">
+							<ExternalLink styling="button" style={{display: "inline-block", width: "100%"}} href="https://opensea.io/collection/pepemonfactory">
 								Buy now
-							</ButtonLink>
+							</ExternalLink>
 						</ContentColumn>
 						<ContentColumn width="60%">
 							<div style={{ position: "relative", height: "100%", width: "100%" }}>
