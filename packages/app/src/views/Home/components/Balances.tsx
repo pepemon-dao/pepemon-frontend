@@ -39,7 +39,7 @@ const Balances: React.FC = () => {
 			<ContentBox style={{ gridArea: "box4" }}>
 				<Text as="p" size={2} font={theme.font.neometric} weight={900} align="center">Sustainable APY</Text>
 				<Text as="p" align="center">
-					Pepemon uses a unique system for those participating in it's DeFi economy. Because we want to o offer a predictable yield and minimize inflation, each PPBLZ produces around 14 PPDEX per year.
+					Pepemon uses a unique system for those participating in it's DeFi economy. Because we want to offer a predictable yield and minimize inflation, each PPBLZ produces around 14 PPDEX per year.
 				</Text>
 			</ContentBox>
 			<ContentBox style={{ gridArea: "box5" }}>
