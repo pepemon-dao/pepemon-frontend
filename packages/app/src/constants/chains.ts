@@ -22,7 +22,7 @@ const chains = {
 	      decimals: 18
 	  	},
 		rpcUrls: ['https://main-light.eth.linkpool.io'],
-		blockExplorerUrls: 'https://etherscan.io',
+		blockExplorerUrls: ['https://etherscan.io'],
 	},
 	"4": {
 		idHex: "0x4",
@@ -34,7 +34,7 @@ const chains = {
 	      decimals: 18
 	  	},
 		rpcUrls: ['https://rinkeby-light.eth.linkpool.io'],
-		blockExplorerUrls: 'https://rinkeby.etherscan.io',
+		blockExplorerUrls: ['https://rinkeby.etherscan.io'],
 	},
 	"56": {
 		idHex: "0x38",
