@@ -1,10 +1,30 @@
-import React from 'react';
-import { Button, Modal, ModalTitle, ModalContent, ModalActions, Spacer, Text } from "../../components";
+import React, { useState } from 'react';
+import { UnhandledError, Button, Modal, ModalTitle, ModalContent, ModalActions, Spacer, Text } from "../../components";
 import { theme } from "../../theme";
 
 const NotSupportedModal: React.FC<{page: string}> = ({ page }) => {
+	const [unhandledError, setUnhandledError] = useState({errCode: null, errMsg: ''})
 
-    return (
+	const handleSwitch = async () => {
+		try {
+			await window.ethereum.request({
+				method: 'wallet_switchEthereumChain',
+				params: [{ chainId: '0x1' }],
+			});
+		} catch (error: any) {
+			setUnhandledError({
+				errCode: error.code,
+				errMsg: error.message
+			})
+		}
+	}
+
+    return (<>{ unhandledError.errCode ?
+		<UnhandledError
+			errCode={unhandledError.errCode}
+			errMsg={unhandledError.errMsg}
+			onDismiss={() => setUnhandledError({errCode: null, errMsg: ''})}/>
+		:
         <Modal>
             <ModalTitle text="Not (yet) supported" />
             <ModalContent>
@@ -17,10 +37,10 @@ const NotSupportedModal: React.FC<{page: string}> = ({ page }) => {
             </ModalContent>
 			<Spacer size="md"/>
             <ModalActions>
-                <Button styling="purple" disabled>Switch to ETH</Button>
+                <Button styling="purple" onClick={handleSwitch}>Switch to ETH</Button>
             </ModalActions>
         </Modal>
-    )
+    }</>)
 }
 
 export default NotSupportedModal
