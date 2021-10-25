@@ -70,6 +70,8 @@ const NetworkSwitch: React.FC<any> = () => {
 		}
 	}
 
+	const supportedChains = Object.keys(chains).filter(chId => isSupportedChain(parseInt(chId)));
+
 	return (
 		<>
 			<ChainsListButton onClick={() => setChainsListActive(!chainsListActive)}>
@@ -77,10 +79,10 @@ const NetworkSwitch: React.FC<any> = () => {
 				<img alt="change network" src={up_down_arrows_dark} style={{ width: ".5em", marginLeft: ".8em" }}/>
 			</ChainsListButton>
 			<ChainsList isOpen={chainsListActive} ref={networkSwitchRef}>
-				{ Object.keys(chains).map((chId, key) => {
+				{ supportedChains.map((chId, key) => {
 					const chain = chains[chId.toString() as keyof typeof chains];
 
-					return (<>{ isSupportedChain(parseInt(chId)) &&
+					return (
 						<li key={key}>
 							<ChainsListButton disabled={parseInt(chId) === chainId} aria-label={`change to ${chain.name}`}
 								onClick={() => {
@@ -90,7 +92,7 @@ const NetworkSwitch: React.FC<any> = () => {
 								{chain.name}
 							</ChainsListButton>
 						</li>
-					}</>)
+					)
 				})}
 			</ChainsList>
 			{ unhandledError.errCode &&

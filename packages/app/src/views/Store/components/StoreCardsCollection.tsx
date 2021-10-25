@@ -10,29 +10,41 @@ import { CardSingle, StyledStoreCardsWrapper, StoreSelectionWrapper } from '../c
 const StoreCardsCollection : React.FC<any> = ({selectedCard, setSelectedCard}) => {
 	const [pepemon] = useContext(PepemonProviderContext);
 	const { chainId } = pepemon;
-	const [activeSeries, setActiveSeries] = useState(cards.get(chainId).find(series => {
-		if (chainId === 56) {
-			return series.title_formatted === 'CARTOONIZED_SERIES'
-		}
-		return series.title_formatted === 'EVENT_ITEM_CARDS'
-	}));
+	const [options, setOptions] = useState(null);
+	const [activeSeries, setActiveSeries] = useState<any>(cards.get(chainId).find(series => {
+																if (chainId === 56) {
+																	return series.title_formatted === 'CARTOONIZED_SERIES'
+																}
+																return series.title_formatted === 'EVENT_ITEM_CARDS'
+															}));
+
+	useEffect(() => {
+		setActiveSeries( cards.get(chainId).find(series => {
+			if (chainId === 56) {
+				return series.title_formatted === 'CARTOONIZED_SERIES'
+			}
+			return series.title_formatted === 'EVENT_ITEM_CARDS'
+		}))
+	},[setActiveSeries, chainId])
 
 	useEffect(() => {
 		setSelectedCard(null);
 	},[setSelectedCard, chainId])
 
-	const options = cards.get(chainId).map((series, key) => {
-		return {
-			title: series.title,
-			onClick: () => setActiveSeries(series)
-		}
-	});
+	useEffect(() => {
+		setOptions( cards.get(chainId).map((series, key) => {
+			return {
+				title: series.title,
+				onClick: () => setActiveSeries(series)
+			}
+		}))
+	}, [setActiveSeries, chainId]);
 
 	return (
 		<div>
 			<StoreSelectionWrapper>
 				{/*<Button styling="link" style={{padding: 0}} onClick={selectAllSeries}>show series</Button>*/}
-				<DropdownMenu title="0 Selected" options={options} activeOptions={activeSeries} setActiveSeries={setActiveSeries}/>
+				{(activeSeries && options) && <DropdownMenu title="0 Selected" options={options} activeOptions={activeSeries} setActiveSeries={setActiveSeries}/>}
 			</StoreSelectionWrapper>
 			{/*{seriesToMap.map((activeSerie, key) => {
 				return (
