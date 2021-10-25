@@ -14,7 +14,8 @@ interface AddEthereumChainParameter {
 
 
 interface ChainsProps extends AddEthereumChainParameter {
-	name: string
+	name: string,
+	blockExplorerTitle: string
 }
 
 const chains: ChainsProps[] = [
@@ -29,6 +30,7 @@ const chains: ChainsProps[] = [
 	  	},
 		rpcUrls: ['https://main-light.eth.linkpool.io'],
 		blockExplorerUrls: ['https://etherscan.io'],
+		blockExplorerTitle: 'Etherscan'
 	},
 	{
 		chainId: "0x4",
@@ -41,6 +43,7 @@ const chains: ChainsProps[] = [
 	  	},
 		rpcUrls: ['https://rinkeby-light.eth.linkpool.io'],
 		blockExplorerUrls: ['https://rinkeby.etherscan.io'],
+		blockExplorerTitle: 'Etherscan (Rinkeby)'
 	},
 	{
 		chainId: "0x38", // = 56
@@ -53,6 +56,7 @@ const chains: ChainsProps[] = [
 	  	},
 		rpcUrls: ["https://bsc-dataseed.binance.org/"],
 		blockExplorerUrls: ['https://bscscan.com'],
+		blockExplorerTitle: 'BSCscan'
 	},
 	{
 		chainId: "0x89", // = 137
@@ -64,7 +68,8 @@ const chains: ChainsProps[] = [
 	      decimals: 18
 	  	},
 		rpcUrls: ["https://rpc-mainnet.maticvigil.com/"],
-		blockExplorerUrls: ['https://explorer.matic.network/'],
+		blockExplorerUrls: ['https://polygonscan.com/'],
+		blockExplorerTitle: 'Polygonscan'
 	}
 ];
 
