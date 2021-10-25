@@ -58,7 +58,7 @@ const PepemonOneSubscription: React.FC<any> = () => {
 						</Text>
 					</ContentColumn>
 					<ContentColumn width="50%">
-						<ExternalLink href={`https://app.uniswap.org/#/add/v2/ETH/${getPpdexAddress(pepemon)}`}>Buy PPDEX-ETH LP</ExternalLink>
+						<ExternalLink href={`https://app.uniswap.org/#/add/v2/ETH/${getPpdexAddress(pepemon)}`}>Provide PPDEX-ETH LP liquidity</ExternalLink>
 					</ContentColumn>
 				</ContentColumns>
 				<Spacer size="md"/>
