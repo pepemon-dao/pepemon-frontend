@@ -90,7 +90,7 @@ const TopBar: React.FC<any> = ({setChainId}) => {
 						<TextInfo as="p" font={theme.font.spaceMace} color={theme.color.purple[800]}>{ppmnCardsOwned} unique card{ppmnCardsOwned !== 1 && 's'}</TextInfo>
 					</StyledTopBarInfo>
 				}
-				<Button styling="green" title={account ? 'My account' : 'Connect wallet'} onClick={handleWalletButtonClick}>{!account ? 'Connect wallet' : formatAddress(account)}</Button>
+				<Button styling="green" title={account ? 'Your wallet' : 'Connect wallet'} onClick={handleWalletButtonClick}>{!account ? 'Connect wallet' : formatAddress(account)}</Button>
 			</StyledTopBarInner>
 			{ visibleWalletModal &&
 				<Suspense fallback={<></>}>

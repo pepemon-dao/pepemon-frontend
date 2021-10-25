@@ -24,7 +24,7 @@ const WalletModal: React.FC<WalletModal> = ({onDismiss, account}) => {
 
     return (
         <Modal onDismiss={onDismiss}>
-            <ModalTitle text="My Account" />
+            <ModalTitle text="Your wallet" />
 			<ModalContent>
 				<Text as="p" font={theme.font.inter} size={.875} color={theme.color.gray[600]}>
 					View your account on <ExternalLink href={`https://etherscan.io/address/${account}`}>Etherscan</ExternalLink>
