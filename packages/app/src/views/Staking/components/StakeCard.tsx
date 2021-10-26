@@ -47,11 +47,12 @@ const StakeCard: React.FC<any> = () => {
     const { account, contracts, provider } = pepemon;
 	const web3 = new Web3(provider);
 
+
     const { ppblzPrice, ppdexPrice } = useTokenPrices();
-    const calculatePpblzApy = () => {
-        const rewardedPerYear = ppdexPrice * 20;
-        return (rewardedPerYear * 100) / ppblzPrice;
-    }
+    const calculatePpblzApy = useCallback(() => {
+	        const rewardedPerYear = ppdexPrice * 20;
+	        return (rewardedPerYear * 100) / ppblzPrice;
+    }, [ppdexPrice, ppblzPrice])
 
     let timer: any = useRef(null);
 

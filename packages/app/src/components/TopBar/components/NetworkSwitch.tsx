@@ -72,12 +72,12 @@ const NetworkSwitch: React.FC<any> = () => {
 	}
 
 	const supportedChains = chains.filter(chain => isSupportedChain(parseInt(chain.chainId)));
-	const currentChain = chains.filter(chain => (parseInt(chain.chainId) === chainId) && chain.chainName);
+	const [currentChain] = chains.filter(chain => (parseInt(chain.chainId) === chainId) && chain.chainName);
 
 	return (
 		<>
 			<ChainsListButton onClick={() => setChainsListActive(!chainsListActive)}>
-				{ currentChain ? currentChain[0].name : 'Not connected' }
+				{ currentChain ? currentChain.name : 'Not connected' }
 				<img alt="change network" src={up_down_arrows_dark} style={{ width: ".5em", marginLeft: ".8em" }}/>
 			</ChainsListButton>
 			<ChainsList isOpen={chainsListActive} ref={networkSwitchRef}>
