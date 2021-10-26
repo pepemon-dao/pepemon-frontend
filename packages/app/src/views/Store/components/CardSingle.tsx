@@ -1,5 +1,5 @@
 import React, { useEffect, useCallback, useContext, useState } from "react";
-import styled from "styled-components";
+import styled from "styled-components/macro";
 import { cardback_normal, coin } from "../../../assets";
 import { Title, Spacer, StyledSpacer } from "../../../components";
 import { getDisplayBalance } from "../../../utils";

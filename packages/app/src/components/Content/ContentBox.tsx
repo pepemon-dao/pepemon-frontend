@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from "styled-components/macro";
 import { theme } from '../../theme';
 
 const ContentBox = styled.div<{bgColor?: string, shadow?: boolean}>`

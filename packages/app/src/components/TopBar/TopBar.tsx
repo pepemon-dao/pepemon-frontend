@@ -1,5 +1,5 @@
 import React, { Suspense, lazy, useEffect, useState, useContext } from "react";
-import styled from "styled-components";
+import styled from "styled-components/macro";
 import Web3 from "web3";
 import { useWeb3Modal, useTokenBalance } from "../../hooks";
 import { getBalanceNumber, formatAddress } from "../../utils";

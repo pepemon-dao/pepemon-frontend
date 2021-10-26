@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import styled from "styled-components";
+import styled from "styled-components/macro";
 import { Button, Spacer, Title, Text } from '../../../../../components';
 import { theme } from '../../../../../theme';
 import { PepemonProviderContext } from '../../../../../contexts';

@@ -1,5 +1,5 @@
 import React from "react";
-import styled from "styled-components";
+import styled from "styled-components/macro";
 import { theme } from "../../theme";
 import { Button, ContentCentered, Title, Text, Spacer } from "../../components";
 

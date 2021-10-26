@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import { Link, useLocation } from "react-router-dom";
-import styled from "styled-components";
+import styled from "styled-components/macro";
 import { pepemon, events, home, my_collection, staking, store, subscriptions, logoexpand } from "../../assets";
 import { theme } from "../../theme";
 

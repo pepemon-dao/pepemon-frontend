@@ -1,5 +1,5 @@
 import React from 'react'
-import styled from 'styled-components'
+import styled from 'styled-components/macro'
 import { AnimatedImg, ContentBox, ContentBoxNumber, ContentBoxGrid, ContentCentered, ContentColumn, ContentColumns, ExternalLink, Evolve, Spacer, ButtonLink, Title, Text, SocialBoxes, Newsletter } from "../../components";
 import Balances from './components/Balances';
 import { theme } from "../../theme";

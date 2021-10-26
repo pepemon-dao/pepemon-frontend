@@ -1,5 +1,5 @@
 import React from 'react'
-import styled from 'styled-components'
+import styled from 'styled-components/macro'
 
 const CardContent: React.FC = ({ children }) => (
   <StyledCardContent>{children}</StyledCardContent>
