@@ -1,10 +1,11 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components/macro';
-import { useLocation } from "react-router-dom";
-import { Footer, Navigation, NotSupportedModal } from "../../components";
-import { PepemonProviderContext } from "../../contexts";
-import { darktealTiles } from "../../assets";
-import { theme } from "../../theme";
+import { useLocation } from 'react-router-dom';
+import { Footer, Navigation, NotSupportedModal } from '../../components';
+import { PepemonProviderContext } from '../../contexts';
+import { darktealTiles } from '../../assets';
+import { theme } from '../../theme';
+import { isSupportedChain } from '../../utils';
 // import Footer from '../Footer';
 
 const Page: React.FC<any> = ({children}) => {
@@ -13,17 +14,6 @@ const Page: React.FC<any> = ({children}) => {
 
 	const { pathname } = useLocation();
 
-	const isSupportedChain = (chainId: number) => {
-		if (pathname.startsWith("/store")) {
-			return (chainId === 1 || chainId === 4 || chainId === 56);
-		}
-		return (chainId === 1 || chainId === 4);
-	}
-
-	const isOnSupportedChain = () => {
-		return isSupportedChain(chainId);
-	}
-
 	// go to top
 	window.scrollTo(0,0);
 
@@ -31,7 +21,7 @@ const Page: React.FC<any> = ({children}) => {
 		<div style={{ position: 'relative' }}>
 			<StyledPageWrapper>
 				<Navigation/>
-				{ (!isOnSupportedChain() && chainId) ? <NotSupportedModal page="Home"/>
+				{ (!isSupportedChain(chainId, pathname) && chainId) ? <NotSupportedModal page='Home'/>
 				: children
 				}
 			</StyledPageWrapper>

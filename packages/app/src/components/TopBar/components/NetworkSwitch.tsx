@@ -1,12 +1,13 @@
-import React, { useState, useRef, useContext } from "react";
-import styled from "styled-components/macro";
-import { useLocation } from "react-router-dom";
-import { up_down_arrows_dark } from "../../../assets";
-import { chains } from "../../../constants";
-import { PepemonProviderContext } from "../../../contexts";
-import { UnhandledError } from "../../../components";
-import { theme } from "../../../theme";
-import { useOutsideClick } from "../../../hooks";
+import React, { useState, useRef, useContext } from 'react';
+import styled from 'styled-components/macro';
+import { useLocation } from 'react-router-dom';
+import { up_down_arrows_dark } from '../../../assets';
+import { chains } from '../../../constants';
+import { PepemonProviderContext } from '../../../contexts';
+import { isSupportedChain } from '../../../utils';
+import { UnhandledError } from '../../../components';
+import { theme } from '../../../theme';
+import { useOutsideClick } from '../../../hooks';
 
 const NetworkSwitch: React.FC<any> = () => {
 	const [chainsListActive, setChainsListActive] = useState(false);
@@ -19,13 +20,6 @@ const NetworkSwitch: React.FC<any> = () => {
 	})
 
 	const { pathname } = useLocation();
-
-	const isSupportedChain = (chainId: number) => {
-		if (pathname.startsWith("/store")) {
-			return (chainId === 1 || chainId === 4 || chainId === 56);
-		}
-		return (chainId === 1 || chainId === 4);
-	}
 
 	const [pepemon] = useContext(PepemonProviderContext);
 	const { chainId } = pepemon;
@@ -53,14 +47,14 @@ const NetworkSwitch: React.FC<any> = () => {
 				} catch (addError: any) {
 					console.log(addError);
 
-					// handle "add" error
+					// handle 'add' error
 					setUnhandledError({
 						errCode: addError.code,
 						errMsg: addError.message
 					})
 				}
 			}
-			// handle other "switch" errors
+			// handle other 'switch' errors
 			else {
 				setUnhandledError({
 					errCode: switchError.code,
@@ -71,14 +65,14 @@ const NetworkSwitch: React.FC<any> = () => {
 		setChainsListActive(false);
 	}
 
-	const supportedChains = chains.filter(chain => isSupportedChain(parseInt(chain.chainId)));
+	const supportedChains = chains.filter(chain => isSupportedChain(parseInt(chain.chainId), pathname));
 	const [currentChain] = chains.filter(chain => (parseInt(chain.chainId) === chainId) && chain.chainName);
 
 	return (
 		<>
 			<ChainsListButton onClick={() => setChainsListActive(!chainsListActive)}>
 				{ currentChain ? currentChain.name : 'Not connected' }
-				<img alt="change network" src={up_down_arrows_dark} style={{ width: ".5em", marginLeft: ".8em" }}/>
+				<img alt='change network' src={up_down_arrows_dark} style={{ width: '.5em', marginLeft: '.8em' }}/>
 			</ChainsListButton>
 			<ChainsList isOpen={chainsListActive} ref={networkSwitchRef}>
 				{ supportedChains.map((chain, key) => {
@@ -120,7 +114,7 @@ const ChainsList = styled.ul<{isOpen?: boolean}>`
 	background-color: rgba(255, 255, 255, .6);
 	border-radius: 10px;
 	border: 1px solid ${theme.color.purple[800]};
-	display: ${props => !props.isOpen && "none"};
+	display: ${props => !props.isOpen && 'none'};
 	left: 0;
 	list-style-type: none;
 	overflow: hidden;
