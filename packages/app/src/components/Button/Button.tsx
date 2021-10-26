@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components/macro";
+import styled, { css, keyframes } from "styled-components/macro";
 import { theme } from "../../theme";
 import { Link } from "react-router-dom";
 
@@ -9,6 +9,18 @@ export interface ButtonProps {
 	width?: string;
 	onClick?: any;
 }
+
+const showAndHide = keyframes`
+	0% {
+		opacity: 0;
+	}
+	40% {
+		opacity: 1;
+	}
+	100% {
+		opacity: 0;
+	}
+`
 
 // TODO: any => ButtonProps
 const Button = styled.button<any>`
@@ -37,24 +49,24 @@ const Button = styled.button<any>`
 	}
 
 	&::after {
-		background-color: ${props => props.styling === 'white' ? theme.color.white : theme.color.purple[600]};
+		background-image: linear-gradient(to bottom, #aa6cd6 -100%, ${theme.color.purple[600]});
 		border-radius: 8px;
-		color: ${props => props.styling === 'white' ? theme.color.purple[600] : theme.color.white};
+		color: ${theme.color.white};
 	    content: attr(aria-label);
 	    font-family: ${theme.font.inter};
 		font-size: 0.4em;
 		left: 50%;
 	    opacity: 0;
-	    padding: .2em;
 		position: absolute;
-		top: 50%;
+		bottom: 100%;
+		padding: .2em .3em;
 		transition: opacity .4s ease-in;
-		transform: translateY(-50%) translateX(-50%);
+		transform: translateY(-.2em) translateX(-50%);
 		z-index: 1;
 	}
 
 	&:hover::after {
-		opacity: 1;
+		animation: 2s ${showAndHide} ease-out;
 	}
 
 	${({disabled}) => disabled && `
