@@ -1,10 +1,10 @@
 import React, { useState, useContext } from "react";
 import styled from "styled-components/macro";
-import { StyledStoreHeader, StyledStoreBody, StyledPepemonCardMeta, StyledPepemonCardPrice } from './index';
+import { StyledStoreBody, StyledPepemonCardMeta, StyledPepemonCardPrice } from './index';
 import { Button, Title, Text, Spacer, StyledSpacer } from '../../../components';
 import { PepemonProviderContext } from '../../../contexts';
 import { StoreAside, StoreClaimModal } from '../components';
-import { ActionClose, coin } from '../../../assets';
+import { coin } from '../../../assets';
 import { theme } from '../../../theme';
 
 const StorePacksAside: React.FC<any> = ({setSelectedPack, selectedPack}) => {
@@ -13,15 +13,7 @@ const StorePacksAside: React.FC<any> = ({setSelectedPack, selectedPack}) => {
 	const { chainId } = pepemon;
 
 	return (
-		<StoreAside>
-			<StyledStoreHeader>
-				<div style={{display: 'flex', justifyContent: 'space-between', width: '100%'}}>
-					<Title as="h2" color={theme.color.white} font={theme.font.neometric} weight={900} size={1.2}>
-						Selected Card
-					</Title>
-					<ActionClose onClick={() => setSelectedPack(null)}/>
-				</div>
-			</StyledStoreHeader>
+		<StoreAside close={() => setSelectedPack(null)} title="Selected Pack">
 			<StyledStoreBody>
 				<Title as="h2" font={theme.font.neometric} size={1.3}>{selectedPack.name}</Title>
 				<Spacer size="sm"/>

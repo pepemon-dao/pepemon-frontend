@@ -1,10 +1,10 @@
 import React, { useState, useContext } from "react";
-import { StoreAside, StyledStoreHeader, StyledStoreBody, StyledPepemonCardMeta, StyledPepemonCardPrice } from './index';
+import { StoreAside, StyledStoreBody, StyledPepemonCardMeta, StyledPepemonCardPrice } from './index';
 import { Button, ExternalLink, Title, Text, Spacer, StyledSpacer } from '../../../components';
 import { PepemonProviderContext } from '../../../contexts';
 import { StoreClaimModal } from '../components';
 import { getDisplayBalance } from "../../../utils";
-import { ActionClose, cardback_normal, coin } from '../../../assets';
+import { cardback_normal, coin } from '../../../assets';
 import { useAllowance, useTokenBalance, useRedeemCard, useApprove } from "../../../hooks";
 import { theme } from '../../../theme';
 
@@ -89,15 +89,7 @@ const StoreCardsAside: React.FC<any> = ({setSelectedCard, selectedCard: { cardId
 	}
 
 	return (
-		<StoreAside>
-			<StyledStoreHeader>
-				<div style={{display: 'flex', justifyContent: 'space-between', width: '100%'}}>
-					<Title as="h2" color={theme.color.white} font={theme.font.neometric} weight={900} size={1.2}>
-						Selected Card
-					</Title>
-					<ActionClose onClick={() => setSelectedCard("")}/>
-				</div>
-			</StyledStoreHeader>
+		<StoreAside close={() => setSelectedCard("")} title="Selected Card">
 			<StyledStoreBody>
 				<Title as="h2" font={theme.font.neometric} size={1.3}>{cardMeta ? cardMeta.name : 'Loading card'}</Title>
 				<Spacer size="sm"/>
@@ -139,12 +131,10 @@ const StoreCardsAside: React.FC<any> = ({setSelectedCard, selectedCard: { cardId
 					</dd>
 				</StyledPepemonCardMeta>
 				<Spacer size='md'/>
-				{isAffordable() && !isReleasingSoon() &&
-					<ExternalLink style={{ width: '100%' }} href={chainId === 137 ? 'https://quickswap.exchange/#/swap?outputCurrency=0x127984b5e6d5c59f81dacc9f1c8b3bdc8494572e' :
-					chainId === 56 ? 'https://www.binance.com/en/trade/BNB_ETH' : `https://app.uniswap.org/#/swap?outputCurrency=${contracts.ppdex.address}`}>
-						Buy {chainId === 56 ? 'BNB' : 'PPDEX'}
-					</ExternalLink>
-				}
+				<ExternalLink style={{ width: '100%' }} href={chainId === 137 ? `https://quickswap.exchange/#/swap?outputCurrency=${contracts.ppdex.address}` :
+				chainId === 56 ? 'https://www.binance.com/en/trade/BNB_ETH' : `https://app.uniswap.org/#/swap?outputCurrency=${contracts.ppdex.address}`}>
+					Buy {chainId === 56 ? 'BNB' : 'PPDEX'}
+				</ExternalLink>
 				<Spacer size='md'/>
 				<Button width="100%" styling="purple"
 					disabled={buttonProps().disabled}
