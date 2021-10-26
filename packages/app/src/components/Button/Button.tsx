@@ -25,6 +25,7 @@ const Button = styled.button<any>`
 		text-transform: ${props => props.styling !== "link" && "uppercase"};
 		opacity: ${props => props.disabled && .5};
 		padding: ${props => props.symbol ? ".22em" : ".75em"} 1.5em;
+		position: relative;
 		transition: all .4s;
 		width: ${props => props.width && props.width};
 	}
@@ -33,6 +34,27 @@ const Button = styled.button<any>`
 		outline: none;
 		box-shadow: ${props => (!props.disabled && props.styling !== "link") && `0px 0px 10px 5px ${theme.color.purple[600]}`};
 		filter: ${props => (!props.disabled && props.styling === "link") && `drop-shadow(2px 2px 3px ${theme.color.purple[600]})`};
+	}
+
+	&::after {
+		background-color: ${props => props.styling === 'white' ? theme.color.white : theme.color.purple[600]};
+		border-radius: 8px;
+		color: ${props => props.styling === 'white' ? theme.color.purple[600] : theme.color.white};
+	    content: attr(aria-label);
+	    font-family: ${theme.font.inter};
+		font-size: 0.4em;
+		left: 50%;
+	    opacity: 0;
+	    padding: .2em;
+		position: absolute;
+		top: 50%;
+		transition: opacity .4s ease-in;
+		transform: translateY(-50%) translateX(-50%);
+		z-index: 1;
+	}
+
+	&:hover::after {
+		opacity: 1;
 	}
 
 	${({disabled}) => disabled && `
