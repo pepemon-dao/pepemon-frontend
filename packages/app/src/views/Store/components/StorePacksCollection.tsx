@@ -23,8 +23,13 @@ const StorePacksCollection : React.FC<any> = ({selectedPack, setSelectedPack}) =
 					<Title as="h3" size={1.3} font={theme.font.spaceMace}>{activeSerie.title}</Title>
 					<Spacer size="sm"/>
 					<StyledStoreCardsWrapper gridCols={selectedPack ? 3 : 5}>
-						{Object.keys(activeSerie.cards).map((packId, key) => {
-							return <PackSingle key={key} packId={`${packId + '_' + key}`} selectedPack={selectedPack} selectPack={setSelectedPack} chainId={chainId} packMeta={activeSerie.cards[packId]}/>
+						{activeSerie.packs.map((pack, key) => {
+							return <PackSingle key={key}
+										packId={`${activeSerie.title_formatted}_${key}`}
+										selectedPack={selectedPack}
+										selectPack={setSelectedPack}
+										chainId={chainId}
+										packMeta={pack}/>
 						})}
 					</StyledStoreCardsWrapper>
 					<Spacer size="md"/>

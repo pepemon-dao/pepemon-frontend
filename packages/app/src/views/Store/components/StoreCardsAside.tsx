@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { StyledStoreWrapper, StyledStoreHeader, StyledStoreBody, StyledPepemonCardMeta, StyledPepemonCardPrice } from './index';
+import { StoreAside, StyledStoreHeader, StyledStoreBody, StyledPepemonCardMeta, StyledPepemonCardPrice } from './index';
 import { Button, ExternalLink, Title, Text, Spacer, StyledSpacer } from '../../../components';
 import { PepemonProviderContext } from '../../../contexts';
 import { StoreClaimModal } from '../components';
@@ -89,7 +89,7 @@ const StoreCardsAside: React.FC<any> = ({setSelectedCard, selectedCard: { cardId
 	}
 
 	return (
-		<StyledStoreWrapper style={{width: "34%"}}>
+		<StoreAside>
 			<StyledStoreHeader>
 				<div style={{display: 'flex', justifyContent: 'space-between', width: '100%'}}>
 					<Title as="h2" color={theme.color.white} font={theme.font.neometric} weight={900} size={1.2}>
@@ -160,7 +160,7 @@ const StoreCardsAside: React.FC<any> = ({setSelectedCard, selectedCard: { cardId
 					/>
 				}
 			</StyledStoreBody>
-		</StyledStoreWrapper>
+		</StoreAside>
 	)
 }
 

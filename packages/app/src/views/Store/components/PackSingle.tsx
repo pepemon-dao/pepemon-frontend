@@ -14,7 +14,7 @@ const PackSingle : React.FC<any> = ({packId, selectedPack, selectPack, chainId, 
 				{packMeta.price} {chainId === 56 ? 'BNB' : 'PPDEX'}
 			</StyledPepemonCardPrice>
 			<div>
-				<StyledPepemonCardImage loading="lazy" active={packId === selectedPack} src={packMeta.url} alt={packMeta.name}
+				<StyledPepemonCardImage loading="lazy" active={packMeta === selectedPack} src={packMeta.url} alt={packMeta.name}
 					onClick={() => selectPack(packMeta)}/>
 				<Title as="h4" size={1} font={theme.font.neometric}>{packMeta.name}</Title>
 				<StyledSpacer bg={theme.color.gray[100]} size={2}/>

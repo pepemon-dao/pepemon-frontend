@@ -1,9 +1,9 @@
 import React, { useState, useContext } from "react";
 import styled from "styled-components/macro";
-import { StyledStoreWrapper, StyledStoreHeader, StyledStoreBody, StyledPepemonCardMeta, StyledPepemonCardPrice } from './index';
+import { StyledStoreHeader, StyledStoreBody, StyledPepemonCardMeta, StyledPepemonCardPrice } from './index';
 import { Button, Title, Text, Spacer, StyledSpacer } from '../../../components';
 import { PepemonProviderContext } from '../../../contexts';
-import { StoreClaimModal } from '../components';
+import { StoreAside, StoreClaimModal } from '../components';
 import { ActionClose, coin } from '../../../assets';
 import { theme } from '../../../theme';
 
@@ -13,7 +13,7 @@ const StorePacksAside: React.FC<any> = ({setSelectedPack, selectedPack}) => {
 	const { chainId } = pepemon;
 
 	return (
-		<StyledStoreWrapper style={{width: "34%"}}>
+		<StoreAside>
 			<StyledStoreHeader>
 				<div style={{display: 'flex', justifyContent: 'space-between', width: '100%'}}>
 					<Title as="h2" color={theme.color.white} font={theme.font.neometric} weight={900} size={1.2}>
@@ -78,7 +78,7 @@ const StorePacksAside: React.FC<any> = ({setSelectedPack, selectedPack}) => {
 						claimButtonText="Claim Deck"/>
 				}
 			</StyledStoreBody>
-		</StyledStoreWrapper>
+		</StoreAside>
 	)
 }
 
