@@ -25,14 +25,14 @@ const WalletModal: React.FC<WalletModal> = ({onDismiss, account}) => {
 		onDismiss();
 	}
 
-	const currentChain = chains.filter(chain => (parseInt(chain.chainId) === chainId) && chain.chainName);
+	const [currentChain] = chains.filter(chain => (parseInt(chain.chainId) === chainId) && chain.chainName);
 
     return (
         <Modal onDismiss={onDismiss}>
             <ModalTitle text="Your wallet" />
 			<ModalContent>
 				<Text as="p" font={theme.font.inter} size={.875} color={theme.color.gray[600]}>
-					View your account on <ExternalLink href={`${currentChain[0]?.blockExplorerUrls}/address/${account}`}>{currentChain[0]?.blockExplorerTitle}</ExternalLink>
+					View your account on <ExternalLink href={`${currentChain?.blockExplorerUrls}/address/${account}`}>{currentChain?.blockExplorerTitle}</ExternalLink>
 				</Text>
 			</ModalContent>
 			<Spacer size="md"/>

@@ -57,20 +57,20 @@ const chains: ChainsProps[] = [
 		rpcUrls: ["https://bsc-dataseed.binance.org/"],
 		blockExplorerUrls: ['https://bscscan.com'],
 		blockExplorerTitle: 'BSCscan'
-	},
-	{
-		chainId: "0x89", // = 137
-		name: "Matic",
-		chainName: "Matic Mainnet",
-		nativeCurrency: {
-	      name: "Matic",
-	      symbol: "MATIC",
-	      decimals: 18
-	  	},
-		rpcUrls: ["https://rpc-mainnet.maticvigil.com/"],
-		blockExplorerUrls: ['https://polygonscan.com/'],
-		blockExplorerTitle: 'Polygonscan'
 	}
+	// {
+	// 	chainId: "0x89", // = 137
+	// 	name: "Matic",
+	// 	chainName: "Matic Mainnet",
+	// 	nativeCurrency: {
+	//       name: "Matic",
+	//       symbol: "MATIC",
+	//       decimals: 18
+	//   	},
+	// 	rpcUrls: ["https://rpc-mainnet.maticvigil.com/"],
+	// 	blockExplorerUrls: ['https://polygonscan.com/'],
+	// 	blockExplorerTitle: 'Polygonscan'
+	// }
 ];
 
 export default chains;

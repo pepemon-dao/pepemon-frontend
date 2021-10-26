@@ -1,16 +1,16 @@
-import React, { Suspense, lazy, useEffect, useState, useContext } from "react";
-import styled from "styled-components/macro";
-import Web3 from "web3";
-import { useWeb3Modal, useTokenBalance } from "../../hooks";
-import { getBalanceNumber, formatAddress } from "../../utils";
-import { getBalanceOfBatch } from "../../utils/erc1155";
-import { Button, Text } from "../../components";
-import { NetworkSwitch } from "./components";
-import { PepemonProviderContext } from "../../contexts";
-import { theme } from "../../theme";
-const WalletModal = lazy(() =>  import("./components/WalletModal").then((module) => ({ default: module.default })));
-// import { PPMNONE_ANNIVERSARY_SET } from "../../constants/cards";
-// import { cards } from "../../constants";
+import React, { Suspense, lazy, useEffect, useState, useContext } from 'react';
+import styled from 'styled-components/macro';
+import Web3 from 'web3';
+import { useWeb3Modal, useTokenBalance } from '../../hooks';
+import { getBalanceNumber, formatAddress } from '../../utils';
+import { getBalanceOfBatch } from '../../utils/erc1155';
+import { Button, Text } from '../../components';
+import { NetworkSwitch } from './components';
+import { PepemonProviderContext } from '../../contexts';
+import { theme } from '../../theme';
+const WalletModal = lazy(() =>  import('./components/WalletModal').then((module) => ({ default: module.default })));
+// import { PPMNONE_ANNIVERSARY_SET } from '../../constants/cards';
+// import { cards } from '../../constants';
 
 const TopBar: React.FC<any> = ({setChainId}) => {
 	const [visibleWalletModal, setVisibleWalletModal] = useState(false);
@@ -74,23 +74,23 @@ const TopBar: React.FC<any> = ({setChainId}) => {
 			<StyledTopBarInner>
 				{ account &&
 					<StyledTopBarInfo>
-						<TextInfo as="div" font={theme.font.spaceMace} color={theme.color.purple[800]} style={{ borderRight: "1px solid currentColor" }}>
+						<TextInfo as='div' font={theme.font.spaceMace} color={theme.color.purple[800]} style={{ borderRight: '1px solid currentColor' }}>
 							<NetworkSwitch {...{appChainId: chainId, providerChainId: chainId, setChainId: setChainId}}/>
 						</TextInfo>
 						{ppblzBalance && (
-							<TextInfo as="p" font={theme.font.spaceMace} color={theme.color.purple[800]} title="In Wallet + Staked PPBLZ">
+							<TextInfo as='p' font={theme.font.spaceMace} color={theme.color.purple[800]} title='In Wallet + Staked PPBLZ'>
 								{totalPpblz.toFixed(2)} $PPBLZ
 							</TextInfo>
 						)}
 						{ppblzBalance && (
-							<TextInfo as="p" font={theme.font.spaceMace} color={theme.color.purple[800]} title="In Wallet + Not Claimed PPDEX">
+							<TextInfo as='p' font={theme.font.spaceMace} color={theme.color.purple[800]} title='In Wallet + Not Claimed PPDEX'>
 								{totalPpdex.toFixed(2)} $PPDEX
 							</TextInfo>
 						)}
-						<TextInfo as="p" font={theme.font.spaceMace} color={theme.color.purple[800]}>{ppmnCardsOwned} unique card{ppmnCardsOwned !== 1 && 's'}</TextInfo>
+						<TextInfo as='p' font={theme.font.spaceMace} color={theme.color.purple[800]}>{ppmnCardsOwned} unique card{ppmnCardsOwned !== 1 && 's'}</TextInfo>
 					</StyledTopBarInfo>
 				}
-				<Button styling="green" title={account ? 'Your wallet' : 'Connect wallet'} onClick={handleWalletButtonClick}>{!account ? 'Connect wallet' : formatAddress(account)}</Button>
+				<Button styling='green' title={account ? 'Your wallet' : 'Connect wallet'} onClick={handleWalletButtonClick}>{!account ? 'Connect wallet' : formatAddress(account)}</Button>
 			</StyledTopBarInner>
 			{ visibleWalletModal &&
 				<Suspense fallback={<></>}>
@@ -102,7 +102,7 @@ const TopBar: React.FC<any> = ({setChainId}) => {
 };
 
 const StyledTopBar = styled.div<{border?: boolean}>`
-	background-color: ${props => props.border && "rgba(255, 255, 255, .6)"};
+	background-color: ${props => props.border && 'rgba(255, 255, 255, .6)'};
 	border-radius: 10px;
 	border: ${props => props.border && `1px solid ${theme.color.purple[800]}`};
 	padding: .25em;
