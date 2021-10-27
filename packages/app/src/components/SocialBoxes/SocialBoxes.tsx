@@ -28,7 +28,7 @@ const SocialBoxes: React.FC<any> = () => {
 					<Spacer size="sm"/>
 					<Text as="p" size={2} font={theme.font.neometric} weight={900} align="center">Telegram</Text>
 					<Spacer size="sm"/>
-					<Text as="p" align="center" lineHeight={1.5}>Join us on Telegram to ask us questions and talk with your fellow Pepemon trainers.</Text>
+					<Text as="p" align="center" lineHeight={1.5}>Join us on Telegram to ask us questions and talk with your fellow Pepetrainers.</Text>
 				</ContentBoxLink>
 				<ContentBoxLink as="a" href="https://discord.com/invite/R8sZwMv" target="_blank" rel="noopener noreferrer"
 				bgColor={theme.color.purple[300]} gridArea="socialBox3">
@@ -36,7 +36,7 @@ const SocialBoxes: React.FC<any> = () => {
 					<Spacer size="sm"/>
 					<Text as="p" size={2} font={theme.font.neometric} weight={900} align="center">Discord</Text>
 					<Spacer size="sm"/>
-					<Text as="p" align="center" lineHeight={1.5}>Come hang out with us and all the Pepemon trainers on Discord.</Text>
+					<Text as="p" align="center" lineHeight={1.5}>Come hang out with us and all the Pepetrainers on Discord.</Text>
 				</ContentBoxLink>
 				<ContentBoxLink as="a" href="https://pepemonfinance.medium.com/" target="_blank" rel="noopener noreferrer"
 				bgColor={theme.color.purple[300]} gridArea="socialBox4">

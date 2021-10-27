@@ -67,6 +67,8 @@ const StyledFooter = styled.footer`
 	background-image: url(${footercover});
 	background-size: 100% auto;
 	background-repeat: no-repeat;
+	padding-left: 2em;
+	padding-right: 2em;
 	position: absolute;
 	bottom: 0;
 	margin-left: ${theme.sideBar.width}px;

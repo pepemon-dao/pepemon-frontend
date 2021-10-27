@@ -13,7 +13,7 @@ const Newsletter: React.FC<any> = () => {
 			<Text as="p" font={theme.font.spaceMace} align="center" underline>Newsletter</Text>
 			<Spacer size="md"/>
 			<Text as="p" font={theme.font.inter} lineHeight={1.5} align="center">
-				Be the first to collect all the new Pepemons. You can unsunscribe anytime.
+				Be the first to collect all the new Pepemons. You can unsubscribe anytime.
 			</Text>
 			<Spacer size="md"/>
 			<ContentCentered direction="row" bgColor={theme.color.white} style={{ borderRadius: "8px", border: `1px solid ${theme.color.purple[600]}`, overflow: 'hidden' }}>
