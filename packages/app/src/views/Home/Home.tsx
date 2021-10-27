@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components/macro'
+// import { useTranslation } from 'react-i18next';
 import { AnimatedImg, ContentBox, ContentBoxNumber, ContentBoxGrid, ContentCentered, ContentColumn, ContentColumns, ExternalLink, Evolve, Spacer, ButtonLink, Title, Text, SocialBoxes, Newsletter } from "../../components";
 import Balances from './components/Balances';
 import { theme } from "../../theme";
@@ -12,6 +13,7 @@ const Home: React.FC<any> = () => {
         const rewardedPerYear = ppdexPrice * 20;
         return (rewardedPerYear * 100) / ppblzPrice;
     }
+	// const { t, i18n } = useTranslation();
 
 	return (
 		<HomeWrapper>
