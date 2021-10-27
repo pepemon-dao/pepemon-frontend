@@ -26,6 +26,7 @@ export { default as Navigation } from './Navigation';
 export { default as Newsletter } from './Newsletter';
 export { default as NotSupportedModal } from './NotSupportedModal';
 export { default as Page, StyledPageWrapper, StyledPageWrapperMain, StyledPageWrapperMainInner } from './Page';
+export { DefaultPage, PlainText } from './Pages';
 export { default as PepemonCard, StyledPepemonCardImage, StyledPepemonCardMeta, StyledPepemonCardPrice } from './PepemonCard';
 export { default as SocialBoxes } from './SocialBoxes';
 export { default as Spacer, StyledSpacer } from './Spacer';

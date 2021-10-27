@@ -4,7 +4,7 @@ import { buttonLinksStyling } from '../Button/Button';
 
 const ExternalLink = styled.a.attrs({
 	target: "_blank",
-	rel: "noopener noreferrer",
+	rel: "external noopener noreferrer",
 })<{styling?: 'button', size?: number}>`
 	${({styling}) => styling === 'button' ?
 		buttonLinksStyling

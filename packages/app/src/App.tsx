@@ -10,6 +10,8 @@ const Home = lazy(() =>  import("./views/Home").then((module) => ({ default: mod
 const Staking = lazy(() =>  import("./views/Staking").then((module) => ({ default: module.default })));
 const Subscription = lazy(() =>  import("./views/Subscription").then((module) => ({ default: module.default })));
 const Store = lazy(() =>  import("./views/Store").then((module) => ({ default: module.default })));
+const TermsOfService = lazy(() =>  import("./views/TermsOfService").then((module) => ({ default: module.default })));
+const PrivacyPolicy = lazy(() =>  import("./views/PrivacyPolicy").then((module) => ({ default: module.default })));
 const Error404 = lazy(() =>  import("./views/Error404").then((module) => ({ default: module.default })));
 
 const StakingWithAuth = withConnectedWallet(Staking);
@@ -36,6 +38,8 @@ const App: React.FC = () => {
 							<Route path="/store/:storeState?">
 								<StoreWithAuth/>
 							</Route>
+							<Route path='/terms-of-service' component={TermsOfService} />
+							<Route path='/privacy-policy' component={PrivacyPolicy} />
 							<Route component={Error404} />
 						</Switch>
 					</Suspense>

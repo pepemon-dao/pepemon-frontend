@@ -48,8 +48,8 @@ const Footer = () => {
 					<hr/>
 					<StyledFooterLegalInner>
 						<StyledFooterLegalLinks>
-							<Link to='/terms-of-cervice'>Terms of service</Link>
-							<Link to='/privay-policy'>Privacy policy</Link>
+							<Link to='/terms-of-service'>Terms of service</Link>
+							<Link to='/privacy-policy'>Privacy policy</Link>
 						</StyledFooterLegalLinks>
 						<div>
 							© 2021
