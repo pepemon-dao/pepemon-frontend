@@ -97,7 +97,7 @@ const TopBar: React.FC<any> = ({setChainId}) => {
 						<TextInfo as='div' font={theme.font.spaceMace} color={theme.color.purple[800]} style={{ borderRight: '1px solid currentColor' }}>
 							<NetworkSwitch {...{appChainId: chainId, providerChainId: chainId, setChainId: setChainId}}/>
 						</TextInfo>
-						<TextInfo as='p' font={theme.font.spaceMace} color={theme.color.purple[800]} title='In Wallet + Staked PPBLZ'>
+						<TextInfo as='p' font={theme.font.spaceMace} color={theme.color.purple[800]} title='Native balance'>
 							{getBalanceNumber(nativeBalance).toFixed(2)} ${getNativeToken(chainId)}
 						</TextInfo>
 						{ppblzBalance && (
