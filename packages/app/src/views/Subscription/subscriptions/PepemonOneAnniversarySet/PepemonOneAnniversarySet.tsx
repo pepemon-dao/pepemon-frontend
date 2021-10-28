@@ -23,9 +23,9 @@ const PepemonOneAnniversarySet: React.FC<any> = () => {
 				<ContentColumns>
 					<ContentColumn width="25%" space="3.5em">
 						<CardToClaim
-							title="Pepertle"
-							text="Provide PPBLZ liquidity to receive this card"
-							img={{url: pepertle1stanniversarycard, title: 'Pepertle anniversary'}}
+							title="Pepechu"
+							text="Own any Pepemon NFT to receive this card"
+							img={{url: pepechu1stanniversarycard, title: 'Pepechu anniversary'}}
 							tokenId={75}/>
 					</ContentColumn>
 					<ContentColumn width="25%" space="3.5em">
@@ -37,16 +37,16 @@ const PepemonOneAnniversarySet: React.FC<any> = () => {
 					</ContentColumn>
 					<ContentColumn width="25%" space="3.5em">
 						<CardToClaim
-							title="Pepesaur"
-							text="Provide PPDEX liquidity to receive this card"
-							img={{url: pepesaur1stanniversarycard, title: 'Pepesaur anniversary'}}
+							title="Pepertle"
+							text="Provide PPBLZ liquidity to receive this card"
+							img={{url: pepertle1stanniversarycard, title: 'Pepertle anniversary'}}
 							tokenId={77}/>
 					</ContentColumn>
 					<ContentColumn width="25%" space="3.5em">
 						<CardToClaim
-							title="Pepechu"
-							text="Own any Pepemon NFT to receive this card"
-							img={{url: pepechu1stanniversarycard, title: 'Pepechu anniversary'}}
+							title="Pepesaur"
+							text="Provide PPDEX liquidity to receive this card"
+							img={{url: pepesaur1stanniversarycard, title: 'Pepesaur anniversary'}}
 							tokenId={78}/>
 					</ContentColumn>
 				</ContentColumns>

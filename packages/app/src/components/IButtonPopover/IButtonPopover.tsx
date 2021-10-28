@@ -5,15 +5,57 @@ import { theme } from "../../theme";
 import { Spacer, Text, Title } from "../../components";
 
 type ModalProps = {
-	apy: string;
+	apy: number;
 	isOpen: boolean;
 	heading: string;
 	toggle: () => void;
 	cursor?: string,
 	button?: React.ReactNode;
+	ppdexPrice: number
 };
 
-const IButtonPopover: React.FC<ModalProps> = ({ apy, isOpen, heading, toggle, cursor = 'pointer', button}) => {
+interface DataProps {
+	key: number,
+	title: string,
+	roi: string,
+	ppdexPer1kUSD: string
+}
+
+const TableRow: React.FC<DataProps> = ({title, roi, ppdexPer1kUSD}) => {
+	return (
+		<tr>
+			<td style={{ paddingLeft: "0px" }}>{title}</td>
+			<td>{roi}%</td>
+			<td>{ppdexPer1kUSD}</td>
+		</tr>
+	)
+}
+
+const IButtonPopover: React.FC<ModalProps> = ({ apy, isOpen, heading, toggle, cursor = 'pointer', button, ppdexPrice}) => {
+	// const ppdexPer1kUSD = 1000*roi_1d/ppdexPrice
+	const data = [
+		{
+			title: '1d',
+			roi: (apy/365).toFixed(2),
+			ppdexPer1kUSD: (1000*(apy/365)/ppdexPrice).toFixed(2),
+		},
+		{
+			title: '7d',
+			roi: (apy/365*7).toFixed(2),
+			ppdexPer1kUSD: (1000*(apy/365*7)/ppdexPrice).toFixed(2),
+		},
+		{
+			title: '30d',
+			roi: (apy/365*30).toFixed(2),
+			ppdexPer1kUSD: (1000*(apy/365*30)/ppdexPrice).toFixed(2),
+		},
+		{
+			title: '365d(APY)',
+			roi: (apy).toFixed(2),
+			ppdexPer1kUSD: (1000*(apy)/ppdexPrice).toFixed(2),
+		},
+	];
+
   return (
 	<div>
 		<ImgButton aria-label="show APY informations" cursor={cursor}><img height="18px" width="18px" src={ibutton} alt="info" onClick={toggle}/></ImgButton>
@@ -32,26 +74,9 @@ const IButtonPopover: React.FC<ModalProps> = ({ apy, isOpen, heading, toggle, cu
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
-								<td style={{ paddingLeft: "0px" }}>1d</td>
-								<td>0.23%</td>
-								<td>0.14</td>
-							</tr>
-							<tr>
-								<td style={{ paddingLeft: "0px" }}>7d</td>
-								<td>1.54%</td>
-								<td>0.99</td>
-							</tr>
-							<tr>
-								<td style={{ paddingLeft: "0px" }}>30d</td>
-								<td>5.45%</td>
-								<td>4.85</td>
-							</tr>
-							<tr>
-								<td style={{ paddingLeft: "0px" }}>365d(APY)</td>
-								<td>{apy}%</td>
-								<td>80.38</td>
-							</tr>
+							{data.map((set, key) => {
+								return <TableRow key={key} {...set}/>
+							})}
 						</tbody>
 					</Table>
 					<Spacer size="sm"/>

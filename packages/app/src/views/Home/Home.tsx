@@ -5,14 +5,12 @@ import { AnimatedImg, ContentBox, ContentBoxNumber, ContentBoxGrid, ContentCente
 import Balances from './components/Balances';
 import { theme } from "../../theme";
 import { useTokenPrices } from "../../hooks";
+import { calculatePpblzApy } from "../../utils";
 import { dummyGraph, group, cover, coverblack, fudizardPng, logoexpand, bluecard, pepechucard, witchenerycard, pepechurcard } from "../../assets";
 
 const Home: React.FC<any> = () => {
 	const { ppblzPrice, ppdexPrice } = useTokenPrices();
-    const calculatePpblzApy = () => {
-        const rewardedPerYear = ppdexPrice * 20;
-        return (rewardedPerYear * 100) / ppblzPrice;
-    }
+    const ppblzApy = calculatePpblzApy(ppblzPrice, ppdexPrice);
 	// const { t, i18n } = useTranslation();
 
 	return (
@@ -46,7 +44,7 @@ const Home: React.FC<any> = () => {
 										Stake your $PPBLZ with
 									</Text>
 									<Text as="p" size={2} font={theme.font.neometric} weight={900} align="center">
-										{calculatePpblzApy().toFixed(0)}% APY
+										{ppblzApy.toFixed(0)}% APY
 									</Text>
 									<Spacer size="md"/>
 									<ButtonLink light="true" to="/staking">Start staking</ButtonLink>

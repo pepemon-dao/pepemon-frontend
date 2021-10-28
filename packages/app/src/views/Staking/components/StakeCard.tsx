@@ -4,7 +4,7 @@ import Web3 from 'web3';
 import { Spacer, Button, Title, IButtonPopover, ExternalLink, Text, ContentCentered } from '../../../components';
 import { PepemonProviderContext } from '../../../contexts';
 import { useTokenPrices } from '../../../hooks';
-import { correctChainIsLoaded } from '../../../utils';
+import { calculatePpblzApy, calculatePpblzEthLpApy, correctChainIsLoaded } from '../../../utils';
 import { pokeball, uniswap } from '../../../assets';
 import { theme } from '../../../theme';
 import { sendTransaction } from '../../../pepemon/utils';
@@ -49,10 +49,8 @@ const StakeCard: React.FC<any> = () => {
 
 
     const { ppblzPrice, ppdexPrice } = useTokenPrices();
-    const calculatePpblzApy = useCallback(() => {
-	        const rewardedPerYear = ppdexPrice * 20;
-	        return (rewardedPerYear * 100) / ppblzPrice;
-    }, [ppdexPrice, ppblzPrice])
+	const ppblzApy = calculatePpblzApy(ppblzPrice, ppdexPrice);
+	const ppblzEthLpApy = calculatePpblzEthLpApy(ppblzPrice, ppdexPrice);
 
     let timer: any = useRef(null);
 
@@ -461,9 +459,10 @@ const StakeCard: React.FC<any> = () => {
 						<Title as="h2" size={1.125} color={theme.color.white} font={theme.font.neometric} weight={900}>Stake PPBLZ</Title>
 					</StakeGridAreaHeaderTitle>
 					<StakeGridAreaHeaderMeta>
-						<span>{calculatePpblzApy().toFixed(0)}% APY</span>
+						<span>{ppblzApy.toFixed(0)}% APY</span>
 						<IButtonPopover toggle={toggle} cursor={'help'} isOpen={popoverOpen} heading="APY staking PPBLZ"
-							apy={calculatePpblzApy().toFixed(0)}
+							apy={ppblzApy}
+							ppdexPrice={ppdexPrice}
 							button={<ExternalLink size={.75} href="https://app.uniswap.org/#/swap?outputCurrency=0x4d2ee5dae46c86da2ff521f7657dad98834f97b8">Buy PPBLZ</ExternalLink>}/>
 					</StakeGridAreaHeaderMeta>
 				</StakeGridAreaHeader>
@@ -551,9 +550,10 @@ const StakeCard: React.FC<any> = () => {
 						<Title as="h2" size={1.125} color={theme.color.white} font={theme.font.neometric} weight={900}>Stake PPBLZ-ETH LP</Title>
 					</StakeGridAreaHeaderTitle>
 					<StakeGridAreaHeaderMeta>
-						<span>87% APY</span>
+						<span>{ppblzEthLpApy.toFixed(0)}% APY</span>
 						<IButtonPopover toggle={toggle2} cursor={'help'} isOpen={popoverOpen2} heading="APY staking PPBLZ-ETH"
-							apy='87'
+							apy={ppblzEthLpApy}
+							ppdexPrice={ppdexPrice}
 							button={<ExternalLink size={.75} href="https://app.uniswap.org/#/add/0x4D2eE5DAe46C86DA2FF521F7657dad98834f97b8/ETH">Provide PPBLZ-ETH LP liquidity</ExternalLink>}/>
 					</StakeGridAreaHeaderMeta>
 				</StakeGridAreaHeader>
