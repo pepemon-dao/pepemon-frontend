@@ -1,10 +1,10 @@
 import React, { useState, useContext } from 'react';
-import { Button, ExternalLink, Modal, ModalTitle, ModalContent, ModalActions, ModalProps, Spacer, Text } from "../../../components";
-import { PepemonProviderContext } from "../../../contexts";
-import { useWeb3Modal } from "../../../hooks";
-import { theme } from "../../../theme";
-import { chains } from "../../../constants";
-import { copyText } from "../../../utils";
+import { Button, ExternalLink, Modal, ModalTitle, ModalContent, ModalActions, ModalProps, Spacer, Text } from '../../../components';
+import { PepemonProviderContext } from '../../../contexts';
+import { useWeb3Modal } from '../../../hooks';
+import { theme } from '../../../theme';
+import { chains } from '../../../constants';
+import { copyText } from '../../../utils';
 
 interface WalletModal extends ModalProps {
 	account: string
@@ -29,16 +29,16 @@ const WalletModal: React.FC<WalletModal> = ({onDismiss, account}) => {
 
     return (
         <Modal onDismiss={onDismiss}>
-            <ModalTitle text="Your wallet" />
+            <ModalTitle text='Your wallet' />
 			<ModalContent>
-				<Text as="p" font={theme.font.inter} size={.875} color={theme.color.gray[600]}>
+				<Text as='p' align='center' font={theme.font.inter} size={.875} color={theme.color.gray[600]}>
 					View your account on <ExternalLink href={`${currentChain?.blockExplorerUrls}/address/${account}`}>{currentChain?.blockExplorerTitle}</ExternalLink>
 				</Text>
 			</ModalContent>
-			<Spacer size="md"/>
+			<Spacer size='md'/>
             <ModalActions>
-				<Button styling="purple" onClick={handleCopy}>{copied ? 'Copied!' : 'Copy address'}</Button>
-				<Button styling="white" onClick={handleLogout}>{'Log out'}</Button>
+				<Button styling='purple' onClick={handleCopy}>{copied ? 'Copied!' : 'Copy address'}</Button>
+				<Button styling='white' onClick={handleLogout}>{'Log out'}</Button>
             </ModalActions>
         </Modal>
     )
