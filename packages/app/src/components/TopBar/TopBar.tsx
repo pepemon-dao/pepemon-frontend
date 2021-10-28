@@ -1,8 +1,9 @@
 import React, { Suspense, lazy, useEffect, useState, useContext } from 'react';
 import styled from 'styled-components/macro';
 import Web3 from 'web3';
+import BigNumber from 'bignumber.js';
 import { useWeb3Modal, useTokenBalance } from '../../hooks';
-import { getBalanceNumber, formatAddress } from '../../utils';
+import { getNativeBalance, getNativeToken, getBalanceNumber, formatAddress } from '../../utils';
 import { getBalanceOfBatch } from '../../utils/erc1155';
 import { Button, Text } from '../../components';
 import { NetworkSwitch } from './components';
@@ -14,6 +15,7 @@ const WalletModal = lazy(() =>  import('./components/WalletModal').then((module)
 
 const TopBar: React.FC<any> = ({setChainId}) => {
 	const [visibleWalletModal, setVisibleWalletModal] = useState(false);
+	const [nativeBalance, setNativeBalance] = useState(new BigNumber(0));
 	const [ppblzStakedAmount, setPpblzStakedAmount] = useState(0);
 	const [ppdexRewards, setPpdexRewards] = useState(0);
 	const [ppmnCardsOwned, setPpmnCardsOwned] = useState(0);
@@ -22,6 +24,14 @@ const TopBar: React.FC<any> = ({setChainId}) => {
 	const { account, chainId, ppblzAddress, ppdexAddress, contracts, provider } = pepemon;
 	const web3 = new Web3(provider);
 	// define balances
+	useEffect(() => {
+		if (!provider) return;
+		(async () => {
+			const balance = new BigNumber( await getNativeBalance(provider, account) );
+			setNativeBalance(balance);
+		})();
+	}, [chainId, provider, account]);
+
 	const ppblzBalance = useTokenBalance(ppblzAddress);
 	const ppdexBalance = useTokenBalance(ppdexAddress);
 
@@ -47,19 +57,29 @@ const TopBar: React.FC<any> = ({setChainId}) => {
 	}, [contracts.pepemonFactory, chainId, account, batchBalanceIds])
 
 	useEffect(() => {
+		setPpdexRewards(0);
+
 		(async () => {
 			if(!contracts.ppdex) return;
-			// Get staked PPBLZ
-	        const stakeA = await contracts.ppdex.getAddressPpblzStakeAmount(account);
-	        setPpblzStakedAmount(parseFloat(web3.utils.fromWei(stakeA.toString())));
-			// Get PPDEX rewards
-			const cRewards = (await contracts.ppdex.myRewardsBalance(account)).toString();
-			setPpdexRewards(parseFloat(web3.utils.fromWei(cRewards)));
+			// No staking on BSC
+			if (chainId !== 56) {
+				// Get staked PPBLZ
+		        const stakeA = await contracts.ppdex.getAddressPpblzStakeAmount(account);
+		        setPpblzStakedAmount(parseFloat(web3.utils.fromWei(stakeA.toString())));
+
+				// Get PPDEX rewards
+				const cRewards = (await contracts.ppdex.myRewardsBalance(account)).toString();
+				setPpdexRewards(parseFloat(web3.utils.fromWei(cRewards)));
+			} else {
+				setPpblzStakedAmount(0);
+				setPpdexRewards(0);
+			}
 	    })()
-	}, [contracts.ppdex, setPpblzStakedAmount, account, web3.utils]);
+	}, [contracts.ppdex, setPpblzStakedAmount, chainId, account, web3.utils]);
 
 	const totalPpblz = getBalanceNumber(ppblzBalance) + ppblzStakedAmount;
 	const totalPpdex = getBalanceNumber(ppdexBalance) + ppdexRewards;
+
 
 	const handleWalletButtonClick = () => {
 		if (account) {
@@ -76,6 +96,9 @@ const TopBar: React.FC<any> = ({setChainId}) => {
 					<StyledTopBarInfo>
 						<TextInfo as='div' font={theme.font.spaceMace} color={theme.color.purple[800]} style={{ borderRight: '1px solid currentColor' }}>
 							<NetworkSwitch {...{appChainId: chainId, providerChainId: chainId, setChainId: setChainId}}/>
+						</TextInfo>
+						<TextInfo as='p' font={theme.font.spaceMace} color={theme.color.purple[800]} title='In Wallet + Staked PPBLZ'>
+							{getBalanceNumber(nativeBalance).toFixed(2)} ${getNativeToken(chainId)}
 						</TextInfo>
 						{ppblzBalance && (
 							<TextInfo as='p' font={theme.font.spaceMace} color={theme.color.purple[800]} title='In Wallet + Staked PPBLZ'>

@@ -1,5 +1,5 @@
 import ERC20ABI from '../contracts/src/abis/erc20.json'
-import {Contract} from '@ethersproject/contracts';
+import { Contract } from '@ethersproject/contracts';
 
 export const getContract = (provider: any, address: string) => {
   const contract = new Contract(
@@ -25,6 +25,10 @@ export const getAllowance = async (
   } catch (e) {
     return '0'
   }
+}
+
+export const getNativeToken = (chainId: number) => {
+	return chainId === 56 ? 'BNB' : chainId === 137 ? 'MATIC' : 'ETH'
 }
 
 export const getNativeBalance = async (
