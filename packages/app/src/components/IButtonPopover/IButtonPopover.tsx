@@ -82,9 +82,7 @@ const IButtonPopover: React.FC<ModalProps> = ({ apy, isOpen, heading, toggle, cu
 					<Spacer size="sm"/>
 
 					<Text as="p" size={.75} lineHeight={1.33}>
-						Calculated based on current rates. Compounding 288x daily. Rates are
-						estimates provided for your convenience only, and by no means represent
-						guaranteed returns.
+						Rates are estimates provided for your convenience only, and by no means represent guaranteed returns.
 					</Text>
 					<Spacer size="sm"/>
 						<Text as="p" size={.75} lineHeight={1.33}>
