@@ -30,44 +30,44 @@ const StyledLoading = styled.div`
 
 const walkAnim1 = keyframes`
   0% {
-    transform: translateX(-50vw);
+    transform: translateX(-100vw);
   }
 
   100% {
-	transform: translateX(50vw);
+	transform: translateX(100vw);
   }
 `;
 
 const walkAnim2 = keyframes`
   0% {
-    transform: translateX(0vw);
+    transform: translateX(-100vw);
   }
 
   100% {
-	transform: translateX(50vw);
+	transform: translateX(100vw);
   }
 `;
 
 const walkAnim3 = keyframes`
   0% {
-    transform: translateX(-75vw);
+    transform: translateX(-100vw);
   }
 
   100% {
-	transform: translateX(75vw);
+	transform: translateX(100vw);
   }
 `;
 
 const AnimatedImg1 = styled.img`
-	animation: ${walkAnim1} 4s linear infinite;
+	animation: ${walkAnim1} 5.5s ease-in infinite;
 `
 
 const AnimatedImg2 = styled.img`
-	animation: ${walkAnim2} 4s linear infinite;
+	animation: ${walkAnim2} 5s linear infinite;
 `
 
 const AnimatedImg3 = styled.img`
-	animation: ${walkAnim3} 4s linear infinite;
+	animation: ${walkAnim3} 6s ease-out infinite;
 `
 
 export default Loading;
