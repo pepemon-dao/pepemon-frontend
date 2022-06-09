@@ -18,9 +18,14 @@ const Home: React.FC<any> = () => {
 			<StyledSection bgImage={cover} style={{paddingTop: "12.125em"}}>
 				<ContentColumns>
 					<ContentColumn width="40%" style={{paddingTop: "3.75em"}}>
+main
+						<Title as="h1" font={theme.font.spaceMace} size={4.5}>Gotta battle ‘em all!</Title>
+						<Text as="p" font={theme.font.inter} size={1.375}>
+							Digital Collectible Card Games in Metaverse. Owned by the gamers, airdropped 100%, since 2020. PlayAndEarn powered by DeFi with NFTs as in-game cards.
 						<Title as="h1" font={theme.font.spaceMace} size={4.5}>Gotta claim ‘em all!</Title>
 						<Text as="p" font={theme.font.inter} size={1.375}>
 							Digital collectible card games on blockchain owned by the players. 100% airdropped. Play2Earn games powered by DeFi and NFTs in-game assets.
+develop
 						</Text>
 						<Spacer size="lg"/>
 						<Spacer size="lg"/>
@@ -29,11 +34,18 @@ const Home: React.FC<any> = () => {
 								<ContentBox shadow>
 									<ContentBoxNumber><span>1</span></ContentBoxNumber>
 									<Text as="p" align="center">
+main
+										Own a piece of Pepemon and vote with PPBLZ
+									</Text>
+									<Spacer size="md"/>
+									<ExternalLink href="https://app.uniswap.org/#/swap?outputCurrency=0x4d2ee5dae46c86da2ff521f7657dad98834f97b8" styling='button'>
+										Shape the path with other Pepetrainers
 										Start your journey by getting $PPBLZ
 									</Text>
 									<Spacer size="md"/>
 									<ExternalLink href="https://app.uniswap.org/#/swap?outputCurrency=0x4d2ee5dae46c86da2ff521f7657dad98834f97b8" styling='button'>
 										Become the very best
+develop
 									</ExternalLink>
 								</ContentBox>
 							</ContentColumn>
@@ -47,17 +59,28 @@ const Home: React.FC<any> = () => {
 										{ppblzApy.toFixed(0)}% APY
 									</Text>
 									<Spacer size="md"/>
+ main
+									<ButtonLink light="true" to="/staking">Start earning</ButtonLink>
+=======
 									<ButtonLink light="true" to="/staking">Start staking</ButtonLink>
+develop
 								</ContentBox>
 							</ContentColumn>
 							<ContentColumn width="calc(1/3 * 100%)" space="1.25em"  style={{transform: "translateY(60%)"}}>
 								<ContentBox shadow>
 									<ContentBoxNumber><span>3</span></ContentBoxNumber>
 									<Text as="p" align="center">
+main
+										Earn $PPDEX and mint Pepemon Boosterpacks!
+									</Text>
+									<Spacer size="md"/>
+									<ButtonLink light="true" to="/store/boosterpacks">Get your Battle NFT cards</ButtonLink>
+=======
 										Buy or earn $PPDEX and get NFT Boosterpacks!
 									</Text>
 									<Spacer size="md"/>
 									<ButtonLink light="true" to="/store/boosterpacks">Get your Boosterpacks</ButtonLink>
+develop
 								</ContentBox>
 							</ContentColumn>
 						</ContentColumns>
@@ -156,12 +179,21 @@ const Home: React.FC<any> = () => {
 						<Evolve/>
 					</ContentColumn>
 					<ContentColumn width="60%" style={{paddingTop: "3.75em"}}>
+ main
+						<Title as="h2" font={theme.font.neometric} size={3} weight={900}>Evolve your monsters and upgrade your cards</Title>
+						<Spacer size="md"/>
+						<Text as="p" font={theme.font.spaceMace} underline>Breed more Exclusive PepeMonsters!</Text>
+						<Spacer size="md"/>
+						<Text as="p" font={theme.font.inter}>
+							Evolve your awesome Pepemon cards and mint exclusive cards to crush your enemies on blockchain decided battles.
+=======
 						<Title as="h2" font={theme.font.neometric} size={3} weight={900}>Stake to evolve</Title>
 						<Spacer size="md"/>
 						<Text as="p" font={theme.font.spaceMace} underline>Staking events</Text>
 						<Spacer size="md"/>
 						<Text as="p" font={theme.font.inter}>
 							Evolve your awesome Pepemon cards to mint exclusive cards and crush your enemies in blockchain battles.
+develop
 						</Text>
 						<Text as="p" font={theme.font.inter}>
 							Don't forget to use special NFT Event items to save your monsters when evolving!
@@ -175,10 +207,17 @@ const Home: React.FC<any> = () => {
 					<ContentColumn width="55%" style={{paddingTop: "3.75em"}}>
 						<Title as="h2" font={theme.font.neometric} size={3} weight={900}>Pepemon: Degen Battleground</Title>
 						<Spacer size="md"/>
+ main
+						<Text as="p" font={theme.font.spaceMace} underline>Release coming in 2022</Text>
+						<Spacer size="md"/>
+						<Text as="p" font={theme.font.inter}>
+							Duel other trainers on an epic game powered by DeFi and NFT's. Become a professional Pepetrainer with the PlayAndEarn mechanism that enables each player to get exclusive drops after a battle no matter what the skill level or collection size, there is always an opportunity to earn for everyone!
+=======
 						<Text as="p" font={theme.font.spaceMace} underline>Beta release late 2021</Text>
 						<Spacer size="md"/>
 						<Text as="p" font={theme.font.inter}>
 							Duel other trainers on an epic game powered by DeFi and NFT's. Become a professional Pepetrainer with the Play2Earn mechanism that enables each player to get exclusive drops after a battle no matter what the skill level or collection size, there is always an opportunity to earn!
+develop
 						</Text>
 					</ContentColumn>
 					<ContentColumn width="45%">
