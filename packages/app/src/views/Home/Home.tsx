@@ -1,18 +1,16 @@
 import React from 'react';
 import styled from 'styled-components';
 import { isMobile } from 'web3modal';
-// import { useTranslation } from 'react-i18next';
 import { AnimatedImg, ContentCentered, ContentColumn, ContentColumns, Evolve, Head, Hero, Stats, Spacer, ButtonLink, Title, Text, SocialBoxes, Newsletter, ContentBox, ContentBoxNumber, ExternalLink } from '../../components';
 import Balances from './components/Balances';
 import { theme } from '../../theme';
 import { useTokenPrices } from '../../hooks';
 import { calculatePpblzApy } from '../../utils';
-import { cover, coverblack, logoexpand, pepechu_res, cardsStack } from '../../assets';
+import { cover, coverblack, logoexpand, pepechu_res, bluecard, pepechucard, pepechurcard, witchenerycard } from '../../assets';
 
 const Home: React.FC<any> = () => {
 	const { ppblzPrice, ppdexPrice } = useTokenPrices();
     const ppblzApy = calculatePpblzApy(ppblzPrice, ppdexPrice);
-	// const { t, i18n } = useTranslation();
 
 	return (
 		<HomeWrapper bgImage={cover}>
@@ -29,45 +27,12 @@ const Home: React.FC<any> = () => {
 			<StyledSection desktopStyle={{marginTop: "17em", marginBottom: "7.5em"}}>
 				<ContentColumns>
 					<ContentColumn width="40%" style={{paddingTop: "xxl"}}>
-						<Title as="h1" font={theme.font.spaceMace} size={'xxxl'}>Gotta battle ‘em all!</Title>
-						<Text as="p" font={theme.font.inter} size={'s'}>
-							Digital Collectible Card Games in Metaverse. Owned by the gamers, airdropped 100%, since 2020. PlayAndEarn powered by DeFi with NFTs as in-game cards.
-						</Text>
-						<Title as="h1" font={theme.font.spaceMace} size={'xxxl'}>Gotta claim ‘em all!</Title>
-						<Text as="p" font={theme.font.inter} size={'s'}>
-							Digital collectible card games on blockchain owned by the players. 100% airdropped. Play2Earn games powered by DeFi and NFTs in-game assets.
-						</Text>
-						<Spacer size="lg"/>
-						<Spacer size="lg"/>
-						<ContentColumns style={{width: "250%"}}>
-							<ContentColumn width="calc(1/3 * 100%)" space="1.25em">
-								<ContentBox shadow>
-									<ContentBoxNumber><span>1</span></ContentBoxNumber>
-									<Text as="p" align="center">
-										Own a piece of Pepemon and vote with PPBLZ
-									</Text>
-									<Spacer size="md"/>
-									<ExternalLink href="https://app.uniswap.org/#/swap?outputCurrency=0x4d2ee5dae46c86da2ff521f7657dad98834f97b8" styling='button'>
-										Shape the path with other Pepetrainers
-										Start your journey by getting $PPBLZ
-									</ExternalLink>
-									<Spacer size="md"/>
-								</ContentBox>
-							</ContentColumn>
-							<ContentColumn width="calc(1/3 * 100%)" space="1.25em"  style={{transform: "translateY(30%)"}}>
-								<ContentBox shadow>
-									<ContentBoxNumber><span>2</span></ContentBoxNumber>
-									<Text as="p" align="center">
-										Stake your $PPBLZ with
-									</Text>
-									<Text as="p" size={'l'} font={theme.font.neometric} weight={900} align="center">
-										{ppblzApy.toFixed(0)}% APY
-									</Text>
-									<Spacer size="md"/>
-									<ButtonLink light="true" to="/staking">Start earning</ButtonLink>
-								</ContentBox>
-							</ContentColumn>
-						</ContentColumns>
+						<div style={{ position: "relative", height: "100%", width: "100%" }}>
+							<img loading="lazy" src={witchenerycard} alt="witchenery" style={{ objectFit: "cover", width: "80%", position: "absolute", right: "40%", top: "-10%", zIndex: 99 }}/>
+							<img loading="lazy" src={pepechucard} alt="pepechu" style={{ objectFit: "cover", width: "80%", position: "absolute", right: "10%", top: "20%" }}/>
+							<img loading="lazy" src={bluecard} alt="blue" style={{ objectFit: "cover", width: "63%", position: "absolute", left: "-20%", top: "70%" }}/>
+							<img loading="lazy" src={pepechurcard} alt="pepechur" style={{ objectFit: "cover", width: "20%", position: "absolute", right: "28%", top: "-18%" }}/>
+						</div>
 					</ContentColumn>
 					
 					<ContentColumn width="60%" style={{paddingTop: "3.75em"}}>
@@ -89,7 +54,7 @@ const Home: React.FC<any> = () => {
 								<Spacer size="md"/>
 							</>
 						}
-						<ButtonLink to="/store/cards">Mint your cards</ButtonLink>
+						<ButtonLink to="/store/cards">Mint your card</ButtonLink>
 					</ContentColumn>
 				</ContentColumns>
 			</StyledSection>

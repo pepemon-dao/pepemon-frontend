@@ -26,11 +26,11 @@ const Hero: React.FC<any> = ({apy}) => {
 						<ContentBox shadow style={{height: "auto"}}>
 							<ContentBoxNumber><span>1</span></ContentBoxNumber>
 							<Text as="p" align="center">
-								Start your journey by getting PPBLZ
+								Own a piece of Pepemon and vote with PPBLZ
 							</Text>
 							<Spacer size="md"/>
 							<ExternalLink href="https://app.uniswap.org/#/swap?outputCurrency=0x4d2ee5dae46c86da2ff521f7657dad98834f97b8" styling='button'>
-								Become the very best
+								Shape the path with other Pepetrainers
 							</ExternalLink>
 						</ContentBox>
 					</ContentColumn>
@@ -51,7 +51,7 @@ const Hero: React.FC<any> = ({apy}) => {
 						<ContentBox shadow style={{height: "auto"}}>
 							<ContentBoxNumber><span>3</span></ContentBoxNumber>
 							<Text as="p" align="center">
-								Use PPDEX to mint NFT Cards
+								Earn $PPDEX and mint Pepemon Boosterpacks!
 							</Text>
 							<Spacer size="md"/>
 							<ButtonLink light="true" to="/store/boosterpacks">Get your Booster Packs</ButtonLink>
