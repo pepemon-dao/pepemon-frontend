@@ -114,11 +114,6 @@ const Home: React.FC<any> = () => {
 						<Text as="p" font={theme.font.inter}>
 							Duel other trainers on an epic game powered by DeFi and NFT's. Become a professional Pepetrainer with the PlayAndEarn mechanism that enables each player to get exclusive drops after a battle no matter what the skill level or collection size, there is always an opportunity to earn for everyone!
 						</Text>
-						<Text as="p" font={theme.font.spaceMace} underline>Beta release late 2021</Text>
-						<Spacer size="md"/>
-						<Text as="p" font={theme.font.inter}>
-							Duel other trainers on an epic game powered by DeFi and NFT's. Become a professional Pepetrainer with the Play2Earn mechanism that enables each player to get exclusive drops after a battle no matter what the skill level or collection size, there is always an opportunity to earn!
-						</Text>
 					</ContentColumn>
 					<ContentColumn mobileStyle={{ marginTop: '2em' }} width="45%">
 						<div style={{ position: "relative", height: "100%", width: "100%" }}>
