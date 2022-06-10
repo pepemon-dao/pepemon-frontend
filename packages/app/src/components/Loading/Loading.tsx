@@ -1,5 +1,5 @@
 import React from 'react';
-import styled, { keyframes } from 'styled-components/macro';
+import styled, { keyframes } from 'styled-components';
 import { walk1, walk2, walk3 } from '../../assets';
 import { Title } from '../../components';
 import { theme } from '../../theme';
@@ -12,7 +12,7 @@ const Loading = ({text}: {text?: string|undefined}) => {
 	return (
 		<StyledLoading>
 			{ text &&
-				<Title as="h1" size={2} font={theme.font.inter} weight="900">{text}</Title>
+				<Title as="h1" size='l' font={theme.font.inter} weight="900">{text}</Title>
 			}
 			<AnimatedImg1 src={walk1} alt="loading"/>
 			<AnimatedImg2 src={walk2} alt="loading"/>

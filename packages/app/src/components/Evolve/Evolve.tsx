@@ -1,45 +1,105 @@
 import React from "react";
-import styled from "styled-components/macro";
+import styled from "styled-components";
 import { AnimatedImg } from "../../components";
+import { theme } from "../../theme";
 import { downgreenarrow, pepertle, warpertle, rektoise } from "../../assets";
-
-const EvolveArrow = () => {
-	return (
-		<img loading="lazy" src={downgreenarrow} alt="downgreenarrow"
-			style={{position: "relative", zIndex: 1, left: "40%", transform: "translateX(-230%) translateY(10%)"}}/>
-	)
-}
 
 const Evolve = () => {
 	return (
-		<div style={{ position: "relative", height: "100%", width: "250%", display: "grid", gridAutoRows: "1fr"}}>
-			<div>
-				<div style={{width: "28%"}}>
-					<AnimatedImg src={pepertle} alt="pepertle" />
-				</div>
-			</div>
-			<div style={{width: "100%", margin: "0 auto", transform: "translateY(-30%)"}}>
-				<DashedContainer style={{left: "50%", transform: "translateX(-50%)"}}>
-					<EvolveArrow/>
-					<AnimatedImg src={warpertle} alt="warpertle" />
-				</DashedContainer>
-			</div>
-			<div style={{width: "100%", margin: "0 0 0 auto", transform: "translateY(-60%)"}}>
-				<DashedContainer style={{ right: "0"}}>
-					<EvolveArrow/>
-					<AnimatedImg src={rektoise} alt="rektoise" />
-				</DashedContainer>
-			</div>
-		</div>
+		<>
+			<EvolveGrid>
+				<EvolveImgWrapper>
+					<EvolveImgContainer>
+						<AnimatedImg src={pepertle} alt="pepertle" />
+					</EvolveImgContainer>
+				</EvolveImgWrapper>
+				<EvolveImgWrapper>
+					<EvolveImgContainer>
+						<EvolveArrow/>
+						<AnimatedImg src={warpertle} alt="warpertle" />
+					</EvolveImgContainer>
+				</EvolveImgWrapper>
+				<EvolveImgWrapper>
+					<EvolveImgContainer>
+						<EvolveArrow/>
+						<AnimatedImg src={rektoise} alt="rektoise" />
+					</EvolveImgContainer>
+				</EvolveImgWrapper>
+			</EvolveGrid>
+		</>
 	)
 }
 
-const DashedContainer = styled.div`
-	// border: 1px dashed gray;
-	// border-radius: 8px;
-	height: 100%;
+const EvolveGrid = styled.div`
+	display: grid;
+	position: relative;
+
+	@media (max-width: ${theme.breakpoints.tabletP}) {
+		margin-top: 2em;
+		margin-bottom: 2em;
+	}
+
+	@media (min-width: ${theme.breakpoints.tabletL}) {
+		grid-auto-rows: 1fr;
+		margin-bottom: 5em;
+		width: 250%;
+	}
+`
+
+interface EvolveImgWrapperProps {
+	width?: string;
+	margin?: string;
+	transform?: string
+}
+
+interface EvolveImgContainerProps {
+	absolute?: boolean,
+	left?: string,
+	transform?: string,
+	right?: string
+}
+
+const EvolveImgContainer = styled.div<EvolveImgContainerProps>`
+	position: relative;
+	text-align: center;
+	width: fit-content;
+`
+
+const EvolveImgWrapper = styled.div<EvolveImgWrapperProps>`
+	margin: ${props => props.margin && props.margin};
+	position: sticky;
+	top: calc(${theme.topBarSize}px + 2em);
+
+	&:first-child {
+			margin-right: auto;
+	}
+
+	&:nth-child(2) {
+		padding-top: ${theme.topBarSize}px;
+
+			margin-left: auto;
+			margin-right: auto;
+	}
+
+	&:nth-child(3) {
+		padding-top: ${2*theme.topBarSize}px;
+
+			margin-left: auto;
+	}
+`
+
+const EvolveArrow = styled.img.attrs({
+	alt: "downgreenarrow",
+	loading: "lazy",
+	src: downgreenarrow,
+})`
+	left: 0;
 	position: absolute;
-	width: 28%;
+	top: -${theme.topBarSize}px;
+
+	@media (max-width: ${theme.breakpoints.desktop}) {
+		display: none;
+	}
 `
 
 export default Evolve;

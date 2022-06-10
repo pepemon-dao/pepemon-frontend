@@ -1,5 +1,5 @@
 import React, { useEffect, useCallback, useContext, useState } from "react";
-import styled from "styled-components/macro";
+import styled from "styled-components";
 import { cardback_normal, coin } from "../../../assets";
 import { Title, Spacer, StyledSpacer } from "../../../components";
 import { getDisplayBalance } from "../../../utils";
@@ -16,15 +16,12 @@ const CardSingle : React.FC<any> = ({cardId, selectedCard, selectCard}) => {
 	const [cardBalance, setCardBalance] = useState([]);
 
 	useEffect(() => {(async() => {
-			setCardMeta(await getCardMeta(cardId, pepemon));
-			setCardPrice(await getCardStorePrices(cardId, pepemon));
-			setCardBalance(await getCardFactoryData(cardId, pepemon, 0));
+			await setCardMeta(await getCardMeta(cardId, pepemon));
+			await setCardPrice(await getCardStorePrices(cardId, pepemon));
+			await setCardBalance(await getCardFactoryData(cardId, pepemon, 0));
+			setIsLoaded(true);
 		})()
 	}, [cardId, pepemon]);
-
-	useEffect(() => {
-		if (cardPrice && cardMeta && cardBalance) setIsLoaded(true);
-	}, [cardPrice, cardMeta, cardBalance])
 
 	const priceOfCard = !cardPrice ? 0 : parseFloat(getDisplayBalance(cardPrice.price, 18)).toFixed(2);
 	const isSoldOut = () => {
@@ -89,43 +86,45 @@ const CardSingle : React.FC<any> = ({cardId, selectedCard, selectCard}) => {
 	if (cardMeta?.status === "failed") return <></>
 
 	const self = {
-		cardId: cardId,
+		cardId: cardId && cardId,
 		cardPrice: cardPrice && cardPrice.price,
-		cardMeta: cardMeta,
-		cardBalance: cardBalance,
+		cardMeta: cardMeta && cardMeta,
+		cardBalance: cardBalance && cardBalance[0],
 	};
 
 	return (
-		<StyledPepemonCard style={{ opacity: (!isSoldOut() && isLoaded && countdown()) ? "100%" : "50%" }} isClickable={(!isSoldOut() && isLoaded && countdown()) && true}>
+		<StyledPepemonCard style={{ opacity: (!isSoldOut() && isLoaded && countdown()) ? "100%" : "60%" }} isLoaded={isLoaded}>
 			<StyledPepemonCardPrice>
 				<img loading="lazy" src={coin} alt="coin"/>
 				{cardPrice ? `${priceOfCard} ${chainId === 56 ? 'BNB' : 'PPDEX'}` : 'loading'}
 			</StyledPepemonCardPrice>
 			<div>
 				<StyledPepemonCardImage loading="lazy" active={cardId === selectedCard?.cardId} src={cardMeta ? cardMeta.image : cardback_normal} alt={cardMeta ? cardMeta.name : 'Loading card'}
-					onClick={() => isLoaded && countdown() && selectCard(self)}/>
-				<Title as="h4" size={1} font={theme.font.neometric}>{cardMeta ? cardMeta.name : 'Loading'}</Title>
+					onClick={() => isLoaded && selectCard(self)}/>
+				<Title as="h4" font={theme.font.neometric}>{cardMeta ? cardMeta.name : 'Loading'}</Title>
 				<StyledSpacer bg={theme.color.gray[100]} size={2}/>
 				<Spacer size="sm"/>
 				<StyledPepemonCardMeta>
 					<dt>Minted</dt>
-					{/*console.log(cardBalance)*/}
 					<dd>{cardBalance === null ? 'loading' : `${parseFloat(cardBalance[0]?.totalSupply)} / ${parseFloat(cardBalance[0]?.maxSupply) > 10000 ? '♾️': parseFloat(cardBalance[0]?.maxSupply)}`}</dd>
 				</StyledPepemonCardMeta>
 				<StyledPepemonCardMeta>
 					<dt>Time</dt>
-					<dd>{countdown() ? countdown() : 'Soon'}</dd>
+					<dd>{countdown() ? countdown() : 'Not available'}</dd>
 				</StyledPepemonCardMeta>
 			</div>
 		</StyledPepemonCard>
 	)
 }
 
-const StyledPepemonCard = styled.div<{isClickable?: boolean}>`
+const StyledPepemonCard = styled.div<{isLoaded: boolean}>`
 	display: flex;
-	cursor: ${props => props.isClickable ? 'pointer' : 'not-allowed'};
-	justify-content: center;
+	justify-content: flex-start;
 	flex-direction: column;
+
+	&{
+		cursor: ${({isLoaded}) => isLoaded ? 'pointer' : 'not-allowed'};
+	}
 `
 
 export const StyledPepemonCardPrice = styled.span<{styling?: string}>`
@@ -158,10 +157,6 @@ export const StyledPepemonCardImage = styled.img<{active?: boolean}>`
 	width: 100%;
 	z-index: 0;
 
-	&:hover {
-		cusror: pointer;
-	}
-
 	${({ active }) => active && `
 		&{
 			filter: drop-shadow(0 0 50px #894fbe);
@@ -191,7 +186,8 @@ export const StyledPepemonCardMeta = styled.dl`
 
 	& dd {
 		color: ${props => props.theme.color.gray[600]};
-		font-weight: bold
+		font-weight: bold;
+		text-align: right;
 	}
 `
 

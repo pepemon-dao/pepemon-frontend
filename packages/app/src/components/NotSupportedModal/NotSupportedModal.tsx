@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { UnhandledError, Button, Modal, ModalTitle, ModalContent, ModalActions, Spacer, Text } from '../../components';
+import { UnhandledError, Modal, ModalTitle, ModalContent, ModalActions, Spacer, Text } from '../../components';
 import { theme } from '../../theme';
 
 const NotSupportedModal: React.FC<{page: string}> = ({ page }) => {
@@ -28,16 +28,19 @@ const NotSupportedModal: React.FC<{page: string}> = ({ page }) => {
         <Modal>
             <ModalTitle text='Not (yet) supported' />
             <ModalContent>
-				<Text as='p' align='center' font={theme.font.inter} size={.875} color={theme.color.gray[600]}>
+				<Text align='center' font={theme.font.inter} size='s' color={theme.color.gray[600]}>
                 	{`Your chosen network is currently not supported on the ${page} page.`}
 					<br/>
 					Please change your wallet provider's network to ETH.
 				</Text>
             </ModalContent>
 			<Spacer size='md'/>
-            <ModalActions>
-                <Button styling='purple' onClick={handleSwitch}>Switch to ETH</Button>
-            </ModalActions>
+            <ModalActions modalActions={[
+				{
+					text: 'Switch to ETH',
+					buttonProps: { styling: 'purple', onClick: handleSwitch }
+				}
+			]}/>
         </Modal>
     }</>)
 }
