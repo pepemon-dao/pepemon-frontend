@@ -1,9 +1,10 @@
-import React from "react";
-import styled, { keyframes } from "styled-components/macro";
+import React from 'react';
+import styled, { keyframes } from 'styled-components';
 import { ActionClose } from '../../assets';
 import { theme } from '../../theme';
 
 export interface ModalProps {
+	ref?: any;
 	onDismiss?: () => void;
 	maxWidth?: number;
 	rounded?: boolean;
@@ -13,7 +14,7 @@ const Modal: React.FC<ModalProps> = ({ children, onDismiss, maxWidth }) => {
 	return (
 		<StyledResponsiveWrapper>
 			<StyledModal maxWidth={maxWidth}>
-				{onDismiss && <ActionClose onClick={() => onDismiss()} />}
+				<ActionClose onClick={onDismiss} />
 				{children}
 			</StyledModal>
 		</StyledResponsiveWrapper>
@@ -31,17 +32,18 @@ const mobileKeyframes = keyframes`
 
 const StyledResponsiveWrapper = styled.div`
 	align-items: center;
+	animation: ${mobileKeyframes} 0.3s forwards ease-in;
+	background: rgba(0, 0, 0, 0.3);
 	display: flex;
 	flex-direction: column;
+	height: 100vh;
 	justify-content: center;
-	width: 100vw;
-	background: rgba(0, 0, 0, 0.3);
+	left: 0;
+	padding: 1em;
 	position: fixed;
 	top: 0;
-	left: 0;
-	height: 100vh;
+	width: 100vw;
 	z-index: 10;
-	animation: ${mobileKeyframes} 0.3s forwards ease-in;
 
 	@media (max-width: ${(props) => props.theme.breakpoints.tablet}px) {
 		flex: 1;

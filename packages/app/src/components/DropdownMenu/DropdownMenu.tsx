@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { useOutsideClick } from '../../hooks';
 import { Check, ChevronDown } from '../../assets';
-import styled from 'styled-components/macro'
+import styled from 'styled-components'
 import { theme } from '../../theme';
 
 interface DropdownMenuProps {
@@ -71,7 +71,6 @@ const StyledMenuContainer = styled.div`
 	display: flex;
 	justify-content: flex-end;
 	position: relative;
-	z-index: 2;
 `
 
 
