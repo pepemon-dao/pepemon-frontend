@@ -109,15 +109,6 @@ const Home: React.FC<any> = () => {
 						<Text as="p" font={theme.font.inter}>
 							Evolve your awesome Pepemon cards and mint exclusive cards to crush your enemies on blockchain decided battles.
 						</Text>
-						<Spacer size="md"/>
-						<Text as="p" font={theme.font.spaceMace} underline>Staking events</Text>
-						<Spacer size="md"/>
-						<Text as="p" font={theme.font.inter}>
-							Evolve your awesome Pepemon cards to mint exclusive cards and crush your enemies in blockchain battles.
-						</Text>
-						<Text as="p" font={theme.font.inter}>
-							Don't forget to use the NFT Evolution Qubes to save your monsters when evolving!
-						</Text>
 					</ContentColumn>
 				</ContentColumns>
 			</StyledSection>
