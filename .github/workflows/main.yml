@@ -17,6 +17,12 @@ jobs:
       # Checkout
       - uses: actions/checkout@v3
       
+      # Cache node_modules based on yarn.lock
+      - uses: actions/cache@v2
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+      
       # Run yarn install
       - uses: borales/actions-yarn@v3.0.0
         with:
