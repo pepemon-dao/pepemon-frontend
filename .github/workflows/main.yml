@@ -1,0 +1,34 @@
+name: CI
+
+on:
+  push:
+    branches: [ "develop" ]
+  pull_request:
+    branches: [ "develop" ]
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    
+      # Checkout
+      - uses: actions/checkout@v3
+      
+      # Cache node_modules based on yarn.lock
+      - uses: actions/cache@v2
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+      
+      # Run yarn install
+      - uses: borales/actions-yarn@v3.0.0
+        with:
+          cmd: install
+          
+      # Run yarn build
+      - uses: borales/actions-yarn@v3.0.0
+        with:
+          cmd: react-app:build
