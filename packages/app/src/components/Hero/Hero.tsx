@@ -9,12 +9,12 @@ const Hero: React.FC<any> = ({apy}) => {
 	return (
 		<ContentColumns mobileStyle={{ marginBottom: '7em' }}>
 			<ContentColumn width="40%" style={{paddingTop: "3.75em"}}>
-				<Title as="h1" font={theme.font.spaceMace} size='xxxl'>Pepemon! Gotta claim ‘em all!</Title>
+				<Title as="h1" font={theme.font.spaceMace} size='xxxl'>Pepemon! Gotta win ‘em all!</Title>
 				<ContentColumns mobileStyle={{ flexDirection: 'row' }}>
 					<ContentColumn
 						desktopStyle={{ paddingTop: "3.75em", maxWidth: '65%' }}>
 						<Text as="p" font={theme.font.inter} size='l'>
-							Digital Collectible Card Games in Metaverse, Owned by the Players. Airdropped 100%. Play2Earn powered by DeFi and NFTs in-game assets.
+							Play and earn web3 card game owned by the players since 2020. Mint and evolve or battle others on chain and win epic prizes!
 						</Text>
 					</ContentColumn>
 					<ContentColumn mobileStyle={{ marginLeft: '1em', flex: '1 0 35%' }} tabletLStyle={{ display: 'none' }}>
@@ -28,11 +28,11 @@ const Hero: React.FC<any> = ({apy}) => {
 						<ContentBox shadow style={{height: "auto"}}>
 							<ContentBoxNumber><span>1</span></ContentBoxNumber>
 							<Text as="p" align="center">
-								Own a piece of Pepemon and vote with PPBLZ
+								Own a piece of Pepemon, govern and farm with PPBLZ
 							</Text>
 							<Spacer size="md"/>
 							<ExternalLink href="https://app.uniswap.org/#/swap?outputCurrency=0x4d2ee5dae46c86da2ff521f7657dad98834f97b8" styling='button'>
-								Shape the path with other Pepetrainers
+								Join the Pepefrens club
 							</ExternalLink>
 						</ContentBox>
 					</ContentColumn>
@@ -40,20 +40,20 @@ const Hero: React.FC<any> = ({apy}) => {
 						<ContentBox shadow style={{height: "auto"}}>
 							<ContentBoxNumber><span>2</span></ContentBoxNumber>
 							<Text as="p" align="center">
-								Stake your PPBLZ with
+								Earn with PPBLZ
 							</Text>
 							<Text as="p" size='xl' font={theme.font.neometric} weight={900} align="center">
 								{apy && apy}
 							</Text>
 							<Spacer size="md"/>
-							<ButtonLink light="true" to="/staking">Start earning</ButtonLink>
+							<ButtonLink light="true" to="/staking">Start earning today</ButtonLink>
 						</ContentBox>
 					</ContentColumn>
 					<ContentColumn width="calc(1/3 * 100%)" space="1.25em"  style={{transform: "translateY(60%)"}} align="flex-end">
 						<ContentBox shadow style={{height: "auto"}}>
 							<ContentBoxNumber><span>3</span></ContentBoxNumber>
 							<Text as="p" align="center">
-								Earn $PPDEX and mint Pepemon Boosterpacks!
+								Mint Pepemon Boosterpacks
 							</Text>
 							<Spacer size="md"/>
 							<ButtonLink light="true" to="/store/boosterpacks">Get your Booster Packs</ButtonLink>
