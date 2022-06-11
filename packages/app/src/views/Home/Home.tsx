@@ -22,6 +22,7 @@ import { theme } from '../../theme';
 import { useTokenPrices } from '../../hooks';
 import { calculatePpblzApy } from '../../utils';
 import { cover, coverblack, logoexpand, pepechu_res, bluecard, pepechucard, pepechurcard, witchenerycard } from '../../assets';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 const Home: React.FC<any> = () => {
 	const { ppblzPrice, ppdexPrice } = useTokenPrices();
@@ -43,10 +44,10 @@ const Home: React.FC<any> = () => {
 				<ContentColumns>
 					<ContentColumn width="40%" style={{paddingTop: "xxl"}}>
 						<div style={{ position: "relative", height: "100%", width: "100%" }}>
-							<img loading="lazy" src={witchenerycard} alt="witchenery" style={{ objectFit: "cover", width: "80%", position: "absolute", right: "40%", top: "-10%", zIndex: 99 }}/>
-							<img loading="lazy" src={pepechucard} alt="pepechu" style={{ objectFit: "cover", width: "80%", position: "absolute", right: "10%", top: "20%" }}/>
-							<img loading="lazy" src={bluecard} alt="blue" style={{ objectFit: "cover", width: "63%", position: "absolute", left: "-20%", top: "70%" }}/>
-							<img loading="lazy" src={pepechurcard} alt="pepechur" style={{ objectFit: "cover", width: "20%", position: "absolute", right: "28%", top: "-18%" }}/>
+							<LazyLoadImage src={witchenerycard} alt="witchenery" style={{ objectFit: "cover", width: "80%", position: "absolute", right: "40%", top: "-10%", zIndex: 99 }}/>
+							<LazyLoadImage src={pepechucard} alt="pepechu" style={{ objectFit: "cover", width: "80%", position: "absolute", right: "10%", top: "20%" }}/>
+							<LazyLoadImage src={bluecard} alt="blue" style={{ objectFit: "cover", width: "63%", position: "absolute", left: "-20%", top: "70%" }}/>
+							<LazyLoadImage src={pepechurcard} alt="pepechur" style={{ objectFit: "cover", width: "20%", position: "absolute", right: "28%", top: "-18%" }}/>
 						</div>
 					</ContentColumn>
 					
