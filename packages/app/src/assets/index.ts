@@ -72,7 +72,7 @@ export { default as logo } from './img/logo/logo.png';
 export { default as logoexpand } from './img/logo/logoexpand.png';
 export { default as medium } from './img/logo/medium.svg';
 export { default as pepeball } from './img/logo/pepeball.png';
-export { default as pepemon } from './img/logo/pepemon.png';
+export { default as pepemonLogoSmall } from './img/logo/pepemon.webp';
 export { default as ppdexLogo } from './img/logo/ppdex.png';
 export { default as telegram } from './img/logo/telegram.svg';
 export { default as twitter } from './img/logo/twitter.svg';
