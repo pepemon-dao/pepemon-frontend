@@ -30,10 +30,10 @@ const Home: React.FC<any> = () => {
 
 	return (
 		<HomeWrapper bgImage={cover}>
-			<Head title='Pepemon - DeFi, NFTs, Blockchain gaming'
-				description='Earn $PPDEX with $PPBLZ Token. Use $PPDEX to Mint NFTs and use those to duel others on a blockchain trading card game!'
-				twitterTitle='Pepemon! Community-driven TCG on blockchain'
-				twitterDescription='Pepemon DeFi economy is powered by $PPBLZ, staking it earns $PPDEX. Collectors and gamers can get their NFT cards on our store. Subscribe to Pepemon One NFT subscription for exclusive NFTs every month.'/>
+			<Head title='Pepemon! Play and earn web3 card game'
+				description='Mint and evolve NFTs or Battle opponents on card games rewarding PPDEX. Govern and farm by hodling PPBLZ.'
+				twitterTitle='Pepemon! Play and earn web3 card game'
+				twitterDescription='Mint and evolve NFTs or Battle opponents on card games rewarding PPDEX. Govern and farm by hodling PPBLZ.'/>
 			<StyledSection
 				desktopStyle={{paddingTop: "12.125em"}}
 				mobileStyle={{paddingTop: '3em', backgroundColor: theme.color.purple[200]}}>
