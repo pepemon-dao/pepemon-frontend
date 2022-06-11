@@ -1,4 +1,4 @@
-import styled from "styled-components/macro";
+import styled from "styled-components";
 import { theme } from '../../theme';
 
 const ContentBox = styled.div<{bgColor?: string, shadow?: boolean}>`
@@ -7,6 +7,7 @@ const ContentBox = styled.div<{bgColor?: string, shadow?: boolean}>`
 	padding: 1em 1.25em;
 	display: flex;
 	flex-direction: column;
+	height: 100%;
 	justify-content: center;
 	position: relative;
 
@@ -20,7 +21,7 @@ export const ContentBoxNumber = styled.span`
 	font-size: 1.125rem;
 	font-weight: 700;
 	left: 50%;
-	margin-bottom: -1em;
+	margin-bottom: auto;
 	margin-top: 0;
 	position: relative;
 	text-align: center;

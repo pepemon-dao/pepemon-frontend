@@ -54,12 +54,14 @@ export { default as downgreenarrow } from './img/icons/downgreenarrow.svg';
 export { default as dropdownarrow } from './img/icons/dropdownarrow.png';
 export { default as homeactive } from './img/icons/homeactive.png';
 export { default as ibutton } from './img/icons/i.svg';
+export { default as arrowUp } from './img/icons/icon_arrow_up.svg';
 export { default as events } from './img/icons/icon_events_32px.svg';
 export { default as home } from './img/icons/icon_home_32px.svg';
 export { default as my_collection } from './img/icons/icon_my_collection_32px.svg';
 export { default as staking } from './img/icons/icon_staking_32px.svg';
 export { default as store } from './img/icons/icon_store_32px.svg';
 export { default as subscriptions } from './img/icons/icon_subscriptions_32px.svg';
+export { default as MenuIcon } from './img/icons/MenuIcon';
 export { default as up_down_arrows_dark } from './img/icons/up_down_arrows_dark.png';
 export { default as uparrow } from './img/icons/uparrow.png';
 
@@ -69,8 +71,9 @@ export { default as ethereumLogo } from './img/logo/ethereumLogo.png';
 export { default as logo } from './img/logo/logo.png';
 export { default as logoexpand } from './img/logo/logoexpand.png';
 export { default as medium } from './img/logo/medium.svg';
-export { default as pepemon } from './img/logo/pepemon.png';
-export { default as pokeball } from './img/logo/pokeball.png';
+export { default as pepeball } from './img/logo/pepeball.png';
+export { default as pepemonLogoSmall } from './img/logo/pepemon.webp';
+export { default as ppdexLogo } from './img/logo/ppdex.png';
 export { default as telegram } from './img/logo/telegram.svg';
 export { default as twitter } from './img/logo/twitter.svg';
 export { default as uniswap } from './img/logo/uniswap.png';
@@ -84,5 +87,7 @@ export { default as walkr } from './img/pepemons/walkr.png';
 export { default as walkw } from './img/pepemons/walkw.png';
 
 // other
+export { default as cardsStack } from './img/cards_stack.png';
 export { default as dummyGraph } from './img/dummy_graph.png';
 export { default as group } from './img/group.png';
+export { default as pepetrainer } from './img/pepetrainer.webp';

@@ -2,14 +2,12 @@ import React, { useState, useContext } from "react";
 import { StoreAside, StyledStoreBody, StyledPepemonCardMeta, StyledPepemonCardPrice } from './index';
 import { Button, ExternalLink, Title, Text, Spacer, StyledSpacer } from '../../../components';
 import { PepemonProviderContext } from '../../../contexts';
-import { StoreClaimModal } from '../components';
 import { getDisplayBalance } from "../../../utils";
 import { cardback_normal, coin } from '../../../assets';
-import { useAllowance, useTokenBalance, useRedeemCard, useApprove } from "../../../hooks";
+import { useModal, useAllowance, useTokenBalance, useRedeemCard, useApprove } from "../../../hooks";
 import { theme } from '../../../theme';
 
 const StoreCardsAside: React.FC<any> = ({setSelectedCard, selectedCard: { cardId, cardPrice, cardMeta = null, cardBalance = null }}) => {
-	const [activeClaimModal, setActiveClaimModal] = useState(false);
 	const [transactions, setTransactions] = useState(0);
 	const [pepemon] = useContext(PepemonProviderContext);
 	const { chainId, contracts } = pepemon;
@@ -17,7 +15,6 @@ const StoreCardsAside: React.FC<any> = ({setSelectedCard, selectedCard: { cardId
 	const { onApprove, isApproving } = useApprove(contracts.pepemonStore, contracts.ppdex);
 	const allowance = useAllowance(contracts.pepemonStore);
 	const ppdexBalance = useTokenBalance(contracts.ppdex.address);
-	if (cardMeta.status === "failed") { setSelectedCard(null); return <></> } // bail out early if card infos couldn't be loaded
 
 	const isItemCard = (tokenId: number) => {
         return [17, 18, 19].includes(tokenId);
@@ -45,43 +42,54 @@ const StoreCardsAside: React.FC<any> = ({setSelectedCard, selectedCard: { cardId
         return cardPrice?.comparedTo(ppdexBalance) === -1;
     }
 
+	const [handlePresent] = useModal({
+		title: 'Claim this card',
+		modalActions: [
+			{
+				text: isRedeemingCard ? 'Claiming...' : 'Claim card',
+				buttonProps: {
+					disabled: isRedeemingCard,
+					styling: "purple",
+					onClick: () => onRedeemCard(cardId, chainId === 56 ? priceOfCard.toString() : null).then(() => setTransactions(transactions + 1))
+				}
+			}
+		]
+	});
+
+	if (cardMeta.status === "failed") { setSelectedCard(null); return <></> } // bail out early if card infos couldn't be loaded
+
 	const isReleasingSoon = () => {
         const birthdayMetaData = cardMeta.attributes.find(attribute => attribute.trait_type === 'birthday');
-        if (parseFloat(birthdayMetaData.value) === 0) {
-            return true;
-        }
-
+		if (parseFloat(birthdayMetaData.value) === 0) return true;
         return parseFloat(birthdayMetaData.value) > (Date.now() / 1000);
     }
 
 	const isForSale = () => {
         const birthdayMetaData = cardMeta.attributes.find(attribute => attribute.trait_type === 'birthday');
-        if (parseFloat(birthdayMetaData.value) === 0) {
-            return false;
-        }
-        return (parseFloat(birthdayMetaData.value) + (daysForSale() * 24 * 60 * 60)) > (Date.now() / 1000)
+		if (parseFloat(birthdayMetaData.value) === 0) return false;
+		return (parseFloat(birthdayMetaData.value) + (daysForSale() * 24 * 60 * 60)) > (Date.now() / 1000)
     }
 
-	const isSoldOut = () => {
-        return (!isMintable() && !isReleasingSoon()) || (!isForSale() && !isReleasingSoon());
-    }
 	const isNoLongerForSale = () => {
-        return !isReleasingSoon() && !isForSale()
+		return !isForSale() && !isReleasingSoon();
+	}
+
+	const isSoldOut = () => {
+        return (!isMintable() && !isReleasingSoon()) || (isNoLongerForSale());
     }
 
 	const priceOfCard = cardPrice && parseFloat(getDisplayBalance(cardPrice, 18)).toFixed(2);
 
 	const buttonProps = () => {
 		if (isSoldOut() || isNoLongerForSale()) {
-			return { disabled: true, onClick: () => null, text: 'Sold out' }
-		}
-		else if (isAllowedSpending()) {
+			return { disabled: true, onClick: () => null, text: 'Not available' }
+		} else if (isAllowedSpending()) {
 			if (isReleasingSoon()) {
-				return { disabled: true, onClick: () => null, text: 'Releasing soon' }
+				return { disabled: true, onClick: () => null, text: 'Available soon' }
 			} else if (!isAffordable()) {
-				return { disabled: true, onClick: () => null, text: 'Not enough balance' };
+				return { disabled: true, onClick: handlePresent, text: 'Not enough balance' };
 			} else {
-				return { disabled: true, onClick: setActiveClaimModal(true), text: isRedeemingCard ? 'Claiming...' : 'Claim card' }
+				return { disabled: isRedeemingCard ? true : false, onClick: handlePresent, text: isRedeemingCard ? 'Claiming...' : 'Claim card' }
 			}
 		} else {
 			return { disabled: false, onClick: () => !isApproving && onApprove(), text: isApproving ? 'Enabling...' : 'Enable' }
@@ -91,9 +99,9 @@ const StoreCardsAside: React.FC<any> = ({setSelectedCard, selectedCard: { cardId
 	return (
 		<StoreAside close={() => setSelectedCard("")} title="Selected Card">
 			<StyledStoreBody>
-				<Title as="h2" font={theme.font.neometric} size={1.3}>{cardMeta ? cardMeta.name : 'Loading card'}</Title>
+				<Title as="h2" font={theme.font.neometric} size='m'>{cardMeta ? cardMeta.name : 'Loading card'}</Title>
 				<Spacer size="sm"/>
-				<Text as="p" font={theme.font.inter} size={.875} lineHeight={1.3} color={theme.color.gray[600]}>{cardMeta && cardMeta.description}</Text>
+				<Text as="p" font={theme.font.inter} size='s' lineHeight={1.3} color={theme.color.gray[600]}>{cardMeta && cardMeta.description}</Text>
 				<Spacer size="sm"/>
 				<img loading="lazy" src={cardMeta ? cardMeta.image : cardback_normal} alt={cardMeta ? cardMeta.name : 'Loading card'} style={{width: "100%"}}/>
 				<Spacer size='md'/>
@@ -141,14 +149,6 @@ const StoreCardsAside: React.FC<any> = ({setSelectedCard, selectedCard: { cardId
 					onClick={buttonProps().onClick}>
 						{buttonProps().text}
 				</Button>
-				{ activeClaimModal &&
-					<StoreClaimModal
-						dismiss={() => setActiveClaimModal(false)}
-						claimButtonText={isRedeemingCard ? 'Claiming...' : 'Claim card'}
-						claimButtonClick={() => onRedeemCard(cardId, chainId === 56 ? priceOfCard.toString() : null).then(() => setTransactions(transactions + 1))}
-						claimButtonDisabled={isRedeemingCard}
-					/>
-				}
 			</StyledStoreBody>
 		</StoreAside>
 	)

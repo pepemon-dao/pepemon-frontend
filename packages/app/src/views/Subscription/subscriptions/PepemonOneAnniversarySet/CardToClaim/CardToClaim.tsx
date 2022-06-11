@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import styled from "styled-components/macro";
+import styled from "styled-components";
 import { Button, Spacer, Title, Text } from '../../../../../components';
 import { theme } from '../../../../../theme';
 import { PepemonProviderContext } from '../../../../../contexts';
@@ -22,14 +22,14 @@ const CardToClaim: React.FC<CardToClaimProps> = ({title, text, tokenId, img}) =>
 	const { response, isFetching } = usePepemonApi(`/merkle/${tokenId}/${account}`);
 	const canClaim = response && response.index;
 
-	// @dev for more info: https://etherscan.io/address/0x3f739128c99B111901d011903309151A26a43b6F#readContract
+	// @dev for more info: https://etherscan.io/address/0x78a285dcd2AD742d8D4ACC33C3a279f44d842e13#readContract
 	const isClaimed = useIsClaimedMerkle( (response && response.index) &&
 		response.index,
 		merkleType,
 		tokenId,
 	);
 
-	// @dev for more info: https://etherscan.io/address/0x3f739128c99B111901d011903309151A26a43b6F#writeContract
+	// @dev for more info: https://etherscan.io/address/0x78a285dcd2AD742d8D4ACC33C3a279f44d842e13#writeContract
 	const { onClaimMerkle, isClaiming } = useClaimMerkle( response && response.index ? {
 		account,
 		index: response.index,
@@ -37,19 +37,19 @@ const CardToClaim: React.FC<CardToClaimProps> = ({title, text, tokenId, img}) =>
 		proof: response.proof,
 	} : null, merkleType, tokenId);
 
-	const isDisabled = !account || isFetching || isClaimed || !canClaim || isClaiming;
+	const isDisabled = !account || isFetching || !canClaim || isClaiming;
 
 	return (
-		<CardToClaimWrapper isDisabled={isDisabled}>
-			<Title as="h3" size={1} weight={900} font={theme.font.neometric}>{title}</Title>
+		<CardToClaimWrapper>
+			<Title as="h3" size='xxs' weight={900} font={theme.font.neometric}>{title}</Title>
 			<Spacer size="sm"/>
 			<StyledFigure>
 			  <img loading='lazy' src={img.url} alt={img.title} title={img.title}/>
-			  <figcaption><Text as="p" size={.875} lineHeight={1.125} align="center" color={theme.color.gray[300]}>{text}</Text></figcaption>
+			  <figcaption><Text as="p" size='s' lineHeight={1.125} align="center" color={theme.color.gray[300]}>{text}</Text></figcaption>
 			</StyledFigure>
 			<Spacer size="sm"/>
 			<Button width="100%" styling="purple" style={{marginTop: "auto"}}
-			onClick={onClaimMerkle} disabled={isDisabled}
+			onClick={onClaimMerkle} disabled={isDisabled || isClaimed}
 			>{
 				isFetching ? 'Checking...'
 				: isClaimed ? 'Already claimed'
@@ -60,14 +60,10 @@ const CardToClaim: React.FC<CardToClaimProps> = ({title, text, tokenId, img}) =>
 	)
 }
 
-const CardToClaimWrapper = styled.div<{isDisabled: boolean}>`
+const CardToClaimWrapper = styled.div`
 	display: flex;
 	flex-direction: column;
 	height: 100%;
-
-	:not(button) {
-		opacity: ${props => props.isDisabled && '.5'};
-	}
 `
 
 const StyledFigure = styled.figure`

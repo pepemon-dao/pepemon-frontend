@@ -1,10 +1,13 @@
 const theme = {
 	borderRadius: 16,
 	breakpoints: {
-		mobile: 576,
-		tablet: 768,
-		desktop: 992,
-		ultra: 1200,
+		mobileS: '400px',
+		mobile: '576px',
+		tabletP: '768px',
+		tabletL: '880px',
+		desktop: '1024px',
+		wide: '1380px',
+		ultra: '1200px',
 	},
 	color: {
 		transparent: "transparent",
@@ -74,10 +77,13 @@ const theme = {
 	},
 	topBarSize: 72,
 	sideBar: {
-		width: 96
+		width: {
+			closed: 96,
+			opened: 260
+		}
 	},
 	footer: {
-		height: 450
+		spaceTop: 250
 	},
 	page: {
 		maxWidth: 1120

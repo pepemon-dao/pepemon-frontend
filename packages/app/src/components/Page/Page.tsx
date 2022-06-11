@@ -1,12 +1,11 @@
 import React, { useContext } from 'react';
-import styled from 'styled-components/macro';
+import styled from 'styled-components';
 import { useLocation } from 'react-router-dom';
 import { Footer, Navigation, NotSupportedModal } from '../../components';
 import { PepemonProviderContext } from '../../contexts';
 import { darktealTiles } from '../../assets';
 import { theme } from '../../theme';
 import { isSupportedChain } from '../../utils';
-// import Footer from '../Footer';
 
 const Page: React.FC<any> = ({children}) => {
 	const [pepemon] = useContext(PepemonProviderContext);
@@ -18,19 +17,26 @@ const Page: React.FC<any> = ({children}) => {
 	window.scrollTo(0,0);
 
 	return (
-		<div style={{ position: 'relative' }}>
-			<StyledPageWrapper>
+		<StyledPageWrapper>
+			<StyledPageInner>
 				<Navigation/>
 				{ (!isSupportedChain(chainId, pathname) && chainId) ? <NotSupportedModal page='Home'/>
 				: children
 				}
-			</StyledPageWrapper>
+			</StyledPageInner>
 			<Footer/>
-		</div>
+		</StyledPageWrapper>
 	)
 }
 
 export const StyledPageWrapper = styled.div`
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+	position: relative;
+`
+
+export const StyledPageInner = styled.div`
 	display: flex;
 `
 
@@ -39,20 +45,31 @@ export const StyledPageWrapperMain = styled.main`
 	background-image: url(${darktealTiles});
 	background-repeat: no-repeat;
 	background-size: cover;
-	margin-left: ${theme.sideBar.width}px;
-	padding-bottom: 7.5em;
-	padding-left: 2em;
-	padding-right: 2em;
+	padding-left: clamp(1em, 2.65vw, 2em);
+	padding-right: clamp(1em, 2.65vw, 2em);
 	min-height: 100vh;
-	width: calc(100vw - ${theme.sideBar.width}px);
-	padding-bottom: ${2 * theme.footer.height}px;
+	padding-bottom: ${theme.footer.spaceTop}px;
+	width: 100vw;
+
+	@supports ( -webkit-touch-callout : none) {
+		background-attachment: scroll;
+	}
+
+	@media (min-width: ${theme.breakpoints.desktop}) {
+		margin-left: ${theme.sideBar.width.closed}px;
+		width: calc(100vw - ${theme.sideBar.width.closed}px);
+	}
 `
 
 export const StyledPageWrapperMainInner = styled.div`
-	max-width: ${theme.breakpoints.ultra}px;
+	max-width: ${theme.breakpoints.ultra};
 	margin-left: auto;
 	margin-right: auto;
-	padding-top: 10em;
+	padding-top: 6em;
+
+	@media (min-width: ${theme.breakpoints.desktop}) {
+		padding-top: 10em;
+	}
 `
 
 export default Page

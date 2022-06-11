@@ -1,26 +1,24 @@
-import React, { Suspense, lazy, useEffect, useState, useContext } from 'react';
-import styled from 'styled-components/macro';
+import React, { useEffect, useState, useContext } from 'react';
+import styled from 'styled-components';
 import Web3 from 'web3';
+import { isMobile } from 'web3modal';
 import BigNumber from 'bignumber.js';
-import { useWeb3Modal, useTokenBalance } from '../../hooks';
-import { getNativeBalance, getNativeToken, getBalanceNumber, formatAddress } from '../../utils';
+import { useModal, useWeb3Modal, useTokenBalance } from '../../hooks';
+import { copyText, getNativeBalance, getNativeToken, getBalanceNumber, formatAddress } from '../../utils';
 import { getBalanceOfBatch } from '../../utils/erc1155';
 import { Button, Text } from '../../components';
-import { NetworkSwitch } from './components';
+import { NetworkSwitch, WalletModal } from './components';
 import { PepemonProviderContext } from '../../contexts';
 import { theme } from '../../theme';
-const WalletModal = lazy(() =>  import('./components/WalletModal').then((module) => ({ default: module.default })));
-// import { PPMNONE_ANNIVERSARY_SET } from '../../constants/cards';
-// import { cards } from '../../constants';
 
-const TopBar: React.FC<any> = ({setChainId}) => {
-	const [visibleWalletModal, setVisibleWalletModal] = useState(false);
+const TopBar: React.FC<any> = () => {
 	const [nativeBalance, setNativeBalance] = useState(new BigNumber(0));
 	const [ppblzStakedAmount, setPpblzStakedAmount] = useState(0);
 	const [ppdexRewards, setPpdexRewards] = useState(0);
 	const [ppmnCardsOwned, setPpmnCardsOwned] = useState(0);
-	const [, loadWeb3Modal] = useWeb3Modal();
+	const [, loadWeb3Modal, logoutOfWeb3Modal] = useWeb3Modal();
 	const [pepemon] = useContext(PepemonProviderContext);
+
 	const { account, chainId, ppblzAddress, ppdexAddress, contracts, provider } = pepemon;
 	const web3 = new Web3(provider);
 	// define balances
@@ -83,43 +81,70 @@ const TopBar: React.FC<any> = ({setChainId}) => {
 
 	const handleWalletButtonClick = () => {
 		if (account) {
-			setVisibleWalletModal(!visibleWalletModal);
+			handlePresent();
 		} else {
 			loadWeb3Modal();
 		}
 	}
 
+	const handleCopy = () => copyText(account);
+
+	const handleLogout = async () => {
+		await logoutOfWeb3Modal();
+	};
+
+	const [handlePresent,onDismiss] = useModal({
+		title: 'Your wallet',
+		content: <WalletModal account={account}
+				{...isMobile() && {
+					ppblzBalance: ppblzBalance,
+					nativeBalance: `${getBalanceNumber(nativeBalance).toFixed(2)} $${getNativeToken(chainId)}`,
+					totalPpblz: `${totalPpblz.toFixed(2)} $PPBLZ`,
+					totalPpdex: `${totalPpdex.toFixed(2)} $PPDEX`,
+					ppmnCardsOwned: ppmnCardsOwned
+				}}/>,
+		modalActions: [
+			{
+				text: 'Copy address',
+				buttonProps: { styling: 'purple', onClick: handleCopy }
+			},
+			{
+				text: 'Log out',
+				buttonProps: { styling: 'white', onClick: handleLogout }
+			}
+		]
+	});
+
+	useEffect(() => {
+		if (!account) onDismiss()
+	}, [account, onDismiss]);
+
 	return (
-		<StyledTopBar {...(account && {border: true})}>
+		<StyledTopBar {...((account && !isMobile()) && {border: true})}>
 			<StyledTopBarInner>
-				{ account &&
+				{(account && !isMobile()) &&
 					<StyledTopBarInfo>
-						<TextInfo as='div' font={theme.font.spaceMace} color={theme.color.purple[800]} style={{ borderRight: '1px solid currentColor' }}>
-							<NetworkSwitch {...{appChainId: chainId, providerChainId: chainId, setChainId: setChainId}}/>
+						<TextInfo as='div' style={{ borderRight: '1px solid currentColor' }}>
+							<NetworkSwitch {...{appChainId: chainId, providerChainId: chainId}}/>
 						</TextInfo>
-						<TextInfo as='p' font={theme.font.spaceMace} color={theme.color.purple[800]} title='Native balance'>
+						<TextInfo title='Native balance'>
 							{getBalanceNumber(nativeBalance).toFixed(2)} ${getNativeToken(chainId)}
 						</TextInfo>
 						{ppblzBalance && (
-							<TextInfo as='p' font={theme.font.spaceMace} color={theme.color.purple[800]} title='In Wallet + Staked PPBLZ'>
-								{totalPpblz.toFixed(2)} $PPBLZ
-							</TextInfo>
+							<>
+								<TextInfo title='In Wallet + Staked PPBLZ'>
+									{totalPpblz.toFixed(2)} $PPBLZ
+								</TextInfo>
+								<TextInfo title='In Wallet + Not Claimed PPDEX'>
+									{totalPpdex.toFixed(2)} $PPDEX
+								</TextInfo>
+							</>
 						)}
-						{ppblzBalance && (
-							<TextInfo as='p' font={theme.font.spaceMace} color={theme.color.purple[800]} title='In Wallet + Not Claimed PPDEX'>
-								{totalPpdex.toFixed(2)} $PPDEX
-							</TextInfo>
-						)}
-						<TextInfo as='p' font={theme.font.spaceMace} color={theme.color.purple[800]}>{ppmnCardsOwned} unique card{ppmnCardsOwned !== 1 && 's'}</TextInfo>
+						<TextInfo title={`${ppmnCardsOwned} unique card${ppmnCardsOwned !== 1 && 's'}`}>{ppmnCardsOwned} unique card{ppmnCardsOwned !== 1 && 's'}</TextInfo>
 					</StyledTopBarInfo>
 				}
 				<Button styling='green' title={account ? 'Your wallet' : 'Connect wallet'} onClick={handleWalletButtonClick}>{!account ? 'Connect wallet' : formatAddress(account)}</Button>
 			</StyledTopBarInner>
-			{ visibleWalletModal &&
-				<Suspense fallback={<></>}>
-					<WalletModal account={account} onDismiss={() => setVisibleWalletModal(!visibleWalletModal)}/>
-				</Suspense>
-			}
 		</StyledTopBar>
 	);
 };
@@ -128,11 +153,17 @@ const StyledTopBar = styled.div<{border?: boolean}>`
 	background-color: ${props => props.border && 'rgba(255, 255, 255, .6)'};
 	border-radius: 10px;
 	border: ${props => props.border && `1px solid ${theme.color.purple[800]}`};
-	padding: .25em;
-	position: absolute;
-	right: 2.5em;
-	top: 2em;
-	z-index: 1;
+	padding: ${props => props.border && '.25em'};
+	position: fixed;
+	right: .6em;
+	top: 1em;
+	z-index: 40;
+
+	@media (min-width: ${theme.breakpoints.desktop}) {
+		position: absolute;
+		right: 2.5em;
+		top: 2em;
+	}
 `
 
 const StyledTopBarInner = styled.div`
@@ -142,12 +173,17 @@ const StyledTopBarInner = styled.div`
 
 const StyledTopBarInfo = styled.div`
 	align-items: center;
-	display: flex;
+	display: none;
+
+	@media (min-width: ${theme.breakpoints.desktop}) {
+		display: flex;
+	}
 `
 
 const TextInfo = styled(Text)`
+	color: ${theme.color.purple[800]};
+	font: ${theme.font.spaceMace};
 	padding: .4em 1em;
-	position: relative;
 `
 
 export default TopBar;

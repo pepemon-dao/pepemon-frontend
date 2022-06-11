@@ -9,7 +9,11 @@
 	letter-spacing: normal;
 }
 
-html {
+html, body {
+	width: 100vw;
+}
+
+body {
 	overflow-x: hidden;
 }
 

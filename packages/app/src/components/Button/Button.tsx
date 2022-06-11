@@ -1,13 +1,14 @@
-import styled, { css, keyframes } from "styled-components/macro";
+import styled, { css, keyframes } from "styled-components";
 import { theme } from "../../theme";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
+import { HashLink as Link } from 'react-router-hash-link';
 
 export interface ButtonProps {
 	disabled?: boolean;
 	styling?: "purple" | "green" | "white" | "link" | "white_borderless";
 	symbol?: boolean;
 	width?: string;
-	onClick?: any;
+	onClick?: () => void;
 }
 
 const showAndHide = keyframes`
@@ -31,12 +32,12 @@ const Button = styled.button<any>`
 		box-shadow: ${props => (!props.disabled && props.styling !== "link") && `0 4px 10px 0 ${theme.color.colorsLayoutShadows}`};
 		cursor: ${props => props.disabled ? "not-allowed" : "pointer"};
 		font-family: ${props => props.styling === "link" ? theme.font.inter : theme.font.spaceMace};
-		font-size: ${props => props.symbol ? "2" : "1"}rem;
+		font-size: ${props => props.symbol ? "clamp(1.4rem, 2.65vw, 2rem)" : "clamp(.9rem, 2vw, 1rem)"};
 		font-weight: ${props => props.styling !== "link" && "bold"};
 		text-align: center;
 		text-transform: ${props => props.styling !== "link" && "uppercase"};
 		opacity: ${props => props.disabled && .5};
-		padding: ${props => props.symbol ? ".22em" : ".75em"} 1.5em;
+		padding: ${props => props.symbol ? ".22em 0" : ".75em 1.5em"};
 		position: relative;
 		transition: all .4s;
 		width: ${props => props.width && props.width};
@@ -48,26 +49,29 @@ const Button = styled.button<any>`
 		filter: ${props => (!props.disabled && props.styling === "link") && `drop-shadow(2px 2px 3px ${theme.color.purple[600]})`};
 	}
 
-	&::after {
-		background-image: linear-gradient(to bottom, #aa6cd6 -100%, ${theme.color.purple[600]});
-		border-radius: 8px;
-		color: ${theme.color.white};
-	    content: attr(aria-label);
-	    font-family: ${theme.font.inter};
-		font-size: 0.4em;
-		left: 50%;
-	    opacity: 0;
-		position: absolute;
-		bottom: 100%;
-		padding: .2em .3em;
-		transition: opacity .4s ease-in;
-		transform: translateY(-.2em) translateX(-50%);
-		z-index: 1;
+	&[aria-label]:not([aria-label=""]) {
+		&::after {
+			background-image: linear-gradient(to bottom, #aa6cd6 -100%, ${theme.color.purple[600]});
+			border-radius: 8px;
+			color: ${theme.color.white};
+			content: attr(aria-label);
+			font-family: ${theme.font.inter};
+			font-size: 0.4em;
+			left: 50%;
+			opacity: 0;
+			position: absolute;
+			bottom: 100%;
+			padding: .2em .3em;
+			transition: opacity .4s ease-in;
+			transform: translateY(-.2em) translateX(-50%);
+			z-index: 1;
+		}
+
+		&:hover::after {
+			animation: 2s ${showAndHide} ease-out;
+		}
 	}
 
-	&:hover::after {
-		animation: 2s ${showAndHide} ease-out;
-	}
 
 	${({disabled}) => disabled && `
 		pointer-events: none;
@@ -133,8 +137,10 @@ export interface ButtonLinkProps {
 export const buttonLinksStyling = css<ButtonLinkProps>`
 	background-color: ${props => props.light && props.theme.color.white};
 	background-image: ${props => !props.light && `linear-gradient(to bottom, #aa6cd6 -100%, ${props.theme.color.purple[600]})`};
+	border-color: ${props => props.light ? props.theme.color.purple[600] : 'transparent'};
 	border-radius: 8px;
-	border: ${props => props.light && `1px solid ${props.theme.color.purple[600]}`};
+	border-style: solid;
+	border-width: 1px;
 	box-shadow: ${props => !props.light && `0 4px 10px 0 ${theme.color.colorsLayoutShadows}`};
 	color: ${props => props.light ? props.theme.color.purple[600] : props.theme.color.white};
 	font-family: ${props => props.theme.font.spaceMace};
@@ -147,7 +153,7 @@ export const buttonLinksStyling = css<ButtonLinkProps>`
 	&:hover {
 		background-image: ${props => props.light ? `linear-gradient(to bottom, #aa6cd6 -100%, ${props.theme.color.purple[600]})` : "unset"};
 		background-color: ${props => !props.light && props.theme.color.white};
-		border: ${props => !props.light && `1px solid ${props.theme.color.purple[600]}`};
+		border-color: ${props => !props.light && props.theme.color.purple[600]};
 		color: ${props => props.light ? props.theme.color.white : props.theme.color.purple[600]};
 		box-shadow: 0 4px 10px 0 ${theme.color.colorsLayoutShadows};
 	}
