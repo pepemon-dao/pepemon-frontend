@@ -1,7 +1,22 @@
 import React from 'react';
 import styled from 'styled-components';
 import { isMobile } from 'web3modal';
-import { AnimatedImg, ContentCentered, ContentColumn, ContentColumns, Evolve, Head, Hero, Stats, Spacer, ButtonLink, Title, Text, SocialBoxes, Newsletter, ContentBox, ContentBoxNumber, ExternalLink } from '../../components';
+import {
+  AnimatedImg,
+  ContentCentered,
+  ContentColumn,
+  ContentColumns,
+  Evolve,
+  Head,
+  Hero,
+  Stats,
+  Spacer,
+  ButtonLink,
+  Title,
+  Text,
+  SocialBoxes,
+  Newsletter,
+} from "../../components";
 import Balances from './components/Balances';
 import { theme } from '../../theme';
 import { useTokenPrices } from '../../hooks';
