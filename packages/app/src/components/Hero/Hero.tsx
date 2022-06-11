@@ -2,6 +2,8 @@ import React from 'react';
 import { ContentBox, ContentBoxNumber, ContentColumn, ContentColumns, ExternalLink, Spacer, ButtonLink, Title, Text } from "../../components";
 import { theme } from "../../theme";
 import { group, pepetrainer } from "../../assets";
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
 
 const Hero: React.FC<any> = ({apy}) => {
 	return (
@@ -60,7 +62,7 @@ const Hero: React.FC<any> = ({apy}) => {
 				</ContentColumns>
 			</ContentColumn>
 			<ContentColumn width="60%" mobileStyle={{ display: 'none' }} tabletLStyle={{ display: 'block' }}>
-				<img src={group} alt="Pepetrainers" style={{maxWidth: "120%", width: "750px"}}/>
+				<LazyLoadImage src={group} alt="Pepetrainers" style={{maxWidth: "120%", width: "750px"}} effect="blur" />
 			</ContentColumn>
 		</ContentColumns>
 	)
