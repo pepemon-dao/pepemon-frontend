@@ -22,6 +22,7 @@ import { theme } from '../../theme';
 import { useTokenPrices } from '../../hooks';
 import { calculatePpblzApy } from '../../utils';
 import { cover, coverblack, logoexpand, pepechu_res, bluecard, pepechucard, pepechurcard, witchenerycard } from '../../assets';
+import { LazyLoadImage, LazyLoadComponent } from 'react-lazy-load-image-component';
 
 const Home: React.FC<any> = () => {
 	const { ppblzPrice, ppdexPrice } = useTokenPrices();
@@ -43,10 +44,10 @@ const Home: React.FC<any> = () => {
 				<ContentColumns>
 					<ContentColumn width="40%" style={{paddingTop: "xxl"}}>
 						<div style={{ position: "relative", height: "100%", width: "100%" }}>
-							<img loading="lazy" src={witchenerycard} alt="witchenery" style={{ objectFit: "cover", width: "80%", position: "absolute", right: "40%", top: "-10%", zIndex: 99 }}/>
-							<img loading="lazy" src={pepechucard} alt="pepechu" style={{ objectFit: "cover", width: "80%", position: "absolute", right: "10%", top: "20%" }}/>
-							<img loading="lazy" src={bluecard} alt="blue" style={{ objectFit: "cover", width: "63%", position: "absolute", left: "-20%", top: "70%" }}/>
-							<img loading="lazy" src={pepechurcard} alt="pepechur" style={{ objectFit: "cover", width: "20%", position: "absolute", right: "28%", top: "-18%" }}/>
+							<LazyLoadImage src={witchenerycard} alt="witchenery" style={{ objectFit: "cover", width: "80%", position: "absolute", right: "40%", top: "-10%", zIndex: 99 }}/>
+							<LazyLoadImage src={pepechucard} alt="pepechu" style={{ objectFit: "cover", width: "80%", position: "absolute", right: "10%", top: "20%" }}/>
+							<LazyLoadImage src={bluecard} alt="blue" style={{ objectFit: "cover", width: "63%", position: "absolute", left: "-20%", top: "70%" }}/>
+							<LazyLoadImage src={pepechurcard} alt="pepechur" style={{ objectFit: "cover", width: "20%", position: "absolute", right: "28%", top: "-18%" }}/>
 						</div>
 					</ContentColumn>
 					
@@ -73,25 +74,27 @@ const Home: React.FC<any> = () => {
 					</ContentColumn>
 				</ContentColumns>
 			</StyledSection>
+			
+			<LazyLoadComponent threshold={200}>
+				<StyledSection bgImage={coverblack} desktopStyle={{ color: theme.color.white, textAlign: 'center' }}>
+					<ContentCentered style={{paddingTop: "7.5em"}}>
+						<Title as="h1" font={theme.font.neometric} size='xxl' color='inherit' weight={900} lineHeight={1.04}>
+							Start earning<br /> before ETH 2.0.
+						</Title>
+						<Spacer size="md"/>
+						<Text as="p" font={theme.font.spaceMace} align='left' color='inherit' underline>NO VCs. No pre-sale.</Text>
+						<Spacer size="md"/>
+						<Text as="p" font={theme.font.inter} color='inherit'>
+							Pepemon tokens were 100% airdropped. No VCs and No token Sale was held, just 300 people got PPBLZ airdropped to their wallets. Since then on average more than 80% of those tokens were staked to generate PPDEX and mint NFT Cards.
+						</Text>
+						<Spacer size="md"/>
 
-			<StyledSection bgImage={coverblack} desktopStyle={{ color: theme.color.white, textAlign: 'center' }}>
-				<ContentCentered style={{paddingTop: "7.5em"}}>
-					<Title as="h1" font={theme.font.neometric} size='xxl' color='inherit' weight={900} lineHeight={1.04}>
-						Start earning<br /> before ETH 2.0.
-					</Title>
-					<Spacer size="md"/>
-					<Text as="p" font={theme.font.spaceMace} align='left' color='inherit' underline>NO VCs. No pre-sale.</Text>
-					<Spacer size="md"/>
-					<Text as="p" font={theme.font.inter} color='inherit'>
-						Pepemon tokens were 100% airdropped. No VCs and No token Sale was held, just 300 people got PPBLZ airdropped to their wallets. Since then on average more than 80% of those tokens were staked to generate PPDEX and mint NFT Cards.
-					</Text>
-					<Spacer size="md"/>
+						<Balances />
 
-					<Balances />
-
-					<Stats/>
-				</ContentCentered>
-			</StyledSection>
+						<Stats/>
+					</ContentCentered>
+				</StyledSection>
+			</LazyLoadComponent>
 
 			<StyledSection>
 				<ContentColumns mobileStyle={{ flexDirection: 'column-reverse' }}>

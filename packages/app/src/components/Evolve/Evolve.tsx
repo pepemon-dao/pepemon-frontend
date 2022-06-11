@@ -10,19 +10,19 @@ const Evolve = () => {
 			<EvolveGrid>
 				<EvolveImgWrapper>
 					<EvolveImgContainer>
-						<AnimatedImg src={pepertle} alt="pepertle" />
+						<AnimatedImg width={313} height={434} src={pepertle} alt="pepertle" />
 					</EvolveImgContainer>
 				</EvolveImgWrapper>
 				<EvolveImgWrapper>
 					<EvolveImgContainer>
 						<EvolveArrow/>
-						<AnimatedImg src={warpertle} alt="warpertle" />
+						<AnimatedImg width={313} height={434} src={warpertle} alt="warpertle" />
 					</EvolveImgContainer>
 				</EvolveImgWrapper>
 				<EvolveImgWrapper>
 					<EvolveImgContainer>
 						<EvolveArrow/>
-						<AnimatedImg src={rektoise} alt="rektoise" />
+						<AnimatedImg width={313} height={434} src={rektoise} alt="rektoise" />
 					</EvolveImgContainer>
 				</EvolveImgWrapper>
 			</EvolveGrid>

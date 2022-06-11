@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import { ContentBoxGrid, ContentCentered, ContentColumn, ContentColumns, ExternalLink, Spacer, Title, Text } from '../../components';
 import { theme } from '../../theme';
 import { dummyGraph, fudizardPng } from '../../assets';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
 
 const Stats: React.FC<any> = () => {
 	return (
@@ -33,7 +35,7 @@ const Stats: React.FC<any> = () => {
 						</StyledContentBoxGrid>
 					</ContentColumn>
 				</ContentColumns>
-				<img loading="lazy" src={dummyGraph} alt="graph"/>
+				<LazyLoadImage effect="blur" src={dummyGraph} alt="graph"/>
 				<StyledExternalLink styling="button" style={{display: "inline-block", width: "100%"}} href="https://opensea.io/collection/pepemonfactory">
 					Buy now
 				</StyledExternalLink>
@@ -41,7 +43,7 @@ const Stats: React.FC<any> = () => {
 			<ContentColumn width="60%">
 				<StyledImgContainer>
 					<StyledImgContainerInner>
-						<StyledImg loading="lazy" src={fudizardPng} alt="fudizard"/>
+						<LazyLoadImage effect="blur" loading="lazy" src={fudizardPng} alt="fudizard"/>
 					</StyledImgContainerInner>
 				</StyledImgContainer>
 			</ContentColumn>
@@ -76,7 +78,5 @@ const StyledImgContainerInner = styled(ContentCentered)`
 		transform: translateY(-50%);
 	}
 `
-
-const StyledImg = styled.img``
 
 export default Stats;

@@ -1,13 +1,25 @@
 import React, { useRef } from "react";
-import styled, { keyframes, css } from 'styled-components';
-import { useIsVisible } from '../../hooks';
+import styled, { keyframes, css } from "styled-components";
+import { useIsVisible } from "../../hooks";
+import { LazyLoadComponent } from "react-lazy-load-image-component";
 
-const AnimatedImg: React.FC<any> = ({ src, alt }) => {
-	const elemRef = useRef();
-	const isVisible = useIsVisible(elemRef);
+const AnimatedImg: React.FC<any> = ({ src, alt, width, height }) => {
+  const elemRef = useRef();
+  const isVisible = useIsVisible(elemRef);
 
-	return <StyledAnimatedImg ref={elemRef} {...{src, alt}} loading="lazy" isVisible={isVisible && true}/>
-}
+  return (
+    <LazyLoadComponent>
+      <StyledAnimatedImg
+        ref={elemRef}
+        {...{ src, alt }}
+        loading="lazy"
+        width={width}
+        height={height}
+        isVisible={isVisible && true}
+      />
+    </LazyLoadComponent>
+  );
+};
 
 const bounceIn = keyframes`
 	0% {
@@ -24,14 +36,14 @@ const bounceIn = keyframes`
 	100% {
 		transform: translateY(0px);
 	}
-`
+`;
 
 const bounceInCss = css`
-	animation: 1s ${bounceIn} ease-out;
-`
+  animation: 1s ${bounceIn} ease-out;
+`;
 
-const StyledAnimatedImg = styled.img<{isVisible?: boolean}>`
-	${props => props.isVisible ? bounceInCss : ''}
-`
+const StyledAnimatedImg = styled.img<{ isVisible?: boolean }>`
+  ${(props) => (props.isVisible ? bounceInCss : "")}
+`;
 
 export default AnimatedImg;
