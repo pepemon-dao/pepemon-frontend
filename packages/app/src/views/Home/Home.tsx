@@ -22,7 +22,7 @@ import { theme } from '../../theme';
 import { useTokenPrices } from '../../hooks';
 import { calculatePpblzApy } from '../../utils';
 import { cover, coverblack, logoexpand, pepechu_res, bluecard, pepechucard, pepechurcard, witchenerycard } from '../../assets';
-import { LazyLoadImage } from 'react-lazy-load-image-component';
+import { LazyLoadImage, LazyLoadComponent } from 'react-lazy-load-image-component';
 
 const Home: React.FC<any> = () => {
 	const { ppblzPrice, ppdexPrice } = useTokenPrices();
@@ -74,25 +74,27 @@ const Home: React.FC<any> = () => {
 					</ContentColumn>
 				</ContentColumns>
 			</StyledSection>
+			
+			<LazyLoadComponent threshold={200}>
+				<StyledSection bgImage={coverblack} desktopStyle={{ color: theme.color.white, textAlign: 'center' }}>
+					<ContentCentered style={{paddingTop: "7.5em"}}>
+						<Title as="h1" font={theme.font.neometric} size='xxl' color='inherit' weight={900} lineHeight={1.04}>
+							Start earning<br /> before ETH 2.0.
+						</Title>
+						<Spacer size="md"/>
+						<Text as="p" font={theme.font.spaceMace} align='left' color='inherit' underline>NO VCs. No pre-sale.</Text>
+						<Spacer size="md"/>
+						<Text as="p" font={theme.font.inter} color='inherit'>
+							Pepemon tokens were 100% airdropped. No VCs and No token Sale was held, just 300 people got PPBLZ airdropped to their wallets. Since then on average more than 80% of those tokens were staked to generate PPDEX and mint NFT Cards.
+						</Text>
+						<Spacer size="md"/>
 
-			<StyledSection bgImage={coverblack} desktopStyle={{ color: theme.color.white, textAlign: 'center' }}>
-				<ContentCentered style={{paddingTop: "7.5em"}}>
-					<Title as="h1" font={theme.font.neometric} size='xxl' color='inherit' weight={900} lineHeight={1.04}>
-						Start earning<br /> before ETH 2.0.
-					</Title>
-					<Spacer size="md"/>
-					<Text as="p" font={theme.font.spaceMace} align='left' color='inherit' underline>NO VCs. No pre-sale.</Text>
-					<Spacer size="md"/>
-					<Text as="p" font={theme.font.inter} color='inherit'>
-						Pepemon tokens were 100% airdropped. No VCs and No token Sale was held, just 300 people got PPBLZ airdropped to their wallets. Since then on average more than 80% of those tokens were staked to generate PPDEX and mint NFT Cards.
-					</Text>
-					<Spacer size="md"/>
+						<Balances />
 
-					<Balances />
-
-					<Stats/>
-				</ContentCentered>
-			</StyledSection>
+						<Stats/>
+					</ContentCentered>
+				</StyledSection>
+			</LazyLoadComponent>
 
 			<StyledSection>
 				<ContentColumns mobileStyle={{ flexDirection: 'column-reverse' }}>
