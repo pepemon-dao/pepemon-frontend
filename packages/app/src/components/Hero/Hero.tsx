@@ -30,7 +30,7 @@ const Hero: React.FC<any> = ({apy}) => {
 								Own a piece of Pepemon, govern and farm with PPBLZ
 							</Text>
 							<Spacer size="md"/>
-							<ExternalLink href="https://app.uniswap.org/#/swap?outputCurrency=0x4d2ee5dae46c86da2ff521f7657dad98834f97b8" styling='button'>
+							<ExternalLink shadow href="https://app.uniswap.org/#/swap?outputCurrency=0x4d2ee5dae46c86da2ff521f7657dad98834f97b8" styling='button'>
 								Join the Pepefrens club
 							</ExternalLink>
 						</ContentBox>

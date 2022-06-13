@@ -131,30 +131,31 @@ const Button = styled.button<any>`
 `;
 
 export interface ButtonLinkProps {
-	light?: string;
+	light?: boolean;
+	shadow?: boolean;
 }
 
 export const buttonLinksStyling = css<ButtonLinkProps>`
-	background-color: ${props => props.light && props.theme.color.white};
-	background-image: ${props => !props.light && `linear-gradient(to bottom, #aa6cd6 -100%, ${props.theme.color.purple[600]})`};
+	background: ${props => props.light ? props.theme.color.white : `linear-gradient(to bottom, #aa6cd6 -100%, ${props.theme.color.purple[600]})`};
 	border-color: ${props => props.light ? props.theme.color.purple[600] : 'transparent'};
 	border-radius: 8px;
 	border-style: solid;
 	border-width: 1px;
-	box-shadow: ${props => !props.light && `0 4px 10px 0 ${theme.color.colorsLayoutShadows}`};
-	color: ${props => props.light ? props.theme.color.purple[600] : props.theme.color.white};
+	box-shadow: ${props => props.shadow && `0 4px 10px 0 ${theme.color.colorsLayoutShadows}`};
+	color: ${props => props.light ? props.theme.color.purple[600] : props.theme.color.typographyAllTextOnDark};
 	font-family: ${props => props.theme.font.spaceMace};
 	padding: .75em 1.5em;
 	text-align: center;
 	text-decoration: none;
 	text-transform: uppercase;
-	transition: .2s all ease-in;
+	transition-property: opacity, background, border-color, color, box-shadow;
+	transition-duration: .2s;
+	transition-timing-function: ease-in-out;
+	position: relative;
+	z-index: 1;
 
 	&:hover {
-		background-image: ${props => props.light ? `linear-gradient(to bottom, #aa6cd6 -100%, ${props.theme.color.purple[600]})` : "unset"};
-		background-color: ${props => !props.light && props.theme.color.white};
-		border-color: ${props => !props.light && props.theme.color.purple[600]};
-		color: ${props => props.light ? props.theme.color.white : props.theme.color.purple[600]};
+		opacity: .7;
 		box-shadow: 0 4px 10px 0 ${theme.color.colorsLayoutShadows};
 	}
 
