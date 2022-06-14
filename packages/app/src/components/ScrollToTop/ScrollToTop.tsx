@@ -64,7 +64,7 @@ const StyledScrollToTop = styled.button<{bottom: number}>`
 	box-shadow: 0 4px 10px 0 ${theme.color.colorsLayoutShadows};
 	cursor: pointer;
 	justify-content: center;
-	opacity: .5;
+	opacity: 1;
 	padding: 1em;
 	position: fixed;
 	right: .6em;
@@ -72,7 +72,7 @@ const StyledScrollToTop = styled.button<{bottom: number}>`
 	z-index: 40;
 
 	&:hover{
-		opacity: 1;
+		opacity: .5;
 	}
 
 	@media (min-width: ${theme.breakpoints.desktop}) {

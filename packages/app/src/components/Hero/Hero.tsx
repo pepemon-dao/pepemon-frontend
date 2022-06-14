@@ -12,7 +12,7 @@ const Hero: React.FC<any> = ({apy}) => {
 				<Title as="h1" font={theme.font.spaceMace} size='xxxl'>Pepemon! Gotta win ‘em all!</Title>
 				<ContentColumns mobileStyle={{ flexDirection: 'row' }}>
 					<ContentColumn
-						desktopStyle={{ paddingTop: "3.75em", maxWidth: '65%' }}>
+						desktopStyle={{ paddingTop: "16px", maxWidth: '460px' }}>
 						<Text as="p" font={theme.font.inter} size='l'>
 							Play and earn web3 card game owned by the players since 2020. Mint and evolve or battle others on chain and win epic prizes!
 						</Text>
@@ -22,8 +22,7 @@ const Hero: React.FC<any> = ({apy}) => {
 					</ContentColumn>
 				</ContentColumns>
 				<Spacer size="lg"/>
-				<Spacer size="lg"/>
-				<ContentColumns width='250%'>
+				<ContentColumns width='250%' style={{ position: 'relative', zIndex: 1 }}>
 					<ContentColumn width="calc(1/3 * 100%)" space="1.25em">
 						<ContentBox shadow style={{height: "auto"}}>
 							<ContentBoxNumber><span>1</span></ContentBoxNumber>
@@ -31,7 +30,7 @@ const Hero: React.FC<any> = ({apy}) => {
 								Own a piece of Pepemon, govern and farm with PPBLZ
 							</Text>
 							<Spacer size="md"/>
-							<ExternalLink href="https://app.uniswap.org/#/swap?outputCurrency=0x4d2ee5dae46c86da2ff521f7657dad98834f97b8" styling='button'>
+							<ExternalLink shadow href="https://app.uniswap.org/#/swap?outputCurrency=0x4d2ee5dae46c86da2ff521f7657dad98834f97b8" styling='button'>
 								Join the Pepefrens club
 							</ExternalLink>
 						</ContentBox>

@@ -4,6 +4,8 @@ import { buttonLinksStyling } from '../Button/Button';
 
 export interface ExternalLinkProps {
 	styling?: 'button',
+	light?: boolean,
+	shadow?: boolean,
 	size?: number
 }
 
