@@ -12,7 +12,7 @@ const ContentBox = styled.div<{bgColor?: string, shadow?: boolean}>`
 	position: relative;
 
 	${({shadow}) => shadow && `
-		box-shadow: 2px 4px 10px 5px ${theme.color.colorsLayoutShadows};
+		box-shadow: 0 4.5px 1px 0 rgba(0, 0, 0, 0.06), 0 10.3px 6.9px 0 ${theme.color.iconBackgroundGrey8}, 0 18.7px 14.2px 0 rgba(0, 0, 0, 0.1), 0 33.2px 29.2px 0 rgba(0, 0, 0, 0.13), 0 71px 80px 0 rgba(0, 0, 0, 0.19);
 	`}
 `
 
