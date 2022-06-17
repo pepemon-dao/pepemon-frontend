@@ -99,7 +99,7 @@ const Home: React.FC<any> = () => {
 			<StyledSection
 				bgColor={theme.color.purple[200]}
 				mobileStyle={{ paddingTop: '2em', paddingBottom: '2em', marginBottom: '2em' }}
-				desktopStyle={{ paddingTop: '4em', paddingBottom: '4em', marginBottom: '4em' }}  >
+				desktopStyle={{ paddingTop: '3.75em', paddingBottom: '3.75em', marginBottom: '3.75em' }}  >
 				<ContentColumns mobileStyle={{ flexDirection: 'column-reverse' }}>
 					<ContentColumn width="40%">
 						<Evolve/>
@@ -139,7 +139,9 @@ const Home: React.FC<any> = () => {
 				<Newsletter/>
 			</StyledSection>
 
-			<StyledSection bgColor={theme.color.purple[200]}>
+			<StyledSection 
+				bgColor={theme.color.purple[200]} 
+				style={{ paddingTop: '3.75em', paddingBottom: theme.footer.spaceTop }}>
 				<SocialBoxes/>
 			</StyledSection>
 		</HomeWrapper>
@@ -147,7 +149,6 @@ const Home: React.FC<any> = () => {
 }
 
 const HomeWrapper = styled.main<{bgImage?: string}>`
-	padding-bottom: ${theme.footer.spaceTop}px;
 	width: 100vw;
 
 	@media (min-width: ${theme.breakpoints.desktop}) {
