@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { AnimatedImg } from "../../components";
 import { theme } from "../../theme";
-import { downgreenarrow, pepertle, warpertle, rektoise } from "../../assets";
+import { pepertle, warpertle, rektoise } from "../../assets";
 
 const Evolve = () => {
 	return (
@@ -15,13 +15,11 @@ const Evolve = () => {
 				</EvolveImgWrapper>
 				<EvolveImgWrapper>
 					<EvolveImgContainer>
-						<EvolveArrow/>
 						<AnimatedImg width={313} height={434} src={warpertle} alt="warpertle" />
 					</EvolveImgContainer>
 				</EvolveImgWrapper>
 				<EvolveImgWrapper>
 					<EvolveImgContainer>
-						<EvolveArrow/>
 						<AnimatedImg width={313} height={434} src={rektoise} alt="rektoise" />
 					</EvolveImgContainer>
 				</EvolveImgWrapper>
@@ -34,14 +32,8 @@ const EvolveGrid = styled.div`
 	display: grid;
 	position: relative;
 
-	@media (max-width: ${theme.breakpoints.tabletP}) {
-		margin-top: 2em;
-		margin-bottom: 2em;
-	}
-
 	@media (min-width: ${theme.breakpoints.tabletL}) {
 		grid-auto-rows: 1fr;
-		margin-bottom: 5em;
 		width: 250%;
 	}
 `
@@ -85,20 +77,6 @@ const EvolveImgWrapper = styled.div<EvolveImgWrapperProps>`
 		padding-top: ${2*theme.topBarSize}px;
 
 			margin-left: auto;
-	}
-`
-
-const EvolveArrow = styled.img.attrs({
-	alt: "downgreenarrow",
-	loading: "lazy",
-	src: downgreenarrow,
-})`
-	left: 0;
-	position: absolute;
-	top: -${theme.topBarSize}px;
-
-	@media (max-width: ${theme.breakpoints.desktop}) {
-		display: none;
 	}
 `
 

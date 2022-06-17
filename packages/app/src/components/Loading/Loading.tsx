@@ -59,14 +59,17 @@ const walkAnim3 = keyframes`
 `;
 
 const AnimatedImg1 = styled.img`
+  	width: 96px;
 	animation: ${walkAnim1} 5.5s ease-in infinite;
 `
 
 const AnimatedImg2 = styled.img`
+  	width: 96px;
 	animation: ${walkAnim2} 5s linear infinite;
 `
 
 const AnimatedImg3 = styled.img`
+  	width: 96px;
 	animation: ${walkAnim3} 6s ease-out infinite;
 `
 

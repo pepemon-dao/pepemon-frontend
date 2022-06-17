@@ -6,7 +6,7 @@ import { discord, telegram, twitter, medium } from "../../assets";
 
 const SocialBoxes: React.FC<any> = () => {
 	return (
-		<ContentCentered style={{paddingTop: "7.5em", paddingBottom: "7.5em"}}>
+		<ContentCentered>
 			<Title as="h1" font={theme.font.neometric} size='xxl' lineHeight={1.04} weight={900} align="center">
 				Say hi and meet all the Pepetrainers
 			</Title>
