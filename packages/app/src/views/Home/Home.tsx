@@ -96,7 +96,10 @@ const Home: React.FC<any> = () => {
 				</StyledSection>
 			</LazyLoadComponent>
 
-			<StyledSection>
+			<StyledSection
+				bgColor={theme.color.purple[200]}
+				mobileStyle={{ paddingTop: '2em', paddingBottom: '2em', marginBottom: '2em' }}
+				desktopStyle={{ paddingTop: '4em', paddingBottom: '4em', marginBottom: '4em' }}  >
 				<ContentColumns mobileStyle={{ flexDirection: 'column-reverse' }}>
 					<ContentColumn width="40%">
 						<Evolve/>

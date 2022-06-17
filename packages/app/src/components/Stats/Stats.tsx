@@ -10,7 +10,7 @@ const Stats: React.FC<any> = () => {
 	return (
 		<ContentColumns
 			mobileStyle={{marginTop: "5em", marginBottom: "5em"}}
-			desktopStyle={{marginTop: "17em", marginBottom: "7.5em"}}>
+			desktopStyle={{marginTop: "17em", marginBottom: "4em"}}>
 			<ContentColumn width="50%">
 				<Title as="h2" align='left' font={theme.font.neometric} size='xxl' weight={900} lineHeight={1.04}>Get yours before it's gone!</Title>
 				<Spacer size="md"/>

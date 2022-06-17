@@ -32,14 +32,8 @@ const EvolveGrid = styled.div`
 	display: grid;
 	position: relative;
 
-	@media (max-width: ${theme.breakpoints.tabletP}) {
-		margin-top: 2em;
-		margin-bottom: 2em;
-	}
-
 	@media (min-width: ${theme.breakpoints.tabletL}) {
 		grid-auto-rows: 1fr;
-		margin-bottom: 120px;
 		width: 250%;
 	}
 `
