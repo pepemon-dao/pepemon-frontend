@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { AnimatedImg } from "../../components";
 import { theme } from "../../theme";
-import { downgreenarrow, pepertle, warpertle, rektoise } from "../../assets";
+import { pepertle, warpertle, rektoise } from "../../assets";
 
 const Evolve = () => {
 	return (
