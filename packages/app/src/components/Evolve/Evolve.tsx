@@ -15,13 +15,11 @@ const Evolve = () => {
 				</EvolveImgWrapper>
 				<EvolveImgWrapper>
 					<EvolveImgContainer>
-						<EvolveArrow/>
 						<AnimatedImg width={313} height={434} src={warpertle} alt="warpertle" />
 					</EvolveImgContainer>
 				</EvolveImgWrapper>
 				<EvolveImgWrapper>
 					<EvolveImgContainer>
-						<EvolveArrow/>
 						<AnimatedImg width={313} height={434} src={rektoise} alt="rektoise" />
 					</EvolveImgContainer>
 				</EvolveImgWrapper>
@@ -85,20 +83,6 @@ const EvolveImgWrapper = styled.div<EvolveImgWrapperProps>`
 		padding-top: ${2*theme.topBarSize}px;
 
 			margin-left: auto;
-	}
-`
-
-const EvolveArrow = styled.img.attrs({
-	alt: "downgreenarrow",
-	loading: "lazy",
-	src: downgreenarrow,
-})`
-	left: 0;
-	position: absolute;
-	top: -${theme.topBarSize}px;
-
-	@media (max-width: ${theme.breakpoints.desktop}) {
-		display: none;
 	}
 `
 
