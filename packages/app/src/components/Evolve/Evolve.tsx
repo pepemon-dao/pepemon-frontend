@@ -39,7 +39,7 @@ const EvolveGrid = styled.div`
 
 	@media (min-width: ${theme.breakpoints.tabletL}) {
 		grid-auto-rows: 1fr;
-		margin-bottom: 5em;
+		margin-bottom: 120px;
 		width: 250%;
 	}
 `
