@@ -81,7 +81,8 @@ const Home: React.FC<any> = () => {
 						<Text as="p" font={theme.font.spaceMace} underline>Breed rare Pepemon NFTs</Text>
 						<Spacer size="md"/>
 						<Text as="p" font={theme.font.inter}>
-							Evolve your Pepemon NFTs and mint rare ones to crush your enemies on a web3 card game rewarding gamers for playing.
+							Crush other Pepemon trainers on a web3 card game rewarding everyone for playing.<br></br>
+							<br></br>Evolve your Pepemon NFTs and mint rare ones to climb the Leaderboard and win epic drops!
 						</Text>
 					</ContentColumn>
 				</ContentColumns>
@@ -95,7 +96,8 @@ const Home: React.FC<any> = () => {
 						<Text as="p" font={theme.font.spaceMace} underline>Releasing late 2022</Text>
 						<Spacer size="md"/>
 						<Text as="p" font={theme.font.inter}>
-							Duel other trainers on an epic card game where skill plays a vital role. Each player earn exclusive drops after a battle no matter what the skill level or collection size, there is always an opportunity to earn for everyone!
+							Duel other trainers on an epic card game where skill plays a vital role.<br>
+							</br><br></br>Each player earn exclusive drops after a battle no matter the skill level or collection size, there is always an opportunity to earn for everyone!
 						</Text>
 					</ContentColumn>
 					<ContentColumn mobileStyle={{ marginTop: '2em' }} width="45%">
