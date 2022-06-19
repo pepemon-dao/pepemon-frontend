@@ -136,11 +136,11 @@ const WalkingPepemon = styled.img<WalkingPepemonProps>`
   left: -96px;
   width: 96px;
   height: 96px;
-  animation: walk-pepemon ${(props) => props.duration || "12s"} linear infinite;
+  animation: walk-pepemon-balances ${(props) => props.duration || "12s"} linear infinite;
   animation-delay: ${(props) => props.delay || "0s"};
   z-index: 1;
 
-  @keyframes walk-pepemon {
+  @keyframes walk-pepemon-balances {
     0% {
       top: calc(0% - 96px);
       left: calc(0% - 96px);

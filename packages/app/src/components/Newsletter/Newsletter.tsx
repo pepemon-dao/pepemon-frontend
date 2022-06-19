@@ -1,11 +1,17 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { theme } from "../../theme";
 import { useModal } from "../../hooks";
 import { api } from "../../constants";
 import { Button, ContentCentered, Title, Text, Spacer } from "../../components";
+import { walk1, walk2, walk3 } from "../../assets";
 
 const Newsletter: React.FC<any> = () => {
+
+	const randomNumber = Math.floor(Math.random() * 3);
+	const walkingPepemon = [walk1, walk2, walk3][randomNumber];
+
 	const [email, setEmail] = useState('');
 
 	const initSignUpState = {
@@ -62,7 +68,7 @@ const Newsletter: React.FC<any> = () => {
 
 	return (
 		<>
-			<ContentCentered id="newsletter" style={{paddingTop: "6em", paddingBottom: "6em"}}>
+			<ContentCentered id="newsletter" style={{paddingTop: "6em", paddingBottom: "12em"}}>
 				<Title as="h1" font={theme.font.neometric} size='xxl' weight={900} align="center">
 					Stay up to date and claim ‘em all
 				</Title>
@@ -73,9 +79,17 @@ const Newsletter: React.FC<any> = () => {
 					Be the first to collect all the new Pepemons.
 				</Text>
 				<Spacer size="md"/>
-				<ContentCentered direction="row" bgColor={theme.color.white} style={{ borderRadius: "8px", border: `1px solid ${theme.color.purple[600]}`, overflow: 'hidden' }}>
-						<StyledInput onChange={(e) => setEmail(e.target.value)} type="email" />
-						<Button styling="purple" disabled={email ? false : true} onClick={handleSignUp}>Sign up</Button>
+				<ContentCentered 
+					direction="row" 
+					bgColor={theme.color.white} 
+					style={{ 
+						borderRadius: "8px", 
+						border: `1px solid ${theme.color.purple[600]}`, 
+						position: 'relative'
+				}}>
+					<StyledInput onChange={(e) => setEmail(e.target.value)} type="email" />
+					<Button styling="purple" disabled={email ? false : true} onClick={handleSignUp}>Sign up</Button>
+					<WalkingPepemon src={walkingPepemon} alt="walking pepemon" />
 				</ContentCentered>
 			</ContentCentered>
 		</>
@@ -83,6 +97,7 @@ const Newsletter: React.FC<any> = () => {
 }
 
 const StyledInput = styled.input`
+	background: none;
 	border: none;
 	flex: 1 1 0%;
 	font-size: 1.2rem;
@@ -91,6 +106,58 @@ const StyledInput = styled.input`
 	&:focus-visible {
 		outline: none;
 	}
+`
+
+const WalkingPepemon = styled(LazyLoadImage)`
+	position: absolute;
+	width: 96px;
+	height: 96px;
+	transform: rotate(180deg) scale(-1);
+	animation: walk-pepemon-newsletter ${(props) => props.duration || "10s"} linear infinite;
+  	animation-delay: ${(props) => props.delay || "0s"};
+	bottom: -96px;
+
+  @keyframes walk-pepemon-newsletter {
+    0% {
+      left: calc(50% - 48px);
+	  transform: rotate(180deg) scaleX(-1);
+    }
+	20% {
+		left: calc(100% - 70px);
+	}
+	23% {
+		left: calc(100% - 70px);
+		transform: rotate(180deg) scaleX(-1);
+	}
+	27% {
+		left: calc(100% - 70px);
+		transform: rotate(180deg) scaleX(1);
+	}
+	30% {
+		left: calc(100% - 70px);
+	}
+    50% {
+    	left: calc(50% - 48px);
+    }
+	70% {
+		left: calc(0% - 16px);
+	}
+	73% {
+		left: calc(0% - 16px);
+		transform: rotate(180deg) scaleX(1);
+	}
+	77% {
+		left: calc(0% - 16px);
+		transform: rotate(180deg) scaleX(-1);
+    }
+	80% {
+		left: calc(0% - 16px);
+	}
+    100% {
+		left: calc(50% - 48px);
+		transform: rotate(180deg) scaleX(-1);
+    }
+  }
 `
 
 export default Newsletter;

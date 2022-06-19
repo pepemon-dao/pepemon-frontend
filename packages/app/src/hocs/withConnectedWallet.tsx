@@ -14,7 +14,7 @@ function withConnectedWallet(WrappedComponent: React.FC, props) {
 				{ !account ?
 					<LoadingPage>
 						<ContentCentered>
-				      		<Title as="h1" size='l'>No wallet connected</Title>
+				      		<Title as="h1" size='xxxl' weight={700}>No wallet connected</Title>
 							<Spacer size="md"/>
 						</ContentCentered>
 			        </LoadingPage>
