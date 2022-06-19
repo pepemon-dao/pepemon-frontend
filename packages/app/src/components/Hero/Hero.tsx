@@ -15,7 +15,7 @@ const Hero: React.FC<any> = ({apy}) => {
 						desktopStyle={{ paddingTop: "16px", maxWidth: '460px' }}>
 						<Text as="p" font={theme.font.inter} size='l'>
 							Play and earn web3 card game owned by the players since 2020.<br>
-							Mint or evolve your Pepemons and battle others to win epic prizes!
+							</br>Mint or evolve your Pepemons and battle others to win epic prizes!
 						</Text>
 					</ContentColumn>
 					<ContentColumn mobileStyle={{ marginLeft: '1em', flex: '1 0 35%' }} tabletLStyle={{ display: 'none' }}>
@@ -29,7 +29,7 @@ const Hero: React.FC<any> = ({apy}) => {
 							<ContentBoxNumber><span>1</span></ContentBoxNumber>
 							<Text as="p" align="center">
 								Own a piece of Pepemon.<br>
-								Govern and farm with PPBLZ
+								</br>Govern and farm with PPBLZ
 							</Text>
 							<Spacer size="md"/>
 							<ExternalLink shadow href="https://app.uniswap.org/#/swap?outputCurrency=0x4d2ee5dae46c86da2ff521f7657dad98834f97b8" styling='button'>
@@ -55,7 +55,7 @@ const Hero: React.FC<any> = ({apy}) => {
 							<ContentBoxNumber><span>3</span></ContentBoxNumber>
 							<Text as="p" align="center">
 								Mint Pepemon Boosterpacks.<br>
-								Get whitelisted
+								</br>Get whitelisted
 							</Text>
 							<Spacer size="md"/>
 							<ButtonLink light="true" to="/store/boosterpacks">Preview Boosterpacks</ButtonLink>
