@@ -49,13 +49,13 @@ const Home: React.FC<any> = () => {
 				<StyledSection bgImage={coverblack} desktopStyle={{ color: theme.color.white, textAlign: 'center' }}>
 					<ContentCentered style={{paddingTop: "7.5em"}}>
 						<Title as="h1" font={theme.font.neometric} size='xxl' color='inherit' weight={900} lineHeight={1.04}>
-							Start earning<br /> before ETH 2.0.
+							Start earning<br /> before ETH 2.0
 						</Title>
 						<Spacer size="md"/>
-						<Text as="p" font={theme.font.spaceMace} align='left' color='inherit' underline>NO VCs. No pre-sale.</Text>
+						<Text as="p" font={theme.font.spaceMace} align='left' color='inherit' underline>Airdropped to the community</Text>
 						<Spacer size="md"/>
 						<Text as="p" font={theme.font.inter} color='inherit'>
-							Pepemon tokens were 100% airdropped. No VCs and No token Sale was held, just 300 people got PPBLZ airdropped to their wallets. Since then on average more than 80% of those tokens were staked to generate PPDEX and mint NFT Cards.
+							PPBLZ tokens were 100% airdropped in 2020. No sale of the token was ever conducted and there was no 'VC' investment made. Just 300 early adopters of DeFi and GameFi getting PPBLZ airdropped for supporting the project early. Since then on avg 80% of PPBLZ supply is earning PPDEX used for minting Collector's Edition NFT cards and play the higher leagues.
 						</Text>
 						<Spacer size="md"/>
 
@@ -75,12 +75,12 @@ const Home: React.FC<any> = () => {
 						<Evolve/>
 					</ContentColumn>
 					<ContentColumn width="60%" style={{paddingTop: "3.75em"}}>
-						<Title as="h2" font={theme.font.neometric} size={'xxl'} weight={900}>Evolve your monsters and upgrade your cards</Title>
+						<Title as="h2" font={theme.font.neometric} size={'xxl'} weight={900}>Evolve your monsters</Title>
 						<Spacer size="md"/>
-						<Text as="p" font={theme.font.spaceMace} underline>Breed more Exclusive PepeMonsters!</Text>
+						<Text as="p" font={theme.font.spaceMace} underline>Breed rare Pepemon NFTs</Text>
 						<Spacer size="md"/>
 						<Text as="p" font={theme.font.inter}>
-							Evolve your awesome Pepemon cards and mint exclusive cards to crush your enemies on blockchain decided battles.
+							Evolve your Pepemon NFTs and mint rare ones to crush your enemies on a web3 card game rewarding gamers for playing.
 						</Text>
 					</ContentColumn>
 				</ContentColumns>
@@ -91,10 +91,10 @@ const Home: React.FC<any> = () => {
 					<ContentColumn width="55%" style={{paddingTop: "3.75em"}}>
 						<Title as="h2" font={theme.font.neometric} size='xxl' weight={900}>Pepemon: Degen Battleground</Title>
 						<Spacer size="md"/>
-						<Text as="p" font={theme.font.spaceMace} underline>Release coming in 2022</Text>
+						<Text as="p" font={theme.font.spaceMace} underline>Releasing late 2022</Text>
 						<Spacer size="md"/>
 						<Text as="p" font={theme.font.inter}>
-							Duel other trainers on an epic game powered by DeFi and NFT's. Become a professional Pepetrainer with the PlayAndEarn mechanism that enables each player to get exclusive drops after a battle no matter what the skill level or collection size, there is always an opportunity to earn for everyone!
+							Duel other trainers on an epic card game where skill plays a vital role. Each player earn exclusive drops after a battle no matter what the skill level or collection size, there is always an opportunity to earn for everyone!
 						</Text>
 					</ContentColumn>
 					<ContentColumn mobileStyle={{ marginTop: '2em' }} width="45%">
