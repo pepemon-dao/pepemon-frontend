@@ -41,8 +41,8 @@ const Hero: React.FC<any> = ({apy}) => {
 						<ContentBox shadow style={{height: "auto"}}>
 							<ContentBoxNumber><span>2</span></ContentBoxNumber>
 							<Text as="p" align="center">
-								Beat the inflation.</br>
-								<br>Earn with PPBLZ
+								Beat the inflation.<br>
+								</br>Earn with PPBLZ
 							</Text>
 							<Text as="p" size='xl' font={theme.font.neometric} weight={900} align="center">
 								{apy && apy}
