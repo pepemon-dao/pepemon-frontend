@@ -14,7 +14,7 @@ const Hero: React.FC<any> = ({apy}) => {
 					<ContentColumn
 						desktopStyle={{ paddingTop: "16px", maxWidth: '460px' }}>
 						<Text as="p" font={theme.font.inter} size='l'>
-							Play and earn web3 card game owned by the players since 2020.</br>
+							Play and earn web3 card game owned by the players since 2020.<br>
 							Mint or evolve your Pepemons and battle others to win epic prizes!
 						</Text>
 					</ContentColumn>
@@ -28,7 +28,7 @@ const Hero: React.FC<any> = ({apy}) => {
 						<ContentBox shadow style={{height: "auto"}}>
 							<ContentBoxNumber><span>1</span></ContentBoxNumber>
 							<Text as="p" align="center">
-								Own a piece of Pepemon.</br>
+								Own a piece of Pepemon.<br>
 								Govern and farm with PPBLZ
 							</Text>
 							<Spacer size="md"/>
@@ -54,7 +54,7 @@ const Hero: React.FC<any> = ({apy}) => {
 						<ContentBox shadow style={{height: "auto"}}>
 							<ContentBoxNumber><span>3</span></ContentBoxNumber>
 							<Text as="p" align="center">
-								Mint Pepemon Boosterpacks.</br>
+								Mint Pepemon Boosterpacks.<br>
 								Get whitelisted
 							</Text>
 							<Spacer size="md"/>
