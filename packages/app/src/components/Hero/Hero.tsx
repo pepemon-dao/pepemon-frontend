@@ -55,8 +55,8 @@ const Hero: React.FC<any> = ({apy}) => {
 						<ContentBox shadow style={{height: "auto"}}>
 							<ContentBoxNumber><span>3</span></ContentBoxNumber>
 							<Text as="p" align="center">
-								Get whitelisted for Pepemon Boosterpacks.<br>
-								</br>Mint first
+								Secure your Pepemon Boosterpacks.<br>
+								</br>Get whitelisted
 							</Text>
 							<Spacer size="md"/>
 							<ButtonLink light="true" to="/store/boosterpacks">Preview Boosterpacks</ButtonLink>
