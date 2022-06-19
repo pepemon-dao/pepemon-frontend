@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import { isMobile } from 'web3modal';
 import {
   AnimatedImg,
   ContentCentered,
@@ -11,7 +10,6 @@ import {
   Hero,
   Stats,
   Spacer,
-  ButtonLink,
   Title,
   Text,
   SocialBoxes,
@@ -21,8 +19,9 @@ import Balances from './components/Balances';
 import { theme } from '../../theme';
 import { useTokenPrices } from '../../hooks';
 import { calculatePpblzApy } from '../../utils';
-import { cover, coverblack, logoexpand, pepechu_res, bluecard, pepechucard, pepechurcard, witchenerycard } from '../../assets';
-import { LazyLoadImage, LazyLoadComponent } from 'react-lazy-load-image-component';
+import { cover, coverblack, logoexpand } from '../../assets';
+import { LazyLoadComponent } from 'react-lazy-load-image-component';
+import MintCard from '../../components/MintCard';
 
 const Home: React.FC<any> = () => {
 	const { ppblzPrice, ppdexPrice } = useTokenPrices();
@@ -40,39 +39,10 @@ const Home: React.FC<any> = () => {
 				<Hero apy={`${ppblzApy.toFixed(0)}% APY`}/>
 			</StyledSection>
 
-			<StyledSection desktopStyle={{marginTop: "17em", marginBottom: "7.5em"}}>
-				<ContentColumns>
-					<ContentColumn width="40%" style={{paddingTop: "xxl"}}>
-						<div style={{ position: "relative", height: "100%", width: "100%" }}>
-							<LazyLoadImage src={witchenerycard} alt="witchenery" style={{ objectFit: "cover", width: "80%", position: "absolute", right: "40%", top: "-10%", zIndex: 99 }}/>
-							<LazyLoadImage src={pepechucard} alt="pepechu" style={{ objectFit: "cover", width: "80%", position: "absolute", right: "10%", top: "20%" }}/>
-							<LazyLoadImage src={bluecard} alt="blue" style={{ objectFit: "cover", width: "63%", position: "absolute", left: "-20%", top: "70%" }}/>
-							<LazyLoadImage src={pepechurcard} alt="pepechur" style={{ objectFit: "cover", width: "20%", position: "absolute", right: "28%", top: "-18%" }}/>
-						</div>
-					</ContentColumn>
-					
-					<ContentColumn width="60%" style={{paddingTop: "3.75em"}}>
-						<Title as="h2" font={theme.font.neometric} size='xxl' weight={900} lineHeight={1.15}>Collect unique Pepemon NFT cards</Title>
-						<Spacer size="md"/>
-						<Text as="p" font={theme.font.spaceMace} underline>Scarcity meets pixel perfect art</Text>
-						<Spacer size="md"/>
-						<Text as="p" font={theme.font.inter}>
-							Use PPDEX to mint unique Pepemon NFT cards. All the cards are created by upcoming artists all over the metaverse.
-							<br/><br/>
-							Once you have minted your cards, you can become the very best by dueling with your NFTs in a Trading Card Game on blockchain!
-							<br/><br/>
-							"Pepechu, I choose you!"
-						</Text>
-						<Spacer size="md"/>
-						{ isMobile() &&
-							<>
-								<img loading="lazy" src={pepechu_res} alt='pepechu'style={{ objectFit: "cover"}}/>
-								<Spacer size="md"/>
-							</>
-						}
-						<ButtonLink to="/store/cards">Mint your card</ButtonLink>
-					</ContentColumn>
-				</ContentColumns>
+			<StyledSection
+				mobileStyle={{ marginTop: "3.75em", paddingTop: "3.75em" }}
+				desktopStyle={{marginTop: "17em", marginBottom: "7.5em"}}>
+				<MintCard/>
 			</StyledSection>
 			
 			<LazyLoadComponent threshold={200}>
