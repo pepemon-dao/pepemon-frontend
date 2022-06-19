@@ -3,8 +3,8 @@ import { DefaultPage } from '../../components';
 import { StoreCard } from './components';
 
 export const storeMeta = {
-	title: 'Pepemon - Store',
-	description: 'Use PPDEX to mint unique Pepemon NFT cards. All the cards are created by upcoming artists all over the world. Once you have minted your cards, you can become the very best by dueling with your NFTs in a Trading Card Game on blockchain!'
+	title: 'Pepemon! Store',
+	description: 'Use PPDEX to mint Pepemon NFT cards. All the cards are created by upcoming artists all over the world. You can become the very best by dueling with your NFTs in a web3 card game!'
 }
 
 const Store: React.FC<any> = () => {

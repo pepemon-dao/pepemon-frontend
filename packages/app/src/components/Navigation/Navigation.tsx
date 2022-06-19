@@ -36,7 +36,7 @@ const Navigation = () => {
 					<StyledMenuListItem onClick={() => setIsOpen(false)} isActive={ pathname.startsWith("/staking") && true }>
 						<StyledLink to="/staking">
 							<StyledLinkIcon loading="lazy" src={ staking } alt="staking" />
-							<span>Staking</span>
+							<span>Earning</span>
 						</StyledLink>
 					</StyledMenuListItem>
 					<StyledMenuListItem onClick={() => setIsOpen(false)} isActive={ pathname.startsWith("/subscription") && true }>
