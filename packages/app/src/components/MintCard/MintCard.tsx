@@ -88,7 +88,7 @@ const MintCard: React.FC<any> = () => {
             weight={900}
             lineHeight={1.15}
           >
-            Collect unique Pepemon NFT cards
+            Collect rare Pepemon NFT cards
           </Title>
           <Spacer size="md" />
           <Text as="p" font={theme.font.spaceMace} underline>
@@ -96,12 +96,11 @@ const MintCard: React.FC<any> = () => {
           </Text>
           <Spacer size="md" />
           <Text as="p" font={theme.font.inter}>
-            Use PPDEX to mint unique Pepemon NFT cards. All the cards are
-            created by upcoming artists all over the metaverse.
+            Use PPDEX to mint rare Pepemon NFT cards. The NFTs are
+            created by upcoming artists all over the web3.
             <br />
             <br />
-            Once you have minted your cards, you can become the very best by
-            dueling with your NFTs in a Trading Card Game on blockchain!
+            Once you minted your cards, you can start playing by dueling with your NFTs in a play and earn card game on blockchain!
             <br />
             <br />
             "Pepechu, I choose you!"
@@ -119,7 +118,7 @@ const MintCard: React.FC<any> = () => {
               />
               <Spacer size="md" />
             </ShowOnMobile>
-            <ButtonLink to="/store/cards">Mint your card</ButtonLink>
+            <ButtonLink to="/store/cards">Mint your NFT cards</ButtonLink>
           </AlignCenter>
         </ContentColumn>
       </ContentColumns>
