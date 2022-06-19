@@ -455,7 +455,7 @@ const StakeCard: React.FC<any> = () => {
 						<StakeGridAreaHeaderTitle>
 							<img loading="lazy" src={pepeball} alt="Pepeball"/>
 							<Spacer size="sm"/>
-							<Title as="h2" size='m' color={theme.color.white} font={theme.font.neometric} weight={900}>Stake PPBLZ</Title>
+							<Title as="h2" size='m' color={theme.color.white} font={theme.font.neometric} weight={900}>Earn with PPBLZ</Title>
 						</StakeGridAreaHeaderTitle>
 						<StakeGridAreaHeaderMeta>
 							<span>{ppblzApy.toFixed(0)}% APY</span>
@@ -546,7 +546,7 @@ const StakeCard: React.FC<any> = () => {
 						<StakeGridAreaHeaderTitle>
 							<img loading="lazy" src={uniswap} alt="Uniswap"/>
 							<Spacer size="sm"/>
-							<Title as="h2" size='m' color={theme.color.white} font={theme.font.neometric} weight={900}>Stake PPBLZ-ETH LP</Title>
+							<Title as="h2" size='m' color={theme.color.white} font={theme.font.neometric} weight={900}>Earn with PPBLZ-ETH LP</Title>
 						</StakeGridAreaHeaderTitle>
 						<StakeGridAreaHeaderMeta>
 							<span>{ppblzEthLpApy.toFixed(0)}% APY</span>
