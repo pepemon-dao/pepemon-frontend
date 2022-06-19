@@ -55,7 +55,7 @@ const Home: React.FC<any> = () => {
 						<Text as="p" font={theme.font.spaceMace} align='left' color='inherit' underline>Airdropped to the community</Text>
 						<Spacer size="md"/>
 						<Text as="p" font={theme.font.inter} color='inherit'>
-							PPBLZ tokens were 100% airdropped in 2020. No sale of the token was ever conducted and there was no 'VC' investment made. Just 300 early adopters of DeFi and GameFi getting PPBLZ airdropped for supporting the project early.<br>
+							PPBLZ tokens were 100% airdropped in 2020. No sale of the token was ever conducted and there was no 'VC' investment made. Early adopters of DeFi and NFTs got PPBLZ airdropped for supporting the project early.<br>
 							</br><br></br>Since then on avg 80% of PPBLZ supply is earning PPDEX used for minting Collector's Edition NFT cards and play the higher leagues.
 						</Text>
 						<Spacer size="md"/>
