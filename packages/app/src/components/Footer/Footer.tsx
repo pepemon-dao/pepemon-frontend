@@ -52,7 +52,7 @@ const Footer = () => {
 								<Link to='/privacy-policy'>Privacy policy</Link>
 							</StyledFooterLegalLinks>
 							<div>
-								© 2021
+								Pepemon © 2020-2022
 							</div>
 						</StyledFooterLegalInner>
 					</StyledFooterLegal>
