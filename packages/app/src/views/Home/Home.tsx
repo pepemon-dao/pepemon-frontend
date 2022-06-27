@@ -46,7 +46,7 @@ const Home: React.FC<any> = () => {
 			</StyledSection>
 			
 			<LazyLoadComponent threshold={200}>
-				<StyledSection bgImage={coverblack} desktopStyle={{ color: theme.color.white, textAlign: 'center' }}>
+				<StyledSection bgImage={coverblack} mobileStyle={{ overflowX: 'hidden' }} desktopStyle={{ color: theme.color.white, textAlign: 'center' }}>
 					<ContentCentered style={{paddingTop: "7.5em"}}>
 						<Title as="h1" font={theme.font.neometric} size='xxl' color='inherit' weight={900} lineHeight={1.04}>
 							Start earning<br /> before ETH 2.0
