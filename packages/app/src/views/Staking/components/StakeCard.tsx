@@ -546,25 +546,25 @@ const StakeCard: React.FC<any> = () => {
 						<StakeGridAreaHeaderTitle>
 							<img loading="lazy" src={uniswap} alt="Uniswap"/>
 							<Spacer size="sm"/>
-							<Title as="h2" size='m' color={theme.color.white} font={theme.font.neometric} weight={900}>Earn with PPBLZ-ETH LP</Title>
+							<Title as="h2" size='m' color={theme.color.white} font={theme.font.neometric} weight={900}>Earn with PPBLZ LP</Title>
 						</StakeGridAreaHeaderTitle>
 						<StakeGridAreaHeaderMeta>
 							<span>{ppblzEthLpApy.toFixed(0)}% APY</span>
-							<IButtonPopover cursor={'help'} heading="APY staking PPBLZ-ETH"
+							<IButtonPopover cursor={'help'} heading="APY staking PPBLZ LP"
 								apy={ppblzEthLpApy}
 								ppdexPrice={ppdexPrice}
-								button={{ href: "https://app.uniswap.org/#/add/0x4D2eE5DAe46C86DA2FF521F7657dad98834f97b8/ETH", text: 'Provide PPBLZ-ETH LP liquidity' }}/>
+								button={{ href: "https://app.uniswap.org/#/add/0x4D2eE5DAe46C86DA2FF521F7657dad98834f97b8/ETH", text: 'Add PPBLZ LP' }}/>
 						</StakeGridAreaHeaderMeta>
 					</StakeGridAreaHeader>
 					<StakeGridAreaBody>
 						<DataColumns>
 							<DataColumn>
-								<Text as="p" size="m" font={theme.font.inter}>PPBLZ-ETH balance</Text>
+								<Text as="p" size="m" font={theme.font.inter}>PPBLZ LP balance</Text>
 								<Spacer size="sm"/>
 								<Text as="p" font={theme.font.neometric} weight={900} size='xl'>{parseFloat(uniV2PpblzBalance.toString()).toFixed(2)}</Text>
 							</DataColumn>
 							<DataColumn>
-								<Text as="p" size="m" font={theme.font.inter}>PPBLZ-ETH staked</Text>
+								<Text as="p" size="m" font={theme.font.inter}>PPBLZ LP staked</Text>
 								<Spacer size="sm"/>
 								<Text as="p" font={theme.font.neometric} weight={900} size='xl'>{parseFloat(uniV2PpblzStakedAmount.toString()).toFixed(2)}</Text>
 							</DataColumn>
