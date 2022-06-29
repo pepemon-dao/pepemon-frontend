@@ -553,7 +553,7 @@ const StakeCard: React.FC<any> = () => {
 							<IButtonPopover cursor={'help'} heading="APY staking PPBLZ LP"
 								apy={ppblzEthLpApy}
 								ppdexPrice={ppdexPrice}
-								button={{ href: "https://app.uniswap.org/#/add/0x4D2eE5DAe46C86DA2FF521F7657dad98834f97b8/ETH", text: 'Add PPBLZ LP liquidity' }}/>
+								button={{ href: "https://app.uniswap.org/#/add/0x4D2eE5DAe46C86DA2FF521F7657dad98834f97b8/ETH", text: 'Add PPBLZ LP' }}/>
 						</StakeGridAreaHeaderMeta>
 					</StakeGridAreaHeader>
 					<StakeGridAreaBody>
