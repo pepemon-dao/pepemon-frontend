@@ -37,7 +37,7 @@ const PepemonOneSubscription: React.FC<any> = () => {
     }
 
 	return (
-		<Accordion title='Pepemon One Subscription'>
+		<Accordion title='Pepemon One Subscription' isActive={isStaking}>
 			<AccordionBodyContent side="left">
 				<Text as="p" size='s' lineHeight={1.125}>
 					Get Exclusive NFTs! Provide 100 PPDEX (+ETH) on Uniswap LP, stake these LP tokens and recieve a unique NFT every month. Your LP tokens will be locked for a minimum 32 days.
