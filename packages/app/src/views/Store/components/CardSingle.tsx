@@ -6,6 +6,7 @@ import { getDisplayBalance } from "../../../utils";
 import { theme } from "../../../theme";
 import { getCardMeta, getCardFactoryData, getCardStorePrices } from "../../../hooks";
 import { PepemonProviderContext } from "../../../contexts";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 const CardSingle : React.FC<any> = ({cardId, selectedCard, selectCard}) => {
 	const [pepemon] = useContext(PepemonProviderContext);
@@ -99,7 +100,7 @@ const CardSingle : React.FC<any> = ({cardId, selectedCard, selectCard}) => {
 				{cardPrice ? `${priceOfCard} ${chainId === 56 ? 'BNB' : 'PPDEX'}` : 'loading'}
 			</StyledPepemonCardPrice>
 			<div>
-				<StyledPepemonCardImage loading="lazy" active={cardId === selectedCard?.cardId} src={cardMeta ? cardMeta.image : cardback_normal} alt={cardMeta ? cardMeta.name : 'Loading card'}
+				<StyledPepemonCardImage width="747" height="1038" effect="blur" active={cardId === selectedCard?.cardId} src={cardMeta ? cardMeta.image : cardback_normal} alt={cardMeta ? cardMeta.name : 'Loading card'}
 					onClick={() => isLoaded && selectCard(self)}/>
 				<Title as="h4" font={theme.font.neometric}>{cardMeta ? cardMeta.name : 'Loading'}</Title>
 				<StyledSpacer bg={theme.color.gray[100]} size={2}/>
@@ -149,13 +150,14 @@ export const StyledPepemonCardPrice = styled.span<{styling?: string}>`
 	}
 `
 
-export const StyledPepemonCardImage = styled.img<{active?: boolean}>`
+export const StyledPepemonCardImage = styled(LazyLoadImage)<{active?: boolean}>`
 	filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.12));
 	height: auto;
 	max-width: 25em;
 	position: relative;
 	width: 100%;
 	z-index: 0;
+	transition: filter 0.2s ease-in-out;
 
 	${({ active }) => active && `
 		&{
