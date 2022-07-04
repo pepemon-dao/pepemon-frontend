@@ -50,6 +50,7 @@ export const StyledPageWrapperMain = styled.main`
 	min-height: 100vh;
 	padding-bottom: ${theme.footer.spaceTop}px;
 	width: 100vw;
+	position: relative;
 
 	@supports ( -webkit-touch-callout : none) {
 		background-attachment: scroll;
@@ -59,6 +60,17 @@ export const StyledPageWrapperMain = styled.main`
 		margin-left: ${theme.sideBar.width.closed}px;
 		width: calc(100vw - ${theme.sideBar.width.closed}px);
 	}
+
+	&::before {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100vh;
+		background: linear-gradient(to bottom, rgba(255, 255, 255, .5) 0%, rgba(255, 255, 255, 0) 100%);
+		z-index: 0;
+	}
 `
 
 export const StyledPageWrapperMainInner = styled.div`
@@ -66,6 +78,8 @@ export const StyledPageWrapperMainInner = styled.div`
 	margin-left: auto;
 	margin-right: auto;
 	padding-top: 6em;
+	z-index: 1;
+	position: relative;
 
 	@media (min-width: ${theme.breakpoints.desktop}) {
 		padding-top: 10em;

@@ -7,17 +7,18 @@ import { pepeball, uparrow, dropdownarrow } from '../../assets';
 interface AccordionProps {
 	title: string,
 	isOpen?: boolean,
-	children: any
+	isActive?: boolean,
+	children: any,
 }
 
-const Accordion: React.FC<AccordionProps> = ({title, isOpen = true, children}) => {
+const Accordion: React.FC<AccordionProps> = ({title, isOpen = true, isActive = false, children}) => {
 	const [openAccordion, setOpenAccordion] = useState(isOpen);
 	const toggleAccordion = () => {
 		setOpenAccordion(!openAccordion)
 	}
 
 	return (
-		<AccordionWrapper isOpen={openAccordion}>
+		<AccordionWrapper isActive={isActive} >
 			<AccordionHeader onClick={toggleAccordion} isOpen={openAccordion}>
 				<AccordionHeaderTitle>
 					<img loading="lazy" src={pepeball} alt="Pepeball" style={{ width: "40px", height: "40px", marginRight: "1em" }}/>
@@ -40,8 +41,8 @@ export const AccordionGroup = styled.section`
 	flex-direction: column;
 `
 
-export const AccordionWrapper = styled.div<{isOpen: boolean}>`
-	border: 2px solid ${props => props.isOpen ? `${props.theme.color.green[200]}` : 'transparent'};;
+export const AccordionWrapper = styled.div<{isActive: boolean}>`
+	border: 2px solid ${props => props.isActive ? `${props.theme.color.green[200]}` : 'transparent'};;
 	background-color: ${theme.color.purple[800]};
 	border-radius: ${theme.borderRadius}px;
 	margin-bottom: .8em;

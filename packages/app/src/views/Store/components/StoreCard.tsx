@@ -15,7 +15,7 @@ const StoreCard : React.FC<any> = () => {
 	(selectedPack && routerParams.storeState === "boosterpacks");
 
 	const storeWidth = () =>{
-		if (itemSelected) return "66%";
+		if (itemSelected) return "calc(60% + .5em)";
 		return "100%";
 	}
 
