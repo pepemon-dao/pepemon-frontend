@@ -57,8 +57,8 @@ const Navigation = () => {
 							<span>My Collection</span>
 						</StyledLink>
 					</StyledMenuListItem>
-					<StyledMenuListItem soon isActive={false}>
-						<StyledLink to="/">
+					<StyledMenuListItem onClick={() => setIsOpen(false)} isActive={ pathname.startsWith("/events") && true }>
+						<StyledLink to="/events">
 							<StyledLinkIcon loading="lazy" src={ events } alt="events" />
 							<span>Events</span>
 						</StyledLink>
