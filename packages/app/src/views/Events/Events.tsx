@@ -20,8 +20,8 @@ import { getBalanceOfBatch } from '../../utils/erc1155';
 
 
 export const eventsMeta = {
-	title:'Pepemon! Card staking',
-	description: "Stake your awesome Pepemon cards to receive even more awesome exclusive Pepemon rewards",
+	title:'Pepemon! Evolution Events',
+	description: "Evolve your awesome Pepemon NFT cards to receive exclusive Pepemon NFT rewards",
 }
 
 export interface IStakeEvent {
@@ -514,7 +514,7 @@ const Events: React.FC<any> = () => {
         })
     }, [pepemon.provider])
 	return (
-		<DefaultPage title='Evlove your pepemons'>
+		<DefaultPage title='Evolve your Pepemons NFTs'>
             <AccordionGroup>
            <EventInfo /> 
            <AccordionV2 title='My cards' isOpen={true}>
