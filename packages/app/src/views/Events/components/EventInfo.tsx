@@ -23,18 +23,19 @@ const EventInfo: React.FC<any> = () => {
 						color={theme.color.white}
 						weight='bold'
 					>
-						Hi pepetrainer!
+						Hello there!
 					</Title>
 					<Spacer size='sm' />
 					<Text color={theme.color.white}>
-						On this page you can stake your awesome Pepemon cards to receive even more awesome exclusive 
-						Pepemon rewards. If you are missing one, or maybe even multiple cards required for joining your 
-						desired event, you can always try buying them from a fellow Pepetrainer on OpenSea.
+						On this page you can evolve your awesome Pepemon NFT cards to 
+						receive exclusive Pepemon NFT rewards. If you are missing a NFT card 
+						required for joining an evolution event you can always get them from 
+						a fellow Pepetrainer on OpenSea or Pepemon Marketplace.
 					</Text>
 					<Spacer size='md' />
 					<Text color={theme.color.white}>
-						Sometimes an event requires you to burn certain cards in the process, these cards are marked with 
-						this cute emoji. Until event completion you can always withdraw your cards without any penalty or card burned.
+						Sometimes an evolution event requires you to burn certain cards in the process, these cards are marked with 
+						this 💀 cute emoji. Until event completion you can always withdraw your cards, loosing the progress but without any changes to your NFTs.
 					</Text>
 					<StyledActionClose>
 						<ActionClose onClick={() => setToggleInfo(false)} />
