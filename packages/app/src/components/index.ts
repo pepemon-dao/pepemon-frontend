@@ -1,4 +1,5 @@
 export { default as Accordion, AccordionGroup, AccordionWrapper, AccordionHeader, AccordionHeaderTitle, AccordionHeaderButton, AccordionBody, AccordionBodyContent } from './Accordion'
+export { default as AccordionV2, AccordionGroupV2, AccordionWrapperV2, AccordionHeaderV2, AccordionHeaderTitleV2, AccordionHeaderButtonV2, AccordionBodyV2, AccordionBodyContentV2 } from './AccordionV2'
 export { default as AnimatedImg } from './AnimatedImg';
 export { default as Button, ButtonLink } from './Button';
 export type { ButtonProps } from './Button';

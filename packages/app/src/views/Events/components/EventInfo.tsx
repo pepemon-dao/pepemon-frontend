@@ -64,11 +64,11 @@ const InfoButton = styled.div`
     background-image: linear-gradient(137deg, #47057b 2%, #220245 99%);
     cursor: pointer;
     opacity: 0.8;
+    justify-content: center;
 `;
 
 const InfoContent = styled.div`
-	width: 940px;
-	height: 224px;
+	width: 100%;
 	margin: 24px 210px 16px 0;
 	padding: 16px 16px 24px 32px;
 	border-radius: 16px;
