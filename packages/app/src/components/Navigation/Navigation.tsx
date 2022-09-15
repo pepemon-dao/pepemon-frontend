@@ -51,12 +51,12 @@ const Navigation = () => {
 							<span>Store</span>
 						</StyledLink>
 					</StyledMenuListItem>
-					<StyledMenuListItem soon isActive={false}>
+<!-- 					<StyledMenuListItem soon isActive={false}>
 						<StyledLink to="/">
 							<StyledLinkIcon loading="lazy" src={ my_collection } alt="my collection" />
 							<span>My Collection</span>
 						</StyledLink>
-					</StyledMenuListItem>
+					</StyledMenuListItem> -->
 					<StyledMenuListItem onClick={() => setIsOpen(false)} isActive={ pathname.startsWith("/events") && true }>
 						<StyledLink to="/events">
 							<StyledLinkIcon loading="lazy" src={ events } alt="events" />
