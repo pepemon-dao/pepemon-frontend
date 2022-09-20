@@ -16,15 +16,15 @@ const Footer = () => {
 							<img loading='lazy' src={logoexpand} alt='pepemon logo' style={{maxWidth: '10em'}}/>
 						</div>
 						<div>
-							<Title as='h2' size='xxxs' weight={400} color={theme.color.white}>Start researching</Title>
+							<Title as='h2' size='xxxs' weight={400} color={theme.color.white}>Start Researching</Title>
 							<StyledList>
 								<li><StyledLink external href='https://docs.pepemon.world/'>Docs</StyledLink></li>
 								<li><StyledLink external href='https://opensea.io/collection/pepemonfactory'>Opensea</StyledLink></li>
-								<li><StyledLink external href='https://docs.pepemon.world/gaming'>Degen Battleground</StyledLink></li>
+								<li><StyledLink external href='https://docs.pepemon.world/gaming'>Degen Battleground Lore</StyledLink></li>
 							</StyledList>
 						</div>
 						<div>
-							<Title as='h2' size='xxxs' weight={400} color={theme.color.white}>Start earning</Title>
+							<Title as='h2' size='xxxs' weight={400} color={theme.color.white}>Start Earning</Title>
 							<StyledList>
 								<li><StyledLink external href='https://etherscan.io/token/0x4d2ee5dae46c86da2ff521f7657dad98834f97b8'>PPBLZ Contract</StyledLink></li>
 								<li><StyledLink external href='https://etherscan.io/token/0xf1f508c7c9f0d1b15a76fba564eef2d956220cf7'>PPDEX Contract</StyledLink></li>
@@ -34,12 +34,12 @@ const Footer = () => {
 						</div>
 
 						<div>
-							<Title as='h2' size='xxxs' weight={400} color={theme.color.white}>Get in touch</Title>
+							<Title as='h2' size='xxxs' weight={400} color={theme.color.white}>Join the Community</Title>
 							<StyledList>
 								<li><StyledLink external href='https://twitter.com/pepemonfinance'>Twitter</StyledLink></li>
 								<li><StyledLink external href='https://t.me/pepemonfinance'>Telegram</StyledLink></li>
 								<li><StyledLink external href='https://discord.gg/R8sZwMv'>Discord</StyledLink></li>
-								<li><StyledLink external href='https://github.com/pepem00n'>Github</StyledLink></li>
+								<li><StyledLink external href='https://github.com/pepemon-dao'>Github</StyledLink></li>
 								<li><StyledLink external href='https://medium.com/@pepemonfinance'>Medium</StyledLink></li>
 							</StyledList>
 						</div>
