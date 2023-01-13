@@ -54,7 +54,7 @@ const Navigation = () => {
 					<StyledMenuListItem soon isActive={false}>
 						<StyledLink to="/">
 							<StyledLinkIcon loading="lazy" src={ my_collection } alt="my collection" />
-							<span>My Collection</span>
+							<span>Marketplace</span>
 						</StyledLink>
 					</StyledMenuListItem>
 					<StyledMenuListItem soon isActive={false}>
