@@ -152,9 +152,9 @@ const Home: React.FC<any> = () => {
             </Text>
             <Spacer size="md" />
             <Text as="p" font={theme.font.inter}>
-              hallenge opponents in Pepemon Degen Battleground, an engaging card
-              game that rewards skillful play. Players of all levels can earn
-              exclusive on-chain NFT prizes after each battle, ensuring
+              Challenge opponents in Pepemon Degen Battleground, an engaging
+              card game that rewards skillful play. Players of all levels can
+              earn exclusive on-chain NFT prizes after each battle, ensuring
               opportunities for everyone.<br></br>
               <br></br>Dive into the play-to-earn experience, where your NFT
               card collection grows and thrives within the Pepechain ecosystem!
