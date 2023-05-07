@@ -20,7 +20,7 @@ const Hero: React.FC<any> = ({ apy }) => {
     <ContentColumns mobileStyle={{ marginBottom: "7em" }}>
       <ContentColumn width="40%" style={{ paddingTop: "3.75em" }}>
         <Title as="h1" font={theme.font.spaceMace} size="xxxl">
-          Dive into Pepemon: Exciting Adventures Await!
+          Pepemon World: Battle, Trade, and Collect!
         </Title>
         <ContentColumns mobileStyle={{ flexDirection: "row" }}>
           <ContentColumn
@@ -64,7 +64,7 @@ const Hero: React.FC<any> = ({ apy }) => {
                 href="https://app.uniswap.org/#/swap?outputCurrency=0x4d2ee5dae46c86da2ff521f7657dad98834f97b8"
                 styling="button"
               >
-                Join the Pepemon club
+                Join Pepemon DAO
               </ExternalLink>
             </ContentBox>
           </ContentColumn>
