@@ -9,15 +9,14 @@ const Hero: React.FC<any> = ({apy}) => {
 	return (
 		<ContentColumns mobileStyle={{ marginBottom: '7em' }}>
 			<ContentColumn width="40%" style={{paddingTop: "3.75em"}}>
-				<Title as="h1" font={theme.font.spaceMace} size='xxxl'>Pepemon! Gotta win ‘em all!</Title>
+				<Title as="h1" font={theme.font.spaceMace} size='xxxl'>Dive into Pepemon: Exciting Adventures Await!</Title>
 				<ContentColumns mobileStyle={{ flexDirection: 'row' }}>
 					<ContentColumn
-						desktopStyle={{ paddingTop: "16px", maxWidth: '460px' }}>
-						<Text as="p" font={theme.font.inter} size='l'>
-							Play and earn web3 card game owned by the players since 2020.<br>
-							</br><br></br>Mint or evolve your Pepemons and battle others to win epic prizes!
-						</Text>
-					</ContentColumn>
+    desktopStyle={{ paddingTop: "16px", maxWidth: '460px' }}>
+    <Text as="p" font={theme.font.inter} size='l'>
+        Embark on an exhilarating journey with Degen Battleground, a web3 card game built on <a href="https://docs.pepemon.world/pepechain">Pepechain</a> - offering a world of action-packed fun, low fees, and lightning-fast transactions!<br>
+    </Text>
+</ContentColumn>
 					<ContentColumn mobileStyle={{ marginLeft: '1em', flex: '1 0 35%' }} tabletLStyle={{ display: 'none' }}>
 						<img src={pepetrainer} alt='pepetrainer' style={{ margin: '0 auto', display: 'block' }}/>
 					</ContentColumn>
