@@ -14,11 +14,13 @@ const initial: any = ({
     provider: null,
     // web3: null,
 })
+
 export const Context = createContext<any>({
   pepemon: undefined,
 })
 
 export const PepemonProvider: React.FC<any> = ({ children }) => {
+
   const setContractAddresses = (networkId: any): any => ({
     // @ts-ignore
     ppblzAddress: contractAddresses.ppblz[networkId],
@@ -43,7 +45,7 @@ export const PepemonProvider: React.FC<any> = ({ children }) => {
     // @ts-ignore
     merkleAddressUniV2: contractAddresses.merkleUniV2[networkId],
 	// @ts-ignore
-	merkleDistributor: contractAddresses.merkleDistributor[networkId],
+  	merkleDistributor: contractAddresses.merkleDistributor[networkId],
     // @ts-ignore
     pepemonLottery: contractAddresses.pepemonLottery[networkId],
     // @ts-ignore
