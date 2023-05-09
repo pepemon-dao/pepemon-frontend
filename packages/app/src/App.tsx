@@ -8,6 +8,7 @@ import { theme } from './theme';
 import { metas, LoadingPage } from './views';
 const Home = lazy(() =>  import("./views/Home").then((module) => ({ default: module.default })));
 const Staking = lazy(() =>  import("./views/Staking").then((module) => ({ default: module.default })));
+const Bridge = lazy(() =>  import("./views/Bridge").then((module) => ({ default: module.default })));
 const Subscription = lazy(() =>  import("./views/Subscription").then((module) => ({ default: module.default })));
 const Store = lazy(() =>  import("./views/Store").then((module) => ({ default: module.default })));
 const TermsOfService = lazy(() =>  import("./views/TermsOfService").then((module) => ({ default: module.default })));
@@ -17,6 +18,7 @@ const Error404 = lazy(() =>  import("./views/Error404").then((module) => ({ defa
 const StakingWithAuth = withConnectedWallet(Staking, {metas: metas.stakingMeta});
 const SubscriptionWithAuth = withConnectedWallet(Subscription, {metas: metas.subscriptionMeta});
 const StoreWithAuth = withConnectedWallet(Store, {metas: metas.storeMeta});
+const BridgeWithAuth = withConnectedWallet(Bridge, {metas: metas.storeMeta});
 
 const App: React.FC = () => {
 	return (
@@ -30,6 +32,9 @@ const App: React.FC = () => {
 						</Route>
 						<Route path="/staking">
 							<StakingWithAuth/>
+						</Route>
+						<Route path="/bridge">
+							<BridgeWithAuth/>
 						</Route>
 						<Route path="/subscription">
 							<SubscriptionWithAuth/>

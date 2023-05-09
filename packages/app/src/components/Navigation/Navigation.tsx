@@ -51,6 +51,12 @@ const Navigation = () => {
 							<span>Store</span>
 						</StyledLink>
 					</StyledMenuListItem>
+					<StyledMenuListItem onClick={() => setIsOpen(false)} isActive={ pathname.startsWith("/bridge") && true }>
+						<StyledLink to="/bridge">
+							<StyledLinkIcon loading="lazy" src={ store } alt="bridge" />
+							<span>Bridge</span>
+						</StyledLink>
+					</StyledMenuListItem>
 					<StyledMenuListItem soon isActive={false}>
 						<StyledLink to="/">
 							<StyledLinkIcon loading="lazy" src={ my_collection } alt="my collection" />
