@@ -89,7 +89,7 @@ const Navigation = () => {
             isActive={pathname.startsWith("/bridge") && true}
           >
             <StyledLink to="/bridge">
-              <StyledLinkIcon loading="lazy" src={store} alt="bridge" />
+              <StyledLinkIcon loading="lazy" src={bridge} alt="bridge" />
               <span>Bridge</span>
             </StyledLink>
           </StyledMenuListItem>
@@ -153,72 +153,75 @@ const StyledMenuInnerWrapper = styled.div<{ isOpen: boolean }>`
 			right: 0;
 		}
 	`}
-`
-const StyledMenuList = styled.ul<{isOpen: boolean}>`
-	align-items: center;
-	background-color: ${theme.color.white};
-	display: flex;
-	flex-direction: column;
-	height: 100%;
-	list-style-type: none;
-	margin-bottom: 0;
-	margin-top: 0;
-	padding-left: 1em;
-	width: 100%;
+`;
+const StyledMenuList = styled.ul<{ isOpen: boolean }>`
+  align-items: center;
+  background-color: ${theme.color.white};
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  list-style-type: none;
+  margin-bottom: 0;
+  margin-top: 0;
+  padding-left: 1em;
+  width: 100%;
 
-	@media (min-width: ${theme.breakpoints.desktop}) {
-		padding-left: 2em;
-	}
-`
+  @media (min-width: ${theme.breakpoints.desktop}) {
+    padding-left: 2em;
+  }
+`;
 
 interface StyledLinkProps {
-	isActive?: boolean;
-	soon?: boolean;
+  isActive?: boolean;
+  soon?: boolean;
 }
 
 const StyledLink = styled(Link)<StyledLinkProps>`
-	align-items: flex-start;
-	display: flex;
-	justify-content: flex-start;
-	margin-bottom: 1.6em;
-	margin-top: 1.6em;
-	overflow: hidde;
-	text-decoration: none;
+  align-items: flex-start;
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 1.6em;
+  margin-top: 1.6em;
+  overflow: hidde;
+  text-decoration: none;
 
-	@media (min-width: ${theme.breakpoints.desktop}) {
-		align-items: center;
-	}
+  @media (min-width: ${theme.breakpoints.desktop}) {
+    align-items: center;
+  }
 
-	span {
-		flex: 1 0 auto;
-		font-size: 1.25rem;
-		margin-left: 1em;
-		padding-right: 1em;
-		position: relative;
+  span {
+    flex: 1 0 auto;
+    font-size: 1.25rem;
+    margin-left: 1em;
+    padding-right: 1em;
+    position: relative;
 
-		@media (min-width: ${theme.breakpoints.desktop}) {
-			opacity: 0;
-			padding-right: 1.9em;
-			transform: translateX(-100%);
-			transition: all .4s cubic-bezier(.04,.8,.61,.89);
-		}
-	}
-`
+    @media (min-width: ${theme.breakpoints.desktop}) {
+      opacity: 0;
+      padding-right: 1.9em;
+      transform: translateX(-100%);
+      transition: all 0.4s cubic-bezier(0.04, 0.8, 0.61, 0.89);
+    }
+  }
+`;
 
 const StyledMenuListItem = styled.li<StyledLinkProps>`
-	overflow: hidden;
-	width: 100%;
+  overflow: hidden;
+  width: 100%;
 
-	${StyledLink} {
-		color: ${props => props.isActive ? theme.color.layoutPrimary : theme.color.layoutOverlay};
-		pointer-events: ${props => props.soon && "none"};
+  ${StyledLink} {
+    color: ${(props) =>
+      props.isActive ? theme.color.layoutPrimary : theme.color.layoutOverlay};
+    pointer-events: ${(props) => props.soon && "none"};
 
-		img {
-			opacity: ${props => props.isActive ? 1 : 0.6};
-		}
+    img {
+      opacity: ${(props) => (props.isActive ? 1 : 0.6)};
+    }
 
-		span {
-			${({soon}) => soon && `
+    span {
+      ${({ soon }) =>
+        soon &&
+        `
 				&::after {
 					background-image: linear-gradient(to bottom, #aa6cd6 -100%, #713aac);
 					border-radius: 8px;
@@ -233,86 +236,85 @@ const StyledMenuListItem = styled.li<StyledLinkProps>`
 					top: -1.7em;
 				}
 			`}
-		}
-	}
-`
+    }
+  }
+`;
 
 const StyledMenuIcon = styled.button`
-	background-color: transparent;
-	border: none;
-	padding-left: 1em;
-	padding-right: 1em;
+  background-color: transparent;
+  border: none;
+  padding-left: 1em;
+  padding-right: 1em;
 
-	@media (min-width: ${theme.breakpoints.desktop}) {
-		display: none;
-	}
-`
+  @media (min-width: ${theme.breakpoints.desktop}) {
+    display: none;
+  }
+`;
 
 const StyledLogoLink = styled(StyledLink)<StyledLinkProps>`
-	align-items: center;
-	height: ${theme.topBarSize}px;
-	margin-bottom: 0;
-	margin-top: 0;
+  align-items: center;
+  height: ${theme.topBarSize}px;
+  margin-bottom: 0;
+  margin-top: 0;
 
-	img {
-		width: 40px;
-	}
+  img {
+    width: 40px;
+  }
 
-	@media (min-width: ${theme.breakpoints.desktop}) {
-		margin-left: ${(theme.sideBar.width.closed - 80) / 2}px;
-		margin-right: ${(theme.sideBar.width.closed - 80) / 2}px;
-		height: 107px;
+  @media (min-width: ${theme.breakpoints.desktop}) {
+    margin-left: ${(theme.sideBar.width.closed - 80) / 2}px;
+    margin-right: ${(theme.sideBar.width.closed - 80) / 2}px;
+    height: 107px;
 
-		img {
-			width: 80px;
-		}
-	}
-`
+    img {
+      width: 80px;
+    }
+  }
+`;
 
 const StyledLinkIcon = styled.img`
-	width: ${theme.sideBar.width.closed / 4}px;
-	height: ${theme.sideBar.width.closed / 4}px;
-	object-fit: contain;
-`
+  width: ${theme.sideBar.width.closed / 4}px;
+  height: ${theme.sideBar.width.closed / 4}px;
+  object-fit: contain;
+`;
 
 const StyledMenuOuterWrapper = styled.div`
-	&{
-		background-color: ${theme.color.typographyAllTextOnDark};
-		box-shadow: 0 4px 8px 0 ${theme.color.iconBackgroundGrey8};
-		height: ${theme.topBarSize}px;
-		left: 0;
-		position: fixed;
-		top: 0;
-		transition: width .2s cubic-bezier(.04,.8,.61,.89);
-		width: 100vw;
-		z-index: 30;
+  & {
+    background-color: ${theme.color.typographyAllTextOnDark};
+    box-shadow: 0 4px 8px 0 ${theme.color.iconBackgroundGrey8};
+    height: ${theme.topBarSize}px;
+    left: 0;
+    position: fixed;
+    top: 0;
+    transition: width 0.2s cubic-bezier(0.04, 0.8, 0.61, 0.89);
+    width: 100vw;
+    z-index: 30;
 
-		@media (min-width: ${theme.breakpoints.desktop}) {
-			box-shadow: none;
-			width: ${theme.sideBar.width.closed}px;
-		}
-	}
+    @media (min-width: ${theme.breakpoints.desktop}) {
+      box-shadow: none;
+      width: ${theme.sideBar.width.closed}px;
+    }
+  }
 
-	&:hover {
-		@media (min-width: ${theme.breakpoints.desktop}) {
-			width: ${theme.sideBar.width.opened}px;
-			box-shadow: 0 4px 15px 10px ${theme.color.colorsLayoutShadows};
+  &:hover {
+    @media (min-width: ${theme.breakpoints.desktop}) {
+      width: ${theme.sideBar.width.opened}px;
+      box-shadow: 0 4px 15px 10px ${theme.color.colorsLayoutShadows};
 
-			${StyledLogoLink} {
-				margin-left: 2em;
+      ${StyledLogoLink} {
+        margin-left: 2em;
 
-				img {
-					width: 200px;
-				}
-			}
+        img {
+          width: 200px;
+        }
+      }
 
-			span {
-				opacity: 1;
-				transform: translateX(0%);
-			}
-		}
-
-	}
-`
+      span {
+        opacity: 1;
+        transform: translateX(0%);
+      }
+    }
+  }
+`;
 
 export default Navigation;
