@@ -47,7 +47,7 @@ const BridgeCard: React.FC<any> = () => {
 
     return (
         <div>
-            Layer 1
+            Bridge from Goerli Testnet
             <Text style={{gridArea: 'area0'}} as="p" font={theme.font.neometric} weight={900} size='xl'>
                 {getDisplayBalance(Layer1.nativeBalance)} $ETH
             </Text>
@@ -71,7 +71,7 @@ const BridgeCard: React.FC<any> = () => {
 
             <hr/>
 
-            Layer 2
+            Bridge from Pepechain L2
             <Text style={{gridArea: 'area0'}} as="p" font={theme.font.neometric} weight={900} size='xl'>
                 {getDisplayBalance(Layer2.nativeBalance)} $ETH
             </Text>
