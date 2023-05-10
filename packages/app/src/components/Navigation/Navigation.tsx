@@ -3,7 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import { isMobile } from 'web3modal';
 import { useOutsideClick } from '../../hooks';
-import { pepemonLogoSmall, events, home, my_collection, staking, store, subscriptions, logoexpand, MenuIcon } from '../../assets';
+import { pepemonLogoSmall, events, home, my_collection, staking, store, ,bridge, subscriptions, logoexpand, MenuIcon } from '../../assets';
 import { theme } from '../../theme';
 
 const Navigation = () => {
