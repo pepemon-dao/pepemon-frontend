@@ -1,110 +1,152 @@
-import React, { useState, useRef } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import styled from 'styled-components';
-import { isMobile } from 'web3modal';
-import { useOutsideClick } from '../../hooks';
-import { pepemonLogoSmall, events, home, my_collection, staking, store, ,bridge, subscriptions, logoexpand, MenuIcon } from '../../assets';
-import { theme } from '../../theme';
+import React, { useState, useRef } from "react";
+import { Link, useLocation } from "react-router-dom";
+import styled from "styled-components";
+import { isMobile } from "web3modal";
+import { useOutsideClick } from "../../hooks";
+import {
+  pepemonLogoSmall,
+  events,
+  home,
+  my_collection,
+  staking,
+  store,
+  bridge,
+  subscriptions,
+  logoexpand,
+  MenuIcon,
+} from "../../assets";
+import { theme } from "../../theme";
 
 const Navigation = () => {
-	const [navLogo, setNavLogo] = useState(pepemonLogoSmall);
-	const [isOpen, setIsOpen] = useState(false);
-	const { pathname } = useLocation();
+  const [navLogo, setNavLogo] = useState(pepemonLogoSmall);
+  const [isOpen, setIsOpen] = useState(false);
+  const { pathname } = useLocation();
 
-	const navRef = useRef(null);
-	useOutsideClick(navRef, () => isOpen && setIsOpen(false));
+  const navRef = useRef(null);
+  useOutsideClick(navRef, () => isOpen && setIsOpen(false));
 
-	return (
-		<StyledMenuOuterWrapper {...(!isMobile() && { onMouseEnter: () => setNavLogo(logoexpand), onMouseLeave: () => setNavLogo(pepemonLogoSmall) })} ref={navRef}>
-			<StyledMenuInnerWrapper isOpen={isOpen}>
-				<StyledLogoWrapper>
-					<StyledMenuIcon onClick={() => setIsOpen(!isOpen)}>
-						<MenuIcon isOpen={isOpen}/>
-					</StyledMenuIcon>
-					<StyledLogoLink to="/">
-						<img src={navLogo} alt="logo" />
-					</StyledLogoLink>
-				</StyledLogoWrapper>
+  return (
+    <StyledMenuOuterWrapper
+      {...(!isMobile() && {
+        onMouseEnter: () => setNavLogo(logoexpand),
+        onMouseLeave: () => setNavLogo(pepemonLogoSmall),
+      })}
+      ref={navRef}
+    >
+      <StyledMenuInnerWrapper isOpen={isOpen}>
+        <StyledLogoWrapper>
+          <StyledMenuIcon onClick={() => setIsOpen(!isOpen)}>
+            <MenuIcon isOpen={isOpen} />
+          </StyledMenuIcon>
+          <StyledLogoLink to="/">
+            <img src={navLogo} alt="logo" />
+          </StyledLogoLink>
+        </StyledLogoWrapper>
 
-				<StyledMenuList isOpen={isOpen}>
-					<StyledMenuListItem onClick={() => setIsOpen(false)} isActive={ pathname === "/" && true }>
-						<StyledLink to="/">
-							<StyledLinkIcon loading="lazy" src={ home } alt="home" />
-							<span>Home</span>
-						</StyledLink>
-					</StyledMenuListItem>
-					<StyledMenuListItem onClick={() => setIsOpen(false)} isActive={ pathname.startsWith("/staking") && true }>
-						<StyledLink to="/staking">
-							<StyledLinkIcon loading="lazy" src={ staking } alt="staking" />
-							<span>Earning</span>
-						</StyledLink>
-					</StyledMenuListItem>
-					<StyledMenuListItem onClick={() => setIsOpen(false)} isActive={ pathname.startsWith("/subscription") && true }>
-						<StyledLink to="/subscription">
-							<StyledLinkIcon loading="lazy" src={ subscriptions } alt="subscriptions" />
-							<span>Subscription</span>
-						</StyledLink>
-					</StyledMenuListItem>
-					<StyledMenuListItem onClick={() => setIsOpen(false)} isActive={ pathname.startsWith("/store") && true }>
-						<StyledLink to="/store">
-							<StyledLinkIcon loading="lazy" src={ store } alt="store" />
-							<span>Store</span>
-						</StyledLink>
-					</StyledMenuListItem>
-					<StyledMenuListItem onClick={() => setIsOpen(false)} isActive={ pathname.startsWith("/bridge") && true }>
-						<StyledLink to="/bridge">
-							<StyledLinkIcon loading="lazy" src={ store } alt="bridge" />
-							<span>Bridge</span>
-						</StyledLink>
-					</StyledMenuListItem>
-					<StyledMenuListItem soon isActive={false}>
-						<StyledLink to="/">
-							<StyledLinkIcon loading="lazy" src={ my_collection } alt="my collection" />
-							<span>Marketplace</span>
-						</StyledLink>
-					</StyledMenuListItem>
-					<StyledMenuListItem soon isActive={false}>
-						<StyledLink to="/">
-							<StyledLinkIcon loading="lazy" src={ events } alt="events" />
-							<span>Events</span>
-						</StyledLink>
-					</StyledMenuListItem>
-				</StyledMenuList>
-			</StyledMenuInnerWrapper>
-		</StyledMenuOuterWrapper>
-	);
-}
+        <StyledMenuList isOpen={isOpen}>
+          <StyledMenuListItem
+            onClick={() => setIsOpen(false)}
+            isActive={pathname === "/" && true}
+          >
+            <StyledLink to="/">
+              <StyledLinkIcon loading="lazy" src={home} alt="home" />
+              <span>Home</span>
+            </StyledLink>
+          </StyledMenuListItem>
+          <StyledMenuListItem
+            onClick={() => setIsOpen(false)}
+            isActive={pathname.startsWith("/staking") && true}
+          >
+            <StyledLink to="/staking">
+              <StyledLinkIcon loading="lazy" src={staking} alt="staking" />
+              <span>Earning</span>
+            </StyledLink>
+          </StyledMenuListItem>
+          <StyledMenuListItem
+            onClick={() => setIsOpen(false)}
+            isActive={pathname.startsWith("/subscription") && true}
+          >
+            <StyledLink to="/subscription">
+              <StyledLinkIcon
+                loading="lazy"
+                src={subscriptions}
+                alt="subscriptions"
+              />
+              <span>Subscription</span>
+            </StyledLink>
+          </StyledMenuListItem>
+          <StyledMenuListItem
+            onClick={() => setIsOpen(false)}
+            isActive={pathname.startsWith("/store") && true}
+          >
+            <StyledLink to="/store">
+              <StyledLinkIcon loading="lazy" src={store} alt="store" />
+              <span>Store</span>
+            </StyledLink>
+          </StyledMenuListItem>
+          <StyledMenuListItem
+            onClick={() => setIsOpen(false)}
+            isActive={pathname.startsWith("/bridge") && true}
+          >
+            <StyledLink to="/bridge">
+              <StyledLinkIcon loading="lazy" src={store} alt="bridge" />
+              <span>Bridge</span>
+            </StyledLink>
+          </StyledMenuListItem>
+          <StyledMenuListItem soon isActive={false}>
+            <StyledLink to="/">
+              <StyledLinkIcon
+                loading="lazy"
+                src={my_collection}
+                alt="my collection"
+              />
+              <span>Marketplace</span>
+            </StyledLink>
+          </StyledMenuListItem>
+          <StyledMenuListItem soon isActive={false}>
+            <StyledLink to="/">
+              <StyledLinkIcon loading="lazy" src={events} alt="events" />
+              <span>Events</span>
+            </StyledLink>
+          </StyledMenuListItem>
+        </StyledMenuList>
+      </StyledMenuInnerWrapper>
+    </StyledMenuOuterWrapper>
+  );
+};
 
 const StyledLogoWrapper = styled.div`
-	align-self: flex-start;
-	align-items: center;
-	display: flex;
-	height: ${theme.topBarSize}px;
-	right: -100%;
-	position: relative;
+  align-self: flex-start;
+  align-items: center;
+  display: flex;
+  height: ${theme.topBarSize}px;
+  right: -100%;
+  position: relative;
 
-	@media (min-width: ${theme.breakpoints.desktop}) {
-		right: 0;
-		margin-bottom: 2em;
-		margin-top: 2em;
-	}
-`
+  @media (min-width: ${theme.breakpoints.desktop}) {
+    right: 0;
+    margin-bottom: 2em;
+    margin-top: 2em;
+  }
+`;
 
-const StyledMenuInnerWrapper = styled.div<{isOpen: boolean}>`
-	align-items: center;
-	display: flex;
-	flex-direction: column;
-	height: 100vh;
-	transform: translateX(-100%);
-	transition: transform .2s cubic-bezier(.04,.8,.61,.89);
-	max-width: ${theme.sideBar.width.opened}px;
+const StyledMenuInnerWrapper = styled.div<{ isOpen: boolean }>`
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  transform: translateX(-100%);
+  transition: transform 0.2s cubic-bezier(0.04, 0.8, 0.61, 0.89);
+  max-width: ${theme.sideBar.width.opened}px;
 
-	@media (min-width: ${theme.breakpoints.desktop}) {
-		background-color: ${theme.color.white};
-		transform: translateX(0);
-	}
+  @media (min-width: ${theme.breakpoints.desktop}) {
+    background-color: ${theme.color.white};
+    transform: translateX(0);
+  }
 
-	${({isOpen}) => isOpen && `
+  ${({ isOpen }) =>
+    isOpen &&
+    `
 		transform: translateX(0);
 
 		${StyledLogoWrapper} {
