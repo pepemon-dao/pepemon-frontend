@@ -1,4 +1,3 @@
-import {chains} from "../constants";
 
 const isSupportedChain = (chainId: number, pathname: string) => {
 	if(pathname.startsWith('/bridge')) {

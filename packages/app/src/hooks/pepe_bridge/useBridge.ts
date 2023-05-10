@@ -4,8 +4,7 @@ import {Goerli, PepemonChain} from "../../utils/providers";
 import {PepemonProviderContext} from "../../contexts";
 import {getBalance, getNativeBalance} from "../../utils";
 import {getPpdexAddress} from "../../pepemon/utils";
-import {useBridgeContracts} from "./useBridgeContracts";
-import {CrossChainMessenger} from "@eth-optimism/sdk";
+import {Layer, useBridgeContracts} from "./useBridgeContracts";
 
 // import {crossChainMessenger} from "../utils/bridgeContract";
 
@@ -31,7 +30,7 @@ export const useBridge = (): BridgeBalances => {
     const [layer2PpdexBalance, setLayer2PpdexBalance] = useState(new BigNumber(0))
     const [layer1PpblzBalance, setLayer1PpblzBalance] = useState(new BigNumber(0))
     const [layer2PpblzBalance, setLayer2PpblzBalance] = useState(new BigNumber(0))
-    const messenger: CrossChainMessenger = useBridgeContracts()
+    const {messenger, activeLayer} = useBridgeContracts()
 
     const {account} = pepemon;
 
@@ -54,10 +53,21 @@ export const useBridge = (): BridgeBalances => {
     }, [account]);
 
     const depositFunds = useCallback(async (amount: BigNumber) => {
+        if (!messenger || activeLayer !== Layer.Layer1) {
+            return
+        }
+
+        console.log(amount.toString())
+
         const response = await messenger.depositETH(amount.toString())
     }, [messenger])
 
     const withdrawFunds = useCallback(async (amount: BigNumber) => {
+        if (!messenger || activeLayer !== Layer.Layer2) {
+
+            return
+        }
+
         const response = await messenger.withdrawETH(amount.toString())
     }, [messenger])
 

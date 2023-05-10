@@ -3,7 +3,6 @@ import BigNumber from 'bignumber.js'
 export const getBalanceNumber = (balance: BigNumber, decimals = 18) => {
 	if (!balance.dividedBy) return;
 	const displayBalance = balance.dividedBy(new BigNumber(10).pow(decimals));
-	console.log(displayBalance)
 	return displayBalance.toNumber()
 }
 

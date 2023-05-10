@@ -4,7 +4,7 @@ import Web3 from 'web3';
 import {PepemonProviderContext} from '../../../contexts';
 import {useHorizontalScroll} from "../../../hooks";
 import {useBridge} from "../../../hooks/pepe_bridge/useBridge";
-import {getDisplayBalance} from "../../../utils";
+import {getDisplayBalance, oneEther} from "../../../utils";
 import {Button, Text} from "../../../components";
 import {theme} from "../../../theme";
 import BigNumber from "bignumber.js";
@@ -12,6 +12,7 @@ import BigNumber from "bignumber.js";
 const BridgeCard: React.FC<any> = () => {
     const [transactionFinished, setTransactionFinished] = useState(0);
     const [l1BalanceToBridge, setL1BalanceToBridge] = useState(0);
+    const [l2BalanceToWithdraw, setL2BalanceToWithdraw] = useState(0);
 
     const [pepemon] = useContext(PepemonProviderContext);
     const {account, contracts, provider} = pepemon;
@@ -59,8 +60,12 @@ const BridgeCard: React.FC<any> = () => {
                 step="1"
                 autoFocus={true}
             />
-            <Button style={{gridArea: 'area3'}} styling="purple" width="clamp(100px, 18em, 100%)"
-                    onClick={() => depositFunds(new BigNumber(1))}>
+            <Button
+                style={{gridArea: 'area3'}}
+                styling="purple" width="clamp(100px, 18em, 100%)"
+                onClick={() => depositFunds(new BigNumber(l1BalanceToBridge).multipliedBy(oneEther))}
+                disabled={isInvalidInput(l1BalanceToBridge.toString())}
+            >
                 Bridge
             </Button>
 
@@ -72,15 +77,15 @@ const BridgeCard: React.FC<any> = () => {
             </Text>
             <StyledInput
                 placeholder="0.00"
-                value={l1BalanceToBridge}
-                onChange={(event) => setL1BalanceToBridge(parseFloat(cleanNumberInput(event.target.value, 18)))}
+                value={l2BalanceToWithdraw}
+                onChange={(event) => setL2BalanceToWithdraw(parseFloat(cleanNumberInput(event.target.value, 18)))}
                 min="0.00"
                 type={"number"}
                 step="1"
                 autoFocus={true}
             />
             <Button style={{gridArea: 'area3'}} styling="purple" width="clamp(100px, 18em, 100%)"
-                    onClick={() => withdrawFunds(new BigNumber(1))}
+                    onClick={() => withdrawFunds(new BigNumber(l2BalanceToWithdraw).multipliedBy(oneEther))}
             >
                 Withdraw
             </Button>

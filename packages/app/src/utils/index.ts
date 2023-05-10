@@ -17,3 +17,5 @@ export const bnToDec = (bn: BigNumber, decimals = 18): number => {
 export const decToBn = (dec: number, decimals = 18) => {
   return new BigNumber(dec).multipliedBy(new BigNumber(10).pow(decimals))
 }
+
+export const oneEther = new BigNumber(10).pow(18)
