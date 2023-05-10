@@ -64,6 +64,9 @@ export { default as subscriptions } from './img/icons/icon_subscriptions_32px.sv
 export { default as MenuIcon } from './img/icons/MenuIcon';
 export { default as up_down_arrows_dark } from './img/icons/up_down_arrows_dark.png';
 export { default as uparrow } from './img/icons/uparrow.png';
+export { default as equalIcon } from './img/icons/equal.svg';
+export { default as disabledplusIcon } from './img/icons/disabledplus.svg';
+export { default as enabledplusIcon } from './img/icons/enabledplus.svg';
 
 // logo
 export { default as discord } from './img/logo/discord.svg';

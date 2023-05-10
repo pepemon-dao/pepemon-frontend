@@ -1,0 +1,15 @@
+{
+    "plugins": ["prettier"],
+    "rules": {
+      "prettier/prettier":  [
+        "error",
+        {
+          "singleQuote": true,
+          "parser": "flow",
+          "useTabs": true,
+          "endOfLine":"auto",
+          "printWidth": 120
+        }
+      ]
+    }
+  }

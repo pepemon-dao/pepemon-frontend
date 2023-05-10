@@ -10,6 +10,8 @@ const Home = lazy(() =>  import("./views/Home").then((module) => ({ default: mod
 const Staking = lazy(() =>  import("./views/Staking").then((module) => ({ default: module.default })));
 const Subscription = lazy(() =>  import("./views/Subscription").then((module) => ({ default: module.default })));
 const Store = lazy(() =>  import("./views/Store").then((module) => ({ default: module.default })));
+const Events = lazy(() =>  import("./views/Events").then((module) => ({ default: module.default })));
+
 const TermsOfService = lazy(() =>  import("./views/TermsOfService").then((module) => ({ default: module.default })));
 const PrivacyPolicy = lazy(() =>  import("./views/PrivacyPolicy").then((module) => ({ default: module.default })));
 const Error404 = lazy(() =>  import("./views/Error404").then((module) => ({ default: module.default })));
@@ -17,6 +19,7 @@ const Error404 = lazy(() =>  import("./views/Error404").then((module) => ({ defa
 const StakingWithAuth = withConnectedWallet(Staking, {metas: metas.stakingMeta});
 const SubscriptionWithAuth = withConnectedWallet(Subscription, {metas: metas.subscriptionMeta});
 const StoreWithAuth = withConnectedWallet(Store, {metas: metas.storeMeta});
+const EventsWithAuth = withConnectedWallet(Events, {metas: metas.eventsMeta});
 
 const App: React.FC = () => {
 	return (
@@ -37,9 +40,12 @@ const App: React.FC = () => {
 						<Route path="/store/:storeState(cards|boosterpacks)?">
 							<StoreWithAuth/>
 						</Route>
+						<Route path="/events">
+							<EventsWithAuth/>
+						</Route>
 						<Route path='/terms-of-service' component={TermsOfService} />
 						<Route path='/privacy-policy' component={PrivacyPolicy} />
-						<Route path={["/events", "/my-collection"]}>
+						<Route path={["/my-collection"]}>
 							<Error404 title='This page will be available soon👀'/>
 						</Route>
 						<Route component={Error404} />
