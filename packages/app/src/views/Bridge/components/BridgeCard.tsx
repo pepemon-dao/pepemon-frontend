@@ -64,7 +64,7 @@ const BridgeCard: React.FC<any> = () => {
                 style={{gridArea: 'area3'}}
                 styling="purple" width="clamp(100px, 18em, 100%)"
                 onClick={() => depositFunds(new BigNumber(l1BalanceToBridge).multipliedBy(oneEther))}
-                disabled={isInvalidInput(l1BalanceToBridge.toString())}
+                disabled={Layer1.nativeBalance.isLessThan(l1BalanceToBridge) || !Layer1.isActivate}
             >
                 Bridge
             </Button>
@@ -84,8 +84,11 @@ const BridgeCard: React.FC<any> = () => {
                 step="1"
                 autoFocus={true}
             />
-            <Button style={{gridArea: 'area3'}} styling="purple" width="clamp(100px, 18em, 100%)"
+            <Button style={{gridArea: 'area3'}}
+                    styling="purple"
+                    width="clamp(100px, 18em, 100%)"
                     onClick={() => withdrawFunds(new BigNumber(l2BalanceToWithdraw).multipliedBy(oneEther))}
+                    disabled={Layer2.nativeBalance.isLessThan(l2BalanceToWithdraw) || !Layer2.isActivate}
             >
                 Withdraw
             </Button>

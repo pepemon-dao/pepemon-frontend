@@ -12,6 +12,7 @@ interface BridgeBalance {
     nativeBalance: BigNumber;
     ppblzBalance: BigNumber;
     ppdexBalance: BigNumber;
+    isActivate: boolean;
 }
 
 interface BridgeBalances {
@@ -75,12 +76,14 @@ export const useBridge = (): BridgeBalances => {
         Layer1: {
             nativeBalance: layer1NativeBalance,
             ppblzBalance: new BigNumber(0),
-            ppdexBalance: layer1PpdexBalance
+            ppdexBalance: layer1PpdexBalance,
+            isActivate: activeLayer === Layer.Layer1
         },
         Layer2: {
             nativeBalance: layer2NativeBalance,
             ppblzBalance: new BigNumber(0),
-            ppdexBalance: new BigNumber(0)
+            ppdexBalance: new BigNumber(0),
+            isActivate: activeLayer === Layer.Layer2
         },
         depositFunds: depositFunds,
         withdrawFunds: withdrawFunds
