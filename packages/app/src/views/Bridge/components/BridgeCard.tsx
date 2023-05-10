@@ -1,6 +1,5 @@
 import React, {useContext, useRef, useState} from 'react';
 import styled from "styled-components";
-import Web3 from 'web3';
 import {PepemonProviderContext} from '../../../contexts';
 import {useHorizontalScroll} from "../../../hooks";
 import {useBridge} from "../../../hooks/pepe_bridge/useBridge";
@@ -8,15 +7,37 @@ import {getDisplayBalance, oneEther} from "../../../utils";
 import {Button, Text} from "../../../components";
 import {theme} from "../../../theme";
 import BigNumber from "bignumber.js";
+import {StyledStoreBody, StyledStoreWrapper} from '../../Store/components';
+import CardDropdownWrapper from "../../../components/CardDropdown/wrapper";
+import CardDropdown from "../../../components/CardDropdown";
+import {getPpblzAddress, getPpdexAddress} from "../../../pepemon/utils";
+
+const options = [
+    {
+        title: '$PPDEX',
+        onClick: () => console.log('Goerli Testnet'),
+        address: getPpdexAddress()
+    },
+    {
+        title: '$PPBLZ',
+        onClick: () => console.log('Rinkeby Testnet'),
+        address: getPpblzAddress()
+    },
+];
 
 const BridgeCard: React.FC<any> = () => {
     const [transactionFinished, setTransactionFinished] = useState(0);
-    const [l1BalanceToBridge, setL1BalanceToBridge] = useState(0);
-    const [l2BalanceToWithdraw, setL2BalanceToWithdraw] = useState(0);
+    const [l1NativeBalanceToBridge, setL1NativeBalanceToBridge] = useState(0);
+    const [l1TokenBalanceToBridge, setL1TokenBalanceToBridge] = useState(0);
+
+    const [l2NativeBalanceToBridge, setL2NativeBalanceToBridge] = useState(0);
+    const [l2TokenBalanceToBridge, setL2TokenBalanceToBridge] = useState(0);
+
+    const [tokenToBridge, setTokenToBridge] = useState("ppdex");
+
 
     const [pepemon] = useContext(PepemonProviderContext);
     const {account, contracts, provider} = pepemon;
-    const web3 = new Web3(provider);
 
     let horzScroll: any = useRef(null);
     useHorizontalScroll(horzScroll);
@@ -47,52 +68,91 @@ const BridgeCard: React.FC<any> = () => {
 
     return (
         <div>
-            Bridge from Goerli Testnet
-            <Text style={{gridArea: 'area0'}} as="p" font={theme.font.neometric} weight={900} size='xl'>
-                {getDisplayBalance(Layer1.nativeBalance)} $ETH
-            </Text>
-            <StyledInput
-                placeholder="0.00"
-                value={l1BalanceToBridge}
-                onChange={(event) => setL1BalanceToBridge(parseFloat(cleanNumberInput(event.target.value, 18)))}
-                min="0.00"
-                type={"number"}
-                step="1"
-                autoFocus={true}
-            />
-            <Button
-                style={{gridArea: 'area3'}}
-                styling="purple" width="clamp(100px, 18em, 100%)"
-                onClick={() => depositFunds(new BigNumber(l1BalanceToBridge).multipliedBy(oneEther))}
-                disabled={Layer1.nativeBalance.isLessThan(l1BalanceToBridge) || !Layer1.isActivate}
-            >
-                Bridge
-            </Button>
+            <StyledStoreWrapper>
+                <StyledStoreBody>
+                    <CardDropdownWrapper>
+                        <CardDropdown
+                            style={{gridArea: 'area2'}}
+                            options={options}
+                            title="Choose Token"
+                            setActive={(option) => setTokenToBridge(option.title)}
+                        />
+                    </CardDropdownWrapper>
 
-            <hr/>
+                    Bridge from Goerli Testnet
+                    <Text style={{gridArea: 'area0'}} as="p" font={theme.font.neometric} weight={900} size='xl'>
+                        {getDisplayBalance(Layer1.nativeBalance)} $ETH
+                    </Text>
+                    <StyledInput
+                        placeholder="0.00"
+                        value={l1NativeBalanceToBridge}
+                        onChange={(event) => setL1NativeBalanceToBridge(parseFloat(cleanNumberInput(event.target.value, 18)))}
+                        min="0.00"
+                        type={"number"}
+                        step="1"
+                        autoFocus={true}
+                    />
+                    <Button
+                        style={{gridArea: 'area3'}}
+                        styling="purple" width="clamp(100px, 18em, 100%)"
+                        onClick={() => depositFunds(new BigNumber(l1NativeBalanceToBridge).multipliedBy(oneEther))}
+                        disabled={Layer1.nativeBalance.isLessThan(l1NativeBalanceToBridge) || !Layer1.isActivate}
+                    >
+                        Bridge
+                    </Button>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <h1>{tokenToBridge}</h1>
+                    <StyledInput
+                        placeholder="0.00"
+                        value={l1NativeBalanceToBridge}
+                        onChange={(event) => setL1NativeBalanceToBridge(parseFloat(cleanNumberInput(event.target.value, 18)))}
+                        min="0.00"
+                        type={"number"}
+                        step="1"
+                        autoFocus={true}
+                    />
+                    <Button
+                        style={{gridArea: 'area3'}}
+                        styling="purple" width="clamp(100px, 18em, 100%)"
+                        onClick={() => depositFunds(new BigNumber(l1NativeBalanceToBridge).multipliedBy(oneEther))}
+                        disabled={Layer1.nativeBalance.isLessThan(l1NativeBalanceToBridge) || !Layer1.isActivate}
+                    >
+                        Bridge
+                    </Button>
 
-            Bridge from Pepechain L2
-            <Text style={{gridArea: 'area0'}} as="p" font={theme.font.neometric} weight={900} size='xl'>
-                {getDisplayBalance(Layer2.nativeBalance)} $ETH
-            </Text>
-            <StyledInput
-                placeholder="0.00"
-                value={l2BalanceToWithdraw}
-                onChange={(event) => setL2BalanceToWithdraw(parseFloat(cleanNumberInput(event.target.value, 18)))}
-                min="0.00"
-                type={"number"}
-                step="1"
-                autoFocus={true}
-            />
-            <Button style={{gridArea: 'area3'}}
-                    styling="purple"
-                    width="clamp(100px, 18em, 100%)"
-                    onClick={() => withdrawFunds(new BigNumber(l2BalanceToWithdraw).multipliedBy(oneEther))}
-                    disabled={Layer2.nativeBalance.isLessThan(l2BalanceToWithdraw) || !Layer2.isActivate}
-            >
-                Withdraw
-            </Button>
+                    <hr/>
 
+                    Bridge from Pepechain L2
+                    <Text style={{gridArea: 'area0'}} as="p" font={theme.font.neometric} weight={900} size='xl'>
+                        {getDisplayBalance(Layer2.nativeBalance)} $ETH
+                    </Text>
+                    <StyledInput
+                        placeholder="0.00"
+                        value={l2NativeBalanceToBridge}
+                        onChange={(event) => setL2NativeBalanceToBridge(parseFloat(cleanNumberInput(event.target.value, 18)))}
+                        min="0.00"
+                        type={"number"}
+                        step="1"
+                        autoFocus={true}
+                    />
+                    <Button style={{gridArea: 'area3'}}
+                            styling="purple"
+                            width="clamp(100px, 18em, 100%)"
+                            onClick={() => withdrawFunds(new BigNumber(l2NativeBalanceToBridge).multipliedBy(oneEther))}
+                            disabled={Layer2.nativeBalance.isLessThan(l2NativeBalanceToBridge) || !Layer2.isActivate}
+                    >
+                        Withdraw
+                    </Button>
+
+                    <br/>
+                    <br/>
+                    <br/>
+
+
+                </StyledStoreBody>
+            </StyledStoreWrapper>
         </div>
     );
 }
