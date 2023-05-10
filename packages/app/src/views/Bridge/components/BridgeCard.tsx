@@ -33,7 +33,7 @@ const BridgeCard: React.FC<any> = () => {
   const [l2NativeBalanceToBridge, setL2NativeBalanceToBridge] = useState(0);
   const [l2TokenBalanceToBridge, setL2TokenBalanceToBridge] = useState(0);
 
-  const [tokenToBridge, setTokenToBridge] = useState("ppdex");
+  const [tokenToBridge, setTokenToBridge] = useState("$PPDEX");
 
   const [pepemon] = useContext(PepemonProviderContext);
   const { account, contracts, provider } = pepemon;
@@ -78,7 +78,8 @@ const BridgeCard: React.FC<any> = () => {
               setActive={(option) => setTokenToBridge(option.title)}
             />
           </CardDropdownWrapper>
-          Bridge to Pepechain Testnet from Goerli Testnet
+          Start bridging gETH or Pepemon tokens to Pepechain Testnet. Connect
+          your wallet to Goerli to start.
           <Text
             style={{ gridArea: "area0" }}
             as="p"
@@ -148,10 +149,11 @@ const BridgeCard: React.FC<any> = () => {
               !Layer1.isActivate
             }
           >
-            Bridge
+            Bridge Tokens to Pepechain
           </Button>
           <hr />
-          Bridge from Pepechain Testnet to Goerli
+          Want to bridge back your gETH to Goerli? Connect your wallet to
+          Pepechain Testnet to start.
           <Text
             style={{ gridArea: "area0" }}
             as="p"
@@ -188,7 +190,7 @@ const BridgeCard: React.FC<any> = () => {
               !Layer2.isActivate
             }
           >
-            Withdraw from Pepechain Testnet
+            Bridge to Goerli
           </Button>
           <br />
           <br />
