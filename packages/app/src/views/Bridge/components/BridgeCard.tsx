@@ -46,11 +46,11 @@ const BridgeCard: React.FC<any> = () => {
             >
               <Link to={`/bridge/bid-on-pepesea`}>4. Bid</Link>
             </StyledLinkTitle>
-            <StyledLinkTitle
+            {/* <StyledLinkTitle
               isInactive={routerParams.bridgeState !== "stake-ppblz"}
             >
               <Link to={`/bridge/stake-ppblz`}>5. Staking</Link>
-            </StyledLinkTitle>
+            </StyledLinkTitle> */}
           </div>
         </StyledStoreHeader>
         <StyledStoreBody>
@@ -109,7 +109,7 @@ const BridgeCard: React.FC<any> = () => {
               ></iframe>
             </>
           )}
-          {routerParams.bridgeState === "stake-ppblz" && (
+          {/* {routerParams.bridgeState === "stake-ppblz" && (
             <>
               <Text as="p" font={theme.font.inter} size="m">
                 Discover a world of exclusive rewards with the power of Pepemon
@@ -127,7 +127,7 @@ const BridgeCard: React.FC<any> = () => {
                 frameBorder="0"
               ></iframe>
             </>
-          )}
+          )} */}
         </StyledStoreBody>
       </StyledStoreWrapper>
     </div>
