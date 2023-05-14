@@ -4,13 +4,18 @@ import { PepemonProviderContext } from "../../../contexts";
 import { useHorizontalScroll } from "../../../hooks";
 import { useBridge } from "../../../hooks/pepe_bridge/useBridge";
 import { getDisplayBalance, oneEther } from "../../../utils";
-import { Button, Text } from "../../../components";
+import { Badge, Button, StyledLinkTitle, Text } from "../../../components";
 import { theme } from "../../../theme";
 import BigNumber from "bignumber.js";
-import { StyledStoreBody, StyledStoreWrapper } from "../../Store/components";
+import {
+  StyledStoreBody,
+  StyledStoreHeader,
+  StyledStoreWrapper,
+} from "../../Store/components";
 import CardDropdownWrapper from "../../../components/CardDropdown/wrapper";
 import CardDropdown from "../../../components/CardDropdown";
 import { getPpblzAddress, getPpdexAddress } from "../../../pepemon/utils";
+import { Link, useParams } from "react-router-dom";
 
 const options = [
   {
@@ -37,6 +42,8 @@ const BridgeCard: React.FC<any> = () => {
 
   const [pepemon] = useContext(PepemonProviderContext);
   const { account, contracts, provider } = pepemon;
+
+  const routerParams: any = useParams();
 
   let horzScroll: any = useRef(null);
   useHorizontalScroll(horzScroll);
@@ -69,132 +76,167 @@ const BridgeCard: React.FC<any> = () => {
   return (
     <div>
       <StyledStoreWrapper>
+        <StyledStoreHeader>
+          <div style={{ display: "flex" }}>
+            <StyledLinkTitle isInactive={routerParams.storeState !== "bridge"}>
+              <Link to={`/bridge`}>Bridge</Link>
+            </StyledLinkTitle>
+            <StyledLinkTitle
+              isInactive={routerParams.storeState !== "claim-ppblz"}
+            >
+              <Link to={`/bridge/claim-ppblz`}>Claim PPBLZ</Link>
+              <Badge text="soon" />
+            </StyledLinkTitle>
+            <StyledLinkTitle
+              isInactive={routerParams.storeState !== "mint-pepemon-avatars"}
+            >
+              <Link to={`/bridge/mint-pepemon-avatars`}>Mint</Link>
+              <Badge text="soon" />
+            </StyledLinkTitle>
+            <StyledLinkTitle
+              isInactive={routerParams.storeState !== "bid-on-pepesea"}
+            >
+              <Link to={`/bridge/bid-on-pepesea`}>Bid</Link>
+              <Badge text="soon" />
+            </StyledLinkTitle>
+          </div>
+        </StyledStoreHeader>
         <StyledStoreBody>
-          <CardDropdownWrapper>
-            <CardDropdown
-              style={{ gridArea: "area2" }}
-              options={options}
-              title="Choose Token"
-              setActive={(option) => setTokenToBridge(option.title)}
-            />
-          </CardDropdownWrapper>
-          Start bridging gETH or Pepemon tokens to Pepechain Testnet. Connect
-          your wallet to Goerli to start.
-          <Text
-            style={{ gridArea: "area0" }}
-            as="p"
-            font={theme.font.neometric}
-            weight={900}
-            size="xl"
-          >
-            {getDisplayBalance(Layer1.nativeBalance)} $ETH
-          </Text>
-          <StyledInput
-            placeholder="0.00"
-            value={l1NativeBalanceToBridge}
-            onChange={(event) =>
-              setL1NativeBalanceToBridge(
-                parseFloat(cleanNumberInput(event.target.value, 18))
-              )
-            }
-            min="0.00"
-            type={"number"}
-            step="1"
-            autoFocus={true}
-          />
-          <Button
-            style={{ gridArea: "area3" }}
-            styling="purple"
-            width="clamp(100px, 18em, 100%)"
-            onClick={() =>
-              depositFunds(
-                new BigNumber(l1NativeBalanceToBridge).multipliedBy(oneEther)
-              )
-            }
-            disabled={
-              Layer1.nativeBalance.isLessThan(l1NativeBalanceToBridge) ||
-              !Layer1.isActivate
-            }
-          >
-            Bridge to Pepechain
-          </Button>
-          <br />
-          <br />
-          <br />
-          <h1>{tokenToBridge}</h1>
-          <StyledInput
-            placeholder="0.00"
-            value={l1NativeBalanceToBridge}
-            onChange={(event) =>
-              setL1NativeBalanceToBridge(
-                parseFloat(cleanNumberInput(event.target.value, 18))
-              )
-            }
-            min="0.00"
-            type={"number"}
-            step="1"
-            autoFocus={true}
-          />
-          <Button
-            style={{ gridArea: "area3" }}
-            styling="purple"
-            width="clamp(100px, 18em, 100%)"
-            onClick={() =>
-              depositFunds(
-                new BigNumber(l1NativeBalanceToBridge).multipliedBy(oneEther)
-              )
-            }
-            disabled={
-              Layer1.nativeBalance.isLessThan(l1NativeBalanceToBridge) ||
-              !Layer1.isActivate
-            }
-          >
-            Bridge Tokens to Pepechain
-          </Button>
-          <hr />
-          Want to bridge back your gETH to Goerli? Connect your wallet to
-          Pepechain Testnet to start.
-          <Text
-            style={{ gridArea: "area0" }}
-            as="p"
-            font={theme.font.neometric}
-            weight={900}
-            size="xl"
-          >
-            {getDisplayBalance(Layer2.nativeBalance)} $ETH
-          </Text>
-          <StyledInput
-            placeholder="0.00"
-            value={l2NativeBalanceToBridge}
-            onChange={(event) =>
-              setL2NativeBalanceToBridge(
-                parseFloat(cleanNumberInput(event.target.value, 18))
-              )
-            }
-            min="0.00"
-            type={"number"}
-            step="1"
-            autoFocus={true}
-          />
-          <Button
-            style={{ gridArea: "area3" }}
-            styling="purple"
-            width="clamp(100px, 18em, 100%)"
-            onClick={() =>
-              withdrawFunds(
-                new BigNumber(l2NativeBalanceToBridge).multipliedBy(oneEther)
-              )
-            }
-            disabled={
-              Layer2.nativeBalance.isLessThan(l2NativeBalanceToBridge) ||
-              !Layer2.isActivate
-            }
-          >
-            Bridge to Goerli
-          </Button>
-          <br />
-          <br />
-          <br />
+          {routerParams.storeState === "bridge" && (
+            <>
+              <CardDropdownWrapper>
+                <CardDropdown
+                  style={{ gridArea: "area2" }}
+                  options={options}
+                  title="Choose Token"
+                  setActive={(option) => setTokenToBridge(option.title)}
+                />
+              </CardDropdownWrapper>
+              Start bridging gETH or Pepemon tokens to Pepechain Testnet.
+              Connect your wallet to Goerli to start.
+              <Text
+                style={{ gridArea: "area0" }}
+                as="p"
+                font={theme.font.neometric}
+                weight={900}
+                size="xl"
+              >
+                {getDisplayBalance(Layer1.nativeBalance)} $ETH
+              </Text>
+              <StyledInput
+                placeholder="0.00"
+                value={l1NativeBalanceToBridge}
+                onChange={(event) =>
+                  setL1NativeBalanceToBridge(
+                    parseFloat(cleanNumberInput(event.target.value, 18))
+                  )
+                }
+                min="0.00"
+                type={"number"}
+                step="1"
+                autoFocus={true}
+              />
+              <Button
+                style={{ gridArea: "area3" }}
+                styling="purple"
+                width="clamp(100px, 18em, 100%)"
+                onClick={() =>
+                  depositFunds(
+                    new BigNumber(l1NativeBalanceToBridge).multipliedBy(
+                      oneEther
+                    )
+                  )
+                }
+                disabled={
+                  Layer1.nativeBalance.isLessThan(l1NativeBalanceToBridge) ||
+                  !Layer1.isActivate
+                }
+              >
+                Bridge to Pepechain
+              </Button>
+              <br />
+              <br />
+              <br />
+              <h1>{tokenToBridge}</h1>
+              <StyledInput
+                placeholder="0.00"
+                value={l1NativeBalanceToBridge}
+                onChange={(event) =>
+                  setL1NativeBalanceToBridge(
+                    parseFloat(cleanNumberInput(event.target.value, 18))
+                  )
+                }
+                min="0.00"
+                type={"number"}
+                step="1"
+                autoFocus={true}
+              />
+              <Button
+                style={{ gridArea: "area3" }}
+                styling="purple"
+                width="clamp(100px, 18em, 100%)"
+                onClick={() =>
+                  depositFunds(
+                    new BigNumber(l1NativeBalanceToBridge).multipliedBy(
+                      oneEther
+                    )
+                  )
+                }
+                disabled={
+                  Layer1.nativeBalance.isLessThan(l1NativeBalanceToBridge) ||
+                  !Layer1.isActivate
+                }
+              >
+                Bridge Tokens to Pepechain
+              </Button>
+              <hr />
+              Want to bridge back your gETH to Goerli? Connect your wallet to
+              Pepechain Testnet to start.
+              <Text
+                style={{ gridArea: "area0" }}
+                as="p"
+                font={theme.font.neometric}
+                weight={900}
+                size="xl"
+              >
+                {getDisplayBalance(Layer2.nativeBalance)} $ETH
+              </Text>
+              <StyledInput
+                placeholder="0.00"
+                value={l2NativeBalanceToBridge}
+                onChange={(event) =>
+                  setL2NativeBalanceToBridge(
+                    parseFloat(cleanNumberInput(event.target.value, 18))
+                  )
+                }
+                min="0.00"
+                type={"number"}
+                step="1"
+                autoFocus={true}
+              />
+              <Button
+                style={{ gridArea: "area3" }}
+                styling="purple"
+                width="clamp(100px, 18em, 100%)"
+                onClick={() =>
+                  withdrawFunds(
+                    new BigNumber(l2NativeBalanceToBridge).multipliedBy(
+                      oneEther
+                    )
+                  )
+                }
+                disabled={
+                  Layer2.nativeBalance.isLessThan(l2NativeBalanceToBridge) ||
+                  !Layer2.isActivate
+                }
+              >
+                Bridge to Goerli
+              </Button>
+              <br />
+              <br />
+              <br />
+            </>
+          )}
         </StyledStoreBody>
       </StyledStoreWrapper>
     </div>
