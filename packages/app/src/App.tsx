@@ -33,7 +33,7 @@ const App: React.FC = () => {
 						<Route path="/staking">
 							<StakingWithAuth/>
 						</Route>
-						<Route path="/bridge/:bridgeState(testnet|claim-ppblz|mint-pepemon-avatars|bid-on-pepesea)?">
+						<Route path="/bridge/:bridgeState(testnet|claim-ppblz|mint-pepemon-avatars|bid-on-pepesea|stake-ppblz)?">
 							<BridgeWithAuth/>
 						</Route>
 						<Route path="/subscription">
