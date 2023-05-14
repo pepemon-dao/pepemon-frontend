@@ -52,8 +52,8 @@ const BridgeSubview: React.FC<any> = () => {
           setActive={(option) => setTokenToBridge(option.title)}
         />
       </CardDropdownWrapper>
-      Start bridging gETH or Pepemon tokens to Pepechain Testnet. Connect your
-      wallet to Goerli to start.
+      Start bridging gETH to Pepechain Testnet. Connect your wallet to Goerli to
+      start.
       <Text
         style={{ gridArea: "area0" }}
         as="p"
@@ -189,11 +189,11 @@ const cleanNumberInput = (value: string, maxDecimals: number) => {
 };
 
 const isInvalidInput = (value: string) =>
-    !Number(value) &&
-    value !== "" &&
-    parseFloat(value) !== 0 &&
-    value.slice(-1) !== "." &&
-    value.slice(-2) !== ".0";
+  !Number(value) &&
+  value !== "" &&
+  parseFloat(value) !== 0 &&
+  value.slice(-1) !== "." &&
+  value.slice(-2) !== ".0";
 
 const StyledInput = styled.input`
   border: none;
