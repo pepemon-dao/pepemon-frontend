@@ -6,6 +6,7 @@ export const MAINNET_ID = 1;
 export const RINKEBY_ID = 4;
 export const BSC_ID = 56;
 export const MATIC_ID = 137;
+export const PEPECHAIN_ID = 906090;
 
 const commonContracts = {
   factory: "0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f",
