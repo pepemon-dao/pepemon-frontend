@@ -77,14 +77,14 @@ const BridgeCard: React.FC<any> = () => {
           {routerParams.bridgeState === "mint-pepemon-avatars" && (
             <>
               <Text as="p" font={theme.font.inter} size="m">
-                Unlock your vibrant, one-of-a-kind Mint Pepemon Avatar on the
-                Pepechain Testnet! Effortlessly turn your hard-earned PPDEX from
-                PPBLZ staking into an exclusive, envy-worthy Pepemon that
-                showcases your dedication and unique style.
+                Unlock your vibrant, one-of-a-kind Pepemon Badge on the
+                Pepechain Testnet! Effortlessly turn your pepETH into an
+                exclusive, envy-worthy Pepemon NFT that showcases your
+                dedication and unique style.
               </Text>
               <Spacer size="md" />
               <iframe
-                src="https://ipfs.thirdwebcdn.com/ipfs/QmfK9mw9eQKE9vCbtZht9kygpkNWffdwibsJPnCo7MBN4M/marketplace-v3.html?contract=0x2FCb67128BE211D7c94dA8990AC61E6af2Ea0BD0&chain=%7B%22name%22%3A%22pepechain-testnet%22%2C%22chain%22%3A%22%22%2C%22rpc%22%3A%5B%22https%3A%2F%2Fl2-pepechain-testnet-8uk55qlld4.t.conduit.xyz%22%5D%2C%22nativeCurrency%22%3A%7B%22symbol%22%3A%22pepETH%22%2C%22name%22%3A%22pepETH%22%2C%22decimals%22%3A18%7D%2C%22shortName%22%3A%22pepechain-testnet%22%2C%22chainId%22%3A906090%2C%22testnet%22%3Atrue%2C%22slug%22%3A%22pepechain-testnet%22%7D&directListingId=0&primaryColor=red&secondaryColor=red"
+                src="https://ipfs.thirdwebcdn.com/ipfs/QmfK9mw9eQKE9vCbtZht9kygpkNWffdwibsJPnCo7MBN4M/erc721.html?contract=0xccC01ab293244e2000fE58319077Fa07adBA540f&chain=%7B%22name%22%3A%22pepechain-testnet%22%2C%22chain%22%3A%22%22%2C%22rpc%22%3A%5B%22https%3A%2F%2Fl2-pepechain-testnet-8uk55qlld4.t.conduit.xyz%22%5D%2C%22nativeCurrency%22%3A%7B%22symbol%22%3A%22pepETH%22%2C%22name%22%3A%22pepETH%22%2C%22decimals%22%3A18%7D%2C%22shortName%22%3A%22pepechain-testnet%22%2C%22chainId%22%3A906090%2C%22testnet%22%3Atrue%2C%22slug%22%3A%22pepechain-testnet%22%7D"
                 width="600px"
                 height="600px"
                 style={{ maxWidth: "100%" }}
@@ -96,13 +96,13 @@ const BridgeCard: React.FC<any> = () => {
             <>
               <Text as="p" font={theme.font.inter} size="m">
                 Unlock exclusive NFT opportunities with Pepesea's thrilling
-                bidding system! With Pepesea, even if your PPDEX balance falls
+                bidding system! With Pepesea, even if your pepETH balance falls
                 short for your dream NFT, you can still join the race and
                 potentially snag the hottest NFTs in the marketplace.
               </Text>
               <Spacer size="md" />
               <iframe
-                src="https://ipfs.thirdwebcdn.com/ipfs/QmfK9mw9eQKE9vCbtZht9kygpkNWffdwibsJPnCo7MBN4M/marketplace-v3.html?contract=0x2FCb67128BE211D7c94dA8990AC61E6af2Ea0BD0&chain=%7B%22name%22%3A%22pepechain-testnet%22%2C%22chain%22%3A%22%22%2C%22rpc%22%3A%5B%22https%3A%2F%2Fl2-pepechain-testnet-8uk55qlld4.t.conduit.xyz%22%5D%2C%22nativeCurrency%22%3A%7B%22symbol%22%3A%22pepETH%22%2C%22name%22%3A%22pepETH%22%2C%22decimals%22%3A18%7D%2C%22shortName%22%3A%22pepechain-testnet%22%2C%22chainId%22%3A906090%2C%22testnet%22%3Atrue%2C%22slug%22%3A%22pepechain-testnet%22%7D&englishAuctionId=1&theme=system"
+                src="https://ipfs.thirdwebcdn.com/ipfs/QmfK9mw9eQKE9vCbtZht9kygpkNWffdwibsJPnCo7MBN4M/marketplace-v3.html?contract=0x6516905B4Af10DC036D73A8e627eA49092915D02&chain=%7B%22name%22%3A%22pepechain-testnet%22%2C%22chain%22%3A%22%22%2C%22rpc%22%3A%5B%22https%3A%2F%2Fl2-pepechain-testnet-8uk55qlld4.t.conduit.xyz%22%5D%2C%22nativeCurrency%22%3A%7B%22symbol%22%3A%22pepETH%22%2C%22name%22%3A%22pepETH%22%2C%22decimals%22%3A18%7D%2C%22shortName%22%3A%22pepechain-testnet%22%2C%22chainId%22%3A906090%2C%22testnet%22%3Atrue%2C%22slug%22%3A%22pepechain-testnet%22%7D&englishAuctionId=1&primaryColor=blue"
                 width="600px"
                 height="600px"
                 style={{ maxWidth: "100%" }}
