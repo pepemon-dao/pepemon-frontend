@@ -37,20 +37,21 @@ const BridgeCard: React.FC<any> = () => {
               <Link to={`/bridge/claim-ppblz`}>2. Claim PPBLZ</Link>
             </StyledLinkTitle>
             <StyledLinkTitle
+              isInactive={routerParams.bridgeState !== "stake-ppblz"}
+            >
+              <Link to={`/bridge/stake-ppblz`}>3. Stake for PPDEX</Link>
+              <Badge text="soon" />
+            </StyledLinkTitle>
+            <StyledLinkTitle
               isInactive={routerParams.bridgeState !== "mint-pepemon-avatars"}
             >
-              <Link to={`/bridge/mint-pepemon-avatars`}>3. Mint</Link>
+              <Link to={`/bridge/mint-pepemon-avatars`}>4. Mint</Link>
             </StyledLinkTitle>
             <StyledLinkTitle
               isInactive={routerParams.bridgeState !== "bid-on-pepesea"}
             >
-              <Link to={`/bridge/bid-on-pepesea`}>4. Bid</Link>
+              <Link to={`/bridge/bid-on-pepesea`}>5. Bid</Link>
             </StyledLinkTitle>
-            {/* <StyledLinkTitle
-              isInactive={routerParams.bridgeState !== "stake-ppblz"}
-            >
-              <Link to={`/bridge/stake-ppblz`}>5. Staking</Link>
-            </StyledLinkTitle> */}
           </div>
         </StyledStoreHeader>
         <StyledStoreBody>
