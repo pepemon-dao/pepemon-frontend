@@ -52,10 +52,10 @@ const BridgeSubview: React.FC<any> = () => {
           setActive={(option) => setTokenToBridge(option.title)}
         />
       </CardDropdownWrapper> */}
-      Start bridging gETH to Pepechain L2 Testnet today!
+      Start bridging Goerli ETH to Pepechain L2 Testnet today!
       <br></br>
-      <br></br>Connect your wallet to Goerli to start. No gETH? No problem, get
-      gETH from{" "}
+      <br></br>Connect your wallet to Goerli to start.<br></br>
+      Get Goerli ETH from{" "}
       <a href="https://faucet.paradigm.xyz/" target="_blank">
         Paradigm's Faucet
       </a>
