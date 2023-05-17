@@ -53,7 +53,10 @@ const BridgeSubview: React.FC<any> = () => {
         />
       </CardDropdownWrapper>
       Start bridging gETH to Pepechain Testnet. Connect your wallet to Goerli to
-      start.
+      start.{" "}
+      <a href="https://faucet.paradigm.xyz/" target="_blank">
+        Try this Faucet for Goerli ETH
+      </a>
       <Text
         style={{ gridArea: "area0" }}
         as="p"
