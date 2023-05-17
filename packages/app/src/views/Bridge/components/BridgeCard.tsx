@@ -36,21 +36,21 @@ const BridgeCard: React.FC<any> = () => {
             >
               <Link to={`/bridge/claim-ppblz`}>2. Claim PPBLZ</Link>
             </StyledLinkTitle>
-            <StyledLinkTitle
+            {/* <StyledLinkTitle
               isInactive={routerParams.bridgeState !== "stake-ppblz"}
             >
               <Link to={`/bridge/stake-ppblz`}>3. Stake for PPDEX</Link>
               <Badge text="soon" />
-            </StyledLinkTitle>
+            </StyledLinkTitle> */}
             <StyledLinkTitle
               isInactive={routerParams.bridgeState !== "mint-pepemon-badges"}
             >
-              <Link to={`/bridge/mint-pepemon-badges`}>4. Mint</Link>
+              <Link to={`/bridge/mint-pepemon-badges`}>3. Mint</Link>
             </StyledLinkTitle>
             <StyledLinkTitle
               isInactive={routerParams.bridgeState !== "bid-on-pepesea"}
             >
-              <Link to={`/bridge/bid-on-pepesea`}>5. Bid</Link>
+              <Link to={`/bridge/bid-on-pepesea`}>4. Bid</Link>
             </StyledLinkTitle>
           </div>
         </StyledStoreHeader>
@@ -80,7 +80,7 @@ const BridgeCard: React.FC<any> = () => {
                 Unlock your vibrant, one-of-a-kind Pepemon Badge on the
                 Pepechain Testnet! Effortlessly turn your pepETH into an
                 exclusive, envy-worthy Pepemon NFT that showcases your
-                dedication and unique style. Limited at 1 per wallet!
+                dedication and unique style. Limited at 1 Badge per wallet!
               </Text>
               <Spacer size="md" />
               <iframe
