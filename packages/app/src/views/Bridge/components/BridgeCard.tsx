@@ -59,10 +59,10 @@ const BridgeCard: React.FC<any> = () => {
           {routerParams.bridgeState === "claim-ppblz" && (
             <>
               <Text as="p" font={theme.font.inter} size="m">
-                Experience the thrill of becoming an early adopter in the
-                revolutionary Pepechain Testnet ecosystem! Be among the
-                exclusive few to claim your limited-edition ERC-20 PPBLZ tokens
-                and unlock staking opportunities for earning PPDEX.
+                Experience the thrill of becoming an early adopter on Pepechain
+                Testnet ecosystem! Be among the exclusive few to claim your
+                limited-edition ERC-20 1 PPBLZ and unlock staking opportunities
+                for earning testnet PPDEX.
               </Text>
               <Spacer size="md" />
               <iframe
@@ -80,7 +80,7 @@ const BridgeCard: React.FC<any> = () => {
                 Unlock your vibrant, one-of-a-kind Pepemon Badge on the
                 Pepechain Testnet! Effortlessly turn your pepETH into an
                 exclusive, envy-worthy Pepemon NFT that showcases your
-                dedication and unique style.
+                dedication and unique style. Limited at 1 per wallet!
               </Text>
               <Spacer size="md" />
               <iframe
