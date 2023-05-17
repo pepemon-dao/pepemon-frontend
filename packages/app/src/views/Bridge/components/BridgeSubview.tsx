@@ -1,6 +1,6 @@
 import React, { useContext, useRef, useState } from "react";
 import { BigNumber } from "bignumber.js";
-import { Button, Text } from "../../../components";
+import { Button, Text, ContentCentered } from "../../../components";
 import { useHorizontalScroll } from "../../../hooks";
 import CardDropdown from "../../../components/CardDropdown";
 import { PepemonProviderContext } from "../../../contexts";
@@ -72,19 +72,30 @@ const BridgeSubview: React.FC<any> = () => {
       </Text>
       <br></br>
       <br></br>
-      <StyledInput
-        placeholder="0.00"
-        value={l1NativeBalanceToBridge}
-        onChange={(event) =>
-          setL1NativeBalanceToBridge(
-            parseFloat(cleanNumberInput(event.target.value, 18))
-          )
-        }
-        min="0.00"
-        type={"number"}
-        step="1"
-        autoFocus={true}
-      />
+      <ContentCentered
+        direction="row"
+        bgColor={theme.color.white}
+        style={{
+          borderRadius: "8px",
+          border: `1px solid ${theme.color.purple[700]}`,
+          padding: ".1em .1em .1em 0.75em",
+        }}
+      >
+        <StyledInput
+          placeholder="0.00"
+          value={l1NativeBalanceToBridge}
+          onChange={(event) =>
+            setL1NativeBalanceToBridge(
+              parseFloat(cleanNumberInput(event.target.value, 18))
+            )
+          }
+          min="0.00"
+          type={"number"}
+          step="1"
+          autoFocus={true}
+        />
+      </ContentCentered>
+      <br></br>
       <Button
         style={{ gridArea: "area3" }}
         styling="purple"
@@ -150,19 +161,30 @@ const BridgeSubview: React.FC<any> = () => {
         <br></br>
         <br></br>
       </Text>
-      <StyledInput
-        placeholder="0.00"
-        value={l2NativeBalanceToBridge}
-        onChange={(event) =>
-          setL2NativeBalanceToBridge(
-            parseFloat(cleanNumberInput(event.target.value, 18))
-          )
-        }
-        min="0.00"
-        type={"number"}
-        step="1"
-        autoFocus={true}
-      />
+      <ContentCentered
+        direction="row"
+        bgColor={theme.color.white}
+        style={{
+          borderRadius: "8px",
+          border: `1px solid ${theme.color.purple[700]}`,
+          padding: ".1em .1em .1em 0.75em",
+        }}
+      >
+        <StyledInput
+          placeholder="0.00"
+          value={l2NativeBalanceToBridge}
+          onChange={(event) =>
+            setL2NativeBalanceToBridge(
+              parseFloat(cleanNumberInput(event.target.value, 18))
+            )
+          }
+          min="0.00"
+          type={"number"}
+          step="1"
+          autoFocus={true}
+        />
+      </ContentCentered>
+      <br></br>
       <Button
         style={{ gridArea: "area3" }}
         styling="purple"
