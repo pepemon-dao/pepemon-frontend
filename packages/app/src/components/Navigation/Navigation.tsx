@@ -90,7 +90,7 @@ const Navigation = () => {
           >
             <StyledLink to="/bridge">
               <StyledLinkIcon loading="lazy" src={bridge} alt="bridge" />
-              <span>Bridge</span>
+              <span>Portal</span>
             </StyledLink>
           </StyledMenuListItem>
           <StyledMenuListItem soon isActive={false}>
