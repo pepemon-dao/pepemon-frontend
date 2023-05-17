@@ -1,6 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 import {
+  Accordion,
+  ContentColumns,
+  ContentColumn,
   Badge,
   StyledLinkTitle,
   Title,
@@ -130,6 +133,36 @@ const BridgeCard: React.FC<any> = () => {
             </>
           )} */}
         </StyledStoreBody>
+        <br></br>
+        <br></br>
+        <Accordion title="Earn PPDEX with PPBLZ" isOpen={false}>
+          <div>
+            <ContentColumns>
+              <ContentColumn width="80%">
+                <Title
+                  as="h3"
+                  size="xl"
+                  weight={900}
+                  font={theme.font.neometric}
+                >
+                  Predictable yield meets low fees
+                </Title>
+                <Spacer size="sm" />
+                <Text as="p" size="s" lineHeight={1.125}>
+                  Staking PPBLZ for PPDEX is easy, secure and even more cheap
+                  now on Pepechain Testnet.
+                </Text>
+                <br></br>
+                <Text as="p" size="s" lineHeight={1.125}>
+                  Coming soon,{" "}
+                  <a href="bridge/claim-ppblz">
+                    claim your testnet PPBLZ before it's gone!
+                  </a>
+                </Text>
+              </ContentColumn>
+            </ContentColumns>
+          </div>
+        </Accordion>
       </StyledStoreWrapper>
     </div>
   );
