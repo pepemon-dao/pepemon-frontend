@@ -27,7 +27,7 @@ const BridgeCard: React.FC<any> = () => {
   return (
     <div>
       <StyledStoreWrapper>
-        <Accordion title="1. Bridge to L2" isOpen={true}>
+        <Accordion title="1. Bridge to L2" isOpen={false}>
           <div>
             <ContentColumns>
               <ContentColumn width="80%">
@@ -36,7 +36,7 @@ const BridgeCard: React.FC<any> = () => {
             </ContentColumns>
           </div>
         </Accordion>
-        <Accordion title="2. Claim PPBLZZ" isOpen={false}>
+        <Accordion title="2. Claim PPBLZ" isOpen={false}>
           <div>
             <ContentColumns>
               <ContentColumn width="80%">
