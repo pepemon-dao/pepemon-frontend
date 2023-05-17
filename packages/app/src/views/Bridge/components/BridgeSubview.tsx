@@ -52,11 +52,15 @@ const BridgeSubview: React.FC<any> = () => {
           setActive={(option) => setTokenToBridge(option.title)}
         />
       </CardDropdownWrapper>
-      Start bridging gETH to Pepechain Testnet. Connect your wallet to Goerli to
-      start.{" "}
+      Start bridging gETH to Pepechain L2 Testnet today!
+      <br></br>
+      <br></br>Connect your wallet to Goerli to start. No gETH? No problem, get
+      gETH from{" "}
       <a href="https://faucet.paradigm.xyz/" target="_blank">
-        Try this Faucet for Goerli ETH
+        Paradigm's Faucet
       </a>
+      <br></br>
+      <br></br>
       <Text
         style={{ gridArea: "area0" }}
         as="p"
@@ -64,8 +68,10 @@ const BridgeSubview: React.FC<any> = () => {
         weight={900}
         size="xl"
       >
-        {getDisplayBalance(Layer1.nativeBalance)} $ETH
+        {getDisplayBalance(Layer1.nativeBalance)} $gETH
       </Text>
+      <br></br>
+      <br></br>
       <StyledInput
         placeholder="0.00"
         value={l1NativeBalanceToBridge}
@@ -98,7 +104,7 @@ const BridgeSubview: React.FC<any> = () => {
       <br />
       <br />
       <br />
-      <h1>{tokenToBridge}</h1>
+      {/* <h1>{tokenToBridge}</h1>
       <StyledInput
         placeholder="0.00"
         value={l1NativeBalanceToBridge}
@@ -127,10 +133,12 @@ const BridgeSubview: React.FC<any> = () => {
         }
       >
         Bridge Tokens to Pepechain
-      </Button>
+      </Button> */}
       <hr />
-      Want to bridge back your gETH to Goerli? Connect your wallet to Pepechain
-      Testnet to start.
+      Want to bridge back your gETH to Goerli?<br></br>
+      <br></br>Connect your wallet to Pepechain L2 Testnet to start.
+      <br></br>
+      <br></br>
       <Text
         style={{ gridArea: "area0" }}
         as="p"
@@ -138,7 +146,9 @@ const BridgeSubview: React.FC<any> = () => {
         weight={900}
         size="xl"
       >
-        {getDisplayBalance(Layer2.nativeBalance)} $ETH
+        {getDisplayBalance(Layer2.nativeBalance)} $pepETH
+        <br></br>
+        <br></br>
       </Text>
       <StyledInput
         placeholder="0.00"
