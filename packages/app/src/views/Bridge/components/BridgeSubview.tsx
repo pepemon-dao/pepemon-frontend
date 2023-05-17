@@ -11,18 +11,18 @@ import styled from "styled-components";
 import { getPpblzAddress, getPpdexAddress } from "../../../pepemon/utils";
 import { useBridge } from "../../../hooks/pepe_bridge/useBridge";
 
-const options = [
-  {
-    title: "$PPDEX",
-    onClick: () => console.log("Goerli Testnet"),
-    address: getPpdexAddress(),
-  },
-  {
-    title: "$PPBLZ",
-    onClick: () => console.log("Rinkeby Testnet"),
-    address: getPpblzAddress(),
-  },
-];
+// const options = [
+//   {
+//     title: "$PPDEX",
+//     onClick: () => console.log("Goerli Testnet"),
+//     address: getPpdexAddress(),
+//   },
+//   {
+//     title: "$PPBLZ",
+//     onClick: () => console.log("Rinkeby Testnet"),
+//     address: getPpblzAddress(),
+//   },
+// ];
 
 const BridgeSubview: React.FC<any> = () => {
   const [transactionFinished, setTransactionFinished] = useState(0);
@@ -44,14 +44,14 @@ const BridgeSubview: React.FC<any> = () => {
 
   return (
     <>
-      <CardDropdownWrapper>
+      {/* <CardDropdownWrapper>
         <CardDropdown
           style={{ gridArea: "area2" }}
           options={options}
           title="Choose Token"
           setActive={(option) => setTokenToBridge(option.title)}
         />
-      </CardDropdownWrapper>
+      </CardDropdownWrapper> */}
       Start bridging gETH to Pepechain L2 Testnet today!
       <br></br>
       <br></br>Connect your wallet to Goerli to start. No gETH? No problem, get
