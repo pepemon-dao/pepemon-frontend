@@ -43,9 +43,9 @@ const BridgeCard: React.FC<any> = () => {
               <Badge text="soon" />
             </StyledLinkTitle>
             <StyledLinkTitle
-              isInactive={routerParams.bridgeState !== "mint-pepemon-avatars"}
+              isInactive={routerParams.bridgeState !== "mint-pepemon-badges"}
             >
-              <Link to={`/bridge/mint-pepemon-avatars`}>4. Mint</Link>
+              <Link to={`/bridge/mint-pepemon-badges`}>4. Mint</Link>
             </StyledLinkTitle>
             <StyledLinkTitle
               isInactive={routerParams.bridgeState !== "bid-on-pepesea"}
@@ -74,7 +74,7 @@ const BridgeCard: React.FC<any> = () => {
               ></iframe>
             </>
           )}
-          {routerParams.bridgeState === "mint-pepemon-avatars" && (
+          {routerParams.bridgeState === "mint-pepemon-badges" && (
             <>
               <Text as="p" font={theme.font.inter} size="m">
                 Unlock your vibrant, one-of-a-kind Pepemon Badge on the
