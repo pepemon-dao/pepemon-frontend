@@ -6,6 +6,9 @@ import { ModalsProvider, PepemonProvider } from "./contexts";
 import { withConnectedWallet } from "./hocs";
 import { theme } from "./theme";
 import { metas, LoadingPage } from "./views";
+import ReactGA from "react-ga";
+const TRACKING_ID = "G-LKL3SJ7NVX"; // OUR_TRACKING_ID
+ReactGA.initialize(TRACKING_ID);
 const Home = lazy(() =>
   import("./views/Home").then((module) => ({ default: module.default }))
 );
