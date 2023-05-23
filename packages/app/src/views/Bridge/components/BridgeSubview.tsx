@@ -26,11 +26,11 @@ const options = [
 
 const BridgeSubview: React.FC<any> = () => {
   const [transactionFinished, setTransactionFinished] = useState(0);
-  const [l1NativeBalanceToBridge, setL1NativeBalanceToBridge] = useState(0);
-  const [l1TokenBalanceToBridge, setL1TokenBalanceToBridge] = useState(0);
+  const [l1NativeBalanceToBridge, setL1NativeBalanceToBridge] = useState(null);
+  const [l1TokenBalanceToBridge, setL1TokenBalanceToBridge] = useState(null);
 
-  const [l2NativeBalanceToBridge, setL2NativeBalanceToBridge] = useState(0);
-  const [l2TokenBalanceToBridge, setL2TokenBalanceToBridge] = useState(0);
+  const [l2NativeBalanceToBridge, setL2NativeBalanceToBridge] = useState(null);
+  const [l2TokenBalanceToBridge, setL2TokenBalanceToBridge] = useState(null);
 
   const [tokenToBridge, setTokenToBridge] = useState("$PPDEX");
 
@@ -68,7 +68,7 @@ const BridgeSubview: React.FC<any> = () => {
         value={l1NativeBalanceToBridge}
         onChange={(event) =>
           setL1NativeBalanceToBridge(
-            parseFloat(cleanNumberInput(event.target.value, 18))
+            cleanNumberInput(event.target.value, 18)
           )
         }
         min="0.00"
@@ -101,7 +101,7 @@ const BridgeSubview: React.FC<any> = () => {
         value={l1NativeBalanceToBridge}
         onChange={(event) =>
           setL1NativeBalanceToBridge(
-            parseFloat(cleanNumberInput(event.target.value, 18))
+            cleanNumberInput(event.target.value, 18)
           )
         }
         min="0.00"
@@ -140,10 +140,11 @@ const BridgeSubview: React.FC<any> = () => {
       <StyledInput
         placeholder="0.00"
         value={l2NativeBalanceToBridge}
-        onChange={(event) =>
+        onChange={(event) => {
           setL2NativeBalanceToBridge(
-            parseFloat(cleanNumberInput(event.target.value, 18))
+            cleanNumberInput(event.target.value, 18)
           )
+        }
         }
         min="0.00"
         type={"number"}
@@ -189,11 +190,12 @@ const cleanNumberInput = (value: string, maxDecimals: number) => {
 };
 
 const isInvalidInput = (value: string) =>
-  !Number(value) &&
-  value !== "" &&
-  parseFloat(value) !== 0 &&
-  value.slice(-1) !== "." &&
-  value.slice(-2) !== ".0";
+    !Number(value) &&
+    value !== '' &&
+    parseFloat(value) !== 0 &&
+    value.slice(-1) !== '.' &&
+    (value.slice(-2) !== '.0')
+;
 
 const StyledInput = styled.input`
   border: none;
