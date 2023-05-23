@@ -156,6 +156,39 @@ const BridgeCard: React.FC<any> = () => {
             </ContentColumns>
           </div>
         </Accordion>
+        <Accordion title="6. Play Pepemon: Degen Battleground" isOpen={false}>
+          <div>
+            <ContentColumns>
+              <ContentColumn width="80%">
+                <Title
+                  as="h3"
+                  size="xl"
+                  weight={900}
+                  font={theme.font.neometric}
+                >
+                  Use your PPDEX to win epic prizes
+                </Title>
+                <Spacer size="sm" />
+                <Text as="p" size="s" lineHeight={1.125}>
+                  Mint your testnet Pepemon Battle Decks and top the game
+                  leaderboards for a chance to win Collector's Edition cards on
+                  Ethereum worth $3000
+                </Text>
+                <br></br>
+                <Text as="p" size="s" lineHeight={1.125}>
+                  Play now at{" "}
+                  <a
+                    href="https://play.pepemon.world"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <b>play.pepemon.world</b>
+                  </a>
+                </Text>
+              </ContentColumn>
+            </ContentColumns>
+          </div>
+        </Accordion>
       </StyledStoreWrapper>
     </div>
   );
