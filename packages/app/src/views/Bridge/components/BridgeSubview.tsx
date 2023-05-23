@@ -26,10 +26,10 @@ import { useBridge } from "../../../hooks/pepe_bridge/useBridge";
 
 const BridgeSubview: React.FC<any> = () => {
   const [transactionFinished, setTransactionFinished] = useState(0);
-  const [l1NativeBalanceToBridge, setL1NativeBalanceToBridge] = useState(0);
+  const [l1NativeBalanceToBridge, setL1NativeBalanceToBridge] = useState(null);
   const [l1TokenBalanceToBridge, setL1TokenBalanceToBridge] = useState(0);
 
-  const [l2NativeBalanceToBridge, setL2NativeBalanceToBridge] = useState(0);
+  const [l2NativeBalanceToBridge, setL2NativeBalanceToBridge] = useState(null);
   const [l2TokenBalanceToBridge, setL2TokenBalanceToBridge] = useState(0);
 
   const [tokenToBridge, setTokenToBridge] = useState("$PPDEX");
@@ -86,7 +86,7 @@ const BridgeSubview: React.FC<any> = () => {
           value={l1NativeBalanceToBridge}
           onChange={(event) =>
             setL1NativeBalanceToBridge(
-              parseFloat(cleanNumberInput(event.target.value, 18))
+              cleanNumberInput(event.target.value, 18)
             )
           }
           min="0.00"
@@ -121,7 +121,7 @@ const BridgeSubview: React.FC<any> = () => {
         value={l1NativeBalanceToBridge}
         onChange={(event) =>
           setL1NativeBalanceToBridge(
-            parseFloat(cleanNumberInput(event.target.value, 18))
+            cleanNumberInput(event.target.value, 18)
           )
         }
         min="0.00"
@@ -175,7 +175,7 @@ const BridgeSubview: React.FC<any> = () => {
           value={l2NativeBalanceToBridge}
           onChange={(event) =>
             setL2NativeBalanceToBridge(
-              parseFloat(cleanNumberInput(event.target.value, 18))
+              cleanNumberInput(event.target.value, 18)
             )
           }
           min="0.00"
