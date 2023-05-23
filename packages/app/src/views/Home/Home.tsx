@@ -31,9 +31,9 @@ const Home: React.FC<any> = () => {
     <HomeWrapper bgImage={cover}>
       <Head
         title="Pepemon! Play and earn web3 card game"
-        description="Mint and evolve NFTs or Battle opponents on card games rewarding PPDEX. Govern and farm by hodling PPBLZ."
+        description="Embark on an exhilarating journey with Degen Battleground, a web3 card game built on Pepechain - offering a world of action-packed fun, low fees, and lightning-fast transactions!"
         twitterTitle="Pepemon! Play and earn web3 card game"
-        twitterDescription="Mint and evolve NFTs or Battle opponents on card games rewarding PPDEX. Govern and farm by hodling PPBLZ."
+        twitterDescription="Embark on an exhilarating journey with Degen Battleground, a web3 card game built on Pepechain - offering a world of action-packed fun, low fees, and lightning-fast transactions!"
       />
       <StyledSection
         desktopStyle={{ paddingTop: "12.125em" }}
