@@ -131,7 +131,7 @@ const BridgeCard: React.FC<any> = () => {
             </ContentColumns>
           </div>
         </Accordion>
-        <Accordion title="5. Earn PPDEX with PPBLZ" isOpen={false}>
+        <Accordion title="5. Swap on Photonswap" isOpen={false}>
           <div>
             <ContentColumns>
               <ContentColumn width="80%">
@@ -141,16 +141,24 @@ const BridgeCard: React.FC<any> = () => {
                   weight={900}
                   font={theme.font.neometric}
                 >
-                  Predictable yield meets low fees
+                  Start trading with fast transactions and low fees
                 </Title>
                 <Spacer size="sm" />
                 <Text as="p" size="s" lineHeight={1.125}>
-                  Staking PPBLZ for PPDEX is easy, secure and even more cheap
-                  now on Pepechain Testnet.
+                  Connect to Pepechain L2 Testnet and start trading testnet
+                  tokens. Make it to the top traders leaderboard and win epic
+                  NFT prizes on mainnet
                 </Text>
                 <br></br>
                 <Text as="p" size="s" lineHeight={1.125}>
-                  Coming soon, claim your testnet PPBLZ to be eligible!
+                  Start swapping BTC, USDC or PPBLZ on{" "}
+                  <a
+                    href="https://photonswap.finance/#/swap"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <b>PhotonSwap</b>
+                  </a>
                 </Text>
               </ContentColumn>
             </ContentColumns>
