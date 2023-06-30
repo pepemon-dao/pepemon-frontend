@@ -38,6 +38,7 @@
     "conduit-sdk": "^0.0.3",
     "eslint": "^6.8.0",
     "eslint-plugin-flowtype": "^4.6.0",
+    "eslint-plugin-prettier": "^4.2.1",
     "ethers": "^5.4.7",
     "husky": "^5.2.0",
     "i18next": "^21.3.3",
@@ -45,6 +46,7 @@
     "jsonwebtoken": "^8.5.1",
     "lint-staged": "^10.5.4",
     "logrocket": "^2.1.1",
+    "prettier": "^2.8.8",
     "react": "16.14.0",
     "react-countup": "^6.0.0",
     "react-dom": "16.14.0",
@@ -68,7 +70,9 @@
   "eslintConfig": {
     "extends": [
       "react-app",
-      "plugin:prettier/recommended"
+      "plugin:prettier/recommended",
+      "plugin:@typescript-eslint/recommended",
+      "prettier/@typescript-eslint"
     ]
   },
   "husky": {
@@ -87,5 +91,6 @@
     "ipfs": "yarn build && node scripts/ipfs.js",
     "start": "react-scripts start",
     "test": "react-scripts test"
-  }
+  },
+  "lint-fix": "eslint --fix 'src/**/*.{js,jsx,ts,tsx,json,css,scss,md}'"
 }
