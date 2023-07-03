@@ -94,7 +94,7 @@ const Navigation = () => {
 								src={my_collection}
 								alt='my collection'
 							/>
-							<span>Marketplace</span>
+							<span>Pepesea</span>
 						</ExternalStyledLink>
 					</StyledMenuListItem>
 					<StyledMenuListItem soon isActive={false}>
