@@ -9,10 +9,15 @@ export const PepemonChain: BaseProvider = ethers.providers.getDefaultProvider(
     }
 );
 
-export const Goerli: BaseProvider = ethers.providers.getDefaultProvider(
+export const Goerli: BaseProvider = new ethers.providers.AlchemyProvider(
     "goerli",
-    {
-        name: "goerli",
-        chainId: 5
-    }
-);
+    ""
+)
+
+// export const Goerli: BaseProvider = ethers.providers.getDefaultProvider(
+//     "goerli",
+//     {
+//         name: "goerli",
+//         chainId: 5
+//     }
+// );
