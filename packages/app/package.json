@@ -65,7 +65,8 @@
     "react-app-rewired": "^2.2.1",
     "stream": "^0.0.2",
     "stream-browserify": "^3.0.0",
-    "util": "^0.12.5"
+    "util": "^0.12.5",
+    "web-vitals": "^3.4.0"
   },
   "scripts": {
     "build": "react-app-rewired build",

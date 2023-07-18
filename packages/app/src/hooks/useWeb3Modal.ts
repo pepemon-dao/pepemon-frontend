@@ -1,4 +1,4 @@
-import {ethers} from 'ethers';
+import { ethers } from 'ethers';
 import { EthereumProvider } from '@walletconnect/ethereum-provider';
 import { useCallback, useContext, useState } from 'react';
 import { Web3Provider, ExternalProvider } from '@ethersproject/providers';
@@ -77,11 +77,15 @@ function useWeb3Modals(config = {}) {
 				chains: [1], // REQUIRED chain ids
 				optionalChains: [5, 54],
 				showQrModal: true, // REQUIRED set to "true" to use @walletconnect/modal
-				methods: [
-					'eth_requestAccounts',
-					'eth_sendTransaction',
+				methods: ['eth_requestAccounts', 'eth_sendTransaction'], // OPTIONAL
+				events: [
+					'connect',
+					'accountsChanged',
+					'chainChanged',
+					'disconnect',
+					'session_event',
+					'display_uri',
 				], // OPTIONAL
-				events: ['connect','accountsChanged', 'chainChanged', 'disconnect','session_event','display_uri'], // OPTIONAL
 				qrModalOptions: {
 					explorerRecommendedWalletIds: [
 						'c57ca95b47569778a828d19178114f4db188b89b763c899ba0be274e97267d96',
@@ -91,25 +95,22 @@ function useWeb3Modals(config = {}) {
 				},
 			});
 
-			console.log(provider)
+		
 
-			await provider.connect()
+			await provider.connect();
 
-			
-			provider.on('connect', async () => {
+			// provider.on('connect', async () => {
+			// 	console.log('clicked');
 
-				console.log("clicked")
+				
+			// });
 
-				await subscribeProvider(provider);
+			await subscribeProvider(provider);
 
-
-			setEthereumProvider(provider);
-			const web3Provider = new Web3Provider(provider, 'any');
-			setweb3Provider(web3Provider);
-			setPepemon(web3Provider).then(() => console.log('Contracts LOADED'));
-			});
-
-			
+				setEthereumProvider(provider);
+				const web3Provider = new Web3Provider(provider, 'any');
+				setweb3Provider(web3Provider);
+				setPepemon(web3Provider).then(() => console.log('Contracts LOADED'));
 		} catch (err: any) {
 			console.log(err);
 		}
