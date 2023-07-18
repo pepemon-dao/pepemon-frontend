@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
+import { useParams } from 'react-router-dom';
 import { Title, Spacer, DropdownMenu,
 	// Button
 } from '../../../components';
@@ -10,16 +11,19 @@ import { CardSingle, StyledStoreCardsWrapper, StyledStoreCardsInner, StoreSelect
 const StoreCardsCollection : React.FC<any> = ({selectedCard, setSelectedCard}) => {
 	const [pepemon] = useContext(PepemonProviderContext);
 	const { chainId } = pepemon;
-	const [options, setOptions] = useState(null);
-	const [activeSeries, setActiveSeries] = useState<any>(cards.get(chainId).find(series => {
+	const [options, setOptions] = useState<any>(null);
+	const [activeSeries, setActiveSeries] = useState<any>(cards.get(chainId)?.find(series => {
 																if (chainId === 56) {
 																	return series.title_formatted === 'CARTOONIZED_SERIES'
 																}
 																return series.title_formatted === 'EVENT_ITEM_CARDS'
 															}));
 
+
+
+
 	useEffect(() => {
-		setActiveSeries( cards.get(chainId).find(series => {
+		setActiveSeries( cards.get(chainId)?.find(series => {
 			if (chainId === 56) {
 				return series.title_formatted === 'CARTOONIZED_SERIES'
 			}
@@ -32,13 +36,20 @@ const StoreCardsCollection : React.FC<any> = ({selectedCard, setSelectedCard}) =
 	},[setSelectedCard, chainId])
 
 	useEffect(() => {
-		setOptions( cards.get(chainId).map((series, key) => {
-			return {
-				title: series.title,
-				onClick: () => setActiveSeries(series)
-			}
-		}))
-	}, [setActiveSeries, chainId]);
+		setOptions((prevOptions:any) => {
+		  const newOptions = (cards.get(chainId) || []).map((series: any) => ({
+			title: series.title,
+			onClick: () => setActiveSeries(series),
+		  }));
+		  return newOptions;
+		});
+	  }, [chainId, setActiveSeries]);
+	  
+	  const routerParams: any = useParams();
+
+	  useEffect(() => {
+		setSelectedCard(null);
+	}, [setSelectedCard, routerParams,activeSeries]);
 
 	return (
 		<div>
@@ -54,7 +65,7 @@ const StoreCardsCollection : React.FC<any> = ({selectedCard, setSelectedCard}) =
 							<Title as="h3" size='m' font={theme.font.spaceMace}>{activeSeries.title}</Title>
 							<Spacer size="md"/>
 							<StyledStoreCardsInner gridCols={selectedCard ? 3 : 5}>
-								{activeSeries.cards.map(cardId => {
+								{activeSeries.cards.map((cardId:any )=> {
 									return <CardSingle key={cardId} cardId={cardId} selectedCard={selectedCard} selectCard={setSelectedCard}/>
 								})}
 							</StyledStoreCardsInner>

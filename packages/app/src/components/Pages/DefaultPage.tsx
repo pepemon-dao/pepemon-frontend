@@ -6,7 +6,7 @@ interface DefaultPageProps {
 	title?: string
 }
 
-const DefaultPage: React.FC<DefaultPageProps> = ({children, title}) => {
+const DefaultPage: React.FC<DefaultPageProps> = ({children, title}:any) => {
 	return (
 		<StyledPageWrapperMain>
 			<StyledPageWrapperMainInner>

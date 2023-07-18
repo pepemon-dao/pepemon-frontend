@@ -10,7 +10,7 @@ export interface CardPrice {
 }
 
 const useCardsStorePrices = (tokenIds: number[], promo = false) => {
-    const [cardsPrices, setCardsPrices] = useState([])
+    const [cardsPrices, setCardsPrices] = useState<CardPrice[]>([]);
     const { provider }: { provider: any } = usePepemon()
     const pepemon = usePepemon();
 

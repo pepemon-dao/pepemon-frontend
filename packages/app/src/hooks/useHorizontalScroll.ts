@@ -4,7 +4,7 @@ const useHorizontalScroll = (ref: any) => {
   useEffect(() => {
     const el: any = ref.current;
     if (el) {
-      const onWheel = (e) => {
+      const onWheel = (e:any) => {
         if (e.deltaY === 0) return;
         if (
           !(el.scrollLeft === 0 && e.deltaY < 0) &&

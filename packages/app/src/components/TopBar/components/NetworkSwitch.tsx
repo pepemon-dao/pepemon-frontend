@@ -11,8 +11,9 @@ import { useOutsideClick } from '../../../hooks';
 
 const NetworkSwitch: React.FC<any> = () => {
 	const [chainsListActive, setChainsListActive] = useState(false);
-	const [unhandledError, setUnhandledError] = useState<{errCode?: number, errMsg: string}>({errCode: null, errMsg: ''})
-	const networkSwitchRef = useRef(null);
+	const [unhandledError, setUnhandledError] = useState<{ errCode?: number|null, errMsg: string }>({ errCode: null, errMsg: '' });
+
+	const networkSwitchRef = useRef<HTMLDivElement>(null);
 	useOutsideClick(networkSwitchRef, () => {
 		if (chainsListActive) {
 			setChainsListActive(false);
@@ -24,26 +25,38 @@ const NetworkSwitch: React.FC<any> = () => {
 	const [pepemon] = useContext(PepemonProviderContext);
 	const { chainId } = pepemon;
 
-	const handleChainSwitch = async (chain) => {
+	console.log('chainId', chainId);
+	
+
+	const handleChainSwitch = async (chain:any) => {
 		try {
-			await window.ethereum.request({
-				method: 'wallet_switchEthereumChain',
-				params: [{ chainId: chain.chainId }],
-			});
+			if (window.ethereum){
+				await(window as any)?.request({
+					method: 'wallet_switchEthereumChain',
+					params: [{ chainId: chain.chainId }],
+				});
+			}
+			
 		} catch (switchError: any) {
 			// This error code indicates that the chain has not been added to MetaMask.
 			if (switchError.code === 4902) {
 				try {
-					await window.ethereum.request({
-						method: 'wallet_addEthereumChain',
-						params: [{
-							chainId: chain.chainId,
-							chainName: chain.chainName,
-							nativeCurrency: chain.nativeCurrency,
-							rpcUrls: chain.rpcUrls,
-							blockExplorerUrls: chain.blockExplorerUrls,
-						}]
-					});
+
+					if ((window as any).ethereum) {
+						await (window as any).ethereum?.request({
+							method: 'wallet_addEthereumChain',
+							params: [{
+								chainId: chain.chainId,
+								chainName: chain.chainName,
+								nativeCurrency: chain.nativeCurrency,
+								rpcUrls: chain.rpcUrls,
+								blockExplorerUrls: chain.blockExplorerUrls,
+							}]
+						});
+					
+					}
+						
+					
 				} catch (addError: any) {
 					// handle 'add' error
 					setUnhandledError({
@@ -65,14 +78,18 @@ const NetworkSwitch: React.FC<any> = () => {
 	const supportedChains = chains.filter(chain => isSupportedChain(parseInt(chain.chainId), pathname));
 	const [currentChain] = chains.filter(chain => (parseInt(chain.chainId) === chainId) && chain.chainName);
 
+
+
 	return (
-		<NetworkSwitchWrapper>
+		<NetworkSwitchWrapper ref={networkSwitchRef}>
 			<ChainsListButton onClick={() => setChainsListActive(!chainsListActive)}>
 				{ currentChain ? currentChain.name : 'Not connected' }
 				<img alt='change network' src={up_down_arrows_dark} style={{ width: '.5em', marginLeft: '.8em' }}/>
 			</ChainsListButton>
-			<ChainsList isOpen={chainsListActive} ref={networkSwitchRef}>
+			<ChainsList isOpen={chainsListActive} >
 				{ supportedChains.map((chain, key) => {
+				
+
 					return (
 						<li key={key}>
 							<ChainsListButton disabled={parseInt(chain.chainId) === chainId} aria-label={`change to ${chain.name}`}
@@ -87,7 +104,8 @@ const NetworkSwitch: React.FC<any> = () => {
 				<UnhandledError
 					errCode={unhandledError.errCode}
 					errMsg={unhandledError.errMsg}
-					onDismiss={() => setUnhandledError({errCode: null, errMsg: ''})}/>
+					onDismiss={() => setUnhandledError({ errCode: null, errMsg: '' })}
+					/>
 			}
 		</NetworkSwitchWrapper>
 	)

@@ -1,5 +1,6 @@
 import React, { useEffect, useCallback, useContext, useState } from "react";
 import styled from "styled-components";
+import BigNumber from "bignumber.js";
 import { cardback_normal, coin } from "../../../assets";
 import { Title, Spacer, StyledSpacer } from "../../../components";
 import { getDisplayBalance } from "../../../utils";
@@ -16,32 +17,45 @@ const CardSingle: React.FC<any> = ({ cardId, selectedCard, selectCard }) => {
   const [pepemon] = useContext(PepemonProviderContext);
   const { chainId } = pepemon;
   const [isLoaded, setIsLoaded] = useState(false);
-  const [cardPrice, setCardPrice] = useState(null);
-  const [cardMeta, setCardMeta] = useState(null);
-  const [cardBalance, setCardBalance] = useState([]);
+  const [cardPrice, setCardPrice] = useState<{ tokenId: number; price: BigNumber } | null>(null);
+  const [cardMeta, setCardMeta] = useState<any | null>(null);
+  const [cardBalance, setCardBalance] = useState<any[]>([]);
 
   useEffect(() => {
     (async () => {
-      await setCardMeta(await getCardMeta(cardId, pepemon));
-      await setCardPrice(await getCardStorePrices(cardId, pepemon));
-      await setCardBalance(await getCardFactoryData(cardId, pepemon, 0));
+      const fetchedCardMeta = await getCardMeta(cardId, pepemon);
+      const fetchedCardPrice = await getCardStorePrices(cardId, pepemon);
+      const fetchedCardBalance = await getCardFactoryData(cardId, pepemon, 0);
+  
+      if (fetchedCardMeta && fetchedCardPrice && fetchedCardBalance) {
+        setCardMeta(fetchedCardMeta);
+        setCardPrice(fetchedCardPrice);
+        setCardBalance(fetchedCardBalance);
+      }
       setIsLoaded(true);
     })();
   }, [cardId, pepemon]);
 
-  const priceOfCard = !cardPrice
-    ? 0
-    : parseFloat(getDisplayBalance(cardPrice.price, 18)).toFixed(2);
-  const isSoldOut = () => {
-    if (!cardBalance) return true;
-    return (
-      cardBalance[0]?.totalSupply === parseFloat(cardBalance[0]?.maxSupply)
-    );
-  };
+  const priceOfCard = cardPrice && cardPrice.price
+  ? parseFloat(getDisplayBalance(cardPrice.price, 18) || '0').toFixed(2)
+  : '0';
+
+
+
+const isSoldOut = () => {
+  if (!cardBalance || cardBalance.length === 0) return true;
+  return (
+    cardBalance[0]?.totalSupply === parseFloat(cardBalance[0]?.maxSupply || '0')
+  );
+};
+
+
+
+  
 
   const isReleasingSoon = useCallback(() => {
     const birthdayMetaData = cardMeta?.attributes.find(
-      (attribute) => attribute.trait_type === "birthday"
+      (attribute:any) => attribute.trait_type === "birthday"
     );
     if (parseFloat(birthdayMetaData?.value) === 0) {
       return true;
@@ -62,7 +76,7 @@ const CardSingle: React.FC<any> = ({ cardId, selectedCard, selectCard }) => {
 
   const calculateTimeLeft = useCallback(() => {
     const birthdayMetaData = cardMeta?.attributes.find(
-      (attribute) => attribute.trait_type === "birthday"
+      (attribute:any) => attribute.trait_type === "birthday"
     );
     if (parseFloat(birthdayMetaData?.value) === 0) {
       return 0;
@@ -127,7 +141,7 @@ const CardSingle: React.FC<any> = ({ cardId, selectedCard, selectCard }) => {
 
   const self = {
     cardId: cardId && cardId,
-    cardPrice: cardPrice && cardPrice.price,
+    cardPrice: cardPrice && cardPrice?.price,
     cardMeta: cardMeta && cardMeta,
     cardBalance: cardBalance && cardBalance[0],
   };

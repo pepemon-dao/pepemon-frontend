@@ -7,22 +7,25 @@ const NotSupportedModal: React.FC<{page: string}> = ({ page }) => {
 
 	const handleSwitch = async () => {
 		try {
-			await window.ethereum.request({
-				method: 'wallet_switchEthereumChain',
-				params: [{ chainId: '0x1' }],
+		  if ((window as any).ethereum) {
+			await (window as any).ethereum?.request({
+			  method: 'wallet_switchEthereumChain',
+			  params: [{ chainId: '0x1' }],
 			});
+		  }
 		} catch (error: any) {
-			setUnhandledError({
-				errCode: error.code,
-				errMsg: error.message
-			})
+		  setUnhandledError({
+			errCode: error.code,
+			errMsg: error.message,
+		  });
 		}
-	}
+	  };
+	  
 
     return (<>{ unhandledError.errCode ?
 		<UnhandledError
-			errCode={unhandledError.errCode}
-			errMsg={unhandledError.errMsg}
+			errCode={unhandledError?.errCode}
+			errMsg={unhandledError?.errMsg}
 			onDismiss={() => setUnhandledError({errCode: null, errMsg: ''})}/>
 		:
         <Modal>

@@ -50,7 +50,7 @@ const StoreCardsAside: React.FC<any> = ({setSelectedCard, selectedCard: { cardId
 				buttonProps: {
 					disabled: isRedeemingCard,
 					styling: "purple",
-					onClick: () => onRedeemCard(cardId, chainId === 56 ? priceOfCard.toString() : null).then(() => setTransactions(transactions + 1))
+					onClick: () => onRedeemCard(cardId, chainId === 56 ? priceOfCard.toString() : '').then(() => setTransactions(transactions + 1))
 				}
 			}
 		]
@@ -59,13 +59,13 @@ const StoreCardsAside: React.FC<any> = ({setSelectedCard, selectedCard: { cardId
 	if (cardMeta.status === "failed") { setSelectedCard(null); return <></> } // bail out early if card infos couldn't be loaded
 
 	const isReleasingSoon = () => {
-        const birthdayMetaData = cardMeta.attributes.find(attribute => attribute.trait_type === 'birthday');
+        const birthdayMetaData = cardMeta.attributes.find((attribute:any) => attribute.trait_type === 'birthday');
 		if (parseFloat(birthdayMetaData.value) === 0) return true;
         return parseFloat(birthdayMetaData.value) > (Date.now() / 1000);
     }
 
 	const isForSale = () => {
-        const birthdayMetaData = cardMeta.attributes.find(attribute => attribute.trait_type === 'birthday');
+        const birthdayMetaData = cardMeta.attributes.find((attribute:any) => attribute.trait_type === 'birthday');
 		if (parseFloat(birthdayMetaData.value) === 0) return false;
 		return (parseFloat(birthdayMetaData.value) + (daysForSale() * 24 * 60 * 60)) > (Date.now() / 1000)
     }
@@ -78,7 +78,9 @@ const StoreCardsAside: React.FC<any> = ({setSelectedCard, selectedCard: { cardId
         return (!isMintable() && !isReleasingSoon()) || (isNoLongerForSale());
     }
 
-	const priceOfCard = cardPrice && parseFloat(getDisplayBalance(cardPrice, 18)).toFixed(2);
+	const priceOfCard = !cardPrice
+	? 0
+	: parseFloat(getDisplayBalance(cardPrice.price, 18) || '0').toFixed(2);
 
 	const buttonProps = () => {
 		if (isSoldOut() || isNoLongerForSale()) {
@@ -107,25 +109,25 @@ const StoreCardsAside: React.FC<any> = ({setSelectedCard, selectedCard: { cardId
 				<Spacer size='md'/>
 				<StyledPepemonCardMeta>
 					<dt>Rarity:</dt>
-					<dd>{cardMeta && cardMeta.attributes.find((trait) => trait.trait_type === 'Rarity').value}</dd>
+					<dd>{cardMeta && cardMeta.attributes.find((trait:any) => trait.trait_type === 'Rarity').value}</dd>
 				</StyledPepemonCardMeta>
 				<Spacer size='sm'/>
 				<StyledSpacer bg={theme.color.gray[100]} size={2}/>
 				<StyledPepemonCardMeta>
 					<dt>Type:</dt>
-					<dd>{cardMeta && cardMeta.attributes.find((trait) => trait.trait_type === 'Type').value}</dd>
+					<dd>{cardMeta && cardMeta.attributes.find((trait:any) => trait.trait_type === 'Type').value}</dd>
 				</StyledPepemonCardMeta>
 				<Spacer size='sm'/>
 				<StyledSpacer bg={theme.color.gray[100]} size={2}/>
 				<StyledPepemonCardMeta>
 					<dt>Set:</dt>
-					<dd>{cardMeta && cardMeta.attributes.find((trait) => trait.trait_type === 'Set').value}</dd>
+					<dd>{cardMeta && cardMeta.attributes.find((trait:any) => trait.trait_type === 'Set').value}</dd>
 				</StyledPepemonCardMeta>
 				<Spacer size='sm'/>
 				<StyledSpacer bg={theme.color.gray[100]} size={2}/>
 				<StyledPepemonCardMeta>
 					<dt>Artist:</dt>
-					<dd>{cardMeta && cardMeta.attributes.find((trait) => trait.trait_type === 'Artist').value}</dd>
+					<dd>{cardMeta && cardMeta.attributes.find((trait:any) => trait.trait_type === 'Artist').value}</dd>
 				</StyledPepemonCardMeta>
 				<Spacer size='sm'/>
 				<StyledSpacer bg={theme.color.gray[100]} size={2}/>

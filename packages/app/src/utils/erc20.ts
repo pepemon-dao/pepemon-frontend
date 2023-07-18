@@ -18,7 +18,7 @@ export const getAllowance = async (
   try {
     if (!allowContract) {
       console.log('[getAllowance] no contract found')
-      return;
+      return '';
     }
     const allowance: string = await allowContract.allowance(account, fromContract.address)
     return allowance.toString()
@@ -53,7 +53,7 @@ export const getBalance = async (
     const contract = new Contract(tokenAddress, ERC20ABI.abi, provider);
     if (!contract) {
       console.log('[getBalance] no contract found')
-      return;
+      return '';
     }
     const balance: string = await contract.balanceOf(userAddress);
     return balance.toString()

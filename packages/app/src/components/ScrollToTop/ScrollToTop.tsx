@@ -31,7 +31,7 @@ const ScrollToTop = () => {
 
 	return (
 		<StyledScrollToTop onClick={scrollTop}
-			style={{display: !showScroll && 'none'}}
+			style={{display: showScroll ? 'block' : 'none' }}
 			aria-label='Scroll to top'
 			bottom={bottom}
 		>

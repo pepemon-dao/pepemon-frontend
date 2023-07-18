@@ -80,7 +80,11 @@ const App: React.FC = () => {
 	);
 };
 
-const Providers: React.FC<any> = ({ children }) => {
+interface ProvidersProps {
+	children: React.ReactNode;
+}
+
+const Providers: React.FC<ProvidersProps> = ({ children }) => {
 	return (
 		<ThemeProvider theme={theme}>
 			<Router>

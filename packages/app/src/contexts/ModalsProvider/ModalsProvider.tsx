@@ -1,9 +1,17 @@
-import React, { createContext, useCallback, useState, useRef } from 'react';
+import React, {
+	createContext,
+	useCallback,
+	useState,
+	useRef,
+	useEffect,
+} from 'react';
 import styled, { keyframes } from 'styled-components';
+import { useParams } from 'react-router-dom';
 import { useOutsideClick } from '../../hooks';
 import { theme } from '../../theme';
 import { ActionClose } from '../../assets';
-import { ModalActions,
+import {
+	ModalActions,
 	//ModalActionsProps
 } from '../../components';
 
@@ -12,68 +20,87 @@ interface ModalProps {
 }
 
 export interface ModalData extends ModalProps {
-	title?: React.ReactNode|string,
-	content?: React.ReactNode,
-	modalActions?: any
+	title?: React.ReactNode | string;
+	content?: React.ReactNode;
+	modalActions?: any;
 }
 
 interface ModalsContext {
-	data?: ModalData,
-	isOpen?: boolean,
-	onPresent: (content: React.ReactNode, key?: string) => void,
-	onDismiss: () => void
+	data?: ModalData;
+	isOpen?: boolean;
+	onPresent: (content: ModalData, key?: string) => void;
+	onDismiss: () => void;
 }
 
 export const Context = createContext<ModalsContext>({
 	data: {},
 	onPresent: () => {},
 	onDismiss: () => {},
-})
+});
 
-const ModalsProvider: React.FC = ({ children }) => {
-	const [isOpen, setIsOpen] = useState(false);
+const ModalsProvider: React.FC<{ children: any }> = ({ children }) => {
+	const [isOpen, setIsOpen] = useState<boolean>(false);
 	const [data, setData] = useState<ModalData>();
 	const [, setModalKey] = useState<string>();
 
-	const handlePresent = useCallback((modalData: any, key?: string) => {
-		setModalKey(key)
-		setData(modalData)
-		setIsOpen(true)
-	}, [setData, setIsOpen, setModalKey])
+	const routerParams: any = useParams();
+
+	const handlePresent = useCallback(
+		(modalData?: ModalData, key?: string) => {
+			setIsOpen(true);
+			setModalKey(key);
+			setData(modalData);
+		},
+		[setData, setIsOpen, setModalKey]
+	);
+
+	// close the modal when route changes
 
 	const handleDismiss = useCallback(() => {
-		setData(undefined)
-		setIsOpen(false)
-	}, [setData, setIsOpen])
+		setIsOpen(false);
+		setData(undefined);
+	}, [setData, setIsOpen]);
 
-	const modalRef = useRef(null);
-	useOutsideClick(modalRef, () => isOpen && handleDismiss());
+	const modalRef = useRef<HTMLDivElement>(null);
+	useOutsideClick(modalRef, () => {
+		// if (isOpen) {
+		// 	setIsOpen(false);
+		// }
+	});
+
+	useEffect(() => {
+		handleDismiss();
+	}, [routerParams]);
 
 	return (
-		<Context.Provider value={{
-			data,
-			isOpen,
-			onPresent: handlePresent,
-			onDismiss: handleDismiss,
-		}}>
+		<Context.Provider
+			value={{
+				data,
+				isOpen,
+				onPresent: handlePresent,
+				onDismiss: handleDismiss,
+			}}>
 			{children}
-			{(data && isOpen) && (
+			{data && isOpen && (
 				<ResponsiveWrapper>
-					<Modal ref={modalRef} maxWidth={data.maxWidth}>
+					<Modal ref={modalRef} maxWidth={data?.maxWidth}>
 						<ActionClose onClick={handleDismiss} />
-						{ data.title && <ModalTitle>{data.title}</ModalTitle> }
+						{data?.title && <ModalTitle>{data?.title}</ModalTitle>}
 						<ModalContent>
-							{React.isValidElement(data.content) && React.cloneElement(data.content, {
-								onDismiss: handleDismiss,
-							})}
+							{React.isValidElement(data?.content) &&
+								React.cloneElement(data?.content as React.ReactElement<any>, {
+									onDismiss: handleDismiss,
+								})}
 						</ModalContent>
-						{ data.modalActions && <ModalActions modalActions={data.modalActions}/> }
+						{data?.modalActions && (
+							<ModalActions modalActions={data?.modalActions} />
+						)}
 					</Modal>
 				</ResponsiveWrapper>
 			)}
 		</Context.Provider>
-	)
-}
+	);
+};
 
 const mobileKeyframes = keyframes`
 	0% {
@@ -119,12 +146,12 @@ const ResponsiveWrapper = styled.div`
 
 const Modal = styled.div<ModalProps>`
 	padding: 1.5em;
-	background-color: ${props => props.theme.color.white};
+	background-color: ${(props) => props.theme.color.white};
 	border-radius: 32px;
 	box-shadow: 0 5px 10px 0px ${theme.color.colorsLayoutShadows};
 	display: flex;
 	flex-direction: column;
-	max-width: ${(props) => props.maxWidth ? props.maxWidth : 800}px;
+	max-width: ${(props) => (props.maxWidth ? props.maxWidth : 800)}px;
 	align-items: center;
 	position: relative;
 	width: 100%;
@@ -132,15 +159,15 @@ const Modal = styled.div<ModalProps>`
 `;
 
 const ModalTitle = styled.div`
-  align-items: center;
-  display: flex;
-  font-size: 1.375rem;
-  font-weight: 700;
-  justify-content: center;
-`
+	align-items: center;
+	display: flex;
+	font-size: 1.375rem;
+	font-weight: 700;
+	justify-content: center;
+`;
 
 const ModalContent = styled.div`
 	padding: ${(props) => props.theme.spacing[2]}px;
-`
+`;
 
 export default ModalsProvider;

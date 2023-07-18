@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
-import { isMobile } from 'web3modal';
+import { isMobile } from '../../utils';
 import { useOutsideClick } from '../../hooks';
 import {
 	pepemonLogoSmall,

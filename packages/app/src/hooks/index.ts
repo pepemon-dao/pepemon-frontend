@@ -47,5 +47,5 @@ export { default as useTotalValueStaked } from './useTotalValueStaked';
 // export { default as useUnstake } from './useUnstake';
 export { default as useUserEventProgress } from './useUserEventProgress';
 export { default as useUserEventStatus } from './useUserEventStatus';
-export { default as useWeb3Modal } from './useWeb3Modal';
+export { default as useWeb3Modals } from './useWeb3Modal';
 export { default as useWithdrawEvent } from './useWithdrawEvent';

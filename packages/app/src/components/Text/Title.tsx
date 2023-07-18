@@ -1,7 +1,17 @@
 import styled from 'styled-components';
 import { theme } from '../../theme';
 
-type Size = 'xxxs' | 'xxs' | 'xs' | 's' | 'm' | 'l' | 'xl' | 'xxl' | 'xxxl' | 'inherit';
+type Size =
+	| 'xxxs'
+	| 'xxs'
+	| 'xs'
+	| 's'
+	| 'm'
+	| 'l'
+	| 'xl'
+	| 'xxl'
+	| 'xxxl'
+	| 'inherit';
 
 interface TitleProps {
 	as: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
@@ -11,9 +21,10 @@ interface TitleProps {
 	lineHeight?: number;
 	size?: Size;
 	weight?: number | string;
+	color?: string;
 }
 
-const getSize = (size) : string => {
+const getSize = (size: any): string => {
 	switch (size) {
 		case 'xxxs':
 			return '.8rem';
@@ -25,6 +36,8 @@ const getSize = (size) : string => {
 			return '1.3rem';
 		case 'l':
 			return 'clamp(1.4rem, 2.65vw, 2rem)';
+		case 'm': 
+			return '1.5em';	
 		case 'xl':
 			return '2.5rem';
 		case 'xxl':
@@ -37,27 +50,25 @@ const getSize = (size) : string => {
 		default:
 			return 'clamp(.9rem, 1vw, 1rem)';
 	}
-}
+};
 
 const Title = styled.div<TitleProps>`
-	&{
-		color: ${props => props.color ? props.color : props.theme.color.black};
-		font-family: ${props => props.font ? props.font : props.theme.font.spaceMace};
-		font-size: ${props => props.size && getSize(props.size)};
-		font-weight: ${props => props.weight ? props.weight : 500};
-		hyphens: none;
-		line-height: ${props => props.lineHeight && props.lineHeight};
-		margin: 0;
-		text-align: ${props => props.align && props.align};
-	}
-`
+	color: ${({ color }) => (color ? color : theme.color.black)};
+	font-family: ${({ font }) => (font ? font : theme.font.spaceMace)};
+	font-size: ${({ size }) => (size ? getSize(size) : 'inherit')};
+	font-weight: ${({ weight }) => (weight ? weight : 500)};
+	hyphens: none;
+	line-height: ${({ lineHeight }) => (lineHeight ? lineHeight : 'inherit')};
+	margin: 0;
+	text-align: ${({ align }) => (align ? align : 'inherit')};
+`;
 
 export const StyledPageTitle = styled(Title)`
 	font-size: 2.5rem;
-	margin-bottom: .5em;
-`
+	margin-bottom: 0.5em;
+`;
 
-export const StyledLinkTitle = styled.h2<{isInactive?: boolean}>`
+export const StyledLinkTitle = styled.h2<{ isInactive?: boolean }>`
 	font-size: 1.2rem;
 	font-family: ${theme.font.neometric};
 	font-weight: 500;
@@ -74,7 +85,9 @@ export const StyledLinkTitle = styled.h2<{isInactive?: boolean}>`
 		text-decoration: none;
 	}
 
-	${({ isInactive }) => isInactive !== true ? (`
+	${({ isInactive }) =>
+		isInactive !== true
+			? `
 		&{
 			font-weight: 900;
 		}
@@ -92,9 +105,10 @@ export const StyledLinkTitle = styled.h2<{isInactive?: boolean}>`
 			width: 100%;
 			bottom: -.1em;
 			left: 0;
-		}`): (`
+		}`
+			: `
 		opacity: .7;
-	`)}
-`
+	`}
+`;
 
 export default Title;

@@ -78,7 +78,7 @@ const PepemonCard: React.FC<any> = ({
     }
 
 	const isReleasingSoon = useCallback(() => {
-        const birthdayMetaData = metadata.attributes.find(attribute => attribute.trait_type === 'birthday');
+        const birthdayMetaData = metadata.attributes.find((attribute:any) => attribute.trait_type === 'birthday');
         if (parseFloat(birthdayMetaData.value) === 0) {
             return true;
         }
@@ -86,7 +86,7 @@ const PepemonCard: React.FC<any> = ({
     }, [metadata.attributes])
 
     const isForSale = () => {
-        const birthdayMetaData = metadata.attributes.find(attribute => attribute.trait_type === 'birthday');
+        const birthdayMetaData = metadata.attributes.find((attribute:any)=> attribute.trait_type === 'birthday');
         if (parseFloat(birthdayMetaData.value) === 0) {
             return false;
         }
@@ -100,7 +100,7 @@ const PepemonCard: React.FC<any> = ({
     }
 
     // const calculateTimeLeft = useCallback(() => {
-    //     const birthdayMetaData = metadata.attributes.find(attribute => attribute.trait_type === 'birthday');
+    //     const birthdayMetaData = metadata.attributes.find((attribute:any) => attribute.trait_type === 'birthday');
     //     if (parseFloat(birthdayMetaData.value) === 0) {
     //         return 0;
     //     }
@@ -152,7 +152,9 @@ const PepemonCard: React.FC<any> = ({
     //     </span>);
     // }
     const isRedeemingThisCard = isRedeemingCard && isRedeemingCard[0] === tokenId && isRedeemingCard[1];
-    const priceOfCard = parseFloat(getDisplayBalance(price, token ? token.decimals : 18)).toFixed(2);
+	
+	const priceOfCard = parseFloat(getDisplayBalance(price, token ? token.decimals :18) ||'0').toFixed(2);
+
 
     return (
 		<StyledPepemonCard style={{ opacity: isSoldOut() ? "50%" : "100%" }}>
@@ -165,7 +167,7 @@ const PepemonCard: React.FC<any> = ({
 				}
 			</StyledPepemonCardPrice>
 			<div>
-				<StyledPepemonCardImage loading="lazy" active={active} src={isReleasingSoon() ? getCardInfo(0).img : metadata.image} alt={isReleasingSoon() ? 'Coming soon' : metadata.name} onClick={() => setSelectedCard({
+				<StyledPepemonCardImage loading="lazy" active={active} src={isReleasingSoon() ? getCardInfo(0)?.img : metadata.image} alt={isReleasingSoon() ? 'Coming soon' : metadata.name} onClick={() => setSelectedCard({
 					tokenId: tokenId,
 					token: token,
 					priceOfCard: priceOfCard,

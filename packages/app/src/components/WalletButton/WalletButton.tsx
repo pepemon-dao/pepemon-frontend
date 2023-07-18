@@ -1,13 +1,15 @@
 import React from "react";
 import { Button } from "../index";
-import { useWeb3Modal } from "../../hooks";
+import { useWeb3Modals } from "../../hooks";
 
 const WalletButton: React.FC<any> = ({setConnecting}) => {
-	const [provider, loadWeb3Modal] = useWeb3Modal();
+	const [provider, loadWeb3Modal] = useWeb3Modals();
 
 	const handleClick = async () => {
 		if (!provider) {
-			await loadWeb3Modal();
+      if (typeof loadWeb3Modal === "function") {
+        await loadWeb3Modal();
+      }
 		}
 	}
 

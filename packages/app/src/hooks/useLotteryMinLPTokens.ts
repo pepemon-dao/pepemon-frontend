@@ -4,7 +4,7 @@ import {getPepemonLotteryContract, getMinLPTokens} from '../pepemon/utils'
 import usePepemon from './usePepemon'
 
 const useLotteryMinLPTokens = () => {
-    const [minLPTokens, setMinLPTokens] = useState(null)
+    const [minLPTokens, setMinLPTokens] = useState<BigNumber | null>(null);
     const pepemon = usePepemon()
     const lotteryContract = getPepemonLotteryContract(pepemon)
 

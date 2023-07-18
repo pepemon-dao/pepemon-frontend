@@ -4,13 +4,14 @@ import { claimMerkle, getMerkleContract, getMerkleDegoContract, getMerklePpblzCo
 import {Contract} from '@ethersproject/contracts';
 
 export interface Merkle {
-    account: string,
-    index: number,
-    amount: string|number,
-    proof: string[],
-}
+    account: string;
+    index: number | null;
+    amount: string | number;
+    proof: string[];
+  }
+  
 
-const useClaimMerkle = (merkle: Merkle, merkleType?: 'ppblz' | 'ppdex' | 'univ2' | 'dego' | 'distributor', tokenId = null) => {
+const useClaimMerkle = (merkle: Merkle|any, merkleType?: 'ppblz' | 'ppdex' | 'univ2' | 'dego' | 'distributor', tokenId = null) => {
     const [isClaiming, setIsClaiming] = useState<boolean>(false)
     const { provider } = usePepemon()
     const pepemon = usePepemon()

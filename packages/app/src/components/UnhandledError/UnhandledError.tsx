@@ -3,9 +3,10 @@ import { ModalProps, Modal, ModalTitle, ModalContent, ModalActions, Text, Spacer
 import { theme } from '../../theme';
 
 interface UnhandledErrorProps extends ModalProps {
-	errCode?: number,
-	errMsg: string
+	errCode?: number|null,
+	errMsg?: string,
 }
+
 
 const UnhandledError: React.FC<UnhandledErrorProps> = ({errCode, errMsg, onDismiss}) => {
 	const title = errCode ? `Error ${errCode}` : 'Unknown error';

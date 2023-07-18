@@ -5,7 +5,7 @@ import { ActionClose } from '../../../assets';
 import { theme } from '../../../theme';
 import { StyledStoreWrapper, StyledStoreHeader } from '../components';
 
-const StoreAside = ({children, close, title}) => {
+const StoreAside = ({children, close, title}:any) => {
 	return (
 		<StyledStoreWrapper width="34%">
 			<StyledStoreAsideInner>

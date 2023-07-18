@@ -16,7 +16,7 @@ interface StyledTextProps {
 	weight?: number | string;
 }
 
-const getSize = (size) : string => {
+const getSize = (size:any) : string => {
 	switch (size) {
 		case 'xs':
 			return 'clamp(.7rem, 1vw, .75rem)';

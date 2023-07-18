@@ -1,12 +1,19 @@
 import React, { useContext } from "react";
-import styled, { ThemeContext } from "styled-components";
+import styled, { ThemeContext,DefaultTheme } from "styled-components";
 
 interface SpacerProps {
   size?: "sm" | "md" | "lg";
 }
 
+interface CustomTheme extends DefaultTheme {
+  spacing: number[];
+}
+
+
 const Spacer: React.FC<SpacerProps> = ({ size = "md" }) => {
-  const { spacing } = useContext(ThemeContext);
+  const space= useContext(ThemeContext);
+
+  const { spacing } = space as CustomTheme;
 
   let s: number;
   switch (size) {

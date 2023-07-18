@@ -3,11 +3,12 @@ import { usePepemon } from "../hooks";
 import { ContentCentered, Head, Spacer, Title } from "../components";
 import { LoadingPage } from "../views";
 
-function withConnectedWallet(WrappedComponent: React.FC, props) {
-	function WithConnectedWalletComponent(props) {
+function withConnectedWallet(WrappedComponent: React.FC, props:any) {
+	function WithConnectedWalletComponent(props:any) {
 
 		const { account } = usePepemon();
 
+		
 		return (
 			<>
 				<Head {...props.metas}/>

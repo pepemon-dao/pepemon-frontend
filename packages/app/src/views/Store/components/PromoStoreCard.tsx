@@ -40,7 +40,7 @@ const PromoStoreCard: React.FC<StakeCardProps> = ({
         return new BigNumber(100000000000000000000).comparedTo(allowance) === -1;
     }
 
-    const ref = useRef();
+    const ref = useRef<HTMLImageElement | null>(null);
     useOutsideClick(ref, () => {
         if (imageModal !== null) {
             setImageModal(null);
@@ -68,7 +68,7 @@ const PromoStoreCard: React.FC<StakeCardProps> = ({
                     }
                     { imageModal !== null &&
                     <StyledOverlay>
-                      <img alt="placeholder" ref={ref} height="600" src={imageModal}/>
+                      <img alt="placeholder" ref={ref} height="600" src={imageModal || ''}/>
                     </StyledOverlay>
                     }
                     <StyledTitle size="m">{promo.name}</StyledTitle>

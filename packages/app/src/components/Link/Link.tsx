@@ -18,7 +18,7 @@ const ExternalLink = styled.a.attrs({
 	: `
 		color: ${theme.color.purple[600]};
 		cursor: pointer;
-		font-size: ${props => props.size && props.size}rem;
+		font-size: ${(props:any) => props.size && props.size}rem;
 		text-decoration: underline;
 
 		&:hover {

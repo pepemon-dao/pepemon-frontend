@@ -6,7 +6,7 @@ const OPTIONS = {
   threshold: 0,
 };
 
-const useIsVisible = (elementRef) => {
+const useIsVisible = (elementRef:any) => {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {

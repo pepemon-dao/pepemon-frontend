@@ -90,7 +90,7 @@ const Hero: React.FC<any> = ({ apy }) => {
                 {apy && apy}
               </Text>
               <Spacer size="md" />
-              <ButtonLink light="true" to="/staking">
+              <ButtonLink light={true} to="/staking">
                 Start earning today
               </ButtonLink>
             </ContentBox>
@@ -109,7 +109,7 @@ const Hero: React.FC<any> = ({ apy }) => {
                 Secure your Pepemon Boosterpacks.<br></br>Get whitelisted
               </Text>
               <Spacer size="md" />
-              <ButtonLink light="true" to="/store/boosterpacks">
+              <ButtonLink light={true} to="/store/boosterpacks">
                 Preview Boosterpacks
               </ButtonLink>
             </ContentBox>

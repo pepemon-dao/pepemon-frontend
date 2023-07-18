@@ -6,13 +6,13 @@ import { PepemonProviderContext } from '../../../../../contexts';
 import { usePepemonApi, useIsClaimedMerkle, useClaimMerkle } from '../../../../../hooks';
 
 interface CardToClaimProps {
-	title: string,
-	text: string,
-	img: {
+	title?: string,
+	text?: string,
+	img?: {
 		url: string,
 		title: string
 	}
-	tokenId: number
+	tokenId?: any
 }
 
 const CardToClaim: React.FC<CardToClaimProps> = ({title, text, tokenId, img}) => {
@@ -30,12 +30,20 @@ const CardToClaim: React.FC<CardToClaimProps> = ({title, text, tokenId, img}) =>
 	);
 
 	// @dev for more info: https://etherscan.io/address/0x78a285dcd2AD742d8D4ACC33C3a279f44d842e13#writeContract
-	const { onClaimMerkle, isClaiming } = useClaimMerkle( response && response.index ? {
-		account,
-		index: response.index,
-		amount: parseInt(response.amount),
-		proof: response.proof,
-	} : null, merkleType, tokenId);
+	const { onClaimMerkle, isClaiming } = useClaimMerkle(
+		response && response.index
+		  ? {
+			  account,
+			  index: response.index,
+			  amount: parseInt(response.amount),
+			  proof: response.proof,
+			}
+		  : null,
+		merkleType,
+		tokenId
+	  );
+	  
+	  
 
 	const isDisabled = !account || isFetching || !canClaim || isClaiming;
 
@@ -44,7 +52,7 @@ const CardToClaim: React.FC<CardToClaimProps> = ({title, text, tokenId, img}) =>
 			<Title as="h3" size='xxs' weight={900} font={theme.font.neometric}>{title}</Title>
 			<Spacer size="sm"/>
 			<StyledFigure>
-			  <img loading='lazy' src={img.url} alt={img.title} title={img.title}/>
+			  <img loading='lazy' src={img?.url} alt={img?.title} title={img?.title}/>
 			  <figcaption><Text as="p" size='s' lineHeight={1.125} align="center" color={theme.color.gray[300]}>{text}</Text></figcaption>
 			</StyledFigure>
 			<Spacer size="sm"/>

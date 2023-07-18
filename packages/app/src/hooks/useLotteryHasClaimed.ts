@@ -8,7 +8,7 @@ const useLotteryHasClaimed = (cardId: number, transaction: number) => {
     const { account }: { account: string } = usePepemon()
     const lotteryContract = getPepemonLotteryContract(pepemon)
 
-    const fetchHasMinted = useCallback(async (account, cardId) => {
+    const fetchHasMinted = useCallback(async (account:any, cardId:any) => {
         return hasUserMinted(lotteryContract, account, cardId)
     }, [lotteryContract])
 

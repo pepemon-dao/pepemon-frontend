@@ -1,11 +1,17 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { LazyLoadImage } from 'react-lazy-load-image-component';
+import { LazyLoadImage,LazyLoadImageProps } from 'react-lazy-load-image-component';
 import { theme } from "../../theme";
 import { useModal } from "../../hooks";
 import { api } from "../../constants";
 import { Button, ContentCentered, Title, Text, Spacer } from "../../components";
 import { walk1, walk2, walk3 } from "../../assets";
+
+type SignUpState = {
+	success: boolean|undefined ;
+	title: string;
+	message: string;
+  };
 
 const Newsletter: React.FC<any> = () => {
 
@@ -14,7 +20,7 @@ const Newsletter: React.FC<any> = () => {
 
 	const [email, setEmail] = useState('');
 
-	const initSignUpState = {
+	const initSignUpState: SignUpState = {
 		success: undefined,
 		title: '',
 		message: ''
@@ -108,7 +114,14 @@ const StyledInput = styled.input`
 	}
 `
 
-const WalkingPepemon = styled(LazyLoadImage)`
+
+interface WalkingPepemonProps extends LazyLoadImageProps {
+  duration?: string;
+  delay?: string;
+}
+
+
+const WalkingPepemon = styled(LazyLoadImage)<WalkingPepemonProps>`
 	position: absolute;
 	width: 96px;
 	height: 96px;

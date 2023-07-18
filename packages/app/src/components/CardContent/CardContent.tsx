@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-const CardContent: React.FC = ({ children }) => (
+const CardContent: React.FC = ({ children }:any) => (
   <StyledCardContent>{children}</StyledCardContent>
 )
 

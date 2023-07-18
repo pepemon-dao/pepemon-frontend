@@ -56,13 +56,16 @@ const BridgeCard: React.FC<any> = () => {
                   unlock staking opportunities for earning testnet PPDEX.
                 </Text>
                 <Spacer size="md" />
+                <div>
                 <iframe
+                  title="claim-ppblz"
                   src="https://ipfs.thirdwebcdn.com/ipfs/QmfK9mw9eQKE9vCbtZht9kygpkNWffdwibsJPnCo7MBN4M/erc20.html?contract=0xD5678bCB3652a118A0B7e93C5C457e42ce263640&chain=%7B%22name%22%3A%22pepechain-testnet%22%2C%22chain%22%3A%22%22%2C%22rpc%22%3A%5B%22https%3A%2F%2Fl2-pepechain-testnet-8uk55qlld4.t.conduit.xyz%22%5D%2C%22nativeCurrency%22%3A%7B%22symbol%22%3A%22pepETH%22%2C%22name%22%3A%22pepETH%22%2C%22decimals%22%3A18%7D%2C%22shortName%22%3A%22pepechain-testnet%22%2C%22chainId%22%3A906090%2C%22testnet%22%3Atrue%2C%22slug%22%3A%22pepechain-testnet%22%7D"
                   width="600px"
                   height="600px"
                   style={{ maxWidth: "100%" }}
                   frameBorder="0"
-                ></iframe>
+                />
+                </div>
               </ContentColumn>
             </ContentColumns>
           </div>
@@ -88,13 +91,16 @@ const BridgeCard: React.FC<any> = () => {
                   unique style. Limited at 1 Badge per wallet!
                 </Text>
                 <Spacer size="md" />
+                <div>
                 <iframe
+                  title="mint-nft"
                   src="https://ipfs.thirdwebcdn.com/ipfs/QmfK9mw9eQKE9vCbtZht9kygpkNWffdwibsJPnCo7MBN4M/erc1155.html?contract=0xa44e4154dDC1ECeDf60d731460D9E06634498765&chain=%7B%22name%22%3A%22pepechain-testnet%22%2C%22chain%22%3A%22%22%2C%22rpc%22%3A%5B%22https%3A%2F%2Fl2-pepechain-testnet-8uk55qlld4.t.conduit.xyz%22%5D%2C%22nativeCurrency%22%3A%7B%22symbol%22%3A%22pepETH%22%2C%22name%22%3A%22pepETH%22%2C%22decimals%22%3A18%7D%2C%22shortName%22%3A%22pepechain-testnet%22%2C%22chainId%22%3A906090%2C%22testnet%22%3Atrue%2C%22slug%22%3A%22pepechain-testnet%22%7D&tokenId=0"
                   width="600px"
                   height="600px"
                   style={{ maxWidth: "100%" }}
                   frameBorder="0"
                 ></iframe>
+                </div>
               </ContentColumn>
             </ContentColumns>
           </div>
@@ -120,13 +126,16 @@ const BridgeCard: React.FC<any> = () => {
                   potentially snag the hottest NFTs in the marketplace.
                 </Text>
                 <Spacer size="md" />
+                <div>
                 <iframe
                   src="https://ipfs.thirdwebcdn.com/ipfs/QmfK9mw9eQKE9vCbtZht9kygpkNWffdwibsJPnCo7MBN4M/marketplace-v3.html?contract=0x6516905B4Af10DC036D73A8e627eA49092915D02&chain=%7B%22name%22%3A%22pepechain-testnet%22%2C%22chain%22%3A%22%22%2C%22rpc%22%3A%5B%22https%3A%2F%2Fl2-pepechain-testnet-8uk55qlld4.t.conduit.xyz%22%5D%2C%22nativeCurrency%22%3A%7B%22symbol%22%3A%22pepETH%22%2C%22name%22%3A%22pepETH%22%2C%22decimals%22%3A18%7D%2C%22shortName%22%3A%22pepechain-testnet%22%2C%22chainId%22%3A906090%2C%22testnet%22%3Atrue%2C%22slug%22%3A%22pepechain-testnet%22%7D&englishAuctionId=1&primaryColor=blue"
                   width="600px"
                   height="600px"
                   style={{ maxWidth: "100%" }}
                   frameBorder="0"
+                  title="bid-on-pepesea"
                 ></iframe>
+                </div>
               </ContentColumn>
             </ContentColumns>
           </div>

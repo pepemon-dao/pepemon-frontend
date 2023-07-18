@@ -1,12 +1,17 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
-import { isMobile } from 'web3modal';
-import { ExternalLink, ModalProps, NetworkSwitch, Text } from '../../../components';
+import { isMobile } from '../../../utils';
+import {
+	ExternalLink,
+	ModalProps,
+	NetworkSwitch,
+	Text,
+} from '../../../components';
 import { PepemonProviderContext } from '../../../contexts';
 import { theme } from '../../../theme';
 import { chains } from '../../../constants';
 
-interface WalletModal extends ModalProps {
+interface WalletModalProps extends ModalProps {
 	account: string,
 	setChainId?: () => void,
 	ppblzBalance?: any,
@@ -16,21 +21,35 @@ interface WalletModal extends ModalProps {
 	ppmnCardsOwned?: number
 }
 
-const WalletModal: React.FC<WalletModal> = ({account, setChainId, ppblzBalance, nativeBalance, totalPpblz, totalPpdex, ppmnCardsOwned}) => {
-	const [{chainId}] = useContext(PepemonProviderContext);
+const WalletModal: React.FC<WalletModalProps> = ({
+	account,
+	setChainId,
+	ppblzBalance,
+	nativeBalance,
+	totalPpblz,
+	totalPpdex,
+	ppmnCardsOwned,
+}) => {
+	const [{ chainId }] = useContext(PepemonProviderContext);
 
-	const [currentChain] = chains.filter(chain => (parseInt(chain.chainId) === chainId) && chain.chainName);
+	const [currentChain] = chains.filter(
+		(chain) => parseInt(chain.chainId) === chainId && chain.chainName
+	);
 
-    return (
+	return (
 		<>
-			{ ppblzBalance &&
+			{ppblzBalance && (
 				<StyledTextInfos>
-					{ isMobile() &&
+					{isMobile() && (
 						<>
 							<dt>Change network:</dt>
-							<dd><NetworkSwitch {...{appChainId: chainId, providerChainId: chainId}}/></dd>
+							<dd>
+								<NetworkSwitch
+									{...{ appChainId: chainId, providerChainId: chainId }}
+								/>
+							</dd>
 						</>
-					}
+					)}
 					<dt>Native balance</dt>
 					<dd>{nativeBalance}</dd>
 					<dt>In Wallet + Staked PPBLZ</dt>
@@ -40,23 +59,30 @@ const WalletModal: React.FC<WalletModal> = ({account, setChainId, ppblzBalance, 
 					<dt>Unique card{ppmnCardsOwned !== 1 && 's'}</dt>
 					<dd>{ppmnCardsOwned}</dd>
 				</StyledTextInfos>
-			}
-			<CustomText font={theme.font.inter} size='s' color={theme.color.gray[600]}>
-				View your account on <ExternalLink href={`${currentChain?.blockExplorerUrls}/address/${account}`}>{currentChain?.blockExplorerTitle}</ExternalLink>
+			)}
+			<CustomText
+				font={theme.font.inter}
+				size='s'
+				color={theme.color.gray[600]}>
+				View your account on{' '}
+				<ExternalLink
+					href={`${currentChain?.blockExplorerUrls}/address/${account}`}>
+					{currentChain?.blockExplorerTitle}
+				</ExternalLink>
 			</CustomText>
 		</>
-    )
-}
+	);
+};
 
 export const StyledTextInfos = styled.dl`
-	&{
+	& {
 		font-family: ${theme.font.inter};
 		margin-bottom: 0;
 	}
 
 	& dt {
 		color: ${theme.color.gray[300]};
-		font-size: .8rem;
+		font-size: 0.8rem;
 		text-transform: uppercase;
 		letter-spacing: 1.2px;
 	}
@@ -67,7 +93,7 @@ export const StyledTextInfos = styled.dl`
 		font-weight: bold;
 		margin-bottom: 1em;
 		margin-left: 0;
-		margin-top: .2em;
+		margin-top: 0.2em;
 	}
 `
 
@@ -75,6 +101,6 @@ const CustomText = styled(Text)`
 	@media (min-width: ${theme.breakpoints.tabletL}) {
 		text-align: center;
 	}
-`
+`;
 
-export default WalletModal
+export default WalletModal;

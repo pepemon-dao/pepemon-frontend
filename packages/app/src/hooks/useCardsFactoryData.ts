@@ -18,7 +18,7 @@ const setIntervalAsync = (fn: any, ms: any) => {
 };
 
 const useCardsFactoryData = (tokenIds: number[], transactions: number) => {
-    const [cardsBalance, setCardsBalance] = useState([])
+    const [cardsBalance, setCardsBalance] = useState<CardBalances[]>([]);
     const {
         account,
         provider,
@@ -27,8 +27,8 @@ const useCardsFactoryData = (tokenIds: number[], transactions: number) => {
     const pepemon = usePepemon();
 
 
-    const fetchCardBalances = useCallback(async (factoryContract) => {
-        const batches = tokenIds.reduce((resultArray, item, index) => {
+    const fetchCardBalances = useCallback(async (factoryContract:any) => {
+        const batches = tokenIds.reduce((resultArray: any[][], item, index) => {
             const chunkIndex = Math.floor(index / 10)
 
             if(!resultArray[chunkIndex]) {
@@ -83,8 +83,8 @@ const useCardsFactoryData = (tokenIds: number[], transactions: number) => {
 export const getCardFactoryData = async (tokenId: number, pepemon: any, transactions: number) => {
     const { account }: { account: string; provider: any, chainId: number } = pepemon;
 
-	const fetchCardBalances = async (factoryContract) => {
-        const batches = [tokenId].reduce((resultArray, item, index) => {
+	const fetchCardBalances = async (factoryContract:any) => {
+        const batches = [tokenId].reduce((resultArray: any[][], item, index) => {
             const chunkIndex = Math.floor(index / 10)
 
             if(!resultArray[chunkIndex]) {

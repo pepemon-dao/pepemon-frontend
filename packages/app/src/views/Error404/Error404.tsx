@@ -20,7 +20,7 @@ const Error404: React.FC<Error404Props> = ({title, text}) => {
 				<Spacer size="md"/>
 				<ButtonLink to='/#newsletter'>Subscribe to the Newsletter</ButtonLink>
 				<Spacer size="md"/>
-				<ButtonLink to="/" light='true'>Return home</ButtonLink>
+				<ButtonLink to="/" light={true} >Return home</ButtonLink>
 			</ContentCentered>
 		</LoadingPage>
 	)

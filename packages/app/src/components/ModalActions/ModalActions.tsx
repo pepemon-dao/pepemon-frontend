@@ -13,11 +13,11 @@ export interface ModalActionsProps {
 }
 
 const ModalActions: React.FC<ModalActionsProps> = ({ modalActions }) => {
-	const l = modalActions.length;
-
+	// const l = modalActions?.length;
+	// console.log(l)
 	return (
 		<div>
-			{modalActions.map((modalAction, i) => (
+			{modalActions?.map((modalAction, i) => (
 				<StyledModalActions key={i}>
 					<StyledModalAction>
 						{modalAction.href ?
@@ -26,7 +26,7 @@ const ModalActions: React.FC<ModalActionsProps> = ({ modalActions }) => {
 								<Button {...modalAction.buttonProps}>{modalAction.text}</Button>
 						}
 					</StyledModalAction>
-					{i < l - 1 && <Spacer size='sm'/>}
+					{i < (modalActions?.length)- 1 && <Spacer size='sm'/>}
 				</StyledModalActions>
 			))}
 		</div>

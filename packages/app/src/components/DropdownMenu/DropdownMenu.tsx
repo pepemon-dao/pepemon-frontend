@@ -19,9 +19,10 @@ const DropdownMenu: React.FC<any> = ({ title, options, activeOptions, style, set
 	const toggleDropdown = () => setIsActive(!isActive);
 
 	useOutsideClick(dropdownRef, () => {
-		if (isActive) {
-			setIsActive(!isActive);
-		}
+		
+	
+			// setIsActive(false);
+		
 	})
 
 	// const editedTitle = () => {
@@ -39,7 +40,7 @@ const DropdownMenu: React.FC<any> = ({ title, options, activeOptions, style, set
 			<StyledMenu active={isActive} ref={dropdownRef}>
 				{(options.length > 1 || (options.length === 1 && title !== options[0].title)) &&
 					<StyledList>
-						{options.map((option, key) => {
+						{options.map((option:any, key:any) => {
 							// const index = activeOptions.findIndex(serie => serie.title === option.title);
 							const isActive = activeOptions.title === option.title;
 							return (

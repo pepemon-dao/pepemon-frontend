@@ -4,7 +4,7 @@ import { useIsVisible } from "../../hooks";
 import { LazyLoadComponent } from "react-lazy-load-image-component";
 
 const AnimatedImg: React.FC<any> = ({ src, alt, width, height }) => {
-  const elemRef = useRef();
+  const elemRef = useRef<HTMLImageElement | null>(null);
   const isVisible = useIsVisible(elemRef);
 
   return (

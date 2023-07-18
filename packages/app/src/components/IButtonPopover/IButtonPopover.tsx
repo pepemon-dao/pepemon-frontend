@@ -84,7 +84,7 @@ const IButtonPopover: React.FC<IButtonPopoverProps> = ({ apy, heading, cursor = 
 					All estimated rates take into account this pool’s 2% performance fee.
 				</Text>
 				<Spacer size='sm'/>
-				<ExternalLink size={.75} href={button.href}>{button.text}</ExternalLink>
+				<ExternalLink size={.75} href={button?.href}>{button?.text}</ExternalLink>
 			</>,
 		maxWidth: theme.page.maxWidth/3
 	})

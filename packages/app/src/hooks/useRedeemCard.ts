@@ -3,10 +3,10 @@ import {redeemCard, redeemCardNative} from '../pepemon/utils'
 import usePepemon from './usePepemon';
 
 const useRedeemCard = (storeContract: any) => {
-	const [isRedeeming, setIsRedeeming] = useState<Array<string | boolean> | number>([])
+	const [isRedeeming, setIsRedeeming] = useState<(string | boolean)[]>([]);
     const pepemon = usePepemon();
 
-    const handleRedeem = useCallback(async (tokenId, amount = null) => {
+    const handleRedeem = useCallback(async (tokenId:any,  amount?: string) => {
         try {
             setIsRedeeming([tokenId, true]);
             if (amount) {

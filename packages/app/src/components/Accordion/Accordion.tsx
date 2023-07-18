@@ -22,7 +22,7 @@ const Accordion: React.FC<AccordionProps> = ({title, isOpen = true, isActive = f
 			<AccordionHeader onClick={toggleAccordion} isOpen={openAccordion}>
 				<AccordionHeaderTitle>
 					<img loading="lazy" src={pepeball} alt="Pepeball" style={{ width: "40px", height: "40px", marginRight: "1em" }}/>
-					<Title as="h2" color={openAccordion ? theme.color.green[200] : theme.color.white} weight={900} font={theme.font.neometric}>{title}</Title>
+					<Title as="h2" size="m" color={openAccordion ? theme.color.green[200] : theme.color.white} weight={900} font={theme.font.neometric}>{title}</Title>
 				</AccordionHeaderTitle>
 				<AccordionHeaderButton onClick={toggleAccordion}>
 						<span>Show {openAccordion ? "less" : "more"}</span>

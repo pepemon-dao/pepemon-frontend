@@ -9,6 +9,7 @@ export { getBalanceNumber, getDisplayBalance, getFullDisplayBalance } from './fo
 export { default as isSupportedChain } from './isSupportedChain';
 export { correctChainIsLoaded } from './network';
 export { getCardInfo } from './nftCards';
+export { default as isMobile } from './detectMobile';
 
 export const bnToDec = (bn: BigNumber, decimals = 18): number => {
   return bn.dividedBy(new BigNumber(10).pow(decimals)).toNumber()

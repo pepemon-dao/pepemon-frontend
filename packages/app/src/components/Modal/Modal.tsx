@@ -8,6 +8,7 @@ export interface ModalProps {
 	onDismiss?: () => void;
 	maxWidth?: number;
 	rounded?: boolean;
+	children?: React.ReactNode;
 }
 
 const Modal: React.FC<ModalProps> = ({ children, onDismiss, maxWidth }) => {

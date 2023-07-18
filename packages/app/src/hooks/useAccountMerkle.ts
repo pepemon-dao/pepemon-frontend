@@ -25,6 +25,7 @@ const useAccountMerkle = (account: string) => {
         if (account >= part1start) {
             return 1;
         }
+        return 1;
     }
     const fetchData = async (part: number, account: string) => {
         setIsFetching(true)
