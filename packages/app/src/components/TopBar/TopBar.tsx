@@ -16,7 +16,6 @@ import { Button, Text } from '../../components';
 import { NetworkSwitch, WalletModal } from './components';
 import { PepemonProviderContext } from '../../contexts';
 import { theme } from '../../theme';
-import { useWeb3Modal } from '@web3modal/react';
 
 const TopBar: React.FC<any> = () => {
 	const [nativeBalance, setNativeBalance] = useState(new BigNumber(0));
