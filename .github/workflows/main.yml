@@ -2,16 +2,43 @@ name: 'Netlify Previews'
 
 on:
   push:
-    branches-ignore: 
-      - main
+    branches-ignore: [ "main" ]
+    branches: [ "develop" ]
+  pull_request:
+    branches: [ "develop" ]
+
+  workflow_dispatch:
 
 jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    
+      # Checkout
+      - uses: actions/checkout@v3
+      
+      # Cache node_modules based on yarn.lock
+      - uses: actions/cache@v2
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+      
+      # Run yarn install
+      - uses: borales/actions-yarn@v3.0.0
+        with:
+          cmd: install
+          
+      # Run yarn build
+      - uses: borales/actions-yarn@v3.0.0
+        with:
+          cmd: react-app:build
   deploy:
     name: 'Deploy'
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v3
 
       # Sets the branch name as environment variable
       - uses: nelonoel/branch-name@v1.0.1
