@@ -1,4 +1,4 @@
-import { ethers,providers } from 'ethers';
+import { ethers, providers } from 'ethers';
 import { useCallback, useContext, useState, useEffect } from 'react';
 import { Web3Provider, ExternalProvider } from '@ethersproject/providers';
 import { Contracts } from '../pepemon/lib/contracts';
@@ -6,14 +6,16 @@ import { PepemonProviderContext } from '../contexts';
 import detectEthereumProvider from '@metamask/detect-provider';
 import { InjectedConnector } from 'wagmi/connectors/injected';
 import { MetaMaskConnector } from 'wagmi/connectors/metaMask';
-import { useAccount ,useDisconnect,useConnect} from 'wagmi';
+import { useAccount, useDisconnect, useConnect } from 'wagmi';
 import { useEthersProvider } from './useEthersProvider';
-import {useConnectModal,
+import {
+	useConnectModal,
 	useAccountModal,
-	useChainModal,} from '@rainbow-me/rainbowkit';
+	useChainModal,
+} from '@rainbow-me/rainbowkit';
 
 import usePepemon from './usePepemon';
-
+import useSubscribeProvider from './useSubscribeProvider';
 // // Enter a valid infura key here to avoid being rate limited
 // // You can get a key for free at https://infura.io/register
 // const INFURA_ID = '7a9c4ff3188d481f9143904079638424';
@@ -30,43 +32,36 @@ function useWeb3Modals(config = {}) {
 	const [web3Provider, setweb3Provider] = useState<any>();
 	const [ethereumProvider, setEthereumProvider] = useState<any>();
 	const [, dispatch] = useContext(PepemonProviderContext);
-
-	const { openConnectModal,connectModalOpen} = useConnectModal()
+	const { address } = useAccount();
+	const { openConnectModal, connectModalOpen } = useConnectModal();
 	const { disconnect } = useDisconnect();
-	const {account} = usePepemon();
+	const { account } = usePepemon();
+	const provider: any = useEthersProvider();
 
 	// console.log(connectModalOpen,account)
 
-	
-	
+	// console.log(address);
 
-
-
-
-	
-
-
+	// if the address present in the account then sunscribe to the provider
+	// if(address){
+	// 	console.log('address present')
+	// 	// subscribeProvider(ethereumProvider)
+	// }
 
 	
+		const {isSubscribed} = useSubscribeProvider()
 
-	const provider:any = useEthersProvider()
-
-	
+		// console.log(isSubscribed)
 
 	// Open wallet selection modal.
 	const loadWeb3Modal = useCallback(async () => {
-	
-
-
 		const setPepemon = async (newProvider: any, newChainId: any = null) => {
 			if (!newProvider) {
 				return;
 			}
 
-			console.log(newProvider)
-
 			const { chainId } = await newProvider.getNetwork();
-			console.log(chainId)
+			console.log(chainId);
 			const accounts = await newProvider.listAccounts();
 			const contracts = new Contracts(
 				newProvider,
@@ -104,58 +99,46 @@ function useWeb3Modals(config = {}) {
 			});
 		};
 
-
-		
-		
-
+		setEthereumProvider(null)
+		setweb3Provider(null)
 		try {
-			
-			
+
+
+
 			if (typeof openConnectModal === 'function') {
-				
-				
-				 openConnectModal()
-			
-			  } 
-				
-			 	
-			 	await subscribeProvider(await detectEthereumProvider());
-	  
-				setEthereumProvider(await detectEthereumProvider())
-			  
-				setweb3Provider(provider);
+				openConnectModal();
+			}
 
-				setPepemon(provider).then(() => console.log('Contracts LOADED'));
-	
-			  
-				 
+			await subscribeProvider(await detectEthereumProvider());
 
-		
+			setEthereumProvider(await detectEthereumProvider());
+
+			setweb3Provider(provider);
+
+			setPepemon(provider).then(() => console.log('Contracts LOADED'));
 		} catch (err: any) {
 			console.log(err);
 		}
-	}, [dispatch,provider,openConnectModal]);
+	}, [dispatch, provider, openConnectModal]);
 
 	const logoutOfWeb3Modal = useCallback(
 		async function () {
 			const resetApp = async () => {
-				
-
-				if(typeof disconnect==='function'){
-					disconnect()
+				if (typeof disconnect === 'function') {
+					disconnect();
 				}
 
 				setEthereumProvider(null);
-				setweb3Provider(null)
-				
+				setweb3Provider(null);
+
 				await dispatch({
 					type: 'reset',
-				})
-			}
+				});
+			};
 
 			await resetApp();
-        },
-		[dispatch,disconnect]
+		},
+		[dispatch, disconnect]
 	);
 
 	// If autoLoad is enabled and the the wallet had been loaded before, load it automatically now.
