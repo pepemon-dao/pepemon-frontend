@@ -1,11 +1,18 @@
-import { ethers } from 'ethers';
-import { EthereumProvider } from '@walletconnect/ethereum-provider';
-import { useCallback, useContext, useState } from 'react';
+import { ethers,providers } from 'ethers';
+import { useCallback, useContext, useState, useEffect } from 'react';
 import { Web3Provider, ExternalProvider } from '@ethersproject/providers';
 import { Contracts } from '../pepemon/lib/contracts';
 import { PepemonProviderContext } from '../contexts';
+import detectEthereumProvider from '@metamask/detect-provider';
+import { InjectedConnector } from 'wagmi/connectors/injected';
+import { MetaMaskConnector } from 'wagmi/connectors/metaMask';
+import { useAccount ,useDisconnect,useConnect} from 'wagmi';
+import { useEthersProvider } from './useEthersProvider';
+import {useConnectModal,
+	useAccountModal,
+	useChainModal,} from '@rainbow-me/rainbowkit';
 
-const projectId = 'e3ef7e3d65785beff0a858d1cafdda23' as const;
+import usePepemon from './usePepemon';
 
 // // Enter a valid infura key here to avoid being rate limited
 // // You can get a key for free at https://infura.io/register
@@ -24,16 +31,42 @@ function useWeb3Modals(config = {}) {
 	const [ethereumProvider, setEthereumProvider] = useState<any>();
 	const [, dispatch] = useContext(PepemonProviderContext);
 
+	const { openConnectModal,connectModalOpen} = useConnectModal()
+	const { disconnect } = useDisconnect();
+	const {account} = usePepemon();
+
+	// console.log(connectModalOpen,account)
+
+	
+	
+
+
+
+
+	
+
+
+
+	
+
+	const provider:any = useEthersProvider()
+
+	
+
 	// Open wallet selection modal.
 	const loadWeb3Modal = useCallback(async () => {
-		// return when account deteted
+	
+
 
 		const setPepemon = async (newProvider: any, newChainId: any = null) => {
 			if (!newProvider) {
 				return;
 			}
 
+			console.log(newProvider)
+
 			const { chainId } = await newProvider.getNetwork();
+			console.log(chainId)
 			const accounts = await newProvider.listAccounts();
 			const contracts = new Contracts(
 				newProvider,
@@ -71,78 +104,58 @@ function useWeb3Modals(config = {}) {
 			});
 		};
 
-		try {
-			const provider = await EthereumProvider.init({
-				projectId: projectId, // REQUIRED your projectId
-				chains: [1], // REQUIRED chain ids
-				optionalChains: [5, 54],
-				showQrModal: true, // REQUIRED set to "true" to use @walletconnect/modal
-				methods: ['eth_requestAccounts', 'eth_sendTransaction'], // OPTIONAL
-				events: [
-					'connect',
-					'accountsChanged',
-					'chainChanged',
-					'disconnect',
-					'session_event',
-					'display_uri',
-				], // OPTIONAL
-				qrModalOptions: {
-					explorerRecommendedWalletIds: [
-						'c57ca95b47569778a828d19178114f4db188b89b763c899ba0be274e97267d96',
-						'1ae92b26df02f0abca6304df07debccd18262fdf5fe82daa81593582dac9a369',
-						'4622a2b2d6af1c9844944291e5e7351a6aa24cd7b23099efac1b2fd875da31a0',
-					],
-				},
-			});
 
 		
+		
 
-			await provider.connect();
-
-			// provider.on('connect', async () => {
-			// 	console.log('clicked');
-
+		try {
+			
+			
+			if (typeof openConnectModal === 'function') {
 				
-			// });
+				
+				 openConnectModal()
+			
+			  } 
+				
+			 	
+			 	await subscribeProvider(await detectEthereumProvider());
+	  
+				setEthereumProvider(await detectEthereumProvider())
+			  
+				setweb3Provider(provider);
 
-			await subscribeProvider(provider);
+				setPepemon(provider).then(() => console.log('Contracts LOADED'));
+	
+			  
+				 
 
-				setEthereumProvider(provider);
-				const web3Provider = new Web3Provider(provider, 'any');
-				setweb3Provider(web3Provider);
-				setPepemon(web3Provider).then(() => console.log('Contracts LOADED'));
+		
 		} catch (err: any) {
 			console.log(err);
 		}
-	}, [dispatch]);
+	}, [dispatch,provider,openConnectModal]);
 
 	const logoutOfWeb3Modal = useCallback(
 		async function () {
-			try {
-				if (typeof ethereumProvider === 'undefined') {
-					console.log('ethereumProvider is not initialized');
-				}
+			const resetApp = async () => {
+				
 
-				if (
-					typeof ethereumProvider?.disconnect === 'function' &&
-					ethereumProvider?.connected
-				) {
-					await ethereumProvider?.disconnect();
+				if(typeof disconnect==='function'){
+					disconnect()
 				}
-
-				ethereumProvider?.reset();
 
 				setEthereumProvider(null);
-				setweb3Provider(null);
-
+				setweb3Provider(null)
+				
 				await dispatch({
 					type: 'reset',
-				});
-			} catch (err) {
-				console.log(err);
+				})
 			}
-		},
-		[dispatch, ethereumProvider]
+
+			await resetApp();
+        },
+		[dispatch,disconnect]
 	);
 
 	// If autoLoad is enabled and the the wallet had been loaded before, load it automatically now.

@@ -66,6 +66,7 @@ const ModalsProvider: React.FC<{ children: any }> = ({ children }) => {
 		// if (isOpen) {
 		// 	setIsOpen(false);
 		// }
+
 	});
 
 	useEffect(() => {

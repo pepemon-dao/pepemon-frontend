@@ -47,7 +47,7 @@ const BridgeWithAuth = withConnectedWallet(Bridge, { metas: metas.storeMeta });
 const App: React.FC = () => {
 	return (
 		<Providers>
-			<TopBar />
+			<TopBar/>
 			<Page>
 				<Suspense fallback={<LoadingPage />}>
 					<Switch>

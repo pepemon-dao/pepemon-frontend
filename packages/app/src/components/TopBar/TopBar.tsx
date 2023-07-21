@@ -16,6 +16,12 @@ import { Button, Text } from '../../components';
 import { NetworkSwitch, WalletModal } from './components';
 import { PepemonProviderContext } from '../../contexts';
 import { theme } from '../../theme';
+import {
+	useConnectModal,
+	useAccountModal,
+	useChainModal,
+	ConnectButton,
+} from '@rainbow-me/rainbowkit';
 
 const TopBar: React.FC<any> = () => {
 	const [nativeBalance, setNativeBalance] = useState(new BigNumber(0));
@@ -105,27 +111,21 @@ const TopBar: React.FC<any> = () => {
 	const totalPpdex =
 		ppdexBalanceNumber !== undefined ? ppdexBalanceNumber + ppdexRewards : 0;
 
+
+
 	const handleWalletButtonClick = () => {
 		if (account) {
-			
-			
-			if(typeof handlePresent === 'function'){
-				
+			if (typeof handlePresent === 'function') {
 				handlePresent();
-			
 			}
-			
 		} else {
 			if (typeof loadWeb3Modal === 'function') {
 				loadWeb3Modal();
-				
 			} else {
 				console.error('loadWeb3Modal is not defined');
 			}
 		}
 	};
-
-	
 
 	const handleCopy = () => copyText(account);
 
@@ -206,12 +206,25 @@ const TopBar: React.FC<any> = () => {
 						</TextInfo>
 					</StyledTopBarInfo>
 				)}
-				<Button
-					styling='green'
-					title={account ? 'Your wallet' : 'Connect wallet'}
-					onClick={() => handleWalletButtonClick()}>
-					{!account ? 'Connect wallet' : formatAddress(account)}
-				</Button>
+
+				<ConnectButton.Custom>
+					{({
+						account,
+						chain,
+						openAccountModal,
+						openChainModal,
+						openConnectModal,
+						authenticationStatus,
+						mounted,
+					}) => (
+						<Button
+							styling='green'
+							title={account ? 'Your wallet' : 'Connect wallet'}
+							onClick={() => handleWalletButtonClick()}>
+							{!account ? 'Connect Wallet' : formatAddress(account?.address)}
+						</Button>
+					)}
+				</ConnectButton.Custom>
 			</StyledTopBarInner>
 		</StyledTopBar>
 	);

@@ -8,6 +8,7 @@ import { isSupportedChain } from '../../../utils';
 import { UnhandledError } from '../../../components';
 import { theme } from '../../../theme';
 import { useOutsideClick } from '../../../hooks';
+import { switchNetwork } from '@wagmi/core'
 
 const NetworkSwitch: React.FC<any> = () => {
 	const [chainsListActive, setChainsListActive] = useState(false);
@@ -25,17 +26,14 @@ const NetworkSwitch: React.FC<any> = () => {
 	const [pepemon] = useContext(PepemonProviderContext);
 	const { chainId } = pepemon;
 
-	console.log('chainId', chainId);
+	
 	
 
 	const handleChainSwitch = async (chain:any) => {
 		try {
-			if (window.ethereum){
-				await(window as any)?.request({
-					method: 'wallet_switchEthereumChain',
-					params: [{ chainId: chain.chainId }],
-				});
-			}
+			
+				await switchNetwork?.(chain.chainId);
+			
 			
 		} catch (switchError: any) {
 			// This error code indicates that the chain has not been added to MetaMask.
@@ -88,6 +86,7 @@ const NetworkSwitch: React.FC<any> = () => {
 			</ChainsListButton>
 			<ChainsList isOpen={chainsListActive} >
 				{ supportedChains.map((chain, key) => {
+
 				
 
 					return (

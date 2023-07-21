@@ -3,6 +3,7 @@ import { usePepemon } from "../hooks";
 import { ContentCentered, Head, Spacer, Title } from "../components";
 import { LoadingPage } from "../views";
 
+
 function withConnectedWallet(WrappedComponent: React.FC, props:any) {
 	function WithConnectedWalletComponent(props:any) {
 
