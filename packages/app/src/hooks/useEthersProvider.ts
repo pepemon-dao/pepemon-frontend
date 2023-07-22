@@ -3,7 +3,7 @@ import { type WalletClient, useWalletClient } from 'wagmi'
 import { providers } from 'ethers'
 
 export function walletClientToProvider(walletClient: WalletClient) {
-  const { account, chain, transport } = walletClient
+  const { chain, transport } = walletClient
   const network = {
     chainId: chain.id,
     name: chain.name,

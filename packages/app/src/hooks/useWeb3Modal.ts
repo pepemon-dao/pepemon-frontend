@@ -1,17 +1,14 @@
 import { ethers, providers } from 'ethers';
 import { useCallback, useContext, useState, useEffect } from 'react';
 import { Web3Provider, ExternalProvider } from '@ethersproject/providers';
+import detectEthereumProvider from '@metamask/detect-provider';
 import { Contracts } from '../pepemon/lib/contracts';
 import { PepemonProviderContext } from '../contexts';
-import detectEthereumProvider from '@metamask/detect-provider';
-import { InjectedConnector } from 'wagmi/connectors/injected';
-import { MetaMaskConnector } from 'wagmi/connectors/metaMask';
-import { useAccount, useDisconnect, useConnect } from 'wagmi';
+import { useAccount, useDisconnect} from 'wagmi';
 import { useEthersProvider } from './useEthersProvider';
 import {
 	useConnectModal,
-	useAccountModal,
-	useChainModal,
+
 } from '@rainbow-me/rainbowkit';
 
 import usePepemon from './usePepemon';
@@ -32,11 +29,12 @@ function useWeb3Modals(config = {}) {
 	const [web3Provider, setweb3Provider] = useState<any>();
 	const [ethereumProvider, setEthereumProvider] = useState<any>();
 	const [, dispatch] = useContext(PepemonProviderContext);
-	const { address } = useAccount();
-	const { openConnectModal, connectModalOpen } = useConnectModal();
+
+	const { openConnectModal} = useConnectModal();
 	const { disconnect } = useDisconnect();
 	const { account } = usePepemon();
 	const provider: any = useEthersProvider();
+	const {isSubscribed} = useSubscribeProvider()
 
 	// console.log(connectModalOpen,account)
 
@@ -49,12 +47,12 @@ function useWeb3Modals(config = {}) {
 	// }
 
 	
-		const {isSubscribed} = useSubscribeProvider()
-
+		
 		// console.log(isSubscribed)
 
 	// Open wallet selection modal.
 	const loadWeb3Modal = useCallback(async () => {
+
 		const setPepemon = async (newProvider: any, newChainId: any = null) => {
 			if (!newProvider) {
 				return;
@@ -101,6 +99,7 @@ function useWeb3Modals(config = {}) {
 
 		setEthereumProvider(null)
 		setweb3Provider(null)
+		
 		try {
 
 
@@ -119,9 +118,10 @@ function useWeb3Modals(config = {}) {
 		} catch (err: any) {
 			console.log(err);
 		}
-	}, [dispatch, provider, openConnectModal]);
+	}, [dispatch,openConnectModal,provider]);
 
 	const logoutOfWeb3Modal = useCallback(
+
 		async function () {
 			const resetApp = async () => {
 				if (typeof disconnect === 'function') {

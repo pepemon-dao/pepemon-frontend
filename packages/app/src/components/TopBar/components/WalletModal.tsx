@@ -10,6 +10,7 @@ import {
 import { PepemonProviderContext } from '../../../contexts';
 import { theme } from '../../../theme';
 import { chains } from '../../../constants';
+import { useOutsideClick } from '../../../hooks';
 
 interface WalletModalProps extends ModalProps {
 	account: string,
@@ -35,6 +36,8 @@ const WalletModal: React.FC<WalletModalProps> = ({
 	const [currentChain] = chains.filter(
 		(chain) => parseInt(chain.chainId) === chainId && chain.chainName
 	);
+
+
 
 	return (
 		<>

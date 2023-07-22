@@ -16,12 +16,7 @@ import { Button, Text } from '../../components';
 import { NetworkSwitch, WalletModal } from './components';
 import { PepemonProviderContext } from '../../contexts';
 import { theme } from '../../theme';
-import {
-	useConnectModal,
-	useAccountModal,
-	useChainModal,
-	ConnectButton,
-} from '@rainbow-me/rainbowkit';
+import {ConnectButton} from '@rainbow-me/rainbowkit';
 
 const TopBar: React.FC<any> = () => {
 	const [nativeBalance, setNativeBalance] = useState(new BigNumber(0));

@@ -7,13 +7,11 @@ import '@rainbow-me/rainbowkit/styles.css';
 import { configureChains, createConfig, WagmiConfig } from 'wagmi';
 import {  mainnet,  bsc,goerli } from 'wagmi/chains';
 import { Chain } from '@wagmi/chains'
-import { InjectedConnector } from '@wagmi/core/connectors/injected';
 import { publicProvider } from 'wagmi/providers/public';
 import { jsonRpcProvider } from '@wagmi/core/providers/jsonRpc'
 import { infuraProvider } from 'wagmi/providers/infura'
-import { WalletConnectConnector } from 'wagmi/connectors/walletConnect';
-import { MetaMaskConnector } from 'wagmi/connectors/metaMask';
-import { getDefaultWallets, RainbowKitProvider } from '@rainbow-me/rainbowkit';
+
+import {  RainbowKitProvider } from '@rainbow-me/rainbowkit';
 import { connectorsForWallets} from '@rainbow-me/rainbowkit';
 import {
 	walletConnectWallet,
@@ -43,7 +41,7 @@ const pepeChain: Chain ={
 		default: { name: 'pepechain', url: 'https://explorerl2new-pepechain-testnet-8uk55qlld4.t.conduit.xyz' },
 		etherscan: { name: 'pepechain', url: 'https://explorerl2new-pepechain-testnet-8uk55qlld4.t.conduit.xyz' },
 	  },
-	  testnet: false,
+	  testnet: true,
 	  network:'pepechain'  
 
 
@@ -52,7 +50,8 @@ const chain = [bsc, mainnet,goerli,pepeChain];
 
 const { chains, publicClient } = configureChains(chain, [
 	publicProvider(),
-	infuraProvider({ apiKey: "7a9c4ff3188d481f9143904079638424" })
+	infuraProvider({ apiKey: "7a9c4ff3188d481f9143904079638424" }),
+	
 	]);
 
 const connectors = connectorsForWallets([
@@ -73,7 +72,7 @@ const connectors = connectorsForWallets([
 	},
 ]);
 const wagmiConfig = createConfig({
-	autoConnect: true,
+	autoConnect:false,
 	connectors,
 	publicClient,
 });

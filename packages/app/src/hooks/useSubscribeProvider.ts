@@ -3,7 +3,7 @@ import { ethers, providers } from 'ethers';
 import { useCallback, useContext, useState, useEffect } from 'react';
 import { useAccount
  } from 'wagmi';
-import { Web3Provider, ExternalProvider } from '@ethersproject/providers';
+import { Web3Provider} from '@ethersproject/providers';
 import { Contracts } from '../pepemon/lib/contracts';
 import { PepemonProviderContext } from '../contexts';
 import detectEthereumProvider from '@metamask/detect-provider';
@@ -64,6 +64,7 @@ function useSubscribeProvider(){
     },[setPepemon]);
 
    // look for the address and if available subscribe and set the provider
+
     useEffect(() => {
         if (address) {
            
@@ -80,9 +81,27 @@ function useSubscribeProvider(){
 
             setIsSubscribed(true);
         })()
+
+       
+        }
+
+        if(!address){
+
+         ( function () {
+               setIsSubscribed(false);
+               setEthereumProvider(null);   
+                setweb3Provider(null);
+            })()
+        }
+
+        // unsubscribe on unmount
+        return () => {
+            setIsSubscribed(false);
+            setEthereumProvider(null);   
+            setweb3Provider(null);
         }
     }
-    , [address, ethereumProvider,subscribeProvider,provider,setPepemon]);
+    , [address, ethereumProvider,subscribeProvider,provider,setPepemon,web3Provider]);
     
     return {isSubscribed}
 }

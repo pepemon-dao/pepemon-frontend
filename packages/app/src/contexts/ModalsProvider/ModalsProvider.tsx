@@ -54,24 +54,39 @@ const ModalsProvider: React.FC<{ children: any }> = ({ children }) => {
 		[setData, setIsOpen, setModalKey]
 	);
 
-	// close the modal when route changes
+	console.log(isOpen)
+
+	
 
 	const handleDismiss = useCallback(() => {
 		setIsOpen(false);
 		setData(undefined);
 	}, [setData, setIsOpen]);
 
-	const modalRef = useRef<HTMLDivElement>(null);
-	useOutsideClick(modalRef, () => {
-		// if (isOpen) {
-		// 	setIsOpen(false);
-		// }
+	console.log(isOpen)
 
-	});
+	const modalRef = useRef<HTMLDivElement>(null);
+	
+	// useOutsideClick(modalRef, () => {
+	// 	if (isOpen===true) {
+	// 		setIsOpen(false);
+	// 	}
+
+	// })
+
+
+	
+
+
+	console.log(isOpen)
+
+	// close the modal when route changes
 
 	useEffect(() => {
 		handleDismiss();
 	}, [routerParams]);
+
+	console.log(isOpen)
 
 	return (
 		<Context.Provider
@@ -83,8 +98,8 @@ const ModalsProvider: React.FC<{ children: any }> = ({ children }) => {
 			}}>
 			{children}
 			{data && isOpen && (
-				<ResponsiveWrapper>
-					<Modal ref={modalRef} maxWidth={data?.maxWidth}>
+				<ResponsiveWrapper ref={modalRef}>
+					<Modal maxWidth={data?.maxWidth}>
 						<ActionClose onClick={handleDismiss} />
 						{data?.title && <ModalTitle>{data?.title}</ModalTitle>}
 						<ModalContent>

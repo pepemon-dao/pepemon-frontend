@@ -8,7 +8,7 @@ import { isSupportedChain } from '../../../utils';
 import { UnhandledError } from '../../../components';
 import { theme } from '../../../theme';
 import { useOutsideClick } from '../../../hooks';
-import { switchNetwork } from '@wagmi/core'
+import { useSwitchNetwork} from 'wagmi'
 
 const NetworkSwitch: React.FC<any> = () => {
 	const [chainsListActive, setChainsListActive] = useState(false);
@@ -26,13 +26,20 @@ const NetworkSwitch: React.FC<any> = () => {
 	const [pepemon] = useContext(PepemonProviderContext);
 	const { chainId } = pepemon;
 
-	
-	
+	const {switchNetwork} = useSwitchNetwork()
 
 	const handleChainSwitch = async (chain:any) => {
 		try {
+
+			const id = parseInt(chain.chainId,16);
+
 			
-				await switchNetwork?.(chain.chainId);
+
+				if(typeof switchNetwork === 'function'){
+
+			      	await switchNetwork(id)   
+			 
+	              	}
 			
 			
 		} catch (switchError: any) {
@@ -76,7 +83,7 @@ const NetworkSwitch: React.FC<any> = () => {
 	const supportedChains = chains.filter(chain => isSupportedChain(parseInt(chain.chainId), pathname));
 	const [currentChain] = chains.filter(chain => (parseInt(chain.chainId) === chainId) && chain.chainName);
 
-
+	
 
 	return (
 		<NetworkSwitchWrapper ref={networkSwitchRef}>
