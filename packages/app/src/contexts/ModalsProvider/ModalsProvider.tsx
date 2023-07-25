@@ -17,6 +17,7 @@ import {
 
 interface ModalProps {
 	maxWidth?: number;
+	isOpen?: boolean;
 }
 
 export interface ModalData extends ModalProps {
@@ -54,39 +55,38 @@ const ModalsProvider: React.FC<{ children: any }> = ({ children }) => {
 		[setData, setIsOpen, setModalKey]
 	);
 
-	console.log(isOpen)
+	
 
 	
 
 	const handleDismiss = useCallback(() => {
-		setIsOpen(false);
-		setData(undefined);
+		setData(undefined)
+		setIsOpen(false)
 	}, [setData, setIsOpen]);
 
-	console.log(isOpen)
+	
 
 	const modalRef = useRef<HTMLDivElement>(null);
 	
-	// useOutsideClick(modalRef, () => {
-	// 	if (isOpen===true) {
-	// 		setIsOpen(false);
-	// 	}
-
-	// })
+	useOutsideClick(modalRef, () => {
+		// if (isOpen===true) {
+		// 	handleDismiss();
+		// }
+	});
 
 
 	
 
 
-	console.log(isOpen)
+	
 
 	// close the modal when route changes
 
 	useEffect(() => {
 		handleDismiss();
-	}, [routerParams]);
+	}, [routerParams,handleDismiss]);
 
-	console.log(isOpen)
+
 
 	return (
 		<Context.Provider
@@ -98,12 +98,12 @@ const ModalsProvider: React.FC<{ children: any }> = ({ children }) => {
 			}}>
 			{children}
 			{data && isOpen && (
-				<ResponsiveWrapper ref={modalRef}>
-					<Modal maxWidth={data?.maxWidth}>
+				<ResponsiveWrapper>
+					<Modal maxWidth={data?.maxWidth} ref={modalRef}>
 						<ActionClose onClick={handleDismiss} />
 						{data?.title && <ModalTitle>{data?.title}</ModalTitle>}
 						<ModalContent>
-							{React.isValidElement(data?.content) &&
+							  {React.isValidElement(data?.content) &&
 								React.cloneElement(data?.content as React.ReactElement<any>, {
 									onDismiss: handleDismiss,
 								})}
@@ -126,6 +126,9 @@ const mobileKeyframes = keyframes`
 		opacity: 1;
 	}
 `;
+
+
+  
 
 const ResponsiveWrapper = styled.div`
 	align-items: center;
@@ -162,12 +165,12 @@ const ResponsiveWrapper = styled.div`
 
 const Modal = styled.div<ModalProps>`
 	padding: 1.5em;
-	background-color: ${(props) => props.theme.color.white};
+	background-color: ${props => props.theme.color.white};
 	border-radius: 32px;
 	box-shadow: 0 5px 10px 0px ${theme.color.colorsLayoutShadows};
 	display: flex;
 	flex-direction: column;
-	max-width: ${(props) => (props.maxWidth ? props.maxWidth : 800)}px;
+	max-width: ${(props) => props.maxWidth ? props.maxWidth : 800}px;
 	align-items: center;
 	position: relative;
 	width: 100%;
@@ -175,15 +178,15 @@ const Modal = styled.div<ModalProps>`
 `;
 
 const ModalTitle = styled.div`
-	align-items: center;
-	display: flex;
-	font-size: 1.375rem;
-	font-weight: 700;
-	justify-content: center;
-`;
+  align-items: center;
+  display: flex;
+  font-size: 1.375rem;
+  font-weight: 700;
+  justify-content: center;
+`
 
 const ModalContent = styled.div`
 	padding: ${(props) => props.theme.spacing[2]}px;
-`;
+	`
 
 export default ModalsProvider;

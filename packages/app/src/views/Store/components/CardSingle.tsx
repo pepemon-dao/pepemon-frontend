@@ -13,6 +13,7 @@ import {
 import { PepemonProviderContext } from "../../../contexts";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 
+
 const CardSingle: React.FC<any> = ({ cardId, selectedCard, selectCard }) => {
   const [pepemon] = useContext(PepemonProviderContext);
   const { chainId } = pepemon;
@@ -54,6 +55,15 @@ const isSoldOut = () => {
   
 
   const isReleasingSoon = useCallback(() => {
+
+    if (!cardMeta || !cardMeta.attributes || cardMeta.status === "failed") {
+      return null; // Return early if cardMeta or attributes is undefined
+    }
+    
+    if (!cardMeta.attributes.find) {
+      return null;
+    }
+
     const birthdayMetaData = cardMeta?.attributes.find(
       (attribute:any) => attribute.trait_type === "birthday"
     );
@@ -75,6 +85,9 @@ const isSoldOut = () => {
   }, [cardId]);
 
   const calculateTimeLeft = useCallback(() => {
+
+   
+    
     const birthdayMetaData = cardMeta?.attributes.find(
       (attribute:any) => attribute.trait_type === "birthday"
     );
@@ -103,6 +116,14 @@ const isSoldOut = () => {
 
   const countdown = (pre: string = " ", after: string = "") => {
     const timeLeft = calculateTimeLeft();
+  
+    if (!cardMeta || !cardMeta.attributes || cardMeta.status === "failed") {
+      return null; // Return early if cardMeta or attributes is undefined
+    }
+    
+    if (!cardMeta.attributes.find) {
+      return null;
+    }
 
     const days = timeLeft / (60 * 60 * 24);
     if (days > 1) {
@@ -113,7 +134,7 @@ const isSoldOut = () => {
         </span>
       );
     }
-
+  
     const hours = timeLeft / (60 * 60);
     if (hours > 1) {
       return (
@@ -123,12 +144,12 @@ const isSoldOut = () => {
         </span>
       );
     }
-
+  
     const minutes = timeLeft / 60;
     if (minutes <= 0) {
       return null;
     }
-
+  
     return (
       <span>
         {minutes.toFixed(0)}
@@ -136,6 +157,7 @@ const isSoldOut = () => {
       </span>
     );
   };
+  
 
   if (cardMeta?.status === "failed") return <></>;
 

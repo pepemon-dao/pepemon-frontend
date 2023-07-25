@@ -8,7 +8,6 @@ import { configureChains, createConfig, WagmiConfig } from 'wagmi';
 import {  mainnet,  bsc,goerli } from 'wagmi/chains';
 import { Chain } from '@wagmi/chains'
 import { publicProvider } from 'wagmi/providers/public';
-import { jsonRpcProvider } from '@wagmi/core/providers/jsonRpc'
 import { infuraProvider } from 'wagmi/providers/infura'
 
 import {  RainbowKitProvider } from '@rainbow-me/rainbowkit';

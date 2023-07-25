@@ -51,6 +51,8 @@ const StoreCardsCollection : React.FC<any> = ({selectedCard, setSelectedCard}) =
 		setSelectedCard(null);
 	}, [setSelectedCard, routerParams,activeSeries]);
 
+	
+
 	return (
 		<div>
 			<StoreSelectionWrapper>

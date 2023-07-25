@@ -10,7 +10,6 @@ import {
 import { PepemonProviderContext } from '../../../contexts';
 import { theme } from '../../../theme';
 import { chains } from '../../../constants';
-import { useOutsideClick } from '../../../hooks';
 
 interface WalletModalProps extends ModalProps {
 	account: string,
