@@ -20,18 +20,14 @@ const Hero: React.FC<any> = ({ apy }) => {
     <ContentColumns mobileStyle={{ marginBottom: "7em" }}>
       <ContentColumn width="40%" style={{ paddingTop: "3.75em" }}>
         <Title as="h1" font={theme.font.spaceMace} size="xxxl">
-          Pepemon World: Battle, Trade, and Collect!
+          The Ultimate Degentralized Arena!
         </Title>
         <ContentColumns mobileStyle={{ flexDirection: "row" }}>
           <ContentColumn
             desktopStyle={{ paddingTop: "16px", maxWidth: "460px" }}
           >
             <Text as="p" font={theme.font.inter} size="l">
-              Embark on an exhilarating journey with Degen Battleground, a web3
-              card game built on{" "}
-              <a href="https://docs.pepemon.world/pepechain">Pepechain</a> -
-              offering a world of action-packed fun, low fees, and
-              lightning-fast transactions!
+              Get ready for Degen Battleground – where every battle, trade, and collectible isn't just a play, it's piece of nostalgia. One click, one wallet, endless rewards. Ready to claim your stake in the Pepemon universe?
             </Text>
           </ContentColumn>
           <ContentColumn
