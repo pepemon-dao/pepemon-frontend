@@ -26,8 +26,8 @@ const Hero: React.FC<any> = ({ apy }) => {
           <ContentColumn
             desktopStyle={{ paddingTop: "16px", maxWidth: "460px" }}
           >
-            <Text as="p" font={theme.font.inter} size="l">fi
-            Dive into Degen Battleground – where every battle, trade, and collectible isn't just a play, it's piece of nostalgia. One click, one wallet, endless rewards. Ready to claim your stake in the Pepemon universe?
+            <Text as="p" font={theme.font.inter} size="l">
+              Get ready for Degen Battleground – where every battle, trade, and collectible isn't just a play, it's piece of nostalgia. One click, one wallet, endless rewards. Ready to claim your stake in the Pepemon universe?
             </Text>
           </ContentColumn>
           <ContentColumn
