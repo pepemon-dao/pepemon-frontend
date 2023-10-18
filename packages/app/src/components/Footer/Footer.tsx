@@ -69,7 +69,7 @@ const Footer = () => {
                 <li>
                   <StyledLink
                     external
-                    href="https://app.uniswap.org/#/swap?outputCurrency=0x4d2ee5dae46c86da2ff521f7657dad98834f97b8"
+                    href="https://swap.defillama.com/?chain=ethereum&from=0x0000000000000000000000000000000000000000&to=0x4d2ee5dae46c86da2ff521f7657dad98834f97b8"
                   >
                     Buy $PPBLZ
                   </StyledLink>
@@ -77,7 +77,7 @@ const Footer = () => {
                 <li>
                   <StyledLink
                     external
-                    href="https://app.uniswap.org/#/swap?outputCurrency=0xf1f508c7c9f0d1b15a76fba564eef2d956220cf7"
+                    href="https://swap.defillama.com/?chain=ethereum&from=0x0000000000000000000000000000000000000000&to=0xf1f508c7c9f0d1b15a76fba564eef2d956220cf7"
                   >
                     Buy $PPDEX
                   </StyledLink>
