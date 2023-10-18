@@ -57,7 +57,7 @@ const Hero: React.FC<any> = ({ apy }) => {
               <Spacer size="md" />
               <ExternalLink
                 shadow
-                href="https://app.uniswap.org/#/swap?outputCurrency=0x4d2ee5dae46c86da2ff521f7657dad98834f97b8"
+                href="https://swap.defillama.com/?chain=ethereum&from=0x0000000000000000000000000000000000000000&to=0x4d2ee5dae46c86da2ff521f7657dad98834f97b8"
                 styling="button"
               >
                 Join Pepemon DAO
