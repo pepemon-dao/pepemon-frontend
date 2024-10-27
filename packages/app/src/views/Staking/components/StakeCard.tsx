@@ -68,23 +68,44 @@ const StakeCard: React.FC<any> = () => {
 
     //TODO: move to generic contract service
     /** getters */
-    const getPpblzAllowance = useCallback(async () => {
-        // @ts-ignore
-        let _ppblzAllowance = await contracts.ppblz.allowance(account, contracts.ppdex.address);
-        setPpblzAllowance(parseFloat(web3.utils.fromWei(_ppblzAllowance.toString())));
-        if (_ppblzAllowance > 0 ) {
-            setIsApprovedPpblz(true)
-        }
-    }, [setPpblzAllowance, account, contracts.ppblz, contracts.ppdex.address, web3.utils])
 
-    const getUniV2PpblzAllowance = useCallback( async () => {
-        // @ts-ignore
-        let _uniV2PpblzAllowance = await contracts.uniV2_ppblz.allowance(account, contracts.ppdex.address);
-        setUniV2PpblzAllowance(parseFloat(web3.utils.fromWei(_uniV2PpblzAllowance.toString())));
-        if (_uniV2PpblzAllowance > 0 ) {
-            setIsApprovedUniV2Ppblz(true)
-        }
-    }, [contracts.uniV2_ppblz, contracts.ppdex.address, setUniV2PpblzAllowance, setIsApprovedUniV2Ppblz, account, web3.utils])
+	const safeToBN = (value: any) => {
+    try {
+        if (!value || value === '0') return web3.utils.toBN('0');
+        return web3.utils.toBN(value.toString());
+    } catch (error) {
+        console.error('Error converting to BN:', error);
+        return web3.utils.toBN('0');
+    }
+}
+	// Fix for getPpblzAllowance
+const getPpblzAllowance = useCallback(async () => {
+    try {
+        const _ppblzAllowance = await contracts.ppblz.allowance(account, contracts.ppdex.address);
+        const allowanceBN = safeToBN(_ppblzAllowance);
+        setPpblzAllowance(safeFromWei(allowanceBN.toString()));
+        setIsApprovedPpblz(allowanceBN.gt(web3.utils.toBN('0')));
+    } catch (error) {
+        console.error('Error in getPpblzAllowance:', error);
+        setPpblzAllowance(0);
+        setIsApprovedPpblz(false);
+    }
+}, [setPpblzAllowance, account, contracts.ppblz, contracts.ppdex.address, web3.utils])
+
+// Fix for getUniV2PpblzAllowance
+const getUniV2PpblzAllowance = useCallback(async () => {
+    try {
+        const _uniV2PpblzAllowance = await contracts.uniV2_ppblz.allowance(account, contracts.ppdex.address);
+        const allowanceBN = safeToBN(_uniV2PpblzAllowance);
+        setUniV2PpblzAllowance(safeFromWei(allowanceBN.toString()));
+        setIsApprovedUniV2Ppblz(allowanceBN.gt(web3.utils.toBN('0')));
+    } catch (error) {
+        console.error('Error in getUniV2PpblzAllowance:', error);
+        setUniV2PpblzAllowance(0);
+        setIsApprovedUniV2Ppblz(false);
+    }
+}, [contracts.uniV2_ppblz, contracts.ppdex.address, setUniV2PpblzAllowance, account, web3.utils])
+
 
     const getPpblzBalance = useCallback( async () => {
         let _ppblzBalance = await contracts.ppblz.balanceOf(account);
@@ -121,35 +142,70 @@ const StakeCard: React.FC<any> = () => {
         setUniV2PpblzStakedAmount(parseFloat(web3.utils.fromWei(stakeA.toString())));
     }, [contracts.ppdex, setUniV2PpblzStakedAmount, account, web3.utils])
 
-    const getPpdexRewards = useCallback( async () => {
-        setIsUpdatingRewards(true);
-        let cRewards = (await contracts.ppdex.myRewardsBalance(account)).toString();
-        const ppblzStaked = (await contracts.ppdex.getAddressPpblzStakeAmount(account)).toString();
-        const uniV2Staked = (await contracts.ppdex.getAddressUniV2StakeAmount(account)).toString();
+    const getPpdexRewards = useCallback(async () => {
+    setIsUpdatingRewards(true);
+    try {
+        const cRewards = await contracts.ppdex.myRewardsBalance(account);
+        const ppblzStaked = await contracts.ppdex.getAddressPpblzStakeAmount(account);
+        const uniV2Staked = await contracts.ppdex.getAddressUniV2StakeAmount(account);
 
-        // Faulty myRewardsBalance edge case.. dont use view but recalculate!
-        if (ppblzStaked > 0 && uniV2Staked > 0) {
+        // Convert all values to BN safely
+        const rewardsBN = safeToBN(cRewards);
+        const ppblzStakedBN = safeToBN(ppblzStaked);
+        const uniV2StakedBN = safeToBN(uniV2Staked);
+        
+        let rewardsToSet = rewardsBN;
+
+        // Only proceed with calculations if both stakes are greater than zero
+        if (ppblzStakedBN.gt(web3.utils.toBN('0')) && uniV2StakedBN.gt(web3.utils.toBN('0'))) {
             const lastRewardBlock = await contracts.ppdex.getLastBlockCheckedNum(account);
             const currentBlock = await contracts.ppdex.getBlockNum();
             const liquidityMultiplier = await contracts.ppdex.getLiquidityMultiplier();
-            const rewardsVar = 100000;
 
-            const ppblzRewardBalance = ppblzStaked * (currentBlock - lastRewardBlock) / rewardsVar;
-            const uniV2RewardsBalance = uniV2Staked * ((currentBlock - lastRewardBlock) * liquidityMultiplier) / rewardsVar;
-            const originalReward = cRewards - (ppblzRewardBalance + uniV2RewardsBalance);
+            const lastRewardBlockBN = safeToBN(lastRewardBlock);
+            const currentBlockBN = safeToBN(currentBlock);
+            const liquidityMultiplierBN = safeToBN(liquidityMultiplier);
+            const rewardsVarBN = web3.utils.toBN('100000');
 
-            if (originalReward > 10000) {
-                const realReward = ((cRewards - (ppblzRewardBalance + uniV2RewardsBalance)) / 2) + (ppblzRewardBalance + uniV2RewardsBalance);
-                cRewards = realReward.toString();
+            const blockDiff = currentBlockBN.sub(lastRewardBlockBN);
+            
+            const ppblzRewardBalance = ppblzStakedBN.mul(blockDiff).div(rewardsVarBN);
+            const uniV2RewardsBalance = uniV2StakedBN.mul(blockDiff).mul(liquidityMultiplierBN).div(rewardsVarBN);
+            const totalRewards = ppblzRewardBalance.add(uniV2RewardsBalance);
+
+            if (rewardsBN.gt(web3.utils.toBN('10000'))) {
+                const originalReward = rewardsBN.sub(totalRewards);
+                rewardsToSet = originalReward.div(web3.utils.toBN('2')).add(totalRewards);
             }
         }
-        setPpdexRewards(parseFloat(web3.utils.fromWei(cRewards)));
 
+        setPpdexRewards(safeFromWei(rewardsToSet.toString()));
+    } catch (error) {
+        console.error('Error in getPpdexRewards:', error);
+        setPpdexRewards(0);
+    } finally {
         setTimeout(() => {
             setIsUpdatingRewards(false);
-            clearTimeout(timer);
+            if (timer.current) {
+                clearTimeout(timer.current);
+            }
         }, 2000);
-    }, [account, contracts.ppdex, web3.utils])
+    }
+}, [account, contracts.ppdex, web3.utils])
+
+	// Updated safeFromWei function to handle zero values better
+const safeFromWei = (value: string | number) => {
+    try {
+        if (!value || value === '0') return 0;
+        if (typeof value === 'number') {
+            value = value.toString();
+        }
+        return parseFloat(web3.utils.fromWei(value));
+    } catch (error) {
+        console.error('Error in safeFromWei:', error);
+        return 0;
+    }
+}
 
     const stakePpblz = async () => {
         if ((isStakingPpblz || parseFloat(ppblzStakeAmount) === 0) || (parseFloat(ppblzStakeAmount) > ppblzBalance)) {
