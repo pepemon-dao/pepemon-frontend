@@ -10,33 +10,33 @@ import { theme } from '../../../theme';
 import { sendTransaction } from '../../../pepemon/utils';
 
 const StakeCard: React.FC<any> = () => {
-    const [ppblzStakeAmount, setPpblzStakeAmount] = useState(null);
-    const [ppblzStakedAmount, setPpblzStakedAmount] = useState(0);
-    const [uniV2PpblzStakeAmount, setUniV2PpblzStakeAmount] = useState(null);
-    const [uniV2PpblzStakedAmount, setUniV2PpblzStakedAmount] = useState(0);
-    const [isApprovedPpblz, setIsApprovedPpblz] = useState(false);
-    const [isApprovingPpblz, setIsApprovingPpblz] = useState(false);
-    const [isApprovedUniV2Ppblz, setIsApprovedUniV2Ppblz] = useState(false);
-    const [isApprovingUniV2Ppblz, setIsApprovingUniV2Ppblz] = useState(false);
-    const [isStakingPpblz, setIsStakingPpblz] = useState(false);
-    const [isWithdrawingPpblz, setIsWithdrawingPpblz] = useState(false);
-    const [isStakingUniV2Ppblz, setIsStakingUniV2Ppblz] = useState(false);
-    const [isWithdrawingUniV2Ppblz, setIsWithdrawingUniV2Ppblz] = useState(false);
-    const [isClaiming, setIsClaiming] = useState(false);
-    const [isUpdatingRewards, setIsUpdatingRewards] = useState(false);
-    const [ppdexRewards, setPpdexRewards] = useState(0);
-    const [totalPpblzSupply, setTotalPpblzSupply] = useState(0);
-    const [totalUniV2PpblzSupply, setTotalUniV2PpblzSupply] = useState(0);
-    const [ppblzAllowance, setPpblzAllowance] = useState(0);
-    const [uniV2PpblAllowance, setUniV2PpblzAllowance] = useState(0);
-    const [ppblzBalance, setPpblzBalance] = useState(0);
-    const [uniV2PpblzBalance, setUniV2PpblzBalance] = useState(0);
-    const [ppdexBalance, setPpdexBalance] = useState(0);
-    const [transactionFinished, setTransactionFinished] = useState(0);
-    const [ppblzStakeAdd, setPpblzStakeAdd] = useState(false);
-    const [ppblzStakeSub, setPpblzStakeSub] = useState(false);
-    const [uniV2PpblzStakeAdd, setUniV2PpblzStakeAdd] = useState(false);
-    const [uniV2PpblzStakeSub, setUniV2PpblzStakeSub] = useState(false);
+    const [ppblzStakeAmount, setPpblzStakeAmount] = useState<string | null>(null);
+    const [ppblzStakedAmount, setPpblzStakedAmount] = useState<number>(0);
+    const [uniV2PpblzStakeAmount, setUniV2PpblzStakeAmount] = useState<string | null>(null);
+    const [uniV2PpblzStakedAmount, setUniV2PpblzStakedAmount] = useState<number>(0);
+    const [isApprovedPpblz, setIsApprovedPpblz] = useState<boolean>(false);
+    const [isApprovingPpblz, setIsApprovingPpblz] = useState<boolean>(false);
+    const [isApprovedUniV2Ppblz, setIsApprovedUniV2Ppblz] = useState<boolean>(false);
+    const [isApprovingUniV2Ppblz, setIsApprovingUniV2Ppblz] = useState<boolean>(false);
+    const [isStakingPpblz, setIsStakingPpblz] = useState<boolean>(false);
+    const [isWithdrawingPpblz, setIsWithdrawingPpblz] = useState<boolean>(false);
+    const [isStakingUniV2Ppblz, setIsStakingUniV2Ppblz] = useState<boolean>(false);
+    const [isWithdrawingUniV2Ppblz, setIsWithdrawingUniV2Ppblz] = useState<boolean>(false);
+    const [isClaiming, setIsClaiming] = useState<boolean>(false);
+    const [isUpdatingRewards, setIsUpdatingRewards] = useState<boolean>(false);
+    const [ppdexRewards, setPpdexRewards] = useState<number>(0);
+    const [totalPpblzSupply, setTotalPpblzSupply] = useState<number>(0);
+    const [totalUniV2PpblzSupply, setTotalUniV2PpblzSupply] = useState<number>(0);
+    const [ppblzAllowance, setPpblzAllowance] = useState<number>(0);
+    const [uniV2PpblAllowance, setUniV2PpblzAllowance] = useState<number>(0);
+    const [ppblzBalance, setPpblzBalance] = useState<number>(0);
+    const [uniV2PpblzBalance, setUniV2PpblzBalance] = useState<number>(0);
+    const [ppdexBalance, setPpdexBalance] = useState<number>(0);
+    const [transactionFinished, setTransactionFinished] = useState<number>(0);
+    const [ppblzStakeAdd, setPpblzStakeAdd] = useState<boolean>(false);
+    const [ppblzStakeSub, setPpblzStakeSub] = useState<boolean>(false);
+    const [uniV2PpblzStakeAdd, setUniV2PpblzStakeAdd] = useState<boolean>(false);
+    const [uniV2PpblzStakeSub, setUniV2PpblzStakeSub] = useState<boolean>(false);
 
     const [pepemon] = useContext(PepemonProviderContext);
     const { account, contracts, provider } = pepemon;
@@ -45,8 +45,8 @@ const StakeCard: React.FC<any> = () => {
     const ppblzApy = calculatePpblzApy(ppblzPrice, ppdexPrice);
     const ppblzEthLpApy = calculatePpblzEthLpApy(ppblzPrice, ppdexPrice);
 
-    let timer: any = useRef(null);
-    let horzScroll: any = useRef(null);
+    const timer: any = useRef(null);
+    const horzScroll: any = useRef(null);
     useHorizontalScroll(horzScroll);
 
     useEffect(() => {
@@ -242,7 +242,7 @@ const StakeCard: React.FC<any> = () => {
                 await getUniV2PpblzAllowance();
                 await getPpdexRewards();
             }
-            return setTransactionFinished(transactionFinished + 1);
+            return setTransactionFinished(prev => prev + 1);
         } catch (error) {
             console.log(error);
             await resetToInitialStateOnReject();
@@ -250,7 +250,7 @@ const StakeCard: React.FC<any> = () => {
     };
 
     const withdrawPpblz = async () => {
-        if (isWithdrawingPpblz || ppblzStakeAmount === 0) {
+        if (isWithdrawingPpblz || ppblzStakeAmount === null || parseFloat(ppblzStakeAmount) === 0) {
             return;
         }
         setIsWithdrawingPpblz(true);
@@ -269,7 +269,7 @@ const StakeCard: React.FC<any> = () => {
                 setIsWithdrawingPpblz(false);
             }
 
-            return setTransactionFinished(transactionFinished + 1);
+            setTransactionFinished(prev => prev + 1);
         } catch (error) {
             console.log(error);
             await resetToInitialStateOnReject();
@@ -277,7 +277,7 @@ const StakeCard: React.FC<any> = () => {
     };
 
     const withdrawUniV2Ppblz = async () => {
-        if (isWithdrawingUniV2Ppblz || uniV2PpblzStakeAmount === 0) {
+        if (isWithdrawingUniV2Ppblz || uniV2PpblzStakeAmount === null || parseFloat(uniV2PpblzStakeAmount) === 0) {
             return;
         }
         setIsWithdrawingUniV2Ppblz(true);
@@ -296,7 +296,7 @@ const StakeCard: React.FC<any> = () => {
                 setIsWithdrawingUniV2Ppblz(false);
             }
 
-            return setTransactionFinished(transactionFinished + 1);
+            setTransactionFinished(prev => prev + 1);
         } catch (error) {
             console.log(error);
             await resetToInitialStateOnReject();
@@ -323,7 +323,7 @@ const StakeCard: React.FC<any> = () => {
                 setIsApprovedPpblz(true);
             }
 
-            return setTransactionFinished(transactionFinished + 1);
+            setTransactionFinished(prev => prev + 1);
         } catch (error) {
             console.log(error);
             await resetToInitialStateOnReject();
@@ -349,7 +349,7 @@ const StakeCard: React.FC<any> = () => {
                 setIsApprovedUniV2Ppblz(true);
             }
 
-            return setTransactionFinished(transactionFinished + 1);
+            setTransactionFinished(prev => prev + 1);
         } catch (error) {
             console.log(error);
             await resetToInitialStateOnReject();
@@ -377,14 +377,14 @@ const StakeCard: React.FC<any> = () => {
         value.slice(-2) !== '.0';
 
     /** setters & modifiers */
-    const updatePpblzStakingInput = (e: any) => {
+    const updatePpblzStakingInput = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (isInvalidInput(e.target.value)) {
             return;
         }
         setPpblzStakeAmount(cleanNumberInput(e.target.value, 18));
     };
 
-    const updateUniV2PpblzStakingInput = (e: any) => {
+    const updateUniV2PpblzStakingInput = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (isInvalidInput(e.target.value)) {
             return;
         }
@@ -409,28 +409,28 @@ const StakeCard: React.FC<any> = () => {
 
     const setMaxPpblz = () => {
         if (parseFloat(ppblzBalance.toString()) === 0) {
-            return setPpblzStakeAmount(ppblzStakedAmount);
+            return setPpblzStakeAmount(ppblzStakedAmount.toString());
         }
         if (parseFloat(ppblzStakedAmount.toString()) === 0) {
-            return setPpblzStakeAmount(ppblzBalance);
+            return setPpblzStakeAmount(ppblzBalance.toString());
         }
-        if (ppblzBalance === ppblzStakeAmount) {
-            return setPpblzStakeAmount(ppblzStakedAmount);
+        if (ppblzBalance === parseFloat(ppblzStakeAmount || '0')) {
+            return setPpblzStakeAmount(ppblzStakedAmount.toString());
         }
-        return setPpblzStakeAmount(ppblzBalance);
+        return setPpblzStakeAmount(ppblzBalance.toString());
     };
 
     const setMaxUniV2Ppblz = () => {
         if (parseFloat(uniV2PpblzBalance.toString()) === 0) {
-            return setUniV2PpblzStakeAmount(uniV2PpblzStakedAmount);
+            return setUniV2PpblzStakeAmount(uniV2PpblzStakedAmount.toString());
         }
         if (parseFloat(uniV2PpblzStakedAmount.toString()) === 0) {
-            return setUniV2PpblzStakeAmount(uniV2PpblzBalance);
+            return setUniV2PpblzStakeAmount(uniV2PpblzBalance.toString());
         }
-        if (uniV2PpblzBalance === uniV2PpblzStakeAmount) {
-            return setUniV2PpblzStakeAmount(uniV2PpblzStakedAmount);
+        if (uniV2PpblzBalance === parseFloat(uniV2PpblzStakeAmount || '0')) {
+            return setUniV2PpblzStakeAmount(uniV2PpblzStakedAmount.toString());
         }
-        return setUniV2PpblzStakeAmount(uniV2PpblzBalance);
+        return setUniV2PpblzStakeAmount(uniV2PpblzBalance.toString());
     };
 
     const claimRewards = async () => {
@@ -444,7 +444,7 @@ const StakeCard: React.FC<any> = () => {
                 await sendTransaction(provider, async () => await contracts.ppdex.getReward());
 
                 await getPpdexRewards();
-                setTransactionFinished(transactionFinished + 1);
+                setTransactionFinished(prev => prev + 1);
             } catch (error) {
                 console.log(error);
                 await resetToInitialStateOnReject();
@@ -498,8 +498,255 @@ const StakeCard: React.FC<any> = () => {
         getUniV2PpblzSupply,
     ]);
 
-    // The rest of your component code remains unchanged (JSX and styled components)
-    // ...
+    return (
+        <StakeGrid>
+            <StakeGridTop ref={horzScroll}>
+                <StakeGridArea>
+                    <StakeGridAreaHeader>
+                        <StakeGridAreaHeaderTitle>
+                            <img loading="lazy" src={pepeball} alt="Pepeball"/>
+                            <Spacer size="sm"/>
+                            <Title as="h2" size='m' color={theme.color.white} font={theme.font.neometric} weight={900}>Earn with PPBLZ</Title>
+                        </StakeGridAreaHeaderTitle>
+                        <StakeGridAreaHeaderMeta>
+                            <span>{ppblzApy.toFixed(0)}% APY</span>
+                            <IButtonPopover cursor={'pointer'} heading="APY staking PPBLZ"
+                                apy={ppblzApy}
+                                ppdexPrice={ppdexPrice}
+                                button={{ href:"https://app.uniswap.org/#/swap?outputCurrency=0x4d2ee5dae46c86da2ff521f7657dad98834f97b8", text: 'Buy PPBLZ' }}/>
+                        </StakeGridAreaHeaderMeta>
+                    </StakeGridAreaHeader>
+                    <StakeGridAreaBody>
+                        <DataColumns>
+                            <DataColumn>
+                                <Text as="p" size="m" font={theme.font.inter}>PPBLZ balance</Text>
+                                <Spacer size="sm"/>
+                                <Text as="p" font={theme.font.neometric} weight={900} size='xl'>{parseFloat(ppblzBalance.toString()).toFixed(2)}</Text>
+                            </DataColumn>
+                            <DataColumn>
+                                <Text as="p" size="m" font={theme.font.inter}>PPBLZ staked</Text>
+                                <Spacer size="sm"/>
+                                <Text as="p" font={theme.font.neometric} weight={900} size='xl'>{parseFloat(ppblzStakedAmount.toString()).toFixed(2)}</Text>
+                            </DataColumn>
+                        </DataColumns>
+                        <div style={{ marginTop: "auto" }}>
+                            {isApprovedPpblz && !ppblzStakeAdd && !ppblzStakeSub &&
+                                <ContentCentered
+                                    style={{
+                                    display: "flex",
+                                    flexDirection: "row",
+                                    justifyContent: "center",
+                                    }}
+                                >
+                                    <Button styling="white" onClick={() => {
+                                        setPpblzStakeSub(true);
+                                        setPpblzStakeAdd(false);
+                                    }} width="20%" symbol aria-label="withdraw"
+                                        {...(ppblzStakedAmount <= 0 && {disabled: true})}
+                                    >-</Button>
+                                    <Spacer size="sm"/>
+                                    <Button styling="purple" onClick={() => {
+                                        setPpblzStakeSub(false);
+                                        setPpblzStakeAdd(true);
+                                    }} width="80%" symbol aria-label="stake"
+                                    {...(ppblzBalance <= 0 && {disabled: true})}
+                                    >+</Button>
+                                </ContentCentered>
+                            }
+                            {(!isApprovedPpblz || ppblzAllowance < parseFloat(ppblzStakeAmount || '0')) &&
+                                <Button styling="purple" onClick={approvePpblz} {...((isUpdatingRewards || isApprovingPpblz) && {disabled: true})} width="100%">{isUpdatingRewards ? "Updating..." : !isApprovingPpblz ? "Enable" : "Enabling..."}</Button>
+                            }
+                            {isApprovedPpblz &&
+                            !isWithdrawingPpblz &&
+                            !isStakingPpblz &&
+                            (ppblzStakeAdd || ppblzStakeSub) &&
+                                <ContentCentered direction="row" bgColor={theme.color.white} style={{ borderRadius: "8px", border: `1px solid ${theme.color.purple[700]}`, padding: ".1em .1em .1em 0.75em" }}>
+                                    <StyledInput
+                                        placeholder="0.00"
+                                        value={setPpblzInputField() || ""}
+                                        onChange={(event) => updatePpblzStakingInput(event) }
+                                        min="0.00"
+                                        step="1"
+                                        autoFocus={true} />
+                                    <Button styling="link" onClick={setMaxPpblz}>Max</Button>
+                                    <Button styling="purple"
+                                        {...(ppblzStakeAdd && !ppblzStakeSub ?
+                                            {
+                                                onClick: stakePpblz,
+                                                disabled: !(parseFloat(ppblzStakeAmount || '0') > 0 && parseFloat(ppblzStakeAmount || '0') <= ppblzBalance) || isStakingPpblz
+                                            } : ppblzStakeSub && !ppblzStakeAdd &&
+                                            { onClick: withdrawPpblz,
+                                                disabled: !(parseFloat(ppblzStakeAmount || '0') > 0 && parseFloat(ppblzStakeAmount || '0') <= ppblzStakedAmount) || isWithdrawingPpblz }
+                                        )}
+                                    >
+                                        {ppblzStakeAdd && !ppblzStakeSub ? "Stake" : !ppblzStakeAdd && ppblzStakeSub && "Withdraw"}
+                                    </Button>
+                                </ContentCentered>
+                            }
+                            { (isStakingPpblz || isWithdrawingPpblz) &&
+                                <Button styling="purple" onClick={approvePpblz} width="100%" disabled>
+                                    {isStakingPpblz && "Staking"}
+                                    {isWithdrawingPpblz &&  "Withdrawing"}
+                                ...</Button>
+                            }
+                        </div>
+                    </StakeGridAreaBody>
+                </StakeGridArea>
+                {/* Repeat similar structure for PPBLZ LP staking */}
+            </StakeGridTop>
+            {/* PPDEX Earned Section */}
+            <StakeGridArea>
+                <StakeGridAreaHeader wide>
+                    <StakeGridAreaHeaderTitle>
+                        <img loading="lazy" src={ppdexLogo} alt="PPDEX"/>
+                        <Spacer size="sm"/>
+                        <Title as="h2" size='m' color={theme.color.white} font={theme.font.neometric} weight={900}>PPDEX Earned</Title>
+                    </StakeGridAreaHeaderTitle>
+                </StakeGridAreaHeader>
+                <StakeGridAreaBody>
+                    <ClaimGrid>
+                        <Text style={{ gridArea: 'area0' }} as="p" font={theme.font.neometric} weight={900} size='xl'>
+                            {parseFloat(ppdexBalance.toString()).toFixed(2)} $PPDEX
+                        </Text>
+
+                        <Text style={{ gridArea: 'area1' }} as="p" font={theme.font.inter}>
+                            Total value: $ {((parseFloat(ppdexBalance.toString()) * ppdexPrice) + (ppdexRewards * ppdexPrice)).toFixed(2)}
+                        </Text>
+
+                        <UpdateButton style={{ gridArea: 'area2' }} styling="link" onClick={() => !isUpdatingRewards && getPpdexRewards()} {...(isUpdatingRewards && {disabled: true})}>
+                            {isUpdatingRewards ? "UPDATING..." : "UPDATE"}
+                        </UpdateButton>
+
+                        <Button style={{ gridArea: 'area3' }} styling="purple" disabled={(isStakingPpblz || isWithdrawingPpblz) || isUpdatingRewards || (!(ppblzStakedAmount > 0) && (!(ppdexRewards > 0.1) || isClaiming))} onClick={claimRewards} width="clamp(100px, 18em, 100%)">{(isStakingPpblz || isWithdrawingPpblz || isUpdatingRewards) ? "Updating..." : isClaiming ? "Claiming..." : `${ppdexRewards.toFixed(2)} PPDEX to claim`}</Button>
+                    </ClaimGrid>
+                </StakeGridAreaBody>
+            </StakeGridArea>
+        </StakeGrid>
+    );
 };
+
+// Styled components
+const StakeGrid = styled.section``;
+
+const StakeGridArea = styled.div<{area?: string}>`
+    background-color: ${theme.color.purple[800]};
+    border-radius: ${theme.borderRadius}px;
+    display: flex;
+    flex-direction: column;
+    grid-area: ${props => props.area};
+    margin-bottom: 1em;
+    min-width: 0px;
+    overflow: hidden;
+`
+
+const StakeGridTop = styled.div`
+    display: flex;
+    justify-content: space-between;
+    overflow: auto;
+
+    @media (min-width: ${theme.breakpoints.mobile}) and (max-width: ${theme.breakpoints.tabletL}) {
+        flex-wrap: wrap;
+    }
+
+    ${StakeGridArea} {
+        min-width: min(400px, 90%);
+        width: 100%;
+
+        &:not(:first-child) {
+            margin-left: 1.25em;
+
+            @media (min-width: ${theme.breakpoints.mobile}) and (max-width: ${theme.breakpoints.tabletL}) {
+                margin-left: 0;
+            }
+        }
+    }
+`
+
+const StakeGridAreaHeader = styled.div<{wide?: boolean}>`
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: clamp(1.125em, 3.75vw, 1.2em) clamp(.8em, 2.65vw, 2em);
+
+    ${({wide}) => wide && `
+        @media (min-width: ${theme.breakpoints.tabletL}) {
+            justify-content: center;
+        }
+    `}
+`
+
+const StakeGridAreaHeaderTitle = styled.div`
+    align-items: center;
+    display: flex;
+
+    img { width: 2.5em; }
+`
+
+const StakeGridAreaHeaderMeta = styled.div`
+    &{
+        display: flex;
+        align-items: center;
+    }
+
+    span {
+        margin-right: .67em;
+        color: ${props => props.theme.color.white};
+        font-family: ${props => props.theme.font.neometric};
+        font-size: .75rem;
+        font-weight: 900;
+    }
+`
+
+const StakeGridAreaBody = styled.div`
+    background-color: ${props => props.theme.color.white};
+    display: flex;
+    flex-direction: column;
+    padding: clamp(1.125em,3.75vw,1.2em) clamp(.8em,2.65vw,2em) clamp(.8em,2.65vw,2em);
+    flex: 1 0 auto;
+`
+
+const ClaimGrid = styled.div`
+    display: grid;
+    grid-template-areas: "area0 area2" "area1 area1" "area3 area3";
+    grid-column-gap: 1.25em;
+    grid-row-gap: 1.25em;
+
+    @media (min-width: ${theme.breakpoints.tabletL}) {
+        grid-template-areas: "area0 area0" "area1 area2" "area3 area3";
+        justify-content: center;
+    }
+`
+
+const UpdateButton = styled(Button)`
+    text-align: right;
+    padding: 0;
+
+    @media (min-width: ${theme.breakpoints.tabletL}) {
+        text-align: left;
+    }
+`
+
+const DataColumns = styled.div`
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-bottom: 1.5em;
+`
+
+const DataColumn = styled.div`
+    flex: 1 0 auto;
+`
+
+const StyledInput = styled.input`
+    border: none;
+    font-size: 1rem;
+    flex: 1 1 auto;
+    min-width: 0;
+
+    &:focus-within {
+        outline : none;
+    }
+`
 
 export default StakeCard;
