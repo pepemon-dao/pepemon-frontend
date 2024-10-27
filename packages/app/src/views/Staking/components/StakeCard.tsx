@@ -1,3 +1,5 @@
+// StakeCard.tsx
+
 import React, { useCallback, useEffect, useState, useRef, useContext } from 'react';
 import styled from "styled-components";
 import { ethers } from 'ethers';
@@ -242,7 +244,7 @@ const StakeCard: React.FC<any> = () => {
                 await getUniV2PpblzAllowance();
                 await getPpdexRewards();
             }
-            return setTransactionFinished(prev => prev + 1);
+            setTransactionFinished(prev => prev + 1);
         } catch (error) {
             console.log(error);
             await resetToInitialStateOnReject();
@@ -501,6 +503,7 @@ const StakeCard: React.FC<any> = () => {
     return (
         <StakeGrid>
             <StakeGridTop ref={horzScroll}>
+                {/* PPBLZ Staking Section */}
                 <StakeGridArea>
                     <StakeGridAreaHeader>
                         <StakeGridAreaHeaderTitle>
@@ -592,8 +595,101 @@ const StakeCard: React.FC<any> = () => {
                         </div>
                     </StakeGridAreaBody>
                 </StakeGridArea>
-                {/* Repeat similar structure for PPBLZ LP staking */}
+
+                {/* UniV2PPBLZ LP Staking Section */}
+                <StakeGridArea>
+                    <StakeGridAreaHeader>
+                        <StakeGridAreaHeaderTitle>
+                            <img loading="lazy" src={uniswap} alt="Uniswap"/>
+                            <Spacer size="sm"/>
+                            <Title as="h2" size='m' color={theme.color.white} font={theme.font.neometric} weight={900}>Earn with PPBLZ LP</Title>
+                        </StakeGridAreaHeaderTitle>
+                        <StakeGridAreaHeaderMeta>
+                            <span>{ppblzEthLpApy.toFixed(0)}% APY</span>
+                            <IButtonPopover cursor={'pointer'} heading="APY staking PPBLZ LP"
+                                apy={ppblzEthLpApy}
+                                ppdexPrice={ppdexPrice}
+                                button={{ href: "https://app.uniswap.org/#/add/0x4D2eE5DAe46C86DA2FF521F7657dad98834f97b8/ETH", text: 'Add PPBLZ LP' }}/>
+                        </StakeGridAreaHeaderMeta>
+                    </StakeGridAreaHeader>
+                    <StakeGridAreaBody>
+                        <DataColumns>
+                            <DataColumn>
+                                <Text as="p" size="m" font={theme.font.inter}>PPBLZ LP balance</Text>
+                                <Spacer size="sm"/>
+                                <Text as="p" font={theme.font.neometric} weight={900} size='xl'>{parseFloat(uniV2PpblzBalance.toString()).toFixed(2)}</Text>
+                            </DataColumn>
+                            <DataColumn>
+                                <Text as="p" size="m" font={theme.font.inter}>PPBLZ LP staked</Text>
+                                <Spacer size="sm"/>
+                                <Text as="p" font={theme.font.neometric} weight={900} size='xl'>{parseFloat(uniV2PpblzStakedAmount.toString()).toFixed(2)}</Text>
+                            </DataColumn>
+                        </DataColumns>
+                        <div style={{ marginTop: "auto" }}>
+                            {isApprovedUniV2Ppblz && !uniV2PpblzStakeAdd && !uniV2PpblzStakeSub &&
+                                <ContentCentered
+                                    style={{
+                                    display: "flex",
+                                    flexDirection: "row",
+                                    justifyContent: "center",
+                                    }}
+                                >
+                                    <Button styling="white" onClick={() => {
+                                        setUniV2PpblzStakeSub(true);
+                                        setUniV2PpblzStakeAdd(false);
+                                    }} width="20%" symbol aria-label="withdraw"
+                                    {...(uniV2PpblzStakedAmount <= 0 && {disabled: true})}
+                                    >-</Button>
+                                    <Spacer size="sm"/>
+                                    <Button styling="purple" onClick={() => {
+                                        setUniV2PpblzStakeSub(false);
+                                        setUniV2PpblzStakeAdd(true);
+                                    }} width="80%" symbol aria-label="stake"
+                                    {...(uniV2PpblzBalance <= 0 && {disabled: true})}
+                                    >+</Button>
+                                </ContentCentered>
+                            }
+                            {(!isApprovedUniV2Ppblz || uniV2PpblAllowance < parseFloat(uniV2PpblzStakeAmount || '0')) &&
+                                <Button styling="purple" onClick={approveUniV2Ppblz} {...((isUpdatingRewards || isApprovingUniV2Ppblz) && {disabled: true})} width="100%">{isUpdatingRewards ? "Updating..." : !isApprovingUniV2Ppblz ? "Enable" : "Enabling..."}</Button>
+                            }
+                            {isApprovedUniV2Ppblz &&
+                            !isWithdrawingUniV2Ppblz &&
+                            !isStakingUniV2Ppblz &&
+                            (uniV2PpblzStakeAdd || uniV2PpblzStakeSub) &&
+                                <ContentCentered direction="row" bgColor={theme.color.white} style={{ borderRadius: "8px", border: `1px solid ${theme.color.purple[700]}`, padding: ".1em .1em .1em 0.75em" }}>
+                                    <StyledInput
+                                        placeholder="0.00"
+                                        value={setUniV2PpblzInputField() || ""}
+                                        onChange={(event) => updateUniV2PpblzStakingInput(event) }
+                                        min="0.00"
+                                        step="1"
+                                        autoFocus={true} />
+                                    <Button styling="link" onClick={setMaxUniV2Ppblz}>Max</Button>
+                                    <Button styling="purple"
+                                        {...(uniV2PpblzStakeAdd && !uniV2PpblzStakeSub ?
+                                            {
+                                                onClick: stakeUniV2Ppblz,
+                                                disabled: !(parseFloat(uniV2PpblzStakeAmount || '0') > 0 && parseFloat(uniV2PpblzStakeAmount || '0') <= uniV2PpblzBalance) || isStakingUniV2Ppblz
+                                            } : uniV2PpblzStakeSub && !uniV2PpblzStakeAdd &&
+                                            { onClick: withdrawUniV2Ppblz,
+                                                disabled: !(parseFloat(uniV2PpblzStakeAmount || '0') > 0 && parseFloat(uniV2PpblzStakeAmount || '0') <= uniV2PpblzStakedAmount) || isWithdrawingUniV2Ppblz }
+                                        )}
+                                    >
+                                        {uniV2PpblzStakeAdd && !uniV2PpblzStakeSub ? "Stake" : !uniV2PpblzStakeAdd && uniV2PpblzStakeSub && "Withdraw"}
+                                    </Button>
+                                </ContentCentered>
+                            }
+                            { (isStakingUniV2Ppblz || isWithdrawingUniV2Ppblz) &&
+                                <Button styling="purple" onClick={approveUniV2Ppblz} width="100%" disabled>
+                                    {isStakingUniV2Ppblz && "Staking"}
+                                    {isWithdrawingUniV2Ppblz &&  "Withdrawing"}
+                                ...</Button>
+                            }
+                        </div>
+                    </StakeGridAreaBody>
+                </StakeGridArea>
             </StakeGridTop>
+
             {/* PPDEX Earned Section */}
             <StakeGridArea>
                 <StakeGridAreaHeader wide>
