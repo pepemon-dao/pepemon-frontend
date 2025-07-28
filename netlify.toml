@@ -1,0 +1,14 @@
+[build]
+  command = "cd packages/app && yarn build"
+  publish = "packages/app/build"
+
+[build.environment]
+  NODE_VERSION = "18.18.0"
+  NPM_FLAGS = "--legacy-peer-deps"
+  DISABLE_ESLINT_PLUGIN = "true"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+EOF < /dev/null
