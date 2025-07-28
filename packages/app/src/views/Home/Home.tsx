@@ -148,7 +148,7 @@ const Home: React.FC<any> = () => {
             </Title>
             <Spacer size="md" />
             <Text as="p" font={theme.font.spaceMace} underline>
-              Releasing in 2023
+              Released 2023
             </Text>
             <Spacer size="md" />
             <Text as="p" font={theme.font.inter}>
