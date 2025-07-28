@@ -1,5 +1,5 @@
 [build]
-  command = "yarn build"
+  command = "yarn run build"
   publish = "build"
 
 [build.environment]

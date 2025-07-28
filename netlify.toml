@@ -1,5 +1,5 @@
 [build]
-  command = "cd packages/app && yarn build"
+  command = "cd packages/app && yarn install && yarn run build"
   publish = "packages/app/build"
 
 [build.environment]
@@ -11,4 +11,3 @@
   from = "/*"
   to = "/index.html"
   status = 200
-EOF < /dev/null
