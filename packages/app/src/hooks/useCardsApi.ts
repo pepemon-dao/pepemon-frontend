@@ -18,10 +18,10 @@ export interface CardMetadata {
 export const useCardsMetadata = (tokenIds: number[]) => {
 	const [cards, setCards] = useState<any[]>([]);
 	const apiUri = new Map([
-		[1, `https://pepemon.finance/api/cards/`],
-		[4, `https://dev.pepemon.finance/api/testCards/`],
-		[56, `https://dev.pepemon.finance/api/cards/bsc/`],
-		[137, `https://pepemon.finance/api/cards/matic/`],
+		[1, `/metadata/cards/`],
+		[4, `/metadata/cards/`],
+		[56, `/metadata/cards/bsc/`],
+		[137, `/metadata/cards/matic/`],
 	])
 	const pepemon = usePepemon();
 
@@ -45,17 +45,17 @@ export const useCardsMetadata = (tokenIds: number[]) => {
 					return response !== undefined
 				}));
 			})
-	}, [tokenIds, pepemon.chainId, apiUri])
+	}, [tokenIds, pepemon.chainId])
 
 	return cards;
 }
 
 export const getCardMeta = async (tokenId: number, pepemon: any) => {
 	const apiUri = new Map([
-		[1, `https://pepemon.finance/api/cards/`],
-		[4, `https://dev.pepemon.finance/api/testCards/`],
-		[56, `https://dev.pepemon.finance/api/cards/bsc/`],
-		[137, `https://pepemon.finance/api/cards/matic/`],
+		[1, `/metadata/cards/`],
+		[4, `/metadata/cards/`],
+		[56, `/metadata/cards/bsc/`],
+		[137, `/metadata/cards/matic/`],
 	])
 
 	const fetchCardInfo = async (tokenId: number) => {
