@@ -125,6 +125,17 @@ const CardSingle: React.FC<any> = ({ cardId, selectedCard, selectCard }) => {
 
   if (cardMeta?.status === "failed") return <></>;
 
+  const saleTimeText = () => {
+    const live = countdown();
+    if (live) return live;
+    if (!isLoaded) return "loading";
+    const birthdayMeta = cardMeta?.attributes?.find((a: any) => a.trait_type === "birthday");
+    const birthday = parseFloat(birthdayMeta?.value);
+    if (!birthday || birthday === 0) return "—";
+    const saleEnd = new Date((birthday + daysForSale() * 86400) * 1000);
+    return `Ended ${saleEnd.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}`;
+  };
+
   const self = {
     cardId: cardId && cardId,
     cardPrice: cardPrice && cardPrice.price,
@@ -143,12 +154,10 @@ const CardSingle: React.FC<any> = ({ cardId, selectedCard, selectCard }) => {
         <img loading="lazy" src={coin} alt="coin" />
         {cardPrice
           ? `${priceOfCard} ${chainId === 56 ? "BNB" : "PPDEX"}`
-          : "loading"}
+          : isLoaded ? "—" : "loading"}
       </StyledPepemonCardPrice>
       <div>
         <StyledPepemonCardImage
-          width="747"
-          height="1038"
           effect="blur"
           active={cardId === selectedCard?.cardId}
           src={cardMeta ? cardMeta.image : cardback_normal}
@@ -163,8 +172,8 @@ const CardSingle: React.FC<any> = ({ cardId, selectedCard, selectCard }) => {
         <StyledPepemonCardMeta>
           <dt>Minted</dt>
           <dd>
-            {cardBalance === null
-              ? "loading"
+            {!cardBalance?.[0]
+              ? isLoaded ? "—" : "loading"
               : `${parseFloat(cardBalance[0]?.totalSupply)} / ${
                   parseFloat(cardBalance[0]?.maxSupply) > 10000
                     ? "♾️"
@@ -173,8 +182,8 @@ const CardSingle: React.FC<any> = ({ cardId, selectedCard, selectCard }) => {
           </dd>
         </StyledPepemonCardMeta>
         <StyledPepemonCardMeta>
-          <dt>Time</dt>
-          <dd>{countdown() ? countdown() : "Not available"}</dd>
+          <dt>Sale</dt>
+          <dd>{saleTimeText()}</dd>
         </StyledPepemonCardMeta>
       </div>
     </StyledPepemonCard>
