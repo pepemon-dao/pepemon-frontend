@@ -85,7 +85,7 @@ const StakeCard: React.FC<any> = () => {
         } catch (error) {
             console.error('Error in getPpblzAllowance:', error);
         }
-    }, [setPpblzAllowance, account, contracts.ppblz, contracts.ppdex.address]);
+    }, [setPpblzAllowance, account, contracts?.ppblz, contracts?.ppdex?.address]);
 
     const getUniV2PpblzAllowance = useCallback(async () => {
         try {
@@ -95,7 +95,7 @@ const StakeCard: React.FC<any> = () => {
         } catch (error) {
             console.error('Error in getUniV2PpblzAllowance:', error);
         }
-    }, [contracts.uniV2_ppblz, contracts.ppdex.address, setUniV2PpblzAllowance, account]);
+    }, [contracts?.uniV2_ppblz, contracts?.ppdex?.address, setUniV2PpblzAllowance, account]);
 
     const getPpblzBalance = useCallback(async () => {
         try {

@@ -14,7 +14,7 @@ const StoreCardsAside: React.FC<any> = ({setSelectedCard, selectedCard: { cardId
 	const { onRedeemCard, isRedeemingCard } = useRedeemCard(contracts.pepemonStore);
 	const { onApprove, isApproving } = useApprove(contracts.pepemonStore, contracts.ppdex);
 	const allowance = useAllowance(contracts.pepemonStore);
-	const ppdexBalance = useTokenBalance(contracts.ppdex.address);
+	const ppdexBalance = useTokenBalance(contracts?.ppdex?.address);
 
 	const isItemCard = (tokenId: number) => {
         return [17, 18, 19].includes(tokenId);
@@ -139,8 +139,8 @@ const StoreCardsAside: React.FC<any> = ({setSelectedCard, selectedCard: { cardId
 					</dd>
 				</StyledPepemonCardMeta>
 				<Spacer size='md'/>
-				<ExternalLink style={{ width: '100%' }} href={chainId === 137 ? `https://quickswap.exchange/#/swap?outputCurrency=${contracts.ppdex.address}` :
-				chainId === 56 ? 'https://www.binance.com/en/trade/BNB_ETH' : `https://app.uniswap.org/#/swap?outputCurrency=${contracts.ppdex.address}`}>
+				<ExternalLink style={{ width: '100%' }} href={chainId === 137 ? `https://quickswap.exchange/#/swap?outputCurrency=${contracts?.ppdex?.address || ''}` :
+				chainId === 56 ? 'https://www.binance.com/en/trade/BNB_ETH' : `https://app.uniswap.org/#/swap?outputCurrency=${contracts?.ppdex?.address || ''}`}>
 					Buy {chainId === 56 ? 'BNB' : 'PPDEX'}
 				</ExternalLink>
 				<Spacer size='md'/>
