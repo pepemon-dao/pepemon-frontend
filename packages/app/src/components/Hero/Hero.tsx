@@ -52,7 +52,7 @@ const Hero: React.FC<any> = ({ apy }) => {
                 <span>1</span>
               </ContentBoxNumber>
               <Text as="p" align="center">
-                Own a piece of Pepemon.<br></br>Govern and farm with PPBLZ
+                Collect rare on-chain TCG cards.<br></br>Battle, trade &amp; own your Pepemon deck.
               </Text>
               <Spacer size="md" />
               <ExternalLink
@@ -60,7 +60,7 @@ const Hero: React.FC<any> = ({ apy }) => {
                 href="https://opensea.io/collection/pepemonfactory"
                 styling="button"
               >
-                Join Pepemon DAO
+                Collect on OpenSea
               </ExternalLink>
             </ContentBox>
           </ContentColumn>
