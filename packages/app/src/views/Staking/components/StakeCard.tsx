@@ -429,26 +429,14 @@ const StakeCard: React.FC<any> = () => {
     };
 
     const setMaxPpblz = () => {
-        if (parseFloat(ppblzBalance.toString()) === 0) {
-            return setPpblzStakeAmount(ppblzStakedAmount.toString());
-        }
-        if (parseFloat(ppblzStakedAmount.toString()) === 0) {
-            return setPpblzStakeAmount(ppblzBalance.toString());
-        }
-        if (ppblzBalance === parseFloat(ppblzStakeAmount || '0')) {
+        if (ppblzStakeSub) {
             return setPpblzStakeAmount(ppblzStakedAmount.toString());
         }
         return setPpblzStakeAmount(ppblzBalance.toString());
     };
 
     const setMaxUniV2Ppblz = () => {
-        if (parseFloat(uniV2PpblzBalance.toString()) === 0) {
-            return setUniV2PpblzStakeAmount(uniV2PpblzStakedAmount.toString());
-        }
-        if (parseFloat(uniV2PpblzStakedAmount.toString()) === 0) {
-            return setUniV2PpblzStakeAmount(uniV2PpblzBalance.toString());
-        }
-        if (uniV2PpblzBalance === parseFloat(uniV2PpblzStakeAmount || '0')) {
+        if (uniV2PpblzStakeSub) {
             return setUniV2PpblzStakeAmount(uniV2PpblzStakedAmount.toString());
         }
         return setUniV2PpblzStakeAmount(uniV2PpblzBalance.toString());
