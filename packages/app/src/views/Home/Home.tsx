@@ -13,7 +13,6 @@ import {
   Title,
   Text,
   SocialBoxes,
-  Newsletter,
 } from "../../components";
 import Balances from "./components/Balances";
 import { theme } from "../../theme";
@@ -170,9 +169,6 @@ const Home: React.FC<any> = () => {
         </ContentColumns>
       </StyledSection>
 
-      <StyledSection bgColor={theme.color.purple[300]}>
-        <Newsletter />
-      </StyledSection>
 
       <StyledSection
         bgColor={theme.color.purple[200]}
