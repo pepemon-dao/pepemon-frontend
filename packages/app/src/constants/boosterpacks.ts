@@ -1,6 +1,7 @@
 export interface OnchainBoosterpackConfig {
   chainId: number;
   faucetAddress: string;
+  factoryAddress: string;
   packId: number;
   cardIds: number[];
 }
@@ -12,6 +13,7 @@ export interface OnchainBoosterpackConfig {
 export const BATTLE_MONSTERS_3_CARD_BASE_SEPOLIA: OnchainBoosterpackConfig = {
   chainId: 84532,
   faucetAddress: "0x353490205cBe9fB473443619C95779Bde640e76C",
+  factoryAddress: "0xaE0B8933FcDA800e5C561B5585De7130Faff02d5",
   packId: 2,
   cardIds: [1, 2, 3],
 };
