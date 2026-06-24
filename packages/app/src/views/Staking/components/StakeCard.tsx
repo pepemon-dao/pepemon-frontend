@@ -216,6 +216,7 @@ const StakeCard: React.FC<any> = () => {
             if (stakeRes) {
                 setIsStakingPpblz(false);
                 setPpblzStakeAmount(null);
+                setPpblzStakeAdd(false);
                 await getMyPpblzStakeAmount();
                 await getPpblzBalance();
                 await getPpblzAllowance();
@@ -240,6 +241,7 @@ const StakeCard: React.FC<any> = () => {
             if (stakeRes) {
                 setIsStakingUniV2Ppblz(false);
                 setUniV2PpblzStakeAmount(null);
+                setUniV2PpblzStakeAdd(false);
                 await getMyUniV2PpblzStakeAmount();
                 await getUniV2PpblzBalance();
                 await getUniV2PpblzAllowance();
@@ -264,6 +266,7 @@ const StakeCard: React.FC<any> = () => {
             if (unstakeRes) {
                 setIsWithdrawingPpblz(false);
                 setPpblzStakeAmount(null);
+                setPpblzStakeSub(false);
                 await getMyPpblzStakeAmount();
                 await getPpblzBalance();
                 await getPpblzAllowance();
@@ -291,6 +294,7 @@ const StakeCard: React.FC<any> = () => {
             if (unstakeRes) {
                 setIsWithdrawingUniV2Ppblz(false);
                 setUniV2PpblzStakeAmount(null);
+                setUniV2PpblzStakeSub(false);
                 await getMyUniV2PpblzStakeAmount();
                 await getUniV2PpblzBalance();
                 await getUniV2PpblzAllowance();
@@ -551,7 +555,7 @@ const StakeCard: React.FC<any> = () => {
                             {!account &&
                                 <Button styling="purple" onClick={loadWeb3Modal} width="100%">Connect wallet</Button>
                             }
-                            {account && isApprovedPpblz && !ppblzStakeAdd && !ppblzStakeSub &&
+                            {account && !ppblzStakeAdd && !ppblzStakeSub &&
                                 <ContentCentered
                                     style={{
                                     display: "flex",
@@ -575,7 +579,7 @@ const StakeCard: React.FC<any> = () => {
                                 </ContentCentered>
                             }
                             {account &&
-                            (!isApprovedPpblz || ppblzStakeAdd || ppblzStakeSub) &&
+                            (ppblzStakeAdd || ppblzStakeSub) &&
                             !isStakingPpblz &&
                             !isWithdrawingPpblz &&
                             !isApprovingPpblz &&
@@ -588,7 +592,7 @@ const StakeCard: React.FC<any> = () => {
                                         step="1"
                                         autoFocus={true} />
                                     <Button styling="link" onClick={setMaxPpblz}>Max</Button>
-                                    {(!isApprovedPpblz || ppblzAllowance < parseFloat(ppblzStakeAmount || '0')) && !ppblzStakeSub
+                                    {(ppblzAllowance <= 0 || ppblzAllowance < parseFloat(ppblzStakeAmount || '0')) && !ppblzStakeSub
                                         ? <Button styling="purple"
                                             onClick={approvePpblz}
                                             disabled={!ppblzStakeAmount || parseFloat(ppblzStakeAmount) <= 0 || isUpdatingRewards}
@@ -649,7 +653,7 @@ const StakeCard: React.FC<any> = () => {
                             {!account &&
                                 <Button styling="purple" onClick={loadWeb3Modal} width="100%">Connect wallet</Button>
                             }
-                            {account && isApprovedUniV2Ppblz && !uniV2PpblzStakeAdd && !uniV2PpblzStakeSub &&
+                            {account && !uniV2PpblzStakeAdd && !uniV2PpblzStakeSub &&
                                 <ContentCentered
                                     style={{
                                     display: "flex",
@@ -673,7 +677,7 @@ const StakeCard: React.FC<any> = () => {
                                 </ContentCentered>
                             }
                             {account &&
-                            (!isApprovedUniV2Ppblz || uniV2PpblzStakeAdd || uniV2PpblzStakeSub) &&
+                            (uniV2PpblzStakeAdd || uniV2PpblzStakeSub) &&
                             !isStakingUniV2Ppblz &&
                             !isWithdrawingUniV2Ppblz &&
                             !isApprovingUniV2Ppblz &&
@@ -686,7 +690,7 @@ const StakeCard: React.FC<any> = () => {
                                         step="1"
                                         autoFocus={true} />
                                     <Button styling="link" onClick={setMaxUniV2Ppblz}>Max</Button>
-                                    {(!isApprovedUniV2Ppblz || uniV2PpblAllowance < parseFloat(uniV2PpblzStakeAmount || '0')) && !uniV2PpblzStakeSub
+                                    {(uniV2PpblAllowance <= 0 || uniV2PpblAllowance < parseFloat(uniV2PpblzStakeAmount || '0')) && !uniV2PpblzStakeSub
                                         ? <Button styling="purple"
                                             onClick={approveUniV2Ppblz}
                                             disabled={!uniV2PpblzStakeAmount || parseFloat(uniV2PpblzStakeAmount) <= 0 || isUpdatingRewards}
