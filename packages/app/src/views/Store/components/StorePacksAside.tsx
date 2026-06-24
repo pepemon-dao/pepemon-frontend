@@ -10,23 +10,21 @@ import type { ReceivedCard } from '../../../hooks/useClaimBoosterPack';
 import chains from '../../../constants/chains';
 
 const BASE_SEPOLIA_CHAIN_ID = 84532;
-// Video plays a minimum of this long before card reveal starts, even if the chain confirms faster
-const VIDEO_MIN_MS = 6000;
 
 // ─── Animations ──────────────────────────────────────────────────────────────
 
 const popIn = keyframes`
-  0%   { transform: scale(0.4) translateY(60px); opacity: 0; }
-  70%  { transform: scale(1.08) translateY(-6px); opacity: 1; }
+  0%   { transform: scale(0.3) translateY(40px); opacity: 0; }
+  65%  { transform: scale(1.1) translateY(-4px); opacity: 1; }
   100% { transform: scale(1) translateY(0); opacity: 1; }
 `;
 
 const glow = keyframes`
-  0%, 100% { box-shadow: 0 0 18px 4px rgba(168, 85, 247, 0.5); }
-  50%       { box-shadow: 0 0 38px 12px rgba(168, 85, 247, 0.9), 0 0 60px 20px rgba(99,102,241,0.4); }
+  0%, 100% { box-shadow: 0 0 14px 3px rgba(168, 85, 247, 0.55); }
+  50%       { box-shadow: 0 0 34px 10px rgba(168, 85, 247, 0.9), 0 0 54px 18px rgba(99,102,241,0.35); }
 `;
 
-// ─── Styled components ────────────────────────────────────────────────────────
+// ─── Overlay styled components ────────────────────────────────────────────────
 
 const Overlay = styled.div`
   position: fixed;
@@ -48,65 +46,112 @@ const FullVideo = styled.video`
   object-fit: cover;
 `;
 
-const RevealLayer = styled.div`
+const CardOverlayLayer = styled.div<{ visible: boolean }>`
   position: relative;
   z-index: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 32px;
+  gap: 28px;
   padding: 24px;
   width: 100%;
-  max-width: 480px;
+  max-width: 560px;
+  background: rgba(0, 0, 0, 0.55);
+  border-radius: 20px;
+  backdrop-filter: blur(8px);
+  opacity: ${p => (p.visible ? 1 : 0)};
+  transform: ${p => (p.visible ? 'scale(1)' : 'scale(0.95)')};
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  pointer-events: ${p => (p.visible ? 'auto' : 'none')};
 `;
 
 const CardRow = styled.div`
   display: flex;
   flex-wrap: wrap;
-  gap: 16px;
+  gap: 14px;
   justify-content: center;
 `;
 
-const CardSlot = styled.div<{ delay: number; visible: boolean }>`
-  width: 120px;
+const CardSlot = styled.div<{ visible: boolean }>`
+  width: 110px;
   opacity: ${p => (p.visible ? 1 : 0)};
-  animation: ${p => (p.visible ? popIn : 'none')} 0.6s cubic-bezier(0.34,1.56,0.64,1) ${p => p.delay}ms both;
+  animation: ${p => (p.visible ? popIn : 'none')} 0.55s cubic-bezier(0.34,1.56,0.64,1) both;
 `;
 
 const CardImg = styled.img`
   width: 100%;
-  border-radius: 12px;
-  animation: ${glow} 2s ease-in-out infinite;
-`;
-
-const CardBack = styled.div`
-  width: 100%;
-  aspect-ratio: 2/3;
-  border-radius: 12px;
-  background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 32px;
+  border-radius: 10px;
+  animation: ${glow} 2.4s ease-in-out infinite;
 `;
 
 const CardName = styled.p`
   color: #fff;
-  font-size: 11px;
+  font-size: 10px;
   text-align: center;
-  margin: 6px 0 0;
-  font-weight: 600;
+  margin: 5px 0 0;
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.06em;
 `;
 
 const RevealTitle = styled.h2`
   color: #fff;
-  font-size: 22px;
+  font-size: 20px;
   font-weight: 800;
   text-align: center;
-  text-shadow: 0 0 20px rgba(168,85,247,0.8);
+  text-shadow: 0 0 18px rgba(168,85,247,0.9);
   margin: 0;
+`;
+
+// ─── Aside layout ─────────────────────────────────────────────────────────────
+
+const AsideContent = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  @media (min-width: ${theme.breakpoints.tabletL}) {
+    max-height: calc(100vh - 80px);
+    overflow: hidden;
+  }
+`;
+
+const ScrollableContent = styled.div`
+  @media (min-width: ${theme.breakpoints.tabletL}) {
+    overflow-y: auto;
+    flex: 1;
+    min-height: 0;
+  }
+`;
+
+const StickyBottom = styled.div`
+  @media (min-width: ${theme.breakpoints.tabletL}) {
+    position: sticky;
+    bottom: 0;
+    background: #fff;
+    padding-top: 12px;
+    border-top: 1px solid ${theme.color.gray[100]};
+    flex-shrink: 0;
+  }
+`;
+
+const QuantityRow = styled.div`
+  display: flex;
+  gap: 8px;
+  margin-bottom: 10px;
+`;
+
+const QtyBtn = styled.button<{ active: boolean }>`
+  flex: 1;
+  padding: 6px 0;
+  border-radius: 8px;
+  border: 2px solid ${p => (p.active ? theme.color.purple[600] : theme.color.gray[200])};
+  background: ${p => (p.active ? theme.color.purple[600] : 'transparent')};
+  color: ${p => (p.active ? '#fff' : theme.color.gray[600])};
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.15s;
+  &:hover { border-color: ${theme.color.purple[600]}; }
 `;
 
 // ─── Card metadata ────────────────────────────────────────────────────────────
@@ -115,6 +160,7 @@ interface CardMeta { image: string; name: string; }
 
 function useCardMeta(ids: number[]): Record<number, CardMeta> {
   const [meta, setMeta] = useState<Record<number, CardMeta>>({});
+  const key = ids.join(',');
   useEffect(() => {
     if (!ids.length) return;
     const unique = Array.from(new Set(ids));
@@ -134,127 +180,125 @@ function useCardMeta(ids: number[]): Record<number, CardMeta> {
       results.forEach(r => { m[r.id] = { image: r.image, name: r.name }; });
       setMeta(m);
     });
-  }, [ids.join(',')]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [key]);
   return meta;
 }
 
 // ─── Reveal overlay ───────────────────────────────────────────────────────────
 
 interface RevealOverlayProps {
-  phase: 'idle' | 'wallet-pending' | 'video-playing' | 'revealing' | 'done';
+  phase: 'idle' | 'wallet-pending' | 'video-playing' | 'revealing';
   receivedCards: ReceivedCard[];
-  packImageUrl: string;
   onDismiss: () => void;
 }
 
-const RevealOverlay: React.FC<RevealOverlayProps> = ({ phase, receivedCards, packImageUrl, onDismiss }) => {
-  const videoRef    = useRef<HTMLVideoElement>(null);
-  const timerRef    = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const [videoMinElapsed, setVideoMinElapsed] = useState(false);
-  const [revealedCount,   setRevealedCount]   = useState(0);
+const RevealOverlay: React.FC<RevealOverlayProps> = ({ phase, receivedCards, onDismiss }) => {
+  const videoRef      = useRef<HTMLVideoElement>(null);
+  const [videoEnded,  setVideoEnded]  = useState(false);
+  const [revealedCount, setRevealedCount] = useState(0);
 
-  const showOverlay   = phase === 'video-playing' || phase === 'revealing';
-  const showReveal    = phase === 'revealing' && videoMinElapsed;
-  const showVideo     = showOverlay && !showReveal;
+  const showOverlay = phase === 'video-playing' || phase === 'revealing';
+  // Show cards when BOTH: tx confirmed AND video has played to the end
+  const showCards   = phase === 'revealing' && videoEnded;
 
-  // Expand cards to individual items (2× card 2 → [2, 2])
+  // Expand receivedCards to individual card slots (2× card 2 → [2, 2])
   const cardList = receivedCards.flatMap(c => Array(c.amount).fill(c.id));
   const cardIds  = cardList.filter((v, i, a) => a.indexOf(v) === i);
-  const meta     = useCardMeta(showReveal ? cardIds : []);
+  const meta     = useCardMeta(showCards ? cardIds : []);
 
-  // Start min-play timer when video phase begins
-  useEffect(() => {
-    if (phase === 'video-playing' && !videoMinElapsed) {
-      timerRef.current = setTimeout(() => setVideoMinElapsed(true), VIDEO_MIN_MS);
-    }
-    return () => { if (timerRef.current) clearTimeout(timerRef.current); };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [phase]);
-
-  // Play / pause video
+  // Play video when overlay opens; it will stop at the end (no loop)
   useEffect(() => {
     const v = videoRef.current;
     if (!v) return;
-    if (showVideo) {
+    if (showOverlay) {
+      setVideoEnded(false);
       v.currentTime = 0;
-      v.play().catch(() => {});
+      v.play().catch(() => {
+        // Autoplay blocked — treat as immediately ended so cards can reveal
+        setVideoEnded(true);
+      });
     } else {
       v.pause();
+      v.currentTime = 0;
     }
-  }, [showVideo]);
+  }, [showOverlay]);
 
-  // Reveal cards one by one once showReveal is true
+  // If tx confirms before video ends: video keeps playing until onEnded.
+  // If video ends before tx confirms: videoEnded = true, showCards waits for phase === 'revealing'.
+  const handleVideoEnded = () => setVideoEnded(true);
+
+  // Reveal cards one by one once showCards is true
   useEffect(() => {
-    if (!showReveal || cardList.length === 0) return;
+    if (!showCards || cardList.length === 0) return;
     setRevealedCount(0);
     cardList.forEach((_, i) => {
-      setTimeout(() => setRevealedCount(n => n + 1), 400 + i * 900);
+      setTimeout(() => setRevealedCount(n => n + 1), 300 + i * 750);
     });
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [showReveal]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [showCards]);
 
-  // Reset on close
+  // Reset counters when overlay closes
   useEffect(() => {
     if (!showOverlay) {
-      setVideoMinElapsed(false);
+      setVideoEnded(false);
       setRevealedCount(0);
-      if (timerRef.current) clearTimeout(timerRef.current);
     }
   }, [showOverlay]);
 
   if (!showOverlay) return null;
 
-  const allRevealed = revealedCount >= cardList.length && cardList.length > 0;
+  const allRevealed = cardList.length > 0 && revealedCount >= cardList.length;
 
   return (
     <Overlay>
-      {/* Video is always rendered so browser can buffer it; visibility controlled via opacity */}
       <FullVideo
         ref={videoRef}
         src="/videos/claim-reveal.mp4"
-        loop
         muted
         playsInline
-        style={{ opacity: showVideo ? 1 : 0, transition: 'opacity 0.8s' }}
+        onEnded={handleVideoEnded}
       />
 
-      {showReveal && (
-        <RevealLayer>
-          <RevealTitle>You got {cardList.length} {cardList.length === 1 ? 'card' : 'cards'}!</RevealTitle>
-          <CardRow>
-            {cardList.map((id, i) => {
-              const revealed = i < revealedCount;
-              const cardMeta = meta[id];
-              return (
-                <CardSlot key={i} delay={0} visible={revealed}>
-                  {revealed && cardMeta?.image
-                    ? <CardImg src={cardMeta.image} alt={cardMeta?.name || `Card #${id}`} />
-                    : <CardBack>✦</CardBack>
-                  }
-                  <CardName>{revealed ? (meta[id]?.name || `#${id}`) : '???'}</CardName>
-                </CardSlot>
-              );
-            })}
-          </CardRow>
-          {allRevealed && (
-            <Button styling="purple" width="100%" onClick={onDismiss}>
-              Open another pack
-            </Button>
-          )}
-        </RevealLayer>
-      )}
+      <CardOverlayLayer visible={showCards}>
+        <RevealTitle>
+          You pulled {cardList.length} {cardList.length === 1 ? 'card' : 'cards'}!
+        </RevealTitle>
+        <CardRow>
+          {cardList.map((id, i) => {
+            const revealed = i < revealedCount;
+            return (
+              <CardSlot key={i} visible={revealed}>
+                {meta[id]?.image
+                  ? <CardImg src={meta[id].image} alt={meta[id]?.name} />
+                  : <div style={{ width: '100%', aspectRatio: '2/3', borderRadius: 10, background: 'linear-gradient(135deg,#4f46e5,#7c3aed)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 28 }}>✦</div>
+                }
+                <CardName>{meta[id]?.name || `#${id}`}</CardName>
+              </CardSlot>
+            );
+          })}
+        </CardRow>
+        {allRevealed && (
+          <Button styling="purple" width="100%" onClick={onDismiss}>
+            Open another pack
+          </Button>
+        )}
+      </CardOverlayLayer>
     </Overlay>
   );
 };
 
 // ─── Main component ───────────────────────────────────────────────────────────
 
+const QUANTITIES = [1, 3, 5];
+
 const StorePacksAside: React.FC<any> = ({ setSelectedPack, selectedPack }) => {
   const [pepemon] = useContext(PepemonProviderContext);
   const { chainId, account } = pepemon;
+  const [quantity, setQuantity] = useState(1);
 
-  const onchainConfig = selectedPack?.onchainConfig ?? null;
-  const isLivePack    = onchainConfig !== null;
+  const onchainConfig  = selectedPack?.onchainConfig ?? null;
+  const isLivePack     = onchainConfig !== null;
   const isOnRightChain = isLivePack && chainId === onchainConfig.chainId;
 
   const { onClaim, phase, receivedCards, claimError, onDismiss } = useClaimBoosterPack(
@@ -290,50 +334,66 @@ const StorePacksAside: React.FC<any> = ({ setSelectedPack, selectedPack }) => {
   const isClaiming = phase === 'wallet-pending' || phase === 'video-playing' || phase === 'revealing';
 
   const handleOpen = async () => {
-    if (!account) { await loadWeb3Modal(); return; }
+    if (!account)      { await loadWeb3Modal(); return; }
     if (!isOnRightChain) { await switchToBaseSepolia(); return; }
-    onClaim();
+    onClaim(quantity);
   };
 
-  const renderButton = () => {
+  const buttonLabel = phase === 'wallet-pending'
+    ? `Confirm in wallet… (${quantity > 1 ? `sign ${quantity}×` : 'signing'})`
+    : isClaiming
+    ? 'Opening pack…'
+    : quantity > 1
+    ? `Open ${quantity} Boosterpacks`
+    : 'Open Boosterpack';
+
+  const renderClaimArea = () => {
     if (!isLivePack) {
       return <Button disabled styling="purple" width="100%">Not available (yet)</Button>;
     }
-    const label = phase === 'wallet-pending' ? 'Confirm in wallet…'
-      : isClaiming ? 'Opening pack…'
-      : 'Open Boosterpack';
     return (
-      <Button styling="purple" width="100%" disabled={isClaiming} onClick={handleOpen}>
-        {label}
-      </Button>
+      <>
+        {!isClaiming && (
+          <QuantityRow>
+            {QUANTITIES.map(q => (
+              <QtyBtn key={q} active={quantity === q} onClick={() => setQuantity(q)}>
+                {q}×
+              </QtyBtn>
+            ))}
+          </QuantityRow>
+        )}
+        <Button styling="purple" width="100%" disabled={isClaiming} onClick={handleOpen}>
+          {buttonLabel}
+        </Button>
+        {claimError && (
+          <>
+            <Spacer size="sm"/>
+            <Text as="p" font={theme.font.inter} size='xs' color="red">{claimError}</Text>
+          </>
+        )}
+      </>
     );
   };
 
   return (
     <>
-      <RevealOverlay
-        phase={phase}
-        receivedCards={receivedCards}
-        packImageUrl={selectedPack.url}
-        onDismiss={onDismiss}
-      />
+      <RevealOverlay phase={phase} receivedCards={receivedCards} onDismiss={onDismiss} />
       <StoreAside close={() => setSelectedPack(null)} title="Selected Pack">
-        <StyledStoreBody>
-          <Title as="h2" font={theme.font.neometric} size='m'>{selectedPack.name}</Title>
-          <Spacer size="sm"/>
-          <Text as="p" font={theme.font.inter} size='s' lineHeight={1.3} color={theme.color.gray[600]}>
-            When claiming this booster pack you will recieve {selectedPack.cardsPerPack} random cards.
-          </Text>
-          <Spacer size="sm"/>
-          <img loading="lazy" src={selectedPack.url} alt={selectedPack.name} style={{ width: '100%' }}/>
-          <Spacer size='md'/>
-          {renderButton()}
-          {claimError && (
-            <>
+        <StyledStoreBody style={{ padding: 0 }}>
+          <AsideContent>
+            <ScrollableContent style={{ padding: '1.1em' }}>
+              <Title as="h2" font={theme.font.neometric} size='m'>{selectedPack.name}</Title>
               <Spacer size="sm"/>
-              <Text as="p" font={theme.font.inter} size='xs' color="red">{claimError}</Text>
-            </>
-          )}
+              <Text as="p" font={theme.font.inter} size='s' lineHeight={1.3} color={theme.color.gray[600]}>
+                When claiming this booster pack you will receive {selectedPack.cardsPerPack} random cards.
+              </Text>
+              <Spacer size="sm"/>
+              <img loading="lazy" src={selectedPack.url} alt={selectedPack.name} style={{ width: '100%', display: 'block' }}/>
+            </ScrollableContent>
+            <StickyBottom style={{ padding: '0 1.1em 1.1em' }}>
+              {renderClaimArea()}
+            </StickyBottom>
+          </AsideContent>
         </StyledStoreBody>
       </StoreAside>
     </>
