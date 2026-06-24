@@ -163,7 +163,7 @@ const CardSingle: React.FC<any> = ({ cardId, selectedCard, selectCard }) => {
         <StyledPepemonCardMeta>
           <dt>Minted</dt>
           <dd>
-            {cardBalance === null
+            {!cardBalance?.[0]
               ? "loading"
               : `${parseFloat(cardBalance[0]?.totalSupply)} / ${
                   parseFloat(cardBalance[0]?.maxSupply) > 10000
