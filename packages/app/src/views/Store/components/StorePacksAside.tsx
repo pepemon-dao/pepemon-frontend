@@ -5,7 +5,7 @@ import { Button, Title, Text, Spacer } from '../../../components';
 import { PepemonProviderContext } from '../../../contexts';
 import { StoreAside } from '../components';
 import { theme } from '../../../theme';
-import { useClaimBoosterPack } from '../../../hooks';
+import { useClaimBoosterPack, useWeb3Modal } from '../../../hooks';
 import type { ReceivedCard } from '../../../hooks/useClaimBoosterPack';
 import chains from '../../../constants/chains';
 
@@ -238,7 +238,7 @@ const RevealOverlay: React.FC<RevealOverlayProps> = ({ phase, receivedCards, pac
           </CardRow>
           {allRevealed && (
             <Button styling="purple" width="100%" onClick={onDismiss}>
-              Claim another pack
+              Open another pack
             </Button>
           )}
         </RevealLayer>
@@ -260,6 +260,8 @@ const StorePacksAside: React.FC<any> = ({ setSelectedPack, selectedPack }) => {
   const { onClaim, phase, receivedCards, claimError, onDismiss } = useClaimBoosterPack(
     onchainConfig ?? { chainId: 0, faucetAddress: '', factoryAddress: '', packId: 0, cardIds: [] }
   );
+
+  const [, loadWeb3Modal] = useWeb3Modal() as any;
 
   const switchToBaseSepolia = async () => {
     const chain = chains.find(c => parseInt(c.chainId, 16) === BASE_SEPOLIA_CHAIN_ID);
@@ -287,25 +289,22 @@ const StorePacksAside: React.FC<any> = ({ setSelectedPack, selectedPack }) => {
 
   const isClaiming = phase === 'wallet-pending' || phase === 'video-playing' || phase === 'revealing';
 
+  const handleOpen = async () => {
+    if (!account) { await loadWeb3Modal(); return; }
+    if (!isOnRightChain) { await switchToBaseSepolia(); return; }
+    onClaim();
+  };
+
   const renderButton = () => {
     if (!isLivePack) {
       return <Button disabled styling="purple" width="100%">Not available (yet)</Button>;
     }
-    if (!account) {
-      return <Button disabled styling="purple" width="100%">Connect wallet to claim</Button>;
-    }
-    if (!isOnRightChain) {
-      return <Button styling="purple" width="100%" onClick={switchToBaseSepolia}>Switch to Base Sepolia</Button>;
-    }
-    if (phase === 'done') {
-      return <Button disabled styling="purple" width="100%">✓ Cards sent to your wallet!</Button>;
-    }
+    const label = phase === 'wallet-pending' ? 'Confirm in wallet…'
+      : isClaiming ? 'Opening pack…'
+      : 'Open Boosterpack';
     return (
-      <Button styling="purple" width="100%" disabled={isClaiming} onClick={onClaim}>
-        {phase === 'wallet-pending' ? 'Confirm in wallet…'
-          : phase === 'video-playing' ? 'Opening pack…'
-          : phase === 'revealing' ? 'Revealing…'
-          : 'Claim 3 cards'}
+      <Button styling="purple" width="100%" disabled={isClaiming} onClick={handleOpen}>
+        {label}
       </Button>
     );
   };

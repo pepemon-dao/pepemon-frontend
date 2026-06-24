@@ -67,7 +67,7 @@ const useClaimBoosterPack = (config: OnchainBoosterpackConfig) => {
   }, [pepemon.provider, pepemon.chainId, config]);
 
   const onDismiss = useCallback(() => {
-    setPhase('done');
+    setPhase('idle');
     setReceivedCards([]);
   }, []);
 
