@@ -27,7 +27,7 @@ export const useCardsMetadata = (tokenIds: number[]) => {
 
 	useEffect(() => {
 		const fetchCardInfo = async (tokenId: number) => {
-			const { chainId } = await pepemon.provider.getNetwork();
+			const chainId = pepemon?.chainId || 1;
 			const response = await fetch(
 				`${apiUri.get(chainId)}${tokenId}`,
 				{ method: 'GET'},
@@ -38,7 +38,6 @@ export const useCardsMetadata = (tokenIds: number[]) => {
 			return {tokenId,  ...await response.json()};
 		}
 
-		tokenIds.map(tokenId => fetchCardInfo(tokenId));
 		Promise.all(tokenIds.map((tokenId) => fetchCardInfo(tokenId)))
 			.then((responses) => {
 				// @ts-ignore
@@ -46,7 +45,7 @@ export const useCardsMetadata = (tokenIds: number[]) => {
 					return response !== undefined
 				}));
 			})
-	}, [tokenIds, pepemon.provider, apiUri])
+	}, [tokenIds, pepemon.chainId, apiUri])
 
 	return cards;
 }
@@ -60,7 +59,7 @@ export const getCardMeta = async (tokenId: number, pepemon: any) => {
 	])
 
 	const fetchCardInfo = async (tokenId: number) => {
-		const { chainId } = await pepemon.provider.getNetwork();
+		const chainId = pepemon?.chainId || 1;
 		const response = await fetch(
 			`${apiUri.get(chainId)}${tokenId}`,
 			{ method: 'GET'},
