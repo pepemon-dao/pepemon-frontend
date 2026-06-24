@@ -4,13 +4,14 @@ import { Button, ExternalLink, Title, Text, Spacer, StyledSpacer } from '../../.
 import { PepemonProviderContext } from '../../../contexts';
 import { getDisplayBalance } from "../../../utils";
 import { cardback_normal, coin } from '../../../assets';
-import { useModal, useAllowance, useTokenBalance, useRedeemCard, useApprove } from "../../../hooks";
+import { useModal, useAllowance, useTokenBalance, useRedeemCard, useApprove, useWeb3Modal } from "../../../hooks";
 import { theme } from '../../../theme';
 
 const StoreCardsAside: React.FC<any> = ({setSelectedCard, selectedCard: { cardId, cardPrice, cardMeta = null, cardBalance = null }}) => {
 	const [transactions, setTransactions] = useState(0);
 	const [pepemon] = useContext(PepemonProviderContext);
-	const { chainId, contracts } = pepemon;
+	const { chainId, contracts, account } = pepemon;
+	const [, loadWeb3Modal] = useWeb3Modal();
 	const { onRedeemCard, isRedeemingCard } = useRedeemCard(contracts.pepemonStore);
 	const { onApprove, isApproving } = useApprove(contracts.pepemonStore, contracts.ppdex);
 	const allowance = useAllowance(contracts.pepemonStore);
@@ -81,6 +82,9 @@ const StoreCardsAside: React.FC<any> = ({setSelectedCard, selectedCard: { cardId
 	const priceOfCard = cardPrice && parseFloat(getDisplayBalance(cardPrice, 18)).toFixed(2);
 
 	const buttonProps = () => {
+		if (!account) {
+			return { disabled: false, onClick: loadWeb3Modal, text: 'Connect wallet' }
+		}
 		if (isSoldOut() || isNoLongerForSale()) {
 			return { disabled: true, onClick: () => null, text: 'Not available' }
 		} else if (isAllowedSpending()) {

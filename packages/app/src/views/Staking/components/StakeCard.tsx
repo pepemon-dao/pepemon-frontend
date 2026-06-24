@@ -5,7 +5,7 @@ import styled from "styled-components";
 import { ethers } from 'ethers';
 import { Spacer, Button, Title, IButtonPopover, Text, ContentCentered } from '../../../components';
 import { PepemonProviderContext } from '../../../contexts';
-import { useTokenPrices, useHorizontalScroll } from '../../../hooks';
+import { useTokenPrices, useHorizontalScroll, useWeb3Modal } from '../../../hooks';
 import { calculatePpblzApy, calculatePpblzEthLpApy, correctChainIsLoaded } from '../../../utils';
 import { pepeball, uniswap, ppdexLogo } from '../../../assets';
 import { theme } from '../../../theme';
@@ -42,6 +42,7 @@ const StakeCard: React.FC<any> = () => {
 
     const [pepemon] = useContext(PepemonProviderContext);
     const { account, contracts, provider } = pepemon;
+    const [, loadWeb3Modal] = useWeb3Modal();
 
     const { ppblzPrice, ppdexPrice } = useTokenPrices();
     const ppblzApy = calculatePpblzApy(ppblzPrice, ppdexPrice);
@@ -557,7 +558,7 @@ const StakeCard: React.FC<any> = () => {
                                 </ContentCentered>
                             }
                             {(!isApprovedPpblz || ppblzAllowance < parseFloat(ppblzStakeAmount || '0')) &&
-                                <Button styling="purple" onClick={approvePpblz} {...((isUpdatingRewards || isApprovingPpblz) && {disabled: true})} width="100%">{isUpdatingRewards ? "Updating..." : !isApprovingPpblz ? "Enable" : "Enabling..."}</Button>
+                                <Button styling="purple" onClick={!account ? loadWeb3Modal : approvePpblz} {...(!account ? {} : (isUpdatingRewards || isApprovingPpblz) && {disabled: true})} width="100%">{!account ? "Connect wallet" : isUpdatingRewards ? "Updating..." : !isApprovingPpblz ? "Enable" : "Enabling..."}</Button>
                             }
                             {isApprovedPpblz &&
                             !isWithdrawingPpblz &&
@@ -650,7 +651,7 @@ const StakeCard: React.FC<any> = () => {
                                 </ContentCentered>
                             }
                             {(!isApprovedUniV2Ppblz || uniV2PpblAllowance < parseFloat(uniV2PpblzStakeAmount || '0')) &&
-                                <Button styling="purple" onClick={approveUniV2Ppblz} {...((isUpdatingRewards || isApprovingUniV2Ppblz) && {disabled: true})} width="100%">{isUpdatingRewards ? "Updating..." : !isApprovingUniV2Ppblz ? "Enable" : "Enabling..."}</Button>
+                                <Button styling="purple" onClick={!account ? loadWeb3Modal : approveUniV2Ppblz} {...(!account ? {} : (isUpdatingRewards || isApprovingUniV2Ppblz) && {disabled: true})} width="100%">{!account ? "Connect wallet" : isUpdatingRewards ? "Updating..." : !isApprovingUniV2Ppblz ? "Enable" : "Enabling..."}</Button>
                             }
                             {isApprovedUniV2Ppblz &&
                             !isWithdrawingUniV2Ppblz &&
@@ -713,7 +714,7 @@ const StakeCard: React.FC<any> = () => {
                             {isUpdatingRewards ? "UPDATING..." : "UPDATE"}
                         </UpdateButton>
 
-                        <Button style={{ gridArea: 'area3' }} styling="purple" disabled={(isStakingPpblz || isWithdrawingPpblz) || isUpdatingRewards || (!(ppblzStakedAmount > 0) && (!(ppdexRewards > 0.1) || isClaiming))} onClick={claimRewards} width="clamp(100px, 18em, 100%)">{(isStakingPpblz || isWithdrawingPpblz || isUpdatingRewards) ? "Updating..." : isClaiming ? "Claiming..." : `${ppdexRewards.toFixed(2)} PPDEX to claim`}</Button>
+                        <Button style={{ gridArea: 'area3' }} styling="purple" disabled={!account ? false : (isStakingPpblz || isWithdrawingPpblz) || isUpdatingRewards || (!(ppblzStakedAmount > 0) && (!(ppdexRewards > 0.1) || isClaiming))} onClick={!account ? loadWeb3Modal : claimRewards} width="clamp(100px, 18em, 100%)">{!account ? "Connect wallet" : (isStakingPpblz || isWithdrawingPpblz || isUpdatingRewards) ? "Updating..." : isClaiming ? "Claiming..." : `${ppdexRewards.toFixed(2)} PPDEX to claim`}</Button>
                     </ClaimGrid>
                 </StakeGridAreaBody>
             </StakeGridArea>
