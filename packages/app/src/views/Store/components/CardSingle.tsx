@@ -147,8 +147,6 @@ const CardSingle: React.FC<any> = ({ cardId, selectedCard, selectCard }) => {
       </StyledPepemonCardPrice>
       <div>
         <StyledPepemonCardImage
-          width="747"
-          height="1038"
           effect="blur"
           active={cardId === selectedCard?.cardId}
           src={cardMeta ? cardMeta.image : cardback_normal}

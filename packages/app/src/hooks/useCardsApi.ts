@@ -35,7 +35,9 @@ export const useCardsMetadata = (tokenIds: number[]) => {
 			if (!response.ok) {
 				return {tokenId, status: 'failed'};
 			}
-			return {tokenId,  ...await response.json()};
+			const data = await response.json();
+			if (data.image) data.image = data.image.replace('https://pepemon.world/', '/');
+			return {tokenId, ...data};
 		}
 
 		Promise.all(tokenIds.map((tokenId) => fetchCardInfo(tokenId)))
@@ -67,7 +69,9 @@ export const getCardMeta = async (tokenId: number, pepemon: any) => {
 		if (!response.ok) {
 			return {tokenId, status: 'failed'};
 		}
-		return {tokenId,  ...await response.json()};
+		const data = await response.json();
+		if (data.image) data.image = data.image.replace('https://pepemon.world/', '/');
+		return {tokenId, ...data};
 	}
 
 	return await fetchCardInfo(tokenId);
