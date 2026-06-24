@@ -35,10 +35,15 @@ const StyledStoreAsideInner = styled.div`
 	@media (min-width: ${theme.breakpoints.tabletL}) {
 		position: sticky;
 		top: calc(${theme.topBarSize}px + 1em);
+		display: flex;
+		flex-direction: column;
+		max-height: calc(100vh - ${theme.topBarSize}px - 2em);
+		overflow: hidden;
 	}
 
 	@media (min-width: ${theme.breakpoints.desktop}) {
 		top: 1em;
+		max-height: calc(100vh - 2em);
 	}
 `
 

@@ -110,7 +110,7 @@ const AsideContent = styled.div`
   flex-direction: column;
 
   @media (min-width: ${theme.breakpoints.tabletL}) {
-    max-height: calc(100vh - 80px);
+    height: 100%;
     overflow: hidden;
   }
 `;
@@ -125,12 +125,10 @@ const ScrollableContent = styled.div`
 
 const StickyBottom = styled.div`
   @media (min-width: ${theme.breakpoints.tabletL}) {
-    position: sticky;
-    bottom: 0;
+    flex-shrink: 0;
     background: #fff;
     padding-top: 12px;
     border-top: 1px solid ${theme.color.gray[100]};
-    flex-shrink: 0;
   }
 `;
 
@@ -379,7 +377,7 @@ const StorePacksAside: React.FC<any> = ({ setSelectedPack, selectedPack }) => {
     <>
       <RevealOverlay phase={phase} receivedCards={receivedCards} onDismiss={onDismiss} />
       <StoreAside close={() => setSelectedPack(null)} title="Selected Pack">
-        <StyledStoreBody style={{ padding: 0 }}>
+        <StyledStoreBody style={{ padding: 0, overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
           <AsideContent>
             <ScrollableContent style={{ padding: '1.1em' }}>
               <Title as="h2" font={theme.font.neometric} size='m'>{selectedPack.name}</Title>
