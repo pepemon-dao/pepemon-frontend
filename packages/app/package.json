@@ -33,20 +33,29 @@
     "@uniswap/v2-core": "^1.0.1",
     "@uniswap/v2-periphery": "^1.1.0-beta.0",
     "@walletconnect/web3-provider": "^1.3.6",
+    "assert": "^2.1.0",
     "axios": "^0.21.1",
+    "browserify-zlib": "^0.2.0",
+    "buffer": "^6.0.3",
     "chalk": "^4.1.0",
     "conduit-sdk": "^0.0.3",
+    "crypto-browserify": "^3.12.1",
     "eslint": "^6.8.0",
     "eslint-plugin-flowtype": "^4.6.0",
     "eslint-plugin-prettier": "^4.2.1",
     "ethers": "^5.4.7",
+    "https-browserify": "^1.0.0",
     "husky": "^5.2.0",
     "i18next": "^21.3.3",
     "ipfs-http-client": "^45.0.0",
     "jsonwebtoken": "^8.5.1",
+    "levenary": "^1.1.1",
     "lint-staged": "^10.5.4",
     "logrocket": "^2.1.1",
+    "os-browserify": "^0.3.0",
+    "path-browserify": "^1.0.1",
     "prettier": "^2.8.8",
+    "process": "^0.11.10",
     "react": "16.14.0",
     "react-countup": "^6.0.0",
     "react-dom": "16.14.0",
@@ -55,17 +64,22 @@
     "react-lazy-load-image-component": "^1.5.4",
     "react-router-dom": "^5.2.0",
     "react-router-hash-link": "^2.4.3",
-    "react-scripts": "3.4.3",
+    "react-scripts": "5.0.1",
     "react-twitter-login": "^1.3.0",
+    "stream-browserify": "^3.0.0",
+    "stream-http": "^3.2.0",
     "styled-components": "^5.2.0",
     "typescript": "^4.2.2",
+    "url": "^0.11.4",
     "web3": "^1.3.4",
     "web3modal": "^1.9.1"
   },
   "devDependencies": {
+    "customize-cra": "^1.0.0",
     "eslint-config-prettier": "^8.1.0",
     "eslint-plugin-prettier": "^3.3.1",
-    "prettier": "^2.2.1"
+    "prettier": "^2.2.1",
+    "react-app-rewired": "^2.2.1"
   },
   "eslintConfig": {
     "extends": [
@@ -86,11 +100,11 @@
     ]
   },
   "scripts": {
-    "build": "react-scripts build",
+    "build": "react-app-rewired build",
     "eject": "react-scripts eject",
     "ipfs": "yarn build && node scripts/ipfs.js",
-    "start": "react-scripts start",
-    "test": "react-scripts test"
+    "start": "react-app-rewired start",
+    "test": "react-app-rewired test"
   },
   "lint-fix": "eslint --fix 'src/**/*.{js,jsx,ts,tsx,json,css,scss,md}'"
 }
