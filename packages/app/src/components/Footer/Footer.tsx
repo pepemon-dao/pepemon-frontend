@@ -131,7 +131,7 @@ const Footer = () => {
                 <Link to="/terms-of-service">Terms of service</Link>
                 <Link to="/privacy-policy">Privacy policy</Link>
               </StyledFooterLegalLinks>
-              <div>Pepemon © 2020-2025</div>
+              <div>Pepemon © 2020-2026</div>
             </StyledFooterLegalInner>
           </StyledFooterLegal>
         </StyledFooterInner>
