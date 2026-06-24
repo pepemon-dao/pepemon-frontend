@@ -7,7 +7,7 @@ const isSupportedChain = (chainId: number, pathname: string) => {
 	}
 
 	if (pathname.startsWith('/store') || pathname === '/') {
-		return (chainId === 1 || chainId === 4 || chainId === 56);
+		return (chainId === 1 || chainId === 4 || chainId === 56 || chainId === 84532);
 	}
 	return (chainId === 1 || chainId === 4);
 }

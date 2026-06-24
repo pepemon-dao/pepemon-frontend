@@ -1,4 +1,5 @@
 import { Boosterpack_3_cards_Battle_Monsters, Boosterpack_3_cards_Battle_Support, Boosterpack_3_cards_Gen_1, Boosterpack_6_cards_Battle_Monsters, Boosterpack_6_cards_Battle_Support, Boosterpack_6_cards_Gen_1, Boosterpack_9_cards_Battle_Monsters, Boosterpack_9_cards_Battle_Support, Boosterpack_9_cards_Gen_1 } from '../assets';
+import { BATTLE_MONSTERS_3_CARD_BASE_SEPOLIA } from './boosterpacks';
 
 const BATTLE_MONSTERS_EDITION = {
 	title: 'Battle Monsters edition',
@@ -30,12 +31,29 @@ const BATTLE_SUPPORT_EDITION = {
 }
 
 
+const BATTLE_MONSTERS_EDITION_BASE_SEPOLIA = {
+	title: 'Battle Monsters edition',
+	title_formatted: 'BATTLE_MONSTERS_EDITION',
+	packs: [
+		{
+			name: "Battle Monsters edition - 3 cards",
+			cardsPerPack: 3,
+			url: Boosterpack_3_cards_Battle_Monsters,
+			minted: "—",
+			time: "—",
+			price: "0",
+			onchainConfig: BATTLE_MONSTERS_3_CARD_BASE_SEPOLIA,
+		},
+	]
+}
+
 // series per chainId
 const ALL_BOOSTERPACKS = new Map([
 	[1, [BATTLE_MONSTERS_EDITION, GEN_1_EDITION, BATTLE_SUPPORT_EDITION]],
 	[4, [BATTLE_MONSTERS_EDITION, GEN_1_EDITION, BATTLE_SUPPORT_EDITION]],
 	[56, [BATTLE_MONSTERS_EDITION, GEN_1_EDITION, BATTLE_SUPPORT_EDITION]],
-	[137, [BATTLE_MONSTERS_EDITION, GEN_1_EDITION, BATTLE_SUPPORT_EDITION]]
+	[137, [BATTLE_MONSTERS_EDITION, GEN_1_EDITION, BATTLE_SUPPORT_EDITION]],
+	[84532, [BATTLE_MONSTERS_EDITION_BASE_SEPOLIA]],
 ]);
 
 export default ALL_BOOSTERPACKS;

@@ -8,6 +8,7 @@ export { default as useCardsFactoryData, getCardFactoryData } from './useCardsFa
 export type { CardBalances } from './useCardsFactoryData';
 export { default as useCardsStorePrices, getCardStorePrices } from './useCardsStorePrices';
 export type { CardPrice } from './useCardsStorePrices';
+export { default as useClaimBoosterPack } from './useClaimBoosterPack';
 export { default as useClaimEvent } from './useClaimEvent';
 export { default as useClaimMerkle } from './useClaimMerkle';
 export type { Merkle } from './useClaimMerkle';

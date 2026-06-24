@@ -113,6 +113,19 @@ const chains: ChainsProps[] = [
     ],
     blockExplorerTitle: "Pepescan",
   },
+  {
+    chainId: "0x14a34", // = 84532
+    name: "Base Sepolia",
+    chainName: "Base Sepolia Testnet",
+    nativeCurrency: {
+      name: "Ethereum",
+      symbol: "ETH",
+      decimals: 18,
+    },
+    rpcUrls: ["https://sepolia.base.org"],
+    blockExplorerUrls: ["https://sepolia.basescan.org"],
+    blockExplorerTitle: "Basescan (Sepolia)",
+  },
   // {
   // 	chainId: "0x89", // = 137
   // 	name: "Matic",
