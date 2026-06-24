@@ -1,4 +1,5 @@
-import React, { useContext } from "react";
+import React, { useContext, useRef, useEffect } from "react";
+import styled from "styled-components";
 import { StyledStoreBody } from './index';
 import { Button, Title, Text, Spacer } from '../../../components';
 import { PepemonProviderContext } from '../../../contexts';
@@ -9,6 +10,53 @@ import { chains } from '../../../constants';
 
 const BASE_SEPOLIA_CHAIN_ID = 84532;
 
+const FullScreenOverlay = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 9999;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+`;
+
+const OverlayVideo = styled.video`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+`;
+
+const ClaimRevealOverlay: React.FC<{ visible: boolean }> = ({ visible }) => {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    if (visible && videoRef.current) {
+      videoRef.current.currentTime = 0;
+      videoRef.current.play().catch(() => {/* autoplay blocked, silently ignore */});
+    } else if (!visible && videoRef.current) {
+      videoRef.current.pause();
+    }
+  }, [visible]);
+
+  if (!visible) return null;
+
+  return (
+    <FullScreenOverlay>
+      <OverlayVideo
+        ref={videoRef}
+        src="/videos/claim-reveal.mp4"
+        loop
+        muted={false}
+        playsInline
+      />
+    </FullScreenOverlay>
+  );
+};
+
 const StorePacksAside: React.FC<any> = ({setSelectedPack, selectedPack}) => {
 	const [pepemon] = useContext(PepemonProviderContext);
 	const { chainId, account } = pepemon;
@@ -17,7 +65,7 @@ const StorePacksAside: React.FC<any> = ({setSelectedPack, selectedPack}) => {
 	const isLivePack = onchainConfig !== null;
 	const isOnRightChain = isLivePack && chainId === onchainConfig.chainId;
 
-	const { onClaim, isClaiming, claimError, claimSuccess } = useClaimBoosterPack(
+	const { onClaim, isClaiming, isSubmitted, claimError, claimSuccess } = useClaimBoosterPack(
 		onchainConfig ?? { chainId: 0, faucetAddress: '', packId: 0, cardIds: [] }
 	);
 
@@ -85,33 +133,36 @@ const StorePacksAside: React.FC<any> = ({setSelectedPack, selectedPack}) => {
 				disabled={isClaiming}
 				onClick={onClaim}
 			>
-				{isClaiming ? 'Claiming…' : 'Claim 3 cards'}
+				{isClaiming && !isSubmitted ? 'Confirm in wallet…' : isClaiming ? 'Confirming on chain…' : 'Claim 3 cards'}
 			</Button>
 		);
 	};
 
 	return (
-		<StoreAside close={() => setSelectedPack(null)} title="Selected Pack">
-			<StyledStoreBody>
-				<Title as="h2" font={theme.font.neometric} size='m'>{selectedPack.name}</Title>
-				<Spacer size="sm"/>
-				<Text as="p" font={theme.font.inter} size='s' lineHeight={1.3} color={theme.color.gray[600]}>
-					When claiming this booster pack you will recieve {selectedPack.cardsPerPack} random cards.
-				</Text>
-				<Spacer size="sm"/>
-				<img loading="lazy" src={selectedPack.url} alt={selectedPack.name} style={{width: "100%"}}/>
-				<Spacer size='md'/>
-				{renderButton()}
-				{claimError && (
-					<>
-						<Spacer size="sm"/>
-						<Text as="p" font={theme.font.inter} size='xs' color="red">
-							{claimError}
-						</Text>
-					</>
-				)}
-			</StyledStoreBody>
-		</StoreAside>
+		<>
+			<ClaimRevealOverlay visible={isSubmitted} />
+			<StoreAside close={() => setSelectedPack(null)} title="Selected Pack">
+				<StyledStoreBody>
+					<Title as="h2" font={theme.font.neometric} size='m'>{selectedPack.name}</Title>
+					<Spacer size="sm"/>
+					<Text as="p" font={theme.font.inter} size='s' lineHeight={1.3} color={theme.color.gray[600]}>
+						When claiming this booster pack you will recieve {selectedPack.cardsPerPack} random cards.
+					</Text>
+					<Spacer size="sm"/>
+					<img loading="lazy" src={selectedPack.url} alt={selectedPack.name} style={{width: "100%"}}/>
+					<Spacer size='md'/>
+					{renderButton()}
+					{claimError && (
+						<>
+							<Spacer size="sm"/>
+							<Text as="p" font={theme.font.inter} size='xs' color="red">
+								{claimError}
+							</Text>
+						</>
+					)}
+				</StyledStoreBody>
+			</StoreAside>
+		</>
 	);
 };
 

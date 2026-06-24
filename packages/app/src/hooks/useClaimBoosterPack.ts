@@ -7,12 +7,14 @@ import { OnchainBoosterpackConfig } from '../constants/boosterpacks';
 const useClaimBoosterPack = (config: OnchainBoosterpackConfig) => {
   const pepemon = usePepemon();
   const [isClaiming, setIsClaiming] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
   const [claimError, setClaimError] = useState<string | null>(null);
   const [claimSuccess, setClaimSuccess] = useState(false);
 
   const onClaim = useCallback(async () => {
     setClaimError(null);
     setClaimSuccess(false);
+    setIsSubmitted(false);
 
     if (!pepemon.provider) {
       setClaimError('No wallet connected');
@@ -28,10 +30,14 @@ const useClaimBoosterPack = (config: OnchainBoosterpackConfig) => {
       const signer = pepemon.provider.getSigner();
       const faucet = new Contract(config.faucetAddress, FaucetAbi, signer);
       const tx = await faucet.claimAndReveal(config.packId, config.cardIds);
+      // Wallet confirmed — tx is now submitted to the chain
+      setIsSubmitted(true);
       await tx.wait();
+      setIsSubmitted(false);
       setClaimSuccess(true);
       return true;
     } catch (e: any) {
+      setIsSubmitted(false);
       const msg = e?.reason || e?.message || 'Transaction failed';
       setClaimError(msg);
       return false;
@@ -40,7 +46,7 @@ const useClaimBoosterPack = (config: OnchainBoosterpackConfig) => {
     }
   }, [pepemon.provider, pepemon.chainId, config]);
 
-  return { onClaim, isClaiming, claimError, claimSuccess };
+  return { onClaim, isClaiming, isSubmitted, claimError, claimSuccess };
 };
 
 export default useClaimBoosterPack;
