@@ -313,10 +313,12 @@ const StakeCard: React.FC<any> = () => {
         setIsApprovingPpblz(true);
 
         try {
-            const amount = ethers.utils.parseUnits(totalPpblzSupply.toString(), 'ether');
+            const approveAmount = ppblzStakeAmount && parseFloat(ppblzStakeAmount) > 0
+                ? ethers.utils.parseUnits(ppblzStakeAmount.toString(), 'ether')
+                : ethers.utils.parseUnits(ppblzBalance.toString(), 'ether');
             let approveStaking = await sendTransaction(provider, async () => await contracts.ppblz.approve(
                 contracts.ppdex.address,
-                amount
+                approveAmount
             ));
 
             await getPpblzAllowance();
@@ -324,6 +326,11 @@ const StakeCard: React.FC<any> = () => {
             if (approveStaking) {
                 setIsApprovingPpblz(false);
                 setIsApprovedPpblz(true);
+                if (ppblzStakeAmount && parseFloat(ppblzStakeAmount) > 0 && parseFloat(ppblzStakeAmount) <= ppblzBalance) {
+                    await stakePpblz();
+                }
+            } else {
+                setIsApprovingPpblz(false);
             }
 
             setTransactionFinished(prev => prev + 1);
@@ -340,16 +347,23 @@ const StakeCard: React.FC<any> = () => {
         setIsApprovingUniV2Ppblz(true);
 
         try {
-            const amount = ethers.utils.parseUnits(totalUniV2PpblzSupply.toString(), 'ether');
+            const approveAmount = uniV2PpblzStakeAmount && parseFloat(uniV2PpblzStakeAmount) > 0
+                ? ethers.utils.parseUnits(uniV2PpblzStakeAmount.toString(), 'ether')
+                : ethers.utils.parseUnits(uniV2PpblzBalance.toString(), 'ether');
             let approveStaking = await sendTransaction(provider, async () => await contracts.uniV2_ppblz.approve(
                 contracts.ppdex.address,
-                amount
+                approveAmount
             ));
             await getUniV2PpblzAllowance();
 
             if (approveStaking) {
                 setIsApprovingUniV2Ppblz(false);
                 setIsApprovedUniV2Ppblz(true);
+                if (uniV2PpblzStakeAmount && parseFloat(uniV2PpblzStakeAmount) > 0 && parseFloat(uniV2PpblzStakeAmount) <= uniV2PpblzBalance) {
+                    await stakeUniV2Ppblz();
+                }
+            } else {
+                setIsApprovingUniV2Ppblz(false);
             }
 
             setTransactionFinished(prev => prev + 1);
@@ -534,7 +548,10 @@ const StakeCard: React.FC<any> = () => {
                             </DataColumn>
                         </DataColumns>
                         <div style={{ marginTop: "auto" }}>
-                            {isApprovedPpblz && !ppblzStakeAdd && !ppblzStakeSub &&
+                            {!account &&
+                                <Button styling="purple" onClick={loadWeb3Modal} width="100%">Connect wallet</Button>
+                            }
+                            {account && isApprovedPpblz && !ppblzStakeAdd && !ppblzStakeSub &&
                                 <ContentCentered
                                     style={{
                                     display: "flex",
@@ -557,13 +574,11 @@ const StakeCard: React.FC<any> = () => {
                                     >+</Button>
                                 </ContentCentered>
                             }
-                            {(!isApprovedPpblz || ppblzAllowance < parseFloat(ppblzStakeAmount || '0')) &&
-                                <Button styling="purple" onClick={!account ? loadWeb3Modal : approvePpblz} {...(!account ? {} : (isUpdatingRewards || isApprovingPpblz) && {disabled: true})} width="100%">{!account ? "Connect wallet" : isUpdatingRewards ? "Updating..." : !isApprovingPpblz ? "Enable" : "Enabling..."}</Button>
-                            }
-                            {isApprovedPpblz &&
-                            !isWithdrawingPpblz &&
+                            {account &&
+                            (!isApprovedPpblz || ppblzStakeAdd || ppblzStakeSub) &&
                             !isStakingPpblz &&
-                            (ppblzStakeAdd || ppblzStakeSub) &&
+                            !isWithdrawingPpblz &&
+                            !isApprovingPpblz &&
                                 <ContentCentered direction="row" bgColor={theme.color.white} style={{ borderRadius: "8px", border: `1px solid ${theme.color.purple[700]}`, padding: ".1em .1em .1em 0.75em" }}>
                                     <StyledInput
                                         placeholder="0.00"
@@ -573,24 +588,28 @@ const StakeCard: React.FC<any> = () => {
                                         step="1"
                                         autoFocus={true} />
                                     <Button styling="link" onClick={setMaxPpblz}>Max</Button>
-                                    <Button styling="purple"
-                                        {...(ppblzStakeAdd && !ppblzStakeSub ?
-                                            {
-                                                onClick: stakePpblz,
-                                                disabled: !(parseFloat(ppblzStakeAmount || '0') > 0 && parseFloat(ppblzStakeAmount || '0') <= ppblzBalance) || isStakingPpblz
-                                            } : ppblzStakeSub && !ppblzStakeAdd &&
-                                            { onClick: withdrawPpblz,
-                                                disabled: !(parseFloat(ppblzStakeAmount || '0') > 0 && parseFloat(ppblzStakeAmount || '0') <= ppblzStakedAmount) || isWithdrawingPpblz }
-                                        )}
-                                    >
-                                        {ppblzStakeAdd && !ppblzStakeSub ? "Stake" : !ppblzStakeAdd && ppblzStakeSub && "Withdraw"}
-                                    </Button>
+                                    {(!isApprovedPpblz || ppblzAllowance < parseFloat(ppblzStakeAmount || '0')) && !ppblzStakeSub
+                                        ? <Button styling="purple"
+                                            onClick={approvePpblz}
+                                            disabled={!ppblzStakeAmount || parseFloat(ppblzStakeAmount) <= 0 || isUpdatingRewards}
+                                          >Enable</Button>
+                                        : ppblzStakeSub && !ppblzStakeAdd
+                                            ? <Button styling="purple"
+                                                onClick={withdrawPpblz}
+                                                disabled={!(parseFloat(ppblzStakeAmount || '0') > 0 && parseFloat(ppblzStakeAmount || '0') <= ppblzStakedAmount) || isWithdrawingPpblz}
+                                              >Withdraw</Button>
+                                            : <Button styling="purple"
+                                                onClick={stakePpblz}
+                                                disabled={!(parseFloat(ppblzStakeAmount || '0') > 0 && parseFloat(ppblzStakeAmount || '0') <= ppblzBalance) || isStakingPpblz}
+                                              >Stake</Button>
+                                    }
                                 </ContentCentered>
                             }
-                            { (isStakingPpblz || isWithdrawingPpblz) &&
-                                <Button styling="purple" onClick={approvePpblz} width="100%" disabled>
+                            {account && (isApprovingPpblz || isStakingPpblz || isWithdrawingPpblz) &&
+                                <Button styling="purple" width="100%" disabled>
+                                    {isApprovingPpblz && "Enabling"}
                                     {isStakingPpblz && "Staking"}
-                                    {isWithdrawingPpblz &&  "Withdrawing"}
+                                    {isWithdrawingPpblz && "Withdrawing"}
                                 ...</Button>
                             }
                         </div>
@@ -627,7 +646,10 @@ const StakeCard: React.FC<any> = () => {
                             </DataColumn>
                         </DataColumns>
                         <div style={{ marginTop: "auto" }}>
-                            {isApprovedUniV2Ppblz && !uniV2PpblzStakeAdd && !uniV2PpblzStakeSub &&
+                            {!account &&
+                                <Button styling="purple" onClick={loadWeb3Modal} width="100%">Connect wallet</Button>
+                            }
+                            {account && isApprovedUniV2Ppblz && !uniV2PpblzStakeAdd && !uniV2PpblzStakeSub &&
                                 <ContentCentered
                                     style={{
                                     display: "flex",
@@ -650,13 +672,11 @@ const StakeCard: React.FC<any> = () => {
                                     >+</Button>
                                 </ContentCentered>
                             }
-                            {(!isApprovedUniV2Ppblz || uniV2PpblAllowance < parseFloat(uniV2PpblzStakeAmount || '0')) &&
-                                <Button styling="purple" onClick={!account ? loadWeb3Modal : approveUniV2Ppblz} {...(!account ? {} : (isUpdatingRewards || isApprovingUniV2Ppblz) && {disabled: true})} width="100%">{!account ? "Connect wallet" : isUpdatingRewards ? "Updating..." : !isApprovingUniV2Ppblz ? "Enable" : "Enabling..."}</Button>
-                            }
-                            {isApprovedUniV2Ppblz &&
-                            !isWithdrawingUniV2Ppblz &&
+                            {account &&
+                            (!isApprovedUniV2Ppblz || uniV2PpblzStakeAdd || uniV2PpblzStakeSub) &&
                             !isStakingUniV2Ppblz &&
-                            (uniV2PpblzStakeAdd || uniV2PpblzStakeSub) &&
+                            !isWithdrawingUniV2Ppblz &&
+                            !isApprovingUniV2Ppblz &&
                                 <ContentCentered direction="row" bgColor={theme.color.white} style={{ borderRadius: "8px", border: `1px solid ${theme.color.purple[700]}`, padding: ".1em .1em .1em 0.75em" }}>
                                     <StyledInput
                                         placeholder="0.00"
@@ -666,24 +686,28 @@ const StakeCard: React.FC<any> = () => {
                                         step="1"
                                         autoFocus={true} />
                                     <Button styling="link" onClick={setMaxUniV2Ppblz}>Max</Button>
-                                    <Button styling="purple"
-                                        {...(uniV2PpblzStakeAdd && !uniV2PpblzStakeSub ?
-                                            {
-                                                onClick: stakeUniV2Ppblz,
-                                                disabled: !(parseFloat(uniV2PpblzStakeAmount || '0') > 0 && parseFloat(uniV2PpblzStakeAmount || '0') <= uniV2PpblzBalance) || isStakingUniV2Ppblz
-                                            } : uniV2PpblzStakeSub && !uniV2PpblzStakeAdd &&
-                                            { onClick: withdrawUniV2Ppblz,
-                                                disabled: !(parseFloat(uniV2PpblzStakeAmount || '0') > 0 && parseFloat(uniV2PpblzStakeAmount || '0') <= uniV2PpblzStakedAmount) || isWithdrawingUniV2Ppblz }
-                                        )}
-                                    >
-                                        {uniV2PpblzStakeAdd && !uniV2PpblzStakeSub ? "Stake" : !uniV2PpblzStakeAdd && uniV2PpblzStakeSub && "Withdraw"}
-                                    </Button>
+                                    {(!isApprovedUniV2Ppblz || uniV2PpblAllowance < parseFloat(uniV2PpblzStakeAmount || '0')) && !uniV2PpblzStakeSub
+                                        ? <Button styling="purple"
+                                            onClick={approveUniV2Ppblz}
+                                            disabled={!uniV2PpblzStakeAmount || parseFloat(uniV2PpblzStakeAmount) <= 0 || isUpdatingRewards}
+                                          >Enable</Button>
+                                        : uniV2PpblzStakeSub && !uniV2PpblzStakeAdd
+                                            ? <Button styling="purple"
+                                                onClick={withdrawUniV2Ppblz}
+                                                disabled={!(parseFloat(uniV2PpblzStakeAmount || '0') > 0 && parseFloat(uniV2PpblzStakeAmount || '0') <= uniV2PpblzStakedAmount) || isWithdrawingUniV2Ppblz}
+                                              >Withdraw</Button>
+                                            : <Button styling="purple"
+                                                onClick={stakeUniV2Ppblz}
+                                                disabled={!(parseFloat(uniV2PpblzStakeAmount || '0') > 0 && parseFloat(uniV2PpblzStakeAmount || '0') <= uniV2PpblzBalance) || isStakingUniV2Ppblz}
+                                              >Stake</Button>
+                                    }
                                 </ContentCentered>
                             }
-                            { (isStakingUniV2Ppblz || isWithdrawingUniV2Ppblz) &&
-                                <Button styling="purple" onClick={approveUniV2Ppblz} width="100%" disabled>
+                            {account && (isApprovingUniV2Ppblz || isStakingUniV2Ppblz || isWithdrawingUniV2Ppblz) &&
+                                <Button styling="purple" width="100%" disabled>
+                                    {isApprovingUniV2Ppblz && "Enabling"}
                                     {isStakingUniV2Ppblz && "Staking"}
-                                    {isWithdrawingUniV2Ppblz &&  "Withdrawing"}
+                                    {isWithdrawingUniV2Ppblz && "Withdrawing"}
                                 ...</Button>
                             }
                         </div>
