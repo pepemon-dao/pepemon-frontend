@@ -143,7 +143,7 @@ const CardSingle: React.FC<any> = ({ cardId, selectedCard, selectCard }) => {
         <img loading="lazy" src={coin} alt="coin" />
         {cardPrice
           ? `${priceOfCard} ${chainId === 56 ? "BNB" : "PPDEX"}`
-          : "loading"}
+          : isLoaded ? "—" : "loading"}
       </StyledPepemonCardPrice>
       <div>
         <StyledPepemonCardImage
@@ -162,7 +162,7 @@ const CardSingle: React.FC<any> = ({ cardId, selectedCard, selectCard }) => {
           <dt>Minted</dt>
           <dd>
             {!cardBalance?.[0]
-              ? "loading"
+              ? isLoaded ? "—" : "loading"
               : `${parseFloat(cardBalance[0]?.totalSupply)} / ${
                   parseFloat(cardBalance[0]?.maxSupply) > 10000
                     ? "♾️"
