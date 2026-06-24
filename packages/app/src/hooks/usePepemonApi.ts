@@ -8,7 +8,7 @@ const usePepemonApi = (endpoint: string) => {
 
     useEffect(() => {
 		const fetchData = async (endpoint: string) => {
-	        setIsFetching(true)
+	        setIsFetching(true);
 	        const effectiveChainId = chainId || 1;
 	        const host = effectiveChainId === 1 ? `https://pepemon.world/api` : `https://dev.pepemon.finance/api`;
 	        const response = await fetch(
@@ -19,14 +19,10 @@ const usePepemonApi = (endpoint: string) => {
 	            setIsFetching(false);
 	            return null;
 	        }
-	        setIsFetching( false);
+	        setIsFetching(false);
 	        return response.json();
 	    }
 
-        // @ts-ignore
-        // if (!networkId || networkId === 0) {
-        //     return;
-        // }
         fetchData(endpoint).then(res => setResponse(res)).catch(err => console.error(err));
     }, [chainId, endpoint])
 

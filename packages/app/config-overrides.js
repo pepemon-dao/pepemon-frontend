@@ -12,7 +12,7 @@ module.exports = override(
   ),
   addWebpackResolve({
     alias: {
-      '@ethersproject/hash': path.resolve(__dirname, '../../node_modules/@ethersproject/providers/node_modules/@ethersproject/hash/lib/index.js'),
+      '@ethersproject/hash': path.resolve(__dirname, 'node_modules/@ethersproject/hash/lib/index.js'),
     },
     fallback: {
       assert: require.resolve('assert'),
