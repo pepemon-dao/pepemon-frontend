@@ -1,0 +1,12 @@
+[
+  {
+    "type": "function",
+    "name": "claimAndReveal",
+    "inputs": [
+      { "name": "packId", "type": "uint256", "internalType": "uint256" },
+      { "name": "cardIds", "type": "uint256[]", "internalType": "uint256[]" }
+    ],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  }
+]

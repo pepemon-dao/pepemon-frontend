@@ -126,6 +126,19 @@ const chains: ChainsProps[] = [
   // 	blockExplorerUrls: ['https://polygonscan.com/'],
   // 	blockExplorerTitle: 'Polygonscan'
   // }
+  {
+    chainId: "0x14a34", // = 84532
+    name: "BASE_SEPOLIA",
+    chainName: "Base Sepolia",
+    nativeCurrency: {
+      name: "Ether",
+      symbol: "ETH",
+      decimals: 18,
+    },
+    rpcUrls: ["https://sepolia.base.org"],
+    blockExplorerUrls: ["https://sepolia.basescan.org"],
+    blockExplorerTitle: "Basescan (Sepolia)",
+  },
 ];
 
 export default chains;

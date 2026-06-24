@@ -66,6 +66,12 @@ export const StyledStoreBody = styled.div`
     padding: 1.1em;
     border-bottom-left-radius: ${theme.borderRadius}px;;
     border-bottom-right-radius: ${theme.borderRadius}px;
+
+    @media (min-width: ${theme.breakpoints.tabletL}) {
+        flex: 1;
+        min-height: 0;
+        overflow-y: auto;
+    }
 `
 
 export const StyledStoreCardsWrapper = styled.div`
