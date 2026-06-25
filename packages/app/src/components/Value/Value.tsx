@@ -1,29 +1,27 @@
-import React, { useState, useEffect } from 'react'
-import CountUp from 'react-countup'
-import styled from 'styled-components'
+import React, { useState, useEffect } from "react";
+import CountUp from "react-countup";
+import styled from "styled-components";
 
 interface ValueProps {
-  value: string | number
-  decimals?: number
-  size?: 'small' | 'medium'
+  value: string | number;
+  decimals?: number;
+  size?: "small" | "medium";
 }
 
 const Value: React.FC<ValueProps> = ({ value, decimals, size }) => {
-  const [start, updateStart] = useState(0)
-  const [end, updateEnd] = useState(0)
+  const [start, updateStart] = useState(0);
+  const [end, updateEnd] = useState(0);
 
   useEffect(() => {
-    if (typeof value === 'number') {
-      updateStart(end)
-      updateEnd(value)
+    if (typeof value === "number") {
+      updateStart(end);
+      updateEnd(value);
     }
-  }, [value, end])
+  }, [value, end]);
 
   return (
-    <StyledValue
-        size={size || 'default'}
-    >
-      {typeof value == 'string' ? (
+    <StyledValue size={size || "default"}>
+      {typeof value == "string" ? (
         value
       ) : (
         <CountUp
@@ -38,16 +36,17 @@ const Value: React.FC<ValueProps> = ({ value, decimals, size }) => {
         />
       )}
     </StyledValue>
-  )
-}
+  );
+};
 
 interface StyledValueProps {
-	size?: 'small' | 'medium' | 'default',
+  size?: "small" | "medium" | "default";
 }
 
 const StyledValue = styled.span<StyledValueProps>`
-  font-size: ${(props) => props.size === 'small' ? 14 : props.size === 'medium' ? 26 : 36}px;
-  font-weight: ${(props) => props.size === 'small' ? 400 : 700};
-`
+  font-size: ${(props) =>
+    props.size === "small" ? 14 : props.size === "medium" ? 26 : 36}px;
+  font-weight: ${(props) => (props.size === "small" ? 400 : 700)};
+`;
 
-export default Value
+export default Value;

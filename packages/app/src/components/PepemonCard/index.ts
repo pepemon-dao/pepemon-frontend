@@ -1,1 +1,6 @@
-export { default, StyledPepemonCardImage, StyledPepemonCardMeta, StyledPepemonCardPrice } from './PepemonCard';
+export {
+  default,
+  StyledPepemonCardImage,
+  StyledPepemonCardMeta,
+  StyledPepemonCardPrice,
+} from "./PepemonCard";

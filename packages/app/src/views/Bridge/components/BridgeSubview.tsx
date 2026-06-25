@@ -39,7 +39,7 @@ const BridgeSubview: React.FC<any> = () => {
 
   const { Layer1, Layer2, depositFunds, withdrawFunds } = useBridge();
 
-  let horzScroll: any = useRef(null);
+  const horzScroll: any = useRef(null);
   useHorizontalScroll(horzScroll);
 
   return (
@@ -85,9 +85,7 @@ const BridgeSubview: React.FC<any> = () => {
           placeholder="0.00"
           value={l1NativeBalanceToBridge}
           onChange={(event) =>
-            setL1NativeBalanceToBridge(
-              cleanNumberInput(event.target.value, 18)
-            )
+            setL1NativeBalanceToBridge(cleanNumberInput(event.target.value, 18))
           }
           min="0.00"
           type={"number"}
@@ -174,9 +172,7 @@ const BridgeSubview: React.FC<any> = () => {
           placeholder="0.00"
           value={l2NativeBalanceToBridge}
           onChange={(event) =>
-            setL2NativeBalanceToBridge(
-              cleanNumberInput(event.target.value, 18)
-            )
+            setL2NativeBalanceToBridge(cleanNumberInput(event.target.value, 18))
           }
           min="0.00"
           type={"number"}

@@ -1,110 +1,94 @@
-import React, { createContext, useReducer } from 'react';
-import { contractAddresses } from '../../pepemon/lib/constants';
+import React, { createContext, useReducer } from "react";
+import { contractAddresses } from "../../pepemon/lib/constants";
 
 declare global {
   interface Window {
-    pepesauce: any
+    pepesauce: any;
   }
 }
 
-const initial: any = ({
-    account: null,
-    chainId: null,
-    contracts: new Map([]),
-    provider: null,
-    // web3: null,
-})
+const initial: any = {
+  account: null,
+  chainId: null,
+  contracts: new Map([]),
+  provider: null,
+  // web3: null,
+};
 export const Context = createContext<any>({
   pepemon: undefined,
-})
+});
 
 export const PepemonProvider: React.FC<any> = ({ children }) => {
-  const setContractAddresses = (networkId: any): any => ({
-    // @ts-ignore
-    ppblzAddress: contractAddresses.ppblz[networkId],
-    // @ts-ignore
-    ppdexAddress: contractAddresses.ppdex[networkId],
-    // @ts-ignore
-    wethAddress: contractAddresses.weth[networkId],
-    // @ts-ignore
-    uniV2Address: contractAddresses.uniV2_ppblz[networkId],
-    // @ts-ignore
-    pepemonFactoryAddress: contractAddresses.pepemonFactory[networkId],
-    // @ts-ignore
-    pepemonStoreAddress: contractAddresses.pepemonStore[networkId],
-    // @ts-ignore
-    pepemonStakeAddress: contractAddresses.pepemonStake[networkId],
-    // @ts-ignore
-    merkleAddress: contractAddresses.merkle[networkId],
-    // @ts-ignore
-    merkleAddressPpblz: contractAddresses.merklePpblz[networkId],
-    // @ts-ignore
-    merkleAddressPpdex: contractAddresses.merklePpdex[networkId],
-    // @ts-ignore
-    merkleAddressUniV2: contractAddresses.merkleUniV2[networkId],
-	// @ts-ignore
-	merkleDistributor: contractAddresses.merkleDistributor[networkId],
-    // @ts-ignore
-    pepemonLottery: contractAddresses.pepemonLottery[networkId],
-    // @ts-ignore
-    uniV2PpdexAddress: contractAddresses.uniV2_ppdex[networkId],
-    // @ts-ignore
-    pepemonPromoStoreAddress: contractAddresses.pepemonPromoStore[networkId],
-    // @ts-ignore
-    pepemonPromoTokenAddress: contractAddresses.pepemonPromoToken[networkId],
-  } as any)
+  const setContractAddresses = (networkId: any): any =>
+    ({
+      ppblzAddress: contractAddresses.ppblz[networkId],
+      ppdexAddress: contractAddresses.ppdex[networkId],
+      wethAddress: contractAddresses.weth[networkId],
+      uniV2Address: contractAddresses.uniV2_ppblz[networkId],
+      pepemonFactoryAddress: contractAddresses.pepemonFactory[networkId],
+      pepemonStoreAddress: contractAddresses.pepemonStore[networkId],
+      pepemonStakeAddress: contractAddresses.pepemonStake[networkId],
+      merkleAddress: contractAddresses.merkle[networkId],
+      merkleAddressPpblz: contractAddresses.merklePpblz[networkId],
+      merkleAddressPpdex: contractAddresses.merklePpdex[networkId],
+      merkleAddressUniV2: contractAddresses.merkleUniV2[networkId],
+      merkleDistributor: contractAddresses.merkleDistributor[networkId],
+      pepemonLottery: contractAddresses.pepemonLottery[networkId],
+      uniV2PpdexAddress: contractAddresses.uniV2_ppdex[networkId],
+      pepemonPromoStoreAddress: contractAddresses.pepemonPromoStore[networkId],
+      pepemonPromoTokenAddress: contractAddresses.pepemonPromoToken[networkId],
+    } as any);
 
   const pepemonReducer = (state: any, action: any) => {
     switch (action.type) {
-      case 'all':
+      case "all":
         const allState = {
-            account: action.account,
-            chainId: action.chainId,
-            contracts: action.contracts,
-            provider: action.provider,
-            // web3: new Web3(action.provider),
-            ...setContractAddresses(action.chainId),
-        }
-        // @ts-ignore
-        window.pepemon = allState
-        return {...allState};
-      case 'chainChanged':
+          account: action.account,
+          chainId: action.chainId,
+          contracts: action.contracts,
+          provider: action.provider,
+          // web3: new Web3(action.provider),
+          ...setContractAddresses(action.chainId),
+        };
+        // @ts-expect-error -- web3/ethers type mismatch
+        window.pepemon = allState;
+        return { ...allState };
+      case "chainChanged":
         const chainChangedState = {
-            ...state,
-            chainId: action.chainId,
-            contracts: action.contracts,
-            provider: action.provider,
-            // web3: new Web3(action.provider),
-            ...setContractAddresses(action.chainId),
-        }
-        // @ts-ignore
+          ...state,
+          chainId: action.chainId,
+          contracts: action.contracts,
+          provider: action.provider,
+          // web3: new Web3(action.provider),
+          ...setContractAddresses(action.chainId),
+        };
+        // @ts-expect-error -- web3/ethers type mismatch
         window.pepemon = chainChangedState;
-        return {...chainChangedState};
-      case 'accountChanged':
+        return { ...chainChangedState };
+      case "accountChanged":
         const accountChangedState = {
-            ...state,
-            account: action.account,
-            contracts: action.contracts,
-            provider: action.provider,
-            // web3: new Web3(action.provider),
-            ...setContractAddresses(action.chainId),
-        }
-        // @ts-ignore
+          ...state,
+          account: action.account,
+          contracts: action.contracts,
+          provider: action.provider,
+          // web3: new Web3(action.provider),
+          ...setContractAddresses(action.chainId),
+        };
+        // @ts-expect-error -- web3/ethers type mismatch
         window.pepemon = chainChangedState;
-        return {...accountChangedState};
-      case 'reset': return {...initial}
+        return { ...accountChangedState };
+      case "reset":
+        return { ...initial };
       default:
-        return {...state};
+        return { ...state };
     }
-  }
+  };
 
-  const [state, dispatch] = useReducer(pepemonReducer, initial)
+  const [state, dispatch] = useReducer(pepemonReducer, initial);
 
   return (
-      <Context.Provider value={[state, dispatch]}>
-        {children}
-      </Context.Provider>
-  )
-}
+    <Context.Provider value={[state, dispatch]}>{children}</Context.Provider>
+  );
+};
 
 export default PepemonProvider;

@@ -27,7 +27,10 @@ const Hero: React.FC<any> = ({ apy }) => {
             desktopStyle={{ paddingTop: "16px", maxWidth: "460px" }}
           >
             <Text as="p" font={theme.font.inter} size="l">
-              Get ready for Degen Battleground – where every battle, trade, and collectible isn't just a play, it's piece of nostalgia. One click, one wallet, endless rewards. Ready to claim your stake in the Pepemon universe?
+              Get ready for Degen Battleground – where every battle, trade, and
+              collectible isn't just a play, it's piece of nostalgia. One click,
+              one wallet, endless rewards. Ready to claim your stake in the
+              Pepemon universe?
             </Text>
           </ContentColumn>
           <ContentColumn
@@ -52,7 +55,8 @@ const Hero: React.FC<any> = ({ apy }) => {
                 <span>1</span>
               </ContentBoxNumber>
               <Text as="p" align="center">
-                Collect rare on-chain TCG cards.<br></br>Battle, trade &amp; own your Pepemon deck.
+                Collect rare on-chain TCG cards.<br></br>Battle, trade &amp; own
+                your Pepemon deck.
               </Text>
               <Spacer size="md" />
               <ExternalLink

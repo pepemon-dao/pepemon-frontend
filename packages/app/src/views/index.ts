@@ -1,11 +1,11 @@
-import { stakingMeta } from './Staking';
-import { storeMeta } from './Store';
-import { subscriptionMeta } from './Subscription';
+import { stakingMeta } from "./Staking";
+import { storeMeta } from "./Store";
+import { subscriptionMeta } from "./Subscription";
 
 export const metas = {
-	stakingMeta,
-	storeMeta,
-	subscriptionMeta,
-}
+  stakingMeta,
+  storeMeta,
+  subscriptionMeta,
+};
 
-export { default as LoadingPage } from './LoadingPage';
+export { default as LoadingPage } from "./LoadingPage";

@@ -1,16 +1,14 @@
-import React from 'react'
-import styled from 'styled-components'
+import React from "react";
+import styled from "styled-components";
 
 interface LabelProps {
-  text?: string
+  text?: string;
 }
 
 const Label: React.FC<LabelProps> = ({ text }) => (
   <StyledLabel>{text}</StyledLabel>
-)
+);
 
-const StyledLabel = styled.div`
+const StyledLabel = styled.div``;
 
-`
-
-export default Label
+export default Label;

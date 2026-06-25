@@ -1,2 +1,2 @@
-export { default } from './ModalActions'
-export type { ModalActionsProps } from './ModalActions';
+export { default } from "./ModalActions";
+export type { ModalActionsProps } from "./ModalActions";

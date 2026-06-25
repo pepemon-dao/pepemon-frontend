@@ -1,9 +1,14 @@
-import * as React from "react"
-import styled from 'styled-components';
+import * as React from "react";
+import styled from "styled-components";
 
 const ActionClose = (props: any) => {
   return (
-    <StyledActionClose width={24} height={24} xmlns="http://www.w3.org/2000/svg" {...props}>
+    <StyledActionClose
+      width={24}
+      height={24}
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}
+    >
       <g fill="none" fillRule="evenodd" opacity={0.75}>
         <circle fill="#F2F2F2" cx={12} cy={12} r={12} />
         <path
@@ -13,13 +18,17 @@ const ActionClose = (props: any) => {
         />
       </g>
     </StyledActionClose>
-  )
-}
+  );
+};
 
-const StyledActionClose = styled.svg<{width: number, height: number, xmlns: string}>`
-    &:hover {
-        cursor: pointer;
-    }
-`
+const StyledActionClose = styled.svg<{
+  width: number;
+  height: number;
+  xmlns: string;
+}>`
+  &:hover {
+    cursor: pointer;
+  }
+`;
 
 export default ActionClose;

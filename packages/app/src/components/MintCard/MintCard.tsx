@@ -96,11 +96,12 @@ const MintCard: React.FC<any> = () => {
           </Text>
           <Spacer size="md" />
           <Text as="p" font={theme.font.inter}>
-            Use PPDEX to mint rare Pepemon NFT cards. The NFTs are
-            created by upcoming artists all over the web3.
+            Use PPDEX to mint rare Pepemon NFT cards. The NFTs are created by
+            upcoming artists all over the web3.
             <br />
             <br />
-            Once you minted your cards, you can start playing by dueling with your NFTs in a play and earn card game on blockchain!
+            Once you minted your cards, you can start playing by dueling with
+            your NFTs in a play and earn card game on blockchain!
             <br />
             <br />
             "Pepechu, I choose you!"

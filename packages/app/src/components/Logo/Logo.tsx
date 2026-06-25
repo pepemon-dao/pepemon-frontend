@@ -1,17 +1,20 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import styled from 'styled-components'
+import React from "react";
+import { Link } from "react-router-dom";
+import styled from "styled-components";
 
 const Logo: React.FC = () => {
   return (
     <StyledLogo to="/">
-      <img src={'pepeballImg'} height="32" style={{ marginTop: -4 }} alt="pepeball"/>
-      <StyledText>
-        PEPEMON.finance
-      </StyledText>
+      <img
+        src={"pepeballImg"}
+        height="32"
+        style={{ marginTop: -4 }}
+        alt="pepeball"
+      />
+      <StyledText>PEPEMON.finance</StyledText>
     </StyledLogo>
-  )
-}
+  );
+};
 
 const StyledLogo = styled(Link)`
   align-items: center;
@@ -22,7 +25,7 @@ const StyledLogo = styled(Link)`
   min-width: 44px;
   padding: 0;
   text-decoration: none;
-`
+`;
 
 const StyledText = styled.span`
   color: ${(props) => props.theme.color[2]};
@@ -33,6 +36,6 @@ const StyledText = styled.span`
   @media (max-width: 400px) {
     display: flex;
   }
-`
+`;
 
-export default Logo
+export default Logo;

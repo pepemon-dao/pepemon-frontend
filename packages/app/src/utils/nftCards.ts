@@ -164,466 +164,466 @@
  */
 
 export const getCardInfo = (cardId: number, chainId?: number) => {
-    if (chainId === 56) {
-        switch(cardId) {
-            case 0:
-                return {
-                    title: 'Pepemon Cardback',
-                    img: 'cardbackImg',
-                };
-            case 1:
-                return {
-                    title: 'CZmon',
-                    img: 'czmonImg',
-                };
-            case 2:
-                return {
-                    title: 'Never to be released',
-                    img: 'cardbackGoldImg',
-                }
-            case 3:
-                return {
-                    title: 'Pepesaur',
-                    img: 'bscPepesaurImg',
-                }
-            case 4:
-                return {
-                    title: 'Pepemander',
-                    img: 'bscPepemanderImg',
-                }
-            case 5:
-                return {
-                    title: 'Pepertle',
-                    img: 'bscPepertleImg',
-                }
-            case 6:
-                return {
-                    title: 'Pivysaur',
-                    img: 'bscPivysaurImg',
-                }
-            case 7:
-                return {
-                    title: 'Pemeleon',
-                    img: 'bscPemeleonImg',
-                }
-            case 8:
-                return {
-                    title: 'Warpertle',
-                    img: 'bscWarpertleImg',
-                }
-            case 9:
-                return {
-                    title: 'Degochu',
-                    img: 'degochuImg',
-                }
-            case 10:
-                return {
-                    title: 'Dumpesaur',
-                    img: 'bscDumpesaurImg',
-                }
-            case 11:
-                return {
-                    title: 'Fudizard',
-                    img: 'bscFudizardImg',
-                }
-            case 12:
-                return {
-                    title: 'Rektoise',
-                    img: 'bscRektoiseImg',
-                }
-        }
+  if (chainId === 56) {
+    switch (cardId) {
+      case 0:
+        return {
+          title: "Pepemon Cardback",
+          img: "cardbackImg",
+        };
+      case 1:
+        return {
+          title: "CZmon",
+          img: "czmonImg",
+        };
+      case 2:
+        return {
+          title: "Never to be released",
+          img: "cardbackGoldImg",
+        };
+      case 3:
+        return {
+          title: "Pepesaur",
+          img: "bscPepesaurImg",
+        };
+      case 4:
+        return {
+          title: "Pepemander",
+          img: "bscPepemanderImg",
+        };
+      case 5:
+        return {
+          title: "Pepertle",
+          img: "bscPepertleImg",
+        };
+      case 6:
+        return {
+          title: "Pivysaur",
+          img: "bscPivysaurImg",
+        };
+      case 7:
+        return {
+          title: "Pemeleon",
+          img: "bscPemeleonImg",
+        };
+      case 8:
+        return {
+          title: "Warpertle",
+          img: "bscWarpertleImg",
+        };
+      case 9:
+        return {
+          title: "Degochu",
+          img: "degochuImg",
+        };
+      case 10:
+        return {
+          title: "Dumpesaur",
+          img: "bscDumpesaurImg",
+        };
+      case 11:
+        return {
+          title: "Fudizard",
+          img: "bscFudizardImg",
+        };
+      case 12:
+        return {
+          title: "Rektoise",
+          img: "bscRektoiseImg",
+        };
     }
+  }
 
-    if (chainId === 137) {
-        switch(cardId) {
-            case 1:
-                return {
-                    title: 'Polymon',
-                    img: 'polymonImg',
-                };
-            case 2:
-                return {
-                    title: 'To be never released',
-                    img: 'cardbackGoldImg',
-                }
-        }
+  if (chainId === 137) {
+    switch (cardId) {
+      case 1:
+        return {
+          title: "Polymon",
+          img: "polymonImg",
+        };
+      case 2:
+        return {
+          title: "To be never released",
+          img: "cardbackGoldImg",
+        };
     }
+  }
 
-    switch(cardId) {
-        case 0:
-            return {
-                title: 'Pepemon Cardback',
-                img: 'cardbackImg',
-            };
-        case 1:
-            return {
-                title: 'Pepemander',
-                img: 'pepemanderImg',
-            };
-        case 2:
-            return {
-                title: 'Pepertle',
-                img: 'pepertleImg',
-            };
-        case 3:
-            return {
-                title: 'Pepesaur',
-                img: 'pepesaurImg',
-            };
-        case 4:
-            return {
-                title: 'Pepechu',
-                img: 'pepechuImg',
-            };
-        case 5:
-            return {
-                title: 'Golden Pepemander',
-                img: 'goldenPepemanderImg',
-            };
-        case 6:
-            return {
-                title: 'Golden Pepesaur',
-                img: 'goldenPepesaurImg',
-            };
-        case 7:
-            return {
-                title: 'Golden Pepertle',
-                img: 'goldenPepertleImg',
-            };
-        case 8:
-            return {
-                title: 'Golden Pepechu',
-                img: 'goldenPepechuImg',
-            };
-        case 9:
-            return {
-                title: 'Pepe Ketchum',
-                img: 'pepeKetchumImg',
-            };
-        case 10:
-            return {
-                title: 'Wisty',
-                img: 'wistyImg',
-            };
-        case 11:
-            return {
-                title: 'Bobo Rock',
-                img: 'boboRockImg',
-            };
-        case 12:
-            return {
-                title: 'Professor Pedo',
-                img: 'professorPedoImg',
-            };
-        case 13:
-            return {
-                title: 'Pigglypuff',
-                img: 'pigglypuffImg',
-            };
-        case 14:
-            return {
-                title: 'Pigglytuff',
-                img: 'pigglytuffImg',
-            };
-        case 15:
-            return {
-                title: 'Poffing',
-                img: 'poffingImg',
-            };
-        case 16:
-            return {
-                title: 'Peezing',
-                img: 'peezingImg',
-            };
-        case 17:
-            return {
-                title: 'Evolution Qube',
-                img: 'evoqubeImg',
-            };
-        case 18:
-            return {
-                title: 'Golden Evolution Qube',
-                img: 'goldenEvoqubeImg',
-            };
-        case 19:
-            return {
-                title: 'Golden Microchip',
-                img: 'goldenMicrochipImg',
-            };
-        case 20:
-            return {
-                title: 'Golden Pepeketchum',
-                img: 'goldenPepeketchumImg',
-            };
-        case 21:
-            return {
-                title: 'Pemeleon',
-                img: 'pemeleonImg',
-            };
-        case 22:
-            return {
-                title: 'Golden Pemeleon',
-                img: 'goldenPemeleonImg',
-            };
-        case 23:
-            return {
-                title: 'Warpertle',
-                img: 'warpertleImg',
-            };
-        case 24:
-            return {
-                title: 'Golden Warpertle',
-                img: 'goldenWarpertleImg',
-            };
-        case 25:
-            return {
-                title: 'Pastry',
-                img: 'pastryImg',
-            };
-        case 26:
-            return {
-                title: 'Cerbery',
-                img: 'cerberyImg',
-            };
-        case 27:
-            return {
-                title: 'Primariny',
-                img: 'primarinyImg',
-            };
-        case 28:
-            return {
-                title: 'Unifairy',
-                img: 'unifairyImg',
-            };
-        case 29:
-            return {
-                title: 'Witchenry',
-                img: 'witchenryImg',
-            };
-        case 30:
-            return {
-                title: 'Cosmony',
-                img: 'cosmonyImg',
-            };
-        case 31:
-            return {
-                title: 'Pivysaur',
-                img: 'pivysaurImg',
-            };
-        case 32:
-            return {
-                title: 'Golden Pivysaur',
-                img: 'goldenPivysaurImg',
-            };
-        case 33:
-            return {
-                title: 'Pepekarp',
-                img: 'pepekarpImg',
-            };
-        case 34:
-            return {
-                title: 'Druky',
-                img: 'drukyChristmasImg',
-            };
-        case 35:
-            return {
-                title: 'Fafny',
-                img: 'fafnyChristmasImg',
-            };
-        case 36:
-            return {
-                title: 'Sairy',
-                img: 'sairyChristmasImg',
-            };
-        case 37:
-            return {
-                title: 'Pyarados',
-                img: 'pyaradosImg',
-            };
-        case 38:
-            return {
-                title: 'Fafny',
-                img: 'fafnyImg',
-            };
-        case 39:
-            return {
-                title: 'Druky',
-                img: 'drukyImg',
-            };
-        case 40:
-            return {
-                title: 'Sairy',
-                img: 'sairyImg',
-            };
-        case 41:
-            return {
-                title: 'Venumu',
-                img: 'venumuImg',
-            };
-        case 42:
-            return {
-                title: 'Kirimu',
-                img: 'kirimuImg',
-            };
-        case 43:
-            return {
-                title: 'Shapu',
-                img: 'shapuImg',
-            };
-        case 44:
-            return {
-                title: 'Legendary Pepeketchum',
-                img: 'legendaryPepeketchumImg',
-            };
-        case 45:
-            return {
-                title: 'Fudizard',
-                img: 'fudizardImg',
-            };
-        case 46:
-            return {
-                title: 'Golden Fudizard',
-                img: 'goldenFudizardImg',
-            };
-        case 47:
-            return {
-                title: 'Moltry',
-                img: 'moltryImg',
-            }
-        case 48:
-            return {
-                title: 'Rektoise',
-                img: 'rektoiseImg',
-            };
-        case 49:
-            return {
-                title: 'Golden Rektoise',
-                img: 'goldenRektoiseImg',
-            };
-        case 50:
-            return {
-                title: 'PepeStreetBets',
-                img: 'pepeStreetBetsImg',
-            }
-        case 51:
-            return {
-                title: 'Pastry',
-                img: 'pastryPixelImg',
-            };
-        case 52:
-            return {
-                title: 'Cerbery',
-                img: 'cerberyPixelImg',
-            };
-        case 53:
-            return {
-                title: 'Primariny',
-                img: 'primarinyPixelImg',
-            };
-        case 54:
-            return {
-                title: 'Unifairy',
-                img: 'unifairyPixelImg',
-            };
-        case 55:
-            return {
-                title: 'Dumpesaur',
-                img: 'dumpesaurImg',
-            };
-        case 56:
-            return {
-                title: 'Golden Dumpesaur',
-                img: 'goldenDumpesaurImg',
-            };
-        case 57:
-            return {
-                title: 'PyepeDDos',
-                img: 'pyepeddosImg',
-            };
-        case 58:
-            return {
-                title: 'Witchenry',
-                img: 'witchenryPixelImg'
-            };
-        case 59:
-            return {
-                title: 'Fomochu',
-                img: 'fomochuImg'
-            };
-        case 60:
-            return {
-                title: 'Golden Fomochu',
-                img: 'goldenFomochuImg'
-            };
-        case 61:
-            return {
-                title: 'Pepelon',
-                img: 'pepelonImg',
-            };
-        case 62:
-            return {
-                title: 'Pishy',
-                img: 'pishyImg'
-            };
-        case 63:
-            return {
-                title: 'Mermy',
-                img: 'mermyImg'
-            };
-        case 64:
-            return {
-                title: 'Metaphy',
-                img: 'metaphyImg',
-            };
-        case 65:
-            return {
-                title: 'Zaptry',
-                img: 'zaptryImg',
-            }
-        case 66:
-            return {
-                title: 'Yugipepe',
-                img: 'yugipepeImg',
-            }
-        case 67:
-            return {
-                title: 'Zaptry',
-                img: 'zaptryImg',
-            }
-        case 68:
-            return {
-                title: "Cosmony", //pixel
-                img: 'cosmonyPixelImg',
-            }
-        case 69:
-            return {
-                title: "Nioctib Yub",
-                img: 'nioctibYubImg',
-            }
-        case 70:
-            return {
-                title: "Zhu Rong",
-                img: 'zhuRongImg',
-            }
-        case 71:
-            return {
-                title: "Golden Nioctib Yub",
-                img: 'goldenNioctibYubImg',
-            }
-        case 72:
-            return {
-                title: "Dianmu",
-                img: 'dianmuImg',
-            }
-        case 73:
-            return {
-                title: "Golden Zhu Rong",
-                img: 'goldenZhuRongImg',
-            }
-        case 74:
-            return {
-                title: "Augencore",
-                img: 'augencoreImg',
-            }
-    }
-}
+  switch (cardId) {
+    case 0:
+      return {
+        title: "Pepemon Cardback",
+        img: "cardbackImg",
+      };
+    case 1:
+      return {
+        title: "Pepemander",
+        img: "pepemanderImg",
+      };
+    case 2:
+      return {
+        title: "Pepertle",
+        img: "pepertleImg",
+      };
+    case 3:
+      return {
+        title: "Pepesaur",
+        img: "pepesaurImg",
+      };
+    case 4:
+      return {
+        title: "Pepechu",
+        img: "pepechuImg",
+      };
+    case 5:
+      return {
+        title: "Golden Pepemander",
+        img: "goldenPepemanderImg",
+      };
+    case 6:
+      return {
+        title: "Golden Pepesaur",
+        img: "goldenPepesaurImg",
+      };
+    case 7:
+      return {
+        title: "Golden Pepertle",
+        img: "goldenPepertleImg",
+      };
+    case 8:
+      return {
+        title: "Golden Pepechu",
+        img: "goldenPepechuImg",
+      };
+    case 9:
+      return {
+        title: "Pepe Ketchum",
+        img: "pepeKetchumImg",
+      };
+    case 10:
+      return {
+        title: "Wisty",
+        img: "wistyImg",
+      };
+    case 11:
+      return {
+        title: "Bobo Rock",
+        img: "boboRockImg",
+      };
+    case 12:
+      return {
+        title: "Professor Pedo",
+        img: "professorPedoImg",
+      };
+    case 13:
+      return {
+        title: "Pigglypuff",
+        img: "pigglypuffImg",
+      };
+    case 14:
+      return {
+        title: "Pigglytuff",
+        img: "pigglytuffImg",
+      };
+    case 15:
+      return {
+        title: "Poffing",
+        img: "poffingImg",
+      };
+    case 16:
+      return {
+        title: "Peezing",
+        img: "peezingImg",
+      };
+    case 17:
+      return {
+        title: "Evolution Qube",
+        img: "evoqubeImg",
+      };
+    case 18:
+      return {
+        title: "Golden Evolution Qube",
+        img: "goldenEvoqubeImg",
+      };
+    case 19:
+      return {
+        title: "Golden Microchip",
+        img: "goldenMicrochipImg",
+      };
+    case 20:
+      return {
+        title: "Golden Pepeketchum",
+        img: "goldenPepeketchumImg",
+      };
+    case 21:
+      return {
+        title: "Pemeleon",
+        img: "pemeleonImg",
+      };
+    case 22:
+      return {
+        title: "Golden Pemeleon",
+        img: "goldenPemeleonImg",
+      };
+    case 23:
+      return {
+        title: "Warpertle",
+        img: "warpertleImg",
+      };
+    case 24:
+      return {
+        title: "Golden Warpertle",
+        img: "goldenWarpertleImg",
+      };
+    case 25:
+      return {
+        title: "Pastry",
+        img: "pastryImg",
+      };
+    case 26:
+      return {
+        title: "Cerbery",
+        img: "cerberyImg",
+      };
+    case 27:
+      return {
+        title: "Primariny",
+        img: "primarinyImg",
+      };
+    case 28:
+      return {
+        title: "Unifairy",
+        img: "unifairyImg",
+      };
+    case 29:
+      return {
+        title: "Witchenry",
+        img: "witchenryImg",
+      };
+    case 30:
+      return {
+        title: "Cosmony",
+        img: "cosmonyImg",
+      };
+    case 31:
+      return {
+        title: "Pivysaur",
+        img: "pivysaurImg",
+      };
+    case 32:
+      return {
+        title: "Golden Pivysaur",
+        img: "goldenPivysaurImg",
+      };
+    case 33:
+      return {
+        title: "Pepekarp",
+        img: "pepekarpImg",
+      };
+    case 34:
+      return {
+        title: "Druky",
+        img: "drukyChristmasImg",
+      };
+    case 35:
+      return {
+        title: "Fafny",
+        img: "fafnyChristmasImg",
+      };
+    case 36:
+      return {
+        title: "Sairy",
+        img: "sairyChristmasImg",
+      };
+    case 37:
+      return {
+        title: "Pyarados",
+        img: "pyaradosImg",
+      };
+    case 38:
+      return {
+        title: "Fafny",
+        img: "fafnyImg",
+      };
+    case 39:
+      return {
+        title: "Druky",
+        img: "drukyImg",
+      };
+    case 40:
+      return {
+        title: "Sairy",
+        img: "sairyImg",
+      };
+    case 41:
+      return {
+        title: "Venumu",
+        img: "venumuImg",
+      };
+    case 42:
+      return {
+        title: "Kirimu",
+        img: "kirimuImg",
+      };
+    case 43:
+      return {
+        title: "Shapu",
+        img: "shapuImg",
+      };
+    case 44:
+      return {
+        title: "Legendary Pepeketchum",
+        img: "legendaryPepeketchumImg",
+      };
+    case 45:
+      return {
+        title: "Fudizard",
+        img: "fudizardImg",
+      };
+    case 46:
+      return {
+        title: "Golden Fudizard",
+        img: "goldenFudizardImg",
+      };
+    case 47:
+      return {
+        title: "Moltry",
+        img: "moltryImg",
+      };
+    case 48:
+      return {
+        title: "Rektoise",
+        img: "rektoiseImg",
+      };
+    case 49:
+      return {
+        title: "Golden Rektoise",
+        img: "goldenRektoiseImg",
+      };
+    case 50:
+      return {
+        title: "PepeStreetBets",
+        img: "pepeStreetBetsImg",
+      };
+    case 51:
+      return {
+        title: "Pastry",
+        img: "pastryPixelImg",
+      };
+    case 52:
+      return {
+        title: "Cerbery",
+        img: "cerberyPixelImg",
+      };
+    case 53:
+      return {
+        title: "Primariny",
+        img: "primarinyPixelImg",
+      };
+    case 54:
+      return {
+        title: "Unifairy",
+        img: "unifairyPixelImg",
+      };
+    case 55:
+      return {
+        title: "Dumpesaur",
+        img: "dumpesaurImg",
+      };
+    case 56:
+      return {
+        title: "Golden Dumpesaur",
+        img: "goldenDumpesaurImg",
+      };
+    case 57:
+      return {
+        title: "PyepeDDos",
+        img: "pyepeddosImg",
+      };
+    case 58:
+      return {
+        title: "Witchenry",
+        img: "witchenryPixelImg",
+      };
+    case 59:
+      return {
+        title: "Fomochu",
+        img: "fomochuImg",
+      };
+    case 60:
+      return {
+        title: "Golden Fomochu",
+        img: "goldenFomochuImg",
+      };
+    case 61:
+      return {
+        title: "Pepelon",
+        img: "pepelonImg",
+      };
+    case 62:
+      return {
+        title: "Pishy",
+        img: "pishyImg",
+      };
+    case 63:
+      return {
+        title: "Mermy",
+        img: "mermyImg",
+      };
+    case 64:
+      return {
+        title: "Metaphy",
+        img: "metaphyImg",
+      };
+    case 65:
+      return {
+        title: "Zaptry",
+        img: "zaptryImg",
+      };
+    case 66:
+      return {
+        title: "Yugipepe",
+        img: "yugipepeImg",
+      };
+    case 67:
+      return {
+        title: "Zaptry",
+        img: "zaptryImg",
+      };
+    case 68:
+      return {
+        title: "Cosmony", //pixel
+        img: "cosmonyPixelImg",
+      };
+    case 69:
+      return {
+        title: "Nioctib Yub",
+        img: "nioctibYubImg",
+      };
+    case 70:
+      return {
+        title: "Zhu Rong",
+        img: "zhuRongImg",
+      };
+    case 71:
+      return {
+        title: "Golden Nioctib Yub",
+        img: "goldenNioctibYubImg",
+      };
+    case 72:
+      return {
+        title: "Dianmu",
+        img: "dianmuImg",
+      };
+    case 73:
+      return {
+        title: "Golden Zhu Rong",
+        img: "goldenZhuRongImg",
+      };
+    case 74:
+      return {
+        title: "Augencore",
+        img: "augencoreImg",
+      };
+  }
+};

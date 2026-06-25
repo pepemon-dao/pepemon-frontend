@@ -1,27 +1,21 @@
-import { useCallback } from 'react'
+import { useCallback } from "react";
 
-import usePepemon from './usePepemon'
+import usePepemon from "./usePepemon";
 
-
-import { stake, getPpdexContract } from '../pepemon/utils'
+import { stake, getPpdexContract } from "../pepemon/utils";
 
 const useStake = (pid: number) => {
-  const { account } = usePepemon()
-  const pepemon = usePepemon()
+  const { account } = usePepemon();
+  const pepemon = usePepemon();
 
   const handleStake = useCallback(
     async (amount: string) => {
-      await stake(
-        getPpdexContract(pepemon),
-        pid,
-        amount,
-        account,
-      )
+      await stake(getPpdexContract(pepemon), pid, amount, account);
     },
-    [account, pid, pepemon],
-  )
+    [account, pid, pepemon]
+  );
 
-  return { onStake: handleStake }
-}
+  return { onStake: handleStake };
+};
 
-export default useStake
+export default useStake;

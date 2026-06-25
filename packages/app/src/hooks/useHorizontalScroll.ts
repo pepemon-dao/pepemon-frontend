@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect } from "react";
 
 const useHorizontalScroll = (ref: any) => {
   useEffect(() => {
@@ -8,21 +8,23 @@ const useHorizontalScroll = (ref: any) => {
         if (e.deltaY === 0) return;
         if (
           !(el.scrollLeft === 0 && e.deltaY < 0) &&
-          !(el.scrollWidth - el.clientWidth - Math.round(el.scrollLeft) === 0 &&
-              e.deltaY > 0)
+          !(
+            el.scrollWidth - el.clientWidth - Math.round(el.scrollLeft) === 0 &&
+            e.deltaY > 0
+          )
         ) {
           e.preventDefault();
         }
         el.scrollTo({
           left: el.scrollLeft + e.deltaY,
-          behavior: 'smooth'
+          behavior: "smooth",
         });
       };
-      el.addEventListener('wheel', onWheel);
-      return () => el.removeEventListener('wheel', onWheel);
+      el.addEventListener("wheel", onWheel);
+      return () => el.removeEventListener("wheel", onWheel);
     }
-	}, [ref]);
+  }, [ref]);
   return ref;
-}
+};
 
 export default useHorizontalScroll;

@@ -17,8 +17,8 @@ const Balances: React.FC = () => {
     <div>
       <CustomContentBoxGrid>
         <WalkingPepemon src={walk1} delay="0s" duration="10.5s" />
-		<WalkingPepemon src={walk2} delay="-3.5s" duration="13.2s" />
-		<WalkingPepemon src={walk3} delay="-8.2s" duration="11.1s"/>
+        <WalkingPepemon src={walk2} delay="-3.5s" duration="13.2s" />
+        <WalkingPepemon src={walk3} delay="-8.2s" duration="11.1s" />
         <CustomContentBox style={{ gridArea: "box1" }}>
           <Text as="p" align="center">
             Total PPBLZ value locked
@@ -136,7 +136,8 @@ const WalkingPepemon = styled.img<WalkingPepemonProps>`
   left: -96px;
   width: 96px;
   height: 96px;
-  animation: walk-pepemon-balances ${(props) => props.duration || "12s"} linear infinite;
+  animation: walk-pepemon-balances ${(props) => props.duration || "12s"} linear
+    infinite;
   animation-delay: ${(props) => props.delay || "0s"};
   z-index: 1;
 

@@ -1,2 +1,2 @@
-export { default } from './IButtonPopover';
-export type { IButtonPopoverProps } from './IButtonPopover';
+export { default } from "./IButtonPopover";
+export type { IButtonPopoverProps } from "./IButtonPopover";

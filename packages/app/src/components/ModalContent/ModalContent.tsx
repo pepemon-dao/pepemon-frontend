@@ -1,12 +1,12 @@
-import React from 'react'
-import styled from 'styled-components'
+import React from "react";
+import styled from "styled-components";
 
 const ModalContent: React.FC = ({ children }) => {
-	return <StyledModalContent>{children}</StyledModalContent>
-}
+  return <StyledModalContent>{children}</StyledModalContent>;
+};
 
 const StyledModalContent = styled.div`
-	padding: ${(props) => props.theme.spacing[2]}px;
-`
+  padding: ${(props) => props.theme.spacing[2]}px;
+`;
 
-export default ModalContent
+export default ModalContent;

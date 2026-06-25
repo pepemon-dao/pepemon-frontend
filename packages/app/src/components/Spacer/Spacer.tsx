@@ -26,13 +26,14 @@ const Spacer: React.FC<SpacerProps> = ({ size = "md" }) => {
 
 interface StyledSpacerProps {
   size?: number;
-  bg?: string
+  bg?: string;
 }
 
 export const StyledSpacer = styled.div<StyledSpacerProps>`
-  height: ${props => props.size ? props.size : 0}px;
-  width: ${props => props.size ? props.size : 0}px;
-  background-color: ${props => props.bg ? props.bg : props.theme.color.transparent};
+  height: ${(props) => (props.size ? props.size : 0)}px;
+  width: ${(props) => (props.size ? props.size : 0)}px;
+  background-color: ${(props) =>
+    props.bg ? props.bg : props.theme.color.transparent};
 `;
 
 export default Spacer;

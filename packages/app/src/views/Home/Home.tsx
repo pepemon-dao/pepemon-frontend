@@ -169,7 +169,6 @@ const Home: React.FC<any> = () => {
         </ContentColumns>
       </StyledSection>
 
-
       <StyledSection
         bgColor={theme.color.purple[200]}
         style={{ paddingTop: "3.75em", paddingBottom: theme.footer.spaceTop }}

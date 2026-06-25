@@ -1,1 +1,6 @@
-export { default, StyledPageWrapper, StyledPageWrapperMain, StyledPageWrapperMainInner } from './Page';
+export {
+  default,
+  StyledPageWrapper,
+  StyledPageWrapperMain,
+  StyledPageWrapperMainInner,
+} from "./Page";
