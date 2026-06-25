@@ -1,115 +1,138 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
-import { Title } from '../../components';
-import { theme } from '../../theme';
-import { pepeball, uparrow, dropdownarrow } from '../../assets';
+import React, { useState } from "react";
+import styled from "styled-components";
+import { Title } from "../../components";
+import { theme } from "../../theme";
+import { pepeball, uparrow, dropdownarrow } from "../../assets";
 
 interface AccordionProps {
-	title: string,
-	isOpen?: boolean,
-	isActive?: boolean,
-	children: any,
+  title: string;
+  isOpen?: boolean;
+  isActive?: boolean;
+  children: any;
 }
 
-const Accordion: React.FC<AccordionProps> = ({title, isOpen = true, isActive = false, children}) => {
-	const [openAccordion, setOpenAccordion] = useState(isOpen);
-	const toggleAccordion = () => {
-		setOpenAccordion(!openAccordion)
-	}
+const Accordion: React.FC<AccordionProps> = ({
+  title,
+  isOpen = true,
+  isActive = false,
+  children,
+}) => {
+  const [openAccordion, setOpenAccordion] = useState(isOpen);
+  const toggleAccordion = () => {
+    setOpenAccordion(!openAccordion);
+  };
 
-	return (
-		<AccordionWrapper isActive={isActive} >
-			<AccordionHeader onClick={toggleAccordion} isOpen={openAccordion}>
-				<AccordionHeaderTitle>
-					<img loading="lazy" src={pepeball} alt="Pepeball" style={{ width: "40px", height: "40px", marginRight: "1em" }}/>
-					<Title as="h2" color={openAccordion ? theme.color.green[200] : theme.color.white} weight={900} font={theme.font.neometric}>{title}</Title>
-				</AccordionHeaderTitle>
-				<AccordionHeaderButton onClick={toggleAccordion}>
-						<span>Show {openAccordion ? "less" : "more"}</span>
-						<img loading="lazy" src={openAccordion ? uparrow : dropdownarrow} alt="logo" style={{ height: "0.5em", alignSelf: "center", }}/>
-				</AccordionHeaderButton>
-			</AccordionHeader>
-			<AccordionBody isOpen={openAccordion}>
-				{children}
-			</AccordionBody>
-		</AccordionWrapper>
-	)
-}
+  return (
+    <AccordionWrapper isActive={isActive}>
+      <AccordionHeader onClick={toggleAccordion} isOpen={openAccordion}>
+        <AccordionHeaderTitle>
+          <img
+            loading="lazy"
+            src={pepeball}
+            alt="Pepeball"
+            style={{ width: "40px", height: "40px", marginRight: "1em" }}
+          />
+          <Title
+            as="h2"
+            color={openAccordion ? theme.color.green[200] : theme.color.white}
+            weight={900}
+            font={theme.font.neometric}
+          >
+            {title}
+          </Title>
+        </AccordionHeaderTitle>
+        <AccordionHeaderButton onClick={toggleAccordion}>
+          <span>Show {openAccordion ? "less" : "more"}</span>
+          <img
+            loading="lazy"
+            src={openAccordion ? uparrow : dropdownarrow}
+            alt="logo"
+            style={{ height: "0.5em", alignSelf: "center" }}
+          />
+        </AccordionHeaderButton>
+      </AccordionHeader>
+      <AccordionBody isOpen={openAccordion}>{children}</AccordionBody>
+    </AccordionWrapper>
+  );
+};
 
 export const AccordionGroup = styled.section`
-	display: flex;
-	flex-direction: column;
-`
+  display: flex;
+  flex-direction: column;
+`;
 
-export const AccordionWrapper = styled.div<{isActive: boolean}>`
-	border: 2px solid ${props => props.isActive ? `${props.theme.color.green[200]}` : 'transparent'};;
-	background-color: ${theme.color.purple[800]};
-	border-radius: ${theme.borderRadius}px;
-	margin-bottom: .8em;
-	width: 100%;
-`
+export const AccordionWrapper = styled.div<{ isActive: boolean }>`
+  border: 2px solid
+    ${(props) =>
+      props.isActive ? `${props.theme.color.green[200]}` : "transparent"};
+  background-color: ${theme.color.purple[800]};
+  border-radius: ${theme.borderRadius}px;
+  margin-bottom: 0.8em;
+  width: 100%;
+`;
 
-export const AccordionHeader = styled.div<{isOpen: boolean}>`
-	cursor: pointer;
-	display: flex;
-	justify-content: space-between;
-	padding: clamp(1.125em,3.75vw,1.2em) clamp(.8em,2.65vw,2em);
-`
+export const AccordionHeader = styled.div<{ isOpen: boolean }>`
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  padding: clamp(1.125em, 3.75vw, 1.2em) clamp(0.8em, 2.65vw, 2em);
+`;
 
 export const AccordionHeaderTitle = styled.div`
-	display: flex;
-	align-items: center;
-`
+  display: flex;
+  align-items: center;
+`;
 
 export const AccordionHeaderButton = styled.button`
-	align-items: center;
-	background-color: ${theme.color.transparent};
-	border: none;
-	border-radius: 8px;
-	color: ${theme.color.white};
-	cursor: pointer;
-	display: flex;
-	font-family: ${theme.font.neometric};
-	font-size: 0.75rem;
+  align-items: center;
+  background-color: ${theme.color.transparent};
+  border: none;
+  border-radius: 8px;
+  color: ${theme.color.white};
+  cursor: pointer;
+  display: flex;
+  font-family: ${theme.font.neometric};
+  font-size: 0.75rem;
 
-	img {
-		margin-left: .7em;
-	}
+  img {
+    margin-left: 0.7em;
+  }
 
-	&:focus-visible {
-		outline: none;
-		box-shadow: 0px 0px 10px 5px ${theme.color.purple[600]};
-	}
+  &:focus-visible {
+    outline: none;
+    box-shadow: 0px 0px 10px 5px ${theme.color.purple[600]};
+  }
 
-	span {
-		display: none;
+  span {
+    display: none;
 
-		@media (min-width: ${theme.breakpoints.tabletP}) {
-			display: inline;
-		}
-	}
-`
+    @media (min-width: ${theme.breakpoints.tabletP}) {
+      display: inline;
+    }
+  }
+`;
 
-export const AccordionBody = styled.div<{isOpen: boolean}>`
-	background-color: ${theme.color.white};
-	border-bottom-left-radius: ${theme.borderRadius}px;
-	border-bottom-right-radius: ${theme.borderRadius}px;
-	display: ${props => props.isOpen ? 'flex' : 'none'};
-	flex-direction: column;
-	justify-content: space-between;
-	padding: clamp(1.125em,3.75vw,1.2em) clamp(.8em,2.65vw,2em) 2em;
+export const AccordionBody = styled.div<{ isOpen: boolean }>`
+  background-color: ${theme.color.white};
+  border-bottom-left-radius: ${theme.borderRadius}px;
+  border-bottom-right-radius: ${theme.borderRadius}px;
+  display: ${(props) => (props.isOpen ? "flex" : "none")};
+  flex-direction: column;
+  justify-content: space-between;
+  padding: clamp(1.125em, 3.75vw, 1.2em) clamp(0.8em, 2.65vw, 2em) 2em;
 
-	@media (min-width: ${theme.breakpoints.tabletP}) {
-		flex-direction: row;
-	}
-`
+  @media (min-width: ${theme.breakpoints.tabletP}) {
+    flex-direction: row;
+  }
+`;
 
-export const AccordionBodyContent = styled.div<{side: "left" | "right"}>`
-	@media (min-width: ${theme.breakpoints.tabletP}) {
-		border-left: ${props => props.side === "right" && `2px solid ${theme.color.colorsLayoutBorders}`};
-		padding-left: ${props => props.side === "right" && "5.5em"};
-		padding-right: ${props => props.side === "left" ? "5.5em" : "2.5em"};
-	}
-`
+export const AccordionBodyContent = styled.div<{ side: "left" | "right" }>`
+  @media (min-width: ${theme.breakpoints.tabletP}) {
+    border-left: ${(props) =>
+      props.side === "right" && `2px solid ${theme.color.colorsLayoutBorders}`};
+    padding-left: ${(props) => props.side === "right" && "5.5em"};
+    padding-right: ${(props) => (props.side === "left" ? "5.5em" : "2.5em")};
+  }
+`;
 
 export default Accordion;

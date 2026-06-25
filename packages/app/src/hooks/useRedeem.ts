@@ -1,18 +1,18 @@
-import { useCallback } from 'react'
+import { useCallback } from "react";
 
-import { Contract } from 'web3-eth-contract'
-import { redeem } from '../pepemon/utils'
-import usePepemon from './usePepemon';
+import { Contract } from "web3-eth-contract";
+import { redeem } from "../pepemon/utils";
+import usePepemon from "./usePepemon";
 
 const useRedeem = (contract: Contract) => {
-  const { account } = usePepemon()
+  const { account } = usePepemon();
 
   const handleRedeem = useCallback(async () => {
-    const txHash = await redeem(contract, account)
-    return txHash
-  }, [account, contract])
+    const txHash = await redeem(contract, account);
+    return txHash;
+  }, [account, contract]);
 
-  return { onRedeem: handleRedeem }
-}
+  return { onRedeem: handleRedeem };
+};
 
-export default useRedeem
+export default useRedeem;

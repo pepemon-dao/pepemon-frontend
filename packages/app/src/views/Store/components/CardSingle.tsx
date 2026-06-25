@@ -87,7 +87,7 @@ const CardSingle: React.FC<any> = ({ cardId, selectedCard, selectCard }) => {
     );
   }, [cardMeta, daysForSale, isReleasingSoon]);
 
-  const countdown = (pre: string = " ", after: string = "") => {
+  const countdown = (pre = " ", after = "") => {
     const timeLeft = calculateTimeLeft();
 
     const days = timeLeft / (60 * 60 * 24);
@@ -129,11 +129,17 @@ const CardSingle: React.FC<any> = ({ cardId, selectedCard, selectCard }) => {
     const live = countdown();
     if (live) return live;
     if (!isLoaded) return "loading";
-    const birthdayMeta = cardMeta?.attributes?.find((a: any) => a.trait_type === "birthday");
+    const birthdayMeta = cardMeta?.attributes?.find(
+      (a: any) => a.trait_type === "birthday"
+    );
     const birthday = parseFloat(birthdayMeta?.value);
     if (!birthday || birthday === 0) return "—";
     const saleEnd = new Date((birthday + daysForSale() * 86400) * 1000);
-    return `Ended ${saleEnd.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}`;
+    return `Ended ${saleEnd.toLocaleDateString("en-US", {
+      month: "short",
+      day: "numeric",
+      year: "numeric",
+    })}`;
   };
 
   const self = {
@@ -154,7 +160,9 @@ const CardSingle: React.FC<any> = ({ cardId, selectedCard, selectCard }) => {
         <img loading="lazy" src={coin} alt="coin" />
         {cardPrice
           ? `${priceOfCard} ${chainId === 56 ? "BNB" : "PPDEX"}`
-          : isLoaded ? "—" : "loading"}
+          : isLoaded
+          ? "—"
+          : "loading"}
       </StyledPepemonCardPrice>
       <div>
         <StyledPepemonCardImage
@@ -173,7 +181,9 @@ const CardSingle: React.FC<any> = ({ cardId, selectedCard, selectCard }) => {
           <dt>Minted</dt>
           <dd>
             {!cardBalance?.[0]
-              ? isLoaded ? "—" : "loading"
+              ? isLoaded
+                ? "—"
+                : "loading"
               : `${parseFloat(cardBalance[0]?.totalSupply)} / ${
                   parseFloat(cardBalance[0]?.maxSupply) > 10000
                     ? "♾️"

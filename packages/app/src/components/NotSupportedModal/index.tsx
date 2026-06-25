@@ -1,1 +1,1 @@
-export { default } from './NotSupportedModal'
+export { default } from "./NotSupportedModal";

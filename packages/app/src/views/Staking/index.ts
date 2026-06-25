@@ -1,1 +1,1 @@
-export { default, stakingMeta } from './Staking'
+export { default, stakingMeta } from "./Staking";

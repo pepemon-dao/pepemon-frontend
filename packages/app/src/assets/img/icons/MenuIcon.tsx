@@ -1,20 +1,20 @@
-import React from 'react';
-import styled, { keyframes, css } from 'styled-components';
-import { theme } from '../../../theme';
+import React from "react";
+import styled, { keyframes, css } from "styled-components";
+import { theme } from "../../../theme";
 
 interface MenuIconProps {
-	isOpen: boolean
+  isOpen: boolean;
 }
 
 const MenuIcon: React.FC<MenuIconProps> = ({ isOpen }) => {
-	return (
-		<StyledMenuIcon isOpen={isOpen}>
-			<TopStroke/>
-			<MiddleStroke/>
-			<BottomStroke/>
-		</StyledMenuIcon>
-	)
-}
+  return (
+    <StyledMenuIcon isOpen={isOpen}>
+      <TopStroke />
+      <MiddleStroke />
+      <BottomStroke />
+    </StyledMenuIcon>
+  );
+};
 
 const animateTop = keyframes`
 	0% {
@@ -29,7 +29,7 @@ const animateTop = keyframes`
 		top: 50%;
 		transform: translateY(-50%) rotate(45deg);
 	}
-`
+`;
 
 const animateBottom = keyframes`
 	0% {
@@ -44,52 +44,57 @@ const animateBottom = keyframes`
 		top: 50%;
 		transform: translateY(-50%) rotate(-45deg);
 	}
-`
+`;
 
 const animateTopCss = css`
-	animation: ${animateTop} .2s ease-out 0s 1 normal forwards;
-`
+  animation: ${animateTop} 0.2s ease-out 0s 1 normal forwards;
+`;
 
 const animateBottomCss = css`
-	animation: ${animateBottom} .2s ease-out 0s 1 normal forwards;
-`
+  animation: ${animateBottom} 0.2s ease-out 0s 1 normal forwards;
+`;
 
 const StyledSpan = styled.span`
-	left: 0;
-	position: absolute;
-	right: 0;
-`
+  left: 0;
+  position: absolute;
+  right: 0;
+`;
 
 const TopStroke = styled(StyledSpan)`
-	top: 0%;
-`
+  top: 0%;
+`;
 
 const MiddleStroke = styled(StyledSpan)`
-	top: 50%;
-	transform: translateY(-50%);
-`
+  top: 50%;
+  transform: translateY(-50%);
+`;
 
 const BottomStroke = styled(StyledSpan)`
-	top: 100%;
-	transform: translateY(-50%);
-`
+  top: 100%;
+  transform: translateY(-50%);
+`;
 
 const StyledMenuIcon = styled.div<MenuIconProps>`
-	height: 15px;
-	position: relative;
-	transition: all 1s ease-in;
-	width: 20px;
+  height: 15px;
+  position: relative;
+  transition: all 1s ease-in;
+  width: 20px;
 
-	span {
-		background-color: ${theme.color.black};
-		display: block;
-		height: 2px;
-	}
+  span {
+    background-color: ${theme.color.black};
+    display: block;
+    height: 2px;
+  }
 
+  ${TopStroke} {
+    ${({ isOpen }) => isOpen && animateTopCss}
+  }
+  ${MiddleStroke} {
+    ${({ isOpen }) => isOpen && "display: none;"}
+  }
+  ${BottomStroke} {
+    ${({ isOpen }) => isOpen && animateBottomCss}
+  }
+`;
 
-		${TopStroke} { ${({isOpen}) => isOpen && animateTopCss } }
-		${MiddleStroke} { ${({isOpen}) => isOpen && 'display: none;' } }
-		${BottomStroke} { ${({isOpen}) => isOpen && animateBottomCss } }
-`
-
-export default MenuIcon
+export default MenuIcon;

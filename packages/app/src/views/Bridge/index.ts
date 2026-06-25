@@ -1,1 +1,1 @@
-export { default, bridgeMeta } from './Bridge'
+export { default, bridgeMeta } from "./Bridge";

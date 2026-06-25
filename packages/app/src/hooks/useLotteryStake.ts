@@ -1,31 +1,25 @@
-import {useCallback, useState} from 'react'
+import { useCallback, useState } from "react";
 
-import usePepemon from './usePepemon'
+import usePepemon from "./usePepemon";
 
-import {getPepemonLotteryContract, stakeLottery} from '../pepemon/utils'
+import { getPepemonLotteryContract, stakeLottery } from "../pepemon/utils";
 
 const useLotteryStake = () => {
-    const [isJoining, setIsJoining] = useState<boolean>(false)
-    const pepemon = usePepemon()
+  const [isJoining, setIsJoining] = useState<boolean>(false);
+  const pepemon = usePepemon();
 
-    const handleStake = useCallback(
-        async () => {
-            try {
-                setIsJoining(true);
-                await stakeLottery(
-                    pepemon.provider,
-                    getPepemonLotteryContract(pepemon),
-                )
-                setIsJoining(false);
-            } catch(err) {
-                console.error(err);
-                setIsJoining(false);
-            }
-        },
-        [pepemon],
-    )
+  const handleStake = useCallback(async () => {
+    try {
+      setIsJoining(true);
+      await stakeLottery(pepemon.provider, getPepemonLotteryContract(pepemon));
+      setIsJoining(false);
+    } catch (err) {
+      console.error(err);
+      setIsJoining(false);
+    }
+  }, [pepemon]);
 
-    return { onLotteryStake: handleStake, isJoining }
-}
+  return { onLotteryStake: handleStake, isJoining };
+};
 
-export default useLotteryStake
+export default useLotteryStake;

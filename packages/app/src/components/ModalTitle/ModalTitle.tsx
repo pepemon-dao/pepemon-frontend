@@ -1,15 +1,13 @@
-import React from 'react'
-import styled from 'styled-components'
+import React from "react";
+import styled from "styled-components";
 
 interface ModalTitleProps {
-  text?: string
+  text?: string;
 }
 
 const ModalTitle: React.FC<ModalTitleProps> = ({ text }) => (
-  <StyledModalTitle>
-    {text}
-  </StyledModalTitle>
-)
+  <StyledModalTitle>{text}</StyledModalTitle>
+);
 
 const StyledModalTitle = styled.div`
   align-items: center;
@@ -17,6 +15,6 @@ const StyledModalTitle = styled.div`
   font-size: 1.375rem;
   font-weight: 700;
   justify-content: center;
-`
+`;
 
-export default ModalTitle
+export default ModalTitle;

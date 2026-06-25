@@ -1,1 +1,1 @@
-export { default } from './TermsOfService';
+export { default } from "./TermsOfService";

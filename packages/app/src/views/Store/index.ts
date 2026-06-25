@@ -1,1 +1,1 @@
-export { default, storeMeta } from './Store'
+export { default, storeMeta } from "./Store";
